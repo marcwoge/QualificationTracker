@@ -17,9 +17,9 @@
  * warranty of any kind. See the LICENSE file for the full MIT license text.
  */
 
-if( !defined( 'MANTIS_DIR' ) ) {
-	# Load the plugin only through the MantisBT plugin subsystem.
-	die( 'Access denied.' );
+if( !defined( 'MANTIS_VERSION' ) ) {
+	# Load the plugin only through the MantisBT plugin subsystem, never directly.
+	die( 'QualificationTracker is a MantisBT plugin and cannot be called directly.' );
 }
 
 /**
