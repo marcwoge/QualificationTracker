@@ -74,7 +74,7 @@ Legende: ⬜ offen · 🟡 in Arbeit · 🟢 fertig · ⚪ zurückgestellt
 |---|---|---|---|
 | F1.1 | Schema-Migration | Tabellen `qt_massnahme`, `qt_person`, `qt_profil`, `qt_profil_massnahme`, `qt_zuordnung`, `qt_veranstaltung`; Installations- und Upgrade-Routine über die Mantis-Plugin-API | 🟢 |
 | F1.2 | Maßnahmenkatalog CRUD | Anlegen/Bearbeiten von Maßnahmen: Schlüssel, Bezeichnung, Typ (UW/QU/QB/BE/VO), Intervall in Monaten, Rechtsgrundlage, Nachweisart, Vorlaufzeit | 🟢 |
-| F1.3 | Vorbedingungen | Maßnahme kann andere Maßnahmen als Voraussetzung referenzieren (Qualifikation → Beauftragung → Unterweisung) | ⬜ |
+| F1.3 | Vorbedingungen | Maßnahme kann andere Maßnahmen als Voraussetzung referenzieren (Qualifikation → Beauftragung → Unterweisung) | 🟢 |
 | F1.4 | Personenregister | Personen unabhängig von Mantis-Benutzerkonten: Personalnummer, Name, Abteilung, Eintritt, Austritt, Vorgesetzter (Mantis-User-ID) | ⬜ |
 | F1.5 | Custom-Field-Bootstrap | Die in Teil 1 beschriebenen Custom Fields werden bei Installation automatisch angelegt und den Projekten zugeordnet | ⬜ |
 | F1.6 | Konfigurationsseite | Plugin-Konfiguration: Zielprojekt, Statuswerte-Mapping, Vorlaufzeiten, Eskalationsempfänger | ⬜ |

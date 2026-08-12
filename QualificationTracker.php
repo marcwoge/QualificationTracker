@@ -243,6 +243,20 @@ class QualificationTrackerPlugin extends MantisPlugin {
 				" ) ),
 			array( 'CreateIndexSQL', array( 'idx_qt_veranstaltung_massnahme',
 				plugin_table( 'veranstaltung' ), 'massnahme_id' ) ),
+
+			# --- 13/14/15: qt_massnahme_vorbedingung (prerequisites, F1.3) --
+			# Directed edge: measure `massnahme_id` requires `voraussetzung_id`.
+			# The graph must stay acyclic; cycles are rejected on save.
+			array( 'CreateTableSQL', array( plugin_table( 'massnahme_vorbedingung' ), "
+				id              I UNSIGNED NOTNULL AUTOINCREMENT PRIMARY,
+				massnahme_id    I UNSIGNED NOTNULL,
+				voraussetzung_id I UNSIGNED NOTNULL
+				" ) ),
+			array( 'CreateIndexSQL', array( 'idx_qt_vorbed_unique',
+				plugin_table( 'massnahme_vorbedingung' ), 'massnahme_id,voraussetzung_id',
+				array( 'UNIQUE' ) ) ),
+			array( 'CreateIndexSQL', array( 'idx_qt_vorbed_voraussetzung',
+				plugin_table( 'massnahme_vorbedingung' ), 'voraussetzung_id' ) ),
 		);
 	}
 
@@ -256,8 +270,8 @@ class QualificationTrackerPlugin extends MantisPlugin {
 	 */
 	function uninstall() {
 		$t_tables = array(
-			'veranstaltung', 'zuordnung', 'profil_massnahme',
-			'profil', 'person', 'massnahme',
+			'massnahme_vorbedingung', 'veranstaltung', 'zuordnung',
+			'profil_massnahme', 'profil', 'person', 'massnahme',
 		);
 		foreach( $t_tables as $t_name ) {
 			# Table names come from plugin_table(), never from user input.

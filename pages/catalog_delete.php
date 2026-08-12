@@ -26,6 +26,7 @@ access_ensure_global_level( plugin_config_get( 'manage_threshold' ) );
 form_security_validate( 'plugin_QualificationTracker_catalog_delete' );
 
 plugin_require_api( 'core/QT_Catalog.php' );
+plugin_require_api( 'core/QT_Prerequisite.php' );
 
 $f_id = gpc_get_int( 'id' );
 
@@ -40,6 +41,8 @@ if( qt_massnahme_is_referenced( $f_id ) ) {
 	exit;
 }
 
+# Remove prerequisite edges in both directions, then the measure itself.
+qt_vorbedingung_purge( $f_id );
 qt_massnahme_delete( $f_id );
 
 form_security_purge( 'plugin_QualificationTracker_catalog_delete' );

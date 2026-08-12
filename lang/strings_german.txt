@@ -91,3 +91,10 @@ $s_plugin_QualificationTracker_error_typ_invalid          = 'Ungültiger Maßnah
 $s_plugin_QualificationTracker_error_modus_invalid        = 'Ungültiger Fälligkeitsmodus.';
 $s_plugin_QualificationTracker_error_stichmonat_invalid   = 'Bitte einen Stichmonat zwischen 1 und 12 angeben.';
 $s_plugin_QualificationTracker_error_intervall_required   = 'Bitte ein Intervall in Monaten (1–600) angeben.';
+
+# --- Vorbedingungen (F1.3) -----------------------------------------------
+$s_plugin_QualificationTracker_col_vorbedingungen   = 'Vorbedingungen';
+$s_plugin_QualificationTracker_label_vorbedingungen = 'Vorbedingungen';
+$s_plugin_QualificationTracker_help_vorbedingungen  = 'Maßnahmen, die vorausgesetzt werden (z. B. Qualifikation vor Beauftragung). Mehrfachauswahl mit Strg/Cmd. Zyklen sind nicht erlaubt.';
+$s_plugin_QualificationTracker_no_other_massnahmen  = 'Keine weiteren Maßnahmen vorhanden, die als Vorbedingung dienen könnten.';
+$s_plugin_QualificationTracker_error_vorbedingung_cycle = 'Die Vorbedingungen bilden einen Zyklus. Bitte die Auswahl anpassen.';

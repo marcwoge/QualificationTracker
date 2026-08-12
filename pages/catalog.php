@@ -26,9 +26,20 @@ auth_reauthenticate();
 access_ensure_global_level( plugin_config_get( 'manage_threshold' ) );
 
 plugin_require_api( 'core/QT_Catalog.php' );
+plugin_require_api( 'core/QT_Prerequisite.php' );
 
 $t_massnahmen = qt_massnahme_load_all( true );
 $t_msg = gpc_get_string( 'msg', '' );
+
+# Map id -> key and id -> list of prerequisite ids, for the prerequisite column.
+$t_key_by_id = array();
+foreach( $t_massnahmen as $t_m ) {
+	$t_key_by_id[(int)$t_m['id']] = $t_m['schluessel'];
+}
+$t_prereq_map = array();
+foreach( qt_vorbedingung_load_all() as $t_edge ) {
+	$t_prereq_map[(int)$t_edge['massnahme_id']][] = (int)$t_edge['voraussetzung_id'];
+}
 
 layout_page_header( plugin_lang_get( 'catalog_title' ) );
 layout_page_begin();
@@ -70,6 +81,7 @@ layout_page_begin();
 				<th><?php echo plugin_lang_get( 'col_typ' ); ?></th>
 				<th><?php echo plugin_lang_get( 'col_modus' ); ?></th>
 				<th class="center"><?php echo plugin_lang_get( 'col_intervall' ); ?></th>
+				<th><?php echo plugin_lang_get( 'col_vorbedingungen' ); ?></th>
 				<th class="center"><?php echo plugin_lang_get( 'col_wiederkehrend' ); ?></th>
 				<th class="center"><?php echo plugin_lang_get( 'col_sicherheitsrelevant' ); ?></th>
 				<th class="center"><?php echo plugin_lang_get( 'col_aktiv' ); ?></th>
@@ -86,6 +98,17 @@ layout_page_begin();
 				<td><?php echo string_display_line( plugin_lang_get( 'type_' . $t_m['typ'] ) ); ?></td>
 				<td><?php echo string_display_line( plugin_lang_get( 'mode_' . $t_m['faelligkeitsmodus'] ) ); ?></td>
 				<td class="center"><?php echo $t_m['intervall_monate'] === null ? '&ndash;' : (int)$t_m['intervall_monate']; ?></td>
+				<td><?php
+					if( isset( $t_prereq_map[$t_id] ) ) {
+						$t_keys = array();
+						foreach( $t_prereq_map[$t_id] as $t_pid ) {
+							$t_keys[] = isset( $t_key_by_id[$t_pid] ) ? $t_key_by_id[$t_pid] : ( '#' . $t_pid );
+						}
+						echo string_display_line( implode( ', ', $t_keys ) );
+					} else {
+						echo '&ndash;';
+					}
+				?></td>
 				<td class="center"><?php echo $t_m['wiederkehrend'] ? '<i class="ace-icon fa fa-check green"></i>' : ''; ?></td>
 				<td class="center"><?php echo $t_m['sicherheitsrelevant'] ? '<i class="ace-icon fa fa-shield red"></i>' : ''; ?></td>
 				<td class="center"><?php echo $t_m['aktiv'] ? '<i class="ace-icon fa fa-check green"></i>' : '<i class="ace-icon fa fa-ban grey"></i>'; ?></td>
@@ -107,7 +130,7 @@ layout_page_begin();
 			</tr>
 		<?php } ?>
 		<?php if( empty( $t_massnahmen ) ) { ?>
-			<tr><td colspan="9" class="center"><?php echo plugin_lang_get( 'no_massnahmen' ); ?></td></tr>
+			<tr><td colspan="10" class="center"><?php echo plugin_lang_get( 'no_massnahmen' ); ?></td></tr>
 		<?php } ?>
 		</tbody>
 	</table>

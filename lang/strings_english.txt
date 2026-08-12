@@ -91,3 +91,10 @@ $s_plugin_QualificationTracker_error_typ_invalid          = 'Invalid measure typ
 $s_plugin_QualificationTracker_error_modus_invalid        = 'Invalid due-date mode.';
 $s_plugin_QualificationTracker_error_stichmonat_invalid   = 'Please enter a reference month between 1 and 12.';
 $s_plugin_QualificationTracker_error_intervall_required   = 'Please enter an interval in months (1–600).';
+
+# --- Prerequisites (F1.3) ------------------------------------------------
+$s_plugin_QualificationTracker_col_vorbedingungen   = 'Prerequisites';
+$s_plugin_QualificationTracker_label_vorbedingungen = 'Prerequisites';
+$s_plugin_QualificationTracker_help_vorbedingungen  = 'Measures that must be in place first (e.g. qualification before appointment). Multi-select with Ctrl/Cmd. Cycles are not allowed.';
+$s_plugin_QualificationTracker_no_other_massnahmen  = 'No other measures available to use as a prerequisite.';
+$s_plugin_QualificationTracker_error_vorbedingung_cycle = 'The prerequisites form a cycle. Please adjust the selection.';

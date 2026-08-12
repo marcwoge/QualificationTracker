@@ -20,6 +20,11 @@ die Versionierung folgt [Semantic Versioning](https://semver.org/lang/de/).
   Löschen) unter *Verwaltung → QualificationTracker* mit Zugriffsprüfung,
   CSRF-Schutz und Ausgabe-Escaping. Datenschicht `core/QT_Catalog.php` mit reiner,
   unit-getesteter Validierung; PHPUnit-Grundgerüst (`phpunit.xml.dist`, `tests/`).
+- **F1.3 Vorbedingungen:** Eine Maßnahme kann andere als Voraussetzung
+  referenzieren (Qualifikation → Beauftragung → Unterweisung). Neue Tabelle
+  `qt_massnahme_vorbedingung`; `core/QT_Prerequisite.php` mit reiner,
+  unit-getesteter Zyklenerkennung (Selbstreferenzen und Kreise werden beim
+  Speichern abgewiesen). Auswahl im Katalog-Formular, Anzeige in der Liste.
 
 ### Behoben
 - Direktaufruf-Schutz der Hauptklasse prüfte die nicht existente Konstante

@@ -27,11 +27,15 @@ auth_reauthenticate();
 access_ensure_global_level( plugin_config_get( 'manage_threshold' ) );
 
 plugin_require_api( 'core/QT_Catalog.php' );
+plugin_require_api( 'core/QT_Prerequisite.php' );
 
 $f_id     = gpc_get_int( 'id', 0 );
 $f_action = gpc_get_string( 'action', '' );
 
 $t_errors = array();
+
+# Selected prerequisite measure ids (for the form).
+$t_prereqs = $f_id > 0 ? qt_vorbedingung_get_for( $f_id ) : array();
 
 # Default values for a new measure.
 $t_data = array(
@@ -70,6 +74,8 @@ if( $f_action === 'save' ) {
 		'aktiv'               => gpc_get_bool( 'aktiv', false ) ? 1 : 0,
 	);
 
+	$t_prereqs = gpc_get_int_array( 'voraussetzungen', array() );
+
 	$t_errors = qt_massnahme_validate( $t_data );
 
 	# Uniqueness of the key (needs the database, so checked here).
@@ -79,11 +85,20 @@ if( $f_action === 'save' ) {
 		$t_errors[] = 'error_schluessel_duplicate';
 	}
 
+	# Cycle check: only an existing measure can close a loop (nothing points at a
+	# not-yet-created one). Self-references are dropped by qt_vorbedingung_set().
+	if( empty( $t_errors ) && $f_id > 0
+		&& qt_prereq_creates_cycle( qt_vorbedingung_load_all(), $f_id, $t_prereqs ) ) {
+		$t_errors[] = 'error_vorbedingung_cycle';
+	}
+
 	if( empty( $t_errors ) ) {
 		if( $f_id > 0 ) {
 			qt_massnahme_update( $f_id, $t_data );
+			qt_vorbedingung_set( $f_id, $t_prereqs );
 		} else {
-			qt_massnahme_create( $t_data );
+			$t_new_id = qt_massnahme_create( $t_data );
+			qt_vorbedingung_set( $t_new_id, $t_prereqs );
 		}
 		form_security_purge( 'plugin_QualificationTracker_catalog_edit' );
 		print_successful_redirect( plugin_page( 'catalog', true ) );
@@ -100,6 +115,14 @@ if( $f_action === 'save' ) {
 }
 
 $t_title = $f_id > 0 ? plugin_lang_get( 'form_edit_title' ) : plugin_lang_get( 'form_new_title' );
+
+# Candidate measures for the prerequisite selector (all except this one).
+$t_candidates = array();
+foreach( qt_massnahme_load_all( true ) as $t_cand ) {
+	if( (int)$t_cand['id'] !== $f_id ) {
+		$t_candidates[] = $t_cand;
+	}
+}
 
 layout_page_header( $t_title );
 layout_page_begin();
@@ -212,6 +235,25 @@ layout_page_begin();
 			<th class="category"><?php echo plugin_lang_get( 'label_nachweisart' ); ?></th>
 			<td><input type="text" name="nachweisart" maxlength="64" class="input-sm" style="width:100%"
 				value="<?php echo string_attribute( $t_data['nachweisart'] ); ?>" /></td>
+		</tr>
+		<tr>
+			<th class="category"><?php echo plugin_lang_get( 'label_vorbedingungen' ); ?></th>
+			<td>
+			<?php if( empty( $t_candidates ) ) { ?>
+				<span class="help-block" style="margin:0"><?php echo plugin_lang_get( 'no_other_massnahmen' ); ?></span>
+			<?php } else { ?>
+				<select name="voraussetzungen[]" multiple="multiple" size="6" class="input-sm" style="width:100%">
+				<?php foreach( $t_candidates as $t_cand ) {
+					$t_cand_id = (int)$t_cand['id'];
+				?>
+					<option value="<?php echo $t_cand_id; ?>" <?php echo in_array( $t_cand_id, $t_prereqs, true ) ? 'selected="selected"' : ''; ?>>
+						<?php echo string_display_line( $t_cand['schluessel'] . ' — ' . $t_cand['bezeichnung'] ); ?>
+					</option>
+				<?php } ?>
+				</select>
+				<span class="help-block" style="margin:4px 0 0"><?php echo plugin_lang_get( 'help_vorbedingungen' ); ?></span>
+			<?php } ?>
+			</td>
 		</tr>
 		<tr>
 			<th class="category"><?php echo plugin_lang_get( 'label_aktiv' ); ?></th>
