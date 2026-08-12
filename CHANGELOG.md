@@ -13,6 +13,11 @@ die Versionierung folgt [Semantic Versioning](https://semver.org/lang/de/).
   Zuordnung der Maßnahmen (n:m). `core/QT_Profile.php` mit reiner, unit-getesteter
   Validierung und CRUD; Löschen ist blockiert, solange das Profil Personen
   zugeordnet ist. Grundlage für den Ketten-Generator (F2.3).
+- **F2.2 Profilzuordnung:** Person ↔ Profil (n:m) mit Gültigkeitszeitraum unter
+  *Verwaltung → QualificationTracker → Profilzuordnung*, mit Personenfilter.
+  `core/QT_Assignment.php` mit reiner, unit-getesteter Validierung; historische
+  (abgeschlossene) Zuordnungen bleiben erhalten, eine zweite *laufende* Zuordnung
+  derselben Person zum selben Profil wird verhindert.
 - Repository-Grundstruktur: Plugin-Hauptklasse, Verzeichnislayout, Lizenz, leere Sprachdateien.
 - Konzeptdokumentation (`ROADMAP.md`, `KONZEPT-Bordmittel.md`) und Projekt-README.
 - Lokale MantisBT-Testumgebung unter `docker/` (Docker Compose, MantisBT 2.28.3,

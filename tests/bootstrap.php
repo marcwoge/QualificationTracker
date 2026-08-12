@@ -25,3 +25,4 @@ if( !defined( 'CUSTOM_FIELD_TYPE_DATE' ) )    { define( 'CUSTOM_FIELD_TYPE_DATE'
 require_once dirname( __DIR__ ) . '/core/QT_CustomFields.php';
 require_once dirname( __DIR__ ) . '/core/QT_CatalogImport.php';
 require_once dirname( __DIR__ ) . '/core/QT_Profile.php';
+require_once dirname( __DIR__ ) . '/core/QT_Assignment.php';

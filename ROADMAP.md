@@ -87,7 +87,7 @@ Legende: ⬜ offen · 🟡 in Arbeit · 🟢 fertig · ⚪ zurückgestellt
 | ID | Funktion | Beschreibung | Status |
 |---|---|---|---|
 | F2.1 | Tätigkeitsprofile | Profil = benannte Menge von Maßnahmen („Hubarbeitsbühnenführer", „Servicetechniker Außendienst", „Bürotätigkeit") | 🟢 |
-| F2.2 | Profilzuordnung | Person ↔ Profil (n:m), mit Gültigkeitszeitraum | ⬜ |
+| F2.2 | Profilzuordnung | Person ↔ Profil (n:m), mit Gültigkeitszeitraum | 🟢 |
 | F2.3 | Ketten-Generator | Erzeugt aus Profilzuordnung die Tickets inkl. `depends on`-Beziehungen in korrekter Reihenfolge | ⬜ |
 | F2.4 | Native Terminplanung | Erzeugt Folgezyklen selbst — vorausschauend oder ereignisgetrieben je nach Fälligkeitsmodus. Ist IssueRecurrence installiert, wird es optional erkannt und kann alternativ genutzt werden; eine Abhängigkeit besteht nicht | ⬜ |
 | F2.5 | Soll-Ist-Prüfung | Report: Personen mit Profil, aber ohne gültigen Nachweis; inkl. „Beauftragung ohne Qualifikation" | ⬜ |
