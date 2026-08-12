@@ -15,4 +15,79 @@ $s_plugin_QualificationTracker_title       = 'QualificationTracker';
 $s_plugin_QualificationTracker_description  = 'Verwaltet gesetzlich vorgeschriebene Unterweisungen, Qualifikationen und Beauftragungen als MantisBT-Tickets (ArbSchG, DGUV).';
 
 # Verwaltungsmenü
-$s_plugin_QualificationTracker_menu_config = 'QualificationTracker-Konfiguration';
+$s_plugin_QualificationTracker_menu_catalog = 'Maßnahmenkatalog';
+
+# --- Maßnahmenkatalog (F1.2) ---------------------------------------------
+$s_plugin_QualificationTracker_catalog_title = 'Maßnahmenkatalog';
+$s_plugin_QualificationTracker_no_massnahmen = 'Noch keine Maßnahmen angelegt.';
+
+# Schaltflächen
+$s_plugin_QualificationTracker_btn_new_massnahme = 'Neue Maßnahme';
+$s_plugin_QualificationTracker_btn_edit          = 'Bearbeiten';
+$s_plugin_QualificationTracker_btn_delete        = 'Löschen';
+$s_plugin_QualificationTracker_btn_save          = 'Speichern';
+$s_plugin_QualificationTracker_btn_cancel        = 'Abbrechen';
+
+# Meldungen
+$s_plugin_QualificationTracker_confirm_delete = 'Diese Maßnahme wirklich löschen?';
+$s_plugin_QualificationTracker_msg_deleted    = 'Maßnahme gelöscht.';
+$s_plugin_QualificationTracker_msg_referenced = 'Die Maßnahme wird noch von einem Profil oder einer Veranstaltung verwendet und wurde nicht gelöscht. Deaktivieren Sie sie stattdessen.';
+
+# Tabellenspalten
+$s_plugin_QualificationTracker_col_schluessel          = 'Schlüssel';
+$s_plugin_QualificationTracker_col_bezeichnung         = 'Bezeichnung';
+$s_plugin_QualificationTracker_col_typ                 = 'Typ';
+$s_plugin_QualificationTracker_col_modus               = 'Fälligkeitsmodus';
+$s_plugin_QualificationTracker_col_intervall           = 'Intervall (Monate)';
+$s_plugin_QualificationTracker_col_wiederkehrend       = 'Wiederkehrend';
+$s_plugin_QualificationTracker_col_sicherheitsrelevant = 'Sicherheitsrelevant';
+$s_plugin_QualificationTracker_col_aktiv               = 'Aktiv';
+$s_plugin_QualificationTracker_col_aktionen            = 'Aktionen';
+
+# Formular
+$s_plugin_QualificationTracker_form_new_title  = 'Neue Maßnahme';
+$s_plugin_QualificationTracker_form_edit_title = 'Maßnahme bearbeiten';
+
+$s_plugin_QualificationTracker_label_schluessel          = 'Schlüssel';
+$s_plugin_QualificationTracker_label_bezeichnung         = 'Bezeichnung';
+$s_plugin_QualificationTracker_label_typ                 = 'Typ';
+$s_plugin_QualificationTracker_label_modus               = 'Fälligkeitsmodus';
+$s_plugin_QualificationTracker_label_intervall           = 'Intervall (Monate)';
+$s_plugin_QualificationTracker_label_stichmonat          = 'Stichmonat (1–12)';
+$s_plugin_QualificationTracker_label_karenz              = 'Karenzzeit (Tage)';
+$s_plugin_QualificationTracker_label_vorlauf             = 'Vorlaufzeit Eskalation (Tage)';
+$s_plugin_QualificationTracker_label_wiederkehrend       = 'Wiederkehrend';
+$s_plugin_QualificationTracker_label_sicherheitsrelevant = 'Sicherheitsrelevant';
+$s_plugin_QualificationTracker_label_rechtsgrundlage     = 'Rechtsgrundlage';
+$s_plugin_QualificationTracker_label_nachweisart         = 'Nachweisart';
+$s_plugin_QualificationTracker_label_aktiv               = 'Aktiv';
+
+# Hilfetexte
+$s_plugin_QualificationTracker_help_modus               = 'rollierend: Durchführung + Intervall · kalenderjahr: 31.12. · stichmonat: Monatsende im Zieljahr · extern: Datum aus dem Nachweis (keine Berechnung).';
+$s_plugin_QualificationTracker_help_karenz              = 'Wird innerhalb dieser Frist vor dem Soll-Termin durchgeführt, bleibt der Zyklusanker erhalten (verhindert Vorwärtsdrift).';
+$s_plugin_QualificationTracker_help_wiederkehrend       = 'Erzeugt automatisch Folgezyklen. Für anlassbezogene Unterweisungen (nach Unfall, neue Anlage) deaktivieren.';
+$s_plugin_QualificationTracker_help_sicherheitsrelevant = 'Bei Überfälligkeit kann automatisch ein Ruhensvermerk gesetzt werden (z. B. Hubarbeitsbühne, Stapler, Kran).';
+$s_plugin_QualificationTracker_help_aktiv               = 'Nur aktive Maßnahmen werden für neue Nachweise verwendet.';
+
+# Maßnahmentypen
+$s_plugin_QualificationTracker_type_UW = 'Unterweisung (UW)';
+$s_plugin_QualificationTracker_type_QU = 'Qualifikation, unbefristet (QU)';
+$s_plugin_QualificationTracker_type_QB = 'Qualifikation, befristet (QB)';
+$s_plugin_QualificationTracker_type_BE = 'Beauftragung (BE)';
+$s_plugin_QualificationTracker_type_VO = 'Vorsorge (VO)';
+
+# Fälligkeitsmodi
+$s_plugin_QualificationTracker_mode_rollierend   = 'rollierend';
+$s_plugin_QualificationTracker_mode_kalenderjahr = 'Kalenderjahr';
+$s_plugin_QualificationTracker_mode_stichmonat   = 'Stichmonat';
+$s_plugin_QualificationTracker_mode_extern       = 'extern';
+
+# Fehlermeldungen
+$s_plugin_QualificationTracker_error_schluessel_required  = 'Bitte einen Schlüssel angeben.';
+$s_plugin_QualificationTracker_error_schluessel_length    = 'Der Schlüssel darf höchstens 64 Zeichen lang sein.';
+$s_plugin_QualificationTracker_error_schluessel_duplicate = 'Dieser Schlüssel ist bereits vergeben.';
+$s_plugin_QualificationTracker_error_bezeichnung_required = 'Bitte eine Bezeichnung angeben.';
+$s_plugin_QualificationTracker_error_typ_invalid          = 'Ungültiger Maßnahmentyp.';
+$s_plugin_QualificationTracker_error_modus_invalid        = 'Ungültiger Fälligkeitsmodus.';
+$s_plugin_QualificationTracker_error_stichmonat_invalid   = 'Bitte einen Stichmonat zwischen 1 und 12 angeben.';
+$s_plugin_QualificationTracker_error_intervall_required   = 'Bitte ein Intervall in Monaten (1–600) angeben.';

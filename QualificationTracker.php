@@ -43,7 +43,9 @@ class QualificationTrackerPlugin extends MantisPlugin {
 	function register() {
 		$this->name        = 'QualificationTracker';
 		$this->description  = 'Manage legally required safety instructions, qualifications and appointments as MantisBT tickets (ArbSchG, DGUV).';
-		$this->page         = 'config';
+		# Landing page of the plugin. Points at the measure catalogue until the
+		# dedicated configuration page is built (F1.6).
+		$this->page         = 'catalog';
 
 		$this->version  = '0.1.0';
 		$this->requires = array(
@@ -66,6 +68,12 @@ class QualificationTrackerPlugin extends MantisPlugin {
 	 */
 	function config() {
 		return array(
+			# --- Zugriff ---------------------------------------------------
+			# Minimum global access level allowed to manage master data
+			# (catalogue, profiles, persons). Refined into dedicated levels in
+			# F7.1; MANAGER by default so the safety officer can maintain it.
+			'manage_threshold'          => MANAGER,
+
 			# --- Fälligkeitsberechnung (F1.8 / F1.9) -----------------------
 			# Global default due-date mode; overridable per measure.
 			# One of: rollierend | kalenderjahr | stichmonat | extern
@@ -104,8 +112,8 @@ class QualificationTrackerPlugin extends MantisPlugin {
 	 */
 	function menu_manage() {
 		return array(
-			'<a href="' . plugin_page( 'config' ) . '">'
-				. plugin_lang_get( 'menu_config' ) . '</a>',
+			'<a href="' . plugin_page( 'catalog' ) . '">'
+				. plugin_lang_get( 'menu_catalog' ) . '</a>',
 		);
 	}
 

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  PHPUnit configuration for QualificationTracker.
+
+  The plugin ships without Composer (git-clone deployable). Tests use a
+  stand-alone phpunit.phar, e.g. inside the Docker test container:
+
+    curl -sSL https://phar.phpunit.de/phpunit-10.phar -o /tmp/phpunit.phar
+    php /tmp/phpunit.phar -c phpunit.xml.dist
+
+  Only side-effect-free core logic is unit-tested here; database CRUD and pages
+  are verified against the running MantisBT test instance.
+-->
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         bootstrap="tests/bootstrap.php"
+         colors="true"
+         cacheDirectory=".phpunit.cache"
+         failOnWarning="true"
+         failOnRisky="true">
+    <testsuites>
+        <testsuite name="QualificationTracker">
+            <directory>tests</directory>
+        </testsuite>
+    </testsuites>
+    <source>
+        <include>
+            <directory suffix=".php">core</directory>
+        </include>
+    </source>
+</phpunit>

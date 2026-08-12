@@ -4,3 +4,6 @@
 .DS_Store
 .idea/
 .vscode/
+.phpunit.cache/
+.phpunit.result.cache
+/tests/coverage/

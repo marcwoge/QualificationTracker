@@ -15,4 +15,79 @@ $s_plugin_QualificationTracker_title       = 'QualificationTracker';
 $s_plugin_QualificationTracker_description  = 'Manage legally required safety instructions, qualifications and appointments as MantisBT tickets (ArbSchG, DGUV).';
 
 # Management menu
-$s_plugin_QualificationTracker_menu_config = 'QualificationTracker Configuration';
+$s_plugin_QualificationTracker_menu_catalog = 'Measure catalogue';
+
+# --- Measure catalogue (F1.2) --------------------------------------------
+$s_plugin_QualificationTracker_catalog_title = 'Measure catalogue';
+$s_plugin_QualificationTracker_no_massnahmen = 'No measures defined yet.';
+
+# Buttons
+$s_plugin_QualificationTracker_btn_new_massnahme = 'New measure';
+$s_plugin_QualificationTracker_btn_edit          = 'Edit';
+$s_plugin_QualificationTracker_btn_delete        = 'Delete';
+$s_plugin_QualificationTracker_btn_save          = 'Save';
+$s_plugin_QualificationTracker_btn_cancel        = 'Cancel';
+
+# Messages
+$s_plugin_QualificationTracker_confirm_delete = 'Really delete this measure?';
+$s_plugin_QualificationTracker_msg_deleted    = 'Measure deleted.';
+$s_plugin_QualificationTracker_msg_referenced = 'The measure is still used by a profile or an event and was not deleted. Deactivate it instead.';
+
+# Table columns
+$s_plugin_QualificationTracker_col_schluessel          = 'Key';
+$s_plugin_QualificationTracker_col_bezeichnung         = 'Name';
+$s_plugin_QualificationTracker_col_typ                 = 'Type';
+$s_plugin_QualificationTracker_col_modus               = 'Due-date mode';
+$s_plugin_QualificationTracker_col_intervall           = 'Interval (months)';
+$s_plugin_QualificationTracker_col_wiederkehrend       = 'Recurring';
+$s_plugin_QualificationTracker_col_sicherheitsrelevant = 'Safety-relevant';
+$s_plugin_QualificationTracker_col_aktiv               = 'Active';
+$s_plugin_QualificationTracker_col_aktionen            = 'Actions';
+
+# Form
+$s_plugin_QualificationTracker_form_new_title  = 'New measure';
+$s_plugin_QualificationTracker_form_edit_title = 'Edit measure';
+
+$s_plugin_QualificationTracker_label_schluessel          = 'Key';
+$s_plugin_QualificationTracker_label_bezeichnung         = 'Name';
+$s_plugin_QualificationTracker_label_typ                 = 'Type';
+$s_plugin_QualificationTracker_label_modus               = 'Due-date mode';
+$s_plugin_QualificationTracker_label_intervall           = 'Interval (months)';
+$s_plugin_QualificationTracker_label_stichmonat          = 'Reference month (1–12)';
+$s_plugin_QualificationTracker_label_karenz              = 'Grace period (days)';
+$s_plugin_QualificationTracker_label_vorlauf             = 'Escalation lead time (days)';
+$s_plugin_QualificationTracker_label_wiederkehrend       = 'Recurring';
+$s_plugin_QualificationTracker_label_sicherheitsrelevant = 'Safety-relevant';
+$s_plugin_QualificationTracker_label_rechtsgrundlage     = 'Legal basis';
+$s_plugin_QualificationTracker_label_nachweisart         = 'Type of proof';
+$s_plugin_QualificationTracker_label_aktiv               = 'Active';
+
+# Help texts
+$s_plugin_QualificationTracker_help_modus               = 'rolling: performed date + interval · calendar year: 31 Dec · reference month: month-end in the target year · external: date taken from the document (no calculation).';
+$s_plugin_QualificationTracker_help_karenz              = 'When performed within this window before the target date, the cycle anchor is kept (prevents forward drift).';
+$s_plugin_QualificationTracker_help_wiederkehrend       = 'Generates follow-up cycles automatically. Disable for event-driven instructions (after an accident, a new machine).';
+$s_plugin_QualificationTracker_help_sicherheitsrelevant = 'When overdue, a suspension note can be set automatically (e.g. aerial work platform, forklift, crane).';
+$s_plugin_QualificationTracker_help_aktiv               = 'Only active measures are used for new proofs.';
+
+# Measure types
+$s_plugin_QualificationTracker_type_UW = 'Instruction (UW)';
+$s_plugin_QualificationTracker_type_QU = 'Qualification, permanent (QU)';
+$s_plugin_QualificationTracker_type_QB = 'Qualification, time-limited (QB)';
+$s_plugin_QualificationTracker_type_BE = 'Appointment (BE)';
+$s_plugin_QualificationTracker_type_VO = 'Occupational health (VO)';
+
+# Due-date modes
+$s_plugin_QualificationTracker_mode_rollierend   = 'rolling';
+$s_plugin_QualificationTracker_mode_kalenderjahr = 'Calendar year';
+$s_plugin_QualificationTracker_mode_stichmonat   = 'Reference month';
+$s_plugin_QualificationTracker_mode_extern       = 'external';
+
+# Error messages
+$s_plugin_QualificationTracker_error_schluessel_required  = 'Please enter a key.';
+$s_plugin_QualificationTracker_error_schluessel_length    = 'The key may be at most 64 characters long.';
+$s_plugin_QualificationTracker_error_schluessel_duplicate = 'This key is already in use.';
+$s_plugin_QualificationTracker_error_bezeichnung_required = 'Please enter a name.';
+$s_plugin_QualificationTracker_error_typ_invalid          = 'Invalid measure type.';
+$s_plugin_QualificationTracker_error_modus_invalid        = 'Invalid due-date mode.';
+$s_plugin_QualificationTracker_error_stichmonat_invalid   = 'Please enter a reference month between 1 and 12.';
+$s_plugin_QualificationTracker_error_intervall_required   = 'Please enter an interval in months (1–600).';

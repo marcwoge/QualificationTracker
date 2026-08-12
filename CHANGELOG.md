@@ -16,6 +16,10 @@ die Versionierung folgt [Semantic Versioning](https://semver.org/lang/de/).
   `qt_profil`, `qt_profil_massnahme`, `qt_zuordnung`, `qt_veranstaltung`) über
   die Mantis-Plugin-Schema-API inkl. Indizes; Tabellen-Rückbau bei
   Deinstallation. Datenmodell setzt die Entscheidungen E1/E2/E3/E5/E6 um.
+- **F1.2 Maßnahmenkatalog:** Verwaltung von Maßnahmen (Anlegen, Bearbeiten,
+  Löschen) unter *Verwaltung → QualificationTracker* mit Zugriffsprüfung,
+  CSRF-Schutz und Ausgabe-Escaping. Datenschicht `core/QT_Catalog.php` mit reiner,
+  unit-getesteter Validierung; PHPUnit-Grundgerüst (`phpunit.xml.dist`, `tests/`).
 
 ### Behoben
 - Direktaufruf-Schutz der Hauptklasse prüfte die nicht existente Konstante
