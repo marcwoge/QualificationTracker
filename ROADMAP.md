@@ -1,7 +1,7 @@
 # Roadmap — MantisBT QualificationTracker
 
 **Version dieses Dokuments:** 0.4 (2026-08-12)
-**Status Gesamtprojekt:** 🔵 Konzept abgeschlossen, Implementierung nicht begonnen
+**Status Gesamtprojekt:** 🟡 Implementierung begonnen (M1 in Arbeit)
 
 ---
 
@@ -53,7 +53,7 @@ Für die Anbindung an Auswertungssysteme stellt das Plugin **REST-Endpunkte** be
 
 | # | Meilenstein | Ziel | Status |
 |---|---|---|---|
-| M1 | Fundament | Datenmodell, Schema-Migration, Katalogverwaltung | ⬜ offen |
+| M1 | Fundament | Datenmodell, Schema-Migration, Katalogverwaltung | 🟡 in Arbeit |
 | M2 | Generator | Tätigkeitsprofile, automatische Ticketketten, Soll-Ist-Prüfung | ⬜ offen |
 | M3 | Veranstaltungen | Sammeltermine, Massenabschluss, Teilnehmerlisten | ⬜ offen |
 | M4 | Matrix & Auswertung | Matrix-Ansicht, Ampel, Export | ⬜ offen |
@@ -72,7 +72,7 @@ Legende: ⬜ offen · 🟡 in Arbeit · 🟢 fertig · ⚪ zurückgestellt
 
 | ID | Funktion | Beschreibung | Status |
 |---|---|---|---|
-| F1.1 | Schema-Migration | Tabellen `qt_massnahme`, `qt_person`, `qt_profil`, `qt_profil_massnahme`, `qt_zuordnung`, `qt_veranstaltung`; Installations- und Upgrade-Routine über die Mantis-Plugin-API | ⬜ |
+| F1.1 | Schema-Migration | Tabellen `qt_massnahme`, `qt_person`, `qt_profil`, `qt_profil_massnahme`, `qt_zuordnung`, `qt_veranstaltung`; Installations- und Upgrade-Routine über die Mantis-Plugin-API | 🟢 |
 | F1.2 | Maßnahmenkatalog CRUD | Anlegen/Bearbeiten von Maßnahmen: Schlüssel, Bezeichnung, Typ (UW/QU/QB/BE/VO), Intervall in Monaten, Rechtsgrundlage, Nachweisart, Vorlaufzeit | ⬜ |
 | F1.3 | Vorbedingungen | Maßnahme kann andere Maßnahmen als Voraussetzung referenzieren (Qualifikation → Beauftragung → Unterweisung) | ⬜ |
 | F1.4 | Personenregister | Personen unabhängig von Mantis-Benutzerkonten: Personalnummer, Name, Abteilung, Eintritt, Austritt, Vorgesetzter (Mantis-User-ID) | ⬜ |
@@ -199,6 +199,7 @@ Diese Punkte müssen vor M2 geklärt sein, da sie das Datenmodell beeinflussen:
 | Datum | Version | Änderung |
 |---|---|---|
 | 2026-08-12 | 0.1 | Ersterstellung: Zielbeschreibung, 8 Meilensteine, 46 Funktionen, offene Entscheidungen |
+| 2026-08-12 | 0.5 | M1 begonnen. E1/E2/E3/E5/E6 entschieden (Surrogat-ID führend, Personalnummer nullable-unique; Fremdpersonal per `typ`-Diskriminator; anlassbezogen per `wiederkehrend`; Jugendschutz per Stichdatum statt Geburtsdatum; ein globaler Katalog). F1.1 (Schema-Migration) implementiert und in MantisBT 2.28.3 / MariaDB 10.11 verifiziert |
 | 2026-08-12 | 0.4 | Lizenz zurück auf MIT für Konsistenz mit den fünf bereits veröffentlichten Plugins des Autors. Reveille als optionale Integration für F5.2 aufgenommen; die vorhandenen Plugins dienen zusätzlich als API-Referenz für die Implementierung |
 | 2026-08-12 | 0.3 | Lizenz auf GPL-2.0-or-later umgestellt (Mantis-Konformität). Harte Abhängigkeit zu IssueRecurrence entfällt: Terminplanung wird nativ implementiert, Fremdplugins nur optional erkannt. Vorbereitung der öffentlichen Veröffentlichung |
 | 2026-08-12 | 0.2 | E4 geklärt: Fälligkeitsmodus wird je Maßnahme konfigurierbar. Neu: F1.8 (vier Modi), F1.9 (Karenz und Ankererhalt), F2.8 (zwei Erzeugungsstrategien), F5.7 (Moduswechsel im Bestand). Jetzt 50 Funktionen |

@@ -12,6 +12,10 @@ die Versionierung folgt [Semantic Versioning](https://semver.org/lang/de/).
 - Konzeptdokumentation (`ROADMAP.md`, `KONZEPT-Bordmittel.md`) und Projekt-README.
 - Lokale MantisBT-Testumgebung unter `docker/` (Docker Compose, MantisBT 2.28.3,
   MariaDB, Mailpit) zum Ausprobieren des Plugins.
+- **F1.1 Schema-Migration:** sechs Tabellen (`qt_massnahme`, `qt_person`,
+  `qt_profil`, `qt_profil_massnahme`, `qt_zuordnung`, `qt_veranstaltung`) über
+  die Mantis-Plugin-Schema-API inkl. Indizes; Tabellen-Rückbau bei
+  Deinstallation. Datenmodell setzt die Entscheidungen E1/E2/E3/E5/E6 um.
 
 ### Behoben
 - Direktaufruf-Schutz der Hauptklasse prüfte die nicht existente Konstante
