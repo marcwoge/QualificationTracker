@@ -8,6 +8,11 @@ die Versionierung folgt [Semantic Versioning](https://semver.org/lang/de/).
 ## [Unreleased]
 
 ### Hinzugefügt
+- **F2.1 Tätigkeitsprofile (M2):** Verwaltung von Profilen (benannte Mengen von
+  Maßnahmen) unter *Verwaltung → QualificationTracker → Tätigkeitsprofile* mit
+  Zuordnung der Maßnahmen (n:m). `core/QT_Profile.php` mit reiner, unit-getesteter
+  Validierung und CRUD; Löschen ist blockiert, solange das Profil Personen
+  zugeordnet ist. Grundlage für den Ketten-Generator (F2.3).
 - Repository-Grundstruktur: Plugin-Hauptklasse, Verzeichnislayout, Lizenz, leere Sprachdateien.
 - Konzeptdokumentation (`ROADMAP.md`, `KONZEPT-Bordmittel.md`) und Projekt-README.
 - Lokale MantisBT-Testumgebung unter `docker/` (Docker Compose, MantisBT 2.28.3,

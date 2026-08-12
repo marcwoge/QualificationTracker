@@ -199,3 +199,25 @@ $s_plugin_QualificationTracker_import_created       = 'neu';
 $s_plugin_QualificationTracker_import_updated       = 'aktualisiert';
 $s_plugin_QualificationTracker_import_skipped       = 'übersprungen';
 $s_plugin_QualificationTracker_import_errors        = 'fehlerhaft';
+
+# --- Tätigkeitsprofile (F2.1) --------------------------------------------
+$s_plugin_QualificationTracker_menu_profil  = 'Tätigkeitsprofile';
+$s_plugin_QualificationTracker_profil_title = 'Tätigkeitsprofile';
+$s_plugin_QualificationTracker_no_profile   = 'Noch keine Profile angelegt.';
+$s_plugin_QualificationTracker_btn_new_profil = 'Neues Profil';
+$s_plugin_QualificationTracker_confirm_delete_profil = 'Dieses Profil wirklich löschen?';
+$s_plugin_QualificationTracker_profil_msg_deleted    = 'Profil gelöscht.';
+$s_plugin_QualificationTracker_profil_msg_referenced = 'Das Profil ist noch Personen zugeordnet und wurde nicht gelöscht. Deaktivieren Sie es stattdessen.';
+$s_plugin_QualificationTracker_col_profil_name       = 'Profil';
+$s_plugin_QualificationTracker_col_beschreibung      = 'Beschreibung';
+$s_plugin_QualificationTracker_col_profil_massnahmen = 'Maßnahmen';
+$s_plugin_QualificationTracker_profil_form_new_title  = 'Neues Profil';
+$s_plugin_QualificationTracker_profil_form_edit_title = 'Profil bearbeiten';
+$s_plugin_QualificationTracker_label_profil_name       = 'Profilname';
+$s_plugin_QualificationTracker_label_profil_massnahmen = 'Maßnahmen';
+$s_plugin_QualificationTracker_help_profil_massnahmen  = 'Die Maßnahmen, die dieses Profil nach sich zieht. Mehrfachauswahl mit Strg/Cmd. Der Generator erzeugt daraus die Nachweistickets (F2.3).';
+$s_plugin_QualificationTracker_help_profil_aktiv       = 'Nur aktive Profile werden bei der Ticketerzeugung berücksichtigt.';
+$s_plugin_QualificationTracker_error_profil_name_required  = 'Bitte einen Profilnamen angeben.';
+$s_plugin_QualificationTracker_error_profil_name_length    = 'Der Profilname darf höchstens 128 Zeichen lang sein.';
+$s_plugin_QualificationTracker_error_profil_name_duplicate = 'Dieser Profilname ist bereits vergeben.';
+$s_plugin_QualificationTracker_label_beschreibung = 'Beschreibung';

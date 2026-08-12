@@ -199,3 +199,25 @@ $s_plugin_QualificationTracker_import_created       = 'created';
 $s_plugin_QualificationTracker_import_updated       = 'updated';
 $s_plugin_QualificationTracker_import_skipped       = 'skipped';
 $s_plugin_QualificationTracker_import_errors        = 'with errors';
+
+# --- Activity profiles (F2.1) --------------------------------------------
+$s_plugin_QualificationTracker_menu_profil  = 'Activity profiles';
+$s_plugin_QualificationTracker_profil_title = 'Activity profiles';
+$s_plugin_QualificationTracker_no_profile   = 'No profiles defined yet.';
+$s_plugin_QualificationTracker_btn_new_profil = 'New profile';
+$s_plugin_QualificationTracker_confirm_delete_profil = 'Really delete this profile?';
+$s_plugin_QualificationTracker_profil_msg_deleted    = 'Profile deleted.';
+$s_plugin_QualificationTracker_profil_msg_referenced = 'The profile is still assigned to persons and was not deleted. Deactivate it instead.';
+$s_plugin_QualificationTracker_col_profil_name       = 'Profile';
+$s_plugin_QualificationTracker_col_beschreibung      = 'Description';
+$s_plugin_QualificationTracker_col_profil_massnahmen = 'Measures';
+$s_plugin_QualificationTracker_profil_form_new_title  = 'New profile';
+$s_plugin_QualificationTracker_profil_form_edit_title = 'Edit profile';
+$s_plugin_QualificationTracker_label_profil_name       = 'Profile name';
+$s_plugin_QualificationTracker_label_profil_massnahmen = 'Measures';
+$s_plugin_QualificationTracker_help_profil_massnahmen  = 'The measures this profile entails. Multi-select with Ctrl/Cmd. The generator creates the proof tickets from these (F2.3).';
+$s_plugin_QualificationTracker_help_profil_aktiv       = 'Only active profiles are considered during ticket generation.';
+$s_plugin_QualificationTracker_error_profil_name_required  = 'Please enter a profile name.';
+$s_plugin_QualificationTracker_error_profil_name_length    = 'The profile name may be at most 128 characters long.';
+$s_plugin_QualificationTracker_error_profil_name_duplicate = 'This profile name is already in use.';
+$s_plugin_QualificationTracker_label_beschreibung = 'Description';
