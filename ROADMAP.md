@@ -91,7 +91,7 @@ Legende: ⬜ offen · 🟡 in Arbeit · 🟢 fertig · ⚪ zurückgestellt
 | F2.3 | Ketten-Generator | Erzeugt aus Profilzuordnung die Tickets inkl. `depends on`-Beziehungen in korrekter Reihenfolge | 🟢 |
 | F2.4 | Native Terminplanung | Erzeugt Folgezyklen selbst — vorausschauend oder ereignisgetrieben je nach Fälligkeitsmodus. Ist IssueRecurrence installiert, wird es optional erkannt und kann alternativ genutzt werden; eine Abhängigkeit besteht nicht | ⬜ |
 | F2.5 | Soll-Ist-Prüfung | Report: Personen mit Profil, aber ohne gültigen Nachweis; inkl. „Beauftragung ohne Qualifikation" | 🟢 |
-| F2.6 | Vorschau vor Anlage | Dry-Run-Ansicht: welche Tickets würden entstehen, bevor sie erzeugt werden | ⬜ |
+| F2.6 | Vorschau vor Anlage | Dry-Run-Ansicht: welche Tickets würden entstehen, bevor sie erzeugt werden | 🟢 |
 | F2.7 | Profiländerung | Wechselt eine Person das Profil, werden entfallende Maßnahmen auf `entfallen` gesetzt und neue erzeugt | ⬜ |
 | F2.8 | Zwei Erzeugungsstrategien | **Vorausschauend** bei `kalenderjahr`/`stichmonat`: Jahrgang wird im Voraus gesammelt erzeugt (Voraussetzung für Terminplanung M3). **Ereignisgetrieben** bei `rollierend`/`extern`: Folgeticket entsteht erst beim Abschluss des Vorgängers, da vorher kein Fälligkeitsdatum existiert | ⬜ |
 

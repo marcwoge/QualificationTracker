@@ -273,3 +273,12 @@ $s_plugin_QualificationTracker_sollist_art_fehlt        = 'no proof';
 $s_plugin_QualificationTracker_sollist_art_offen        = 'in progress';
 $s_plugin_QualificationTracker_sollist_art_abgelaufen   = 'expired';
 $s_plugin_QualificationTracker_sollist_art_vorbedingung = 'prerequisite missing';
+
+# --- Dry-run preview (F2.6) ----------------------------------------------
+$s_plugin_QualificationTracker_menu_dryrun   = 'Ticket generation';
+$s_plugin_QualificationTracker_dryrun_title  = 'Ticket generation – preview';
+$s_plugin_QualificationTracker_dryrun_intro  = 'Preview of the proof tickets that would be created for all active persons. Existing open proofs are skipped.';
+$s_plugin_QualificationTracker_dryrun_nothing = 'No new tickets to create.';
+$s_plugin_QualificationTracker_dryrun_persons = 'persons';
+$s_plugin_QualificationTracker_dryrun_confirm = 'Create tickets for all listed persons?';
+$s_plugin_QualificationTracker_btn_generate_all = 'Create all tickets';

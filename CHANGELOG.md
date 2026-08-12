@@ -32,6 +32,11 @@ die Versionierung folgt [Semantic Versioning](https://semver.org/lang/de/).
   in Bearbeitung / abgelaufen), inkl. Sonderfall „Beauftragung ohne gültige
   Qualifikation" (gültige Maßnahme, deren Vorbedingung nicht gültig ist).
   `core/QT_SollIst.php` mit reiner, unit-getesteter Bewertung; Abteilungsfilter.
+- **F2.6 Dry-Run-Vorschau:** Betriebsweite Vorschau unter *Verwaltung →
+  QualificationTracker → Ticketerzeugung*: welche Nachweistickets für alle (oder
+  je Abteilung gefilterten) aktiven Personen entstünden, mit Sammel-Erzeugung
+  („Alle Tickets erzeugen"). Ergänzt die Einzelperson-Vorschau aus F2.3
+  (`qt_generator_plan_all` / `qt_generator_run_all`).
 - Repository-Grundstruktur: Plugin-Hauptklasse, Verzeichnislayout, Lizenz, leere Sprachdateien.
 - Konzeptdokumentation (`ROADMAP.md`, `KONZEPT-Bordmittel.md`) und Projekt-README.
 - Lokale MantisBT-Testumgebung unter `docker/` (Docker Compose, MantisBT 2.28.3,

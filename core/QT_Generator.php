@@ -408,3 +408,62 @@ function qt_generator_run_for_person( $p_person_id, $p_today ) {
 	$t_plan = qt_generator_plan( $t_person, $p_today );
 	return qt_generator_execute( $t_person, $t_plan, $p_today );
 }
+
+/**
+ * Company-wide dry-run plan (F2.6): flat rows of what would be created / skipped
+ * across all active persons, optionally filtered by department.
+ *
+ * @param string $p_today
+ * @param string $p_abteilung
+ * @return array List of rows: person, personalnummer, abteilung, schluessel,
+ *               bezeichnung, typ, modus, soll_termin, action.
+ */
+function qt_generator_plan_all( $p_today, $p_abteilung = '' ) {
+	$t_rows = array();
+	foreach( qt_person_load_all( $p_abteilung ) as $t_person ) {
+		if( !$t_person['aktiv'] ) {
+			continue;
+		}
+		$t_name = trim( $t_person['nachname'] . ', ' . $t_person['vorname'], ', ' );
+		foreach( qt_generator_plan( $t_person, $p_today ) as $t_item ) {
+			$t_m = $t_item['massnahme'];
+			$t_rows[] = array(
+				'person'         => $t_name,
+				'personalnummer' => $t_person['personalnummer'],
+				'abteilung'      => $t_person['abteilung'],
+				'schluessel'     => $t_m['schluessel'],
+				'bezeichnung'    => $t_m['bezeichnung'],
+				'typ'            => $t_m['typ'],
+				'modus'          => $t_m['faelligkeitsmodus'],
+				'soll_termin'    => $t_item['soll_termin'],
+				'action'         => $t_item['action'],
+			);
+		}
+	}
+	return $t_rows;
+}
+
+/**
+ * Company-wide generation (F2.6): run the generator for every active person,
+ * optionally filtered by department.
+ *
+ * @param string $p_today
+ * @param string $p_abteilung
+ * @return array Summary: created, skipped, persons, errors[].
+ */
+function qt_generator_run_all( $p_today, $p_abteilung = '' ) {
+	$t_sum = array( 'created' => 0, 'skipped' => 0, 'persons' => 0, 'errors' => array() );
+	foreach( qt_person_load_all( $p_abteilung ) as $t_person ) {
+		if( !$t_person['aktiv'] ) {
+			continue;
+		}
+		$t_s = qt_generator_run_for_person( (int)$t_person['id'], $p_today );
+		$t_sum['created'] += $t_s['created'];
+		$t_sum['skipped'] += $t_s['skipped'];
+		$t_sum['persons']++;
+		foreach( $t_s['errors'] as $t_e ) {
+			$t_sum['errors'][] = $t_e;
+		}
+	}
+	return $t_sum;
+}

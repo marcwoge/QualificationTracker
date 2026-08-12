@@ -273,3 +273,12 @@ $s_plugin_QualificationTracker_sollist_art_fehlt        = 'kein Nachweis';
 $s_plugin_QualificationTracker_sollist_art_offen        = 'in Bearbeitung';
 $s_plugin_QualificationTracker_sollist_art_abgelaufen   = 'abgelaufen';
 $s_plugin_QualificationTracker_sollist_art_vorbedingung = 'Vorbedingung fehlt';
+
+# --- Dry-Run-Vorschau (F2.6) ---------------------------------------------
+$s_plugin_QualificationTracker_menu_dryrun   = 'Ticketerzeugung';
+$s_plugin_QualificationTracker_dryrun_title  = 'Ticketerzeugung – Vorschau';
+$s_plugin_QualificationTracker_dryrun_intro  = 'Vorschau der Nachweistickets, die für alle aktiven Personen erzeugt würden. Bereits vorhandene offene Nachweise werden übersprungen.';
+$s_plugin_QualificationTracker_dryrun_nothing = 'Keine neuen Tickets zu erzeugen.';
+$s_plugin_QualificationTracker_dryrun_persons = 'Personen';
+$s_plugin_QualificationTracker_dryrun_confirm = 'Für alle angezeigten Personen Tickets erzeugen?';
+$s_plugin_QualificationTracker_btn_generate_all = 'Alle Tickets erzeugen';

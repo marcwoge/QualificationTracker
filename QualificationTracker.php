@@ -146,6 +146,8 @@ class QualificationTrackerPlugin extends MantisPlugin {
 				. plugin_lang_get( 'menu_zuordnung' ) . '</a>',
 			'<a href="' . plugin_page( 'sollist' ) . '">'
 				. plugin_lang_get( 'menu_sollist' ) . '</a>',
+			'<a href="' . plugin_page( 'dryrun' ) . '">'
+				. plugin_lang_get( 'menu_dryrun' ) . '</a>',
 			'<a href="' . plugin_page( 'config' ) . '">'
 				. plugin_lang_get( 'menu_config' ) . '</a>',
 		);
