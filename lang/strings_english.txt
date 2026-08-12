@@ -261,3 +261,15 @@ $s_plugin_QualificationTracker_generate_msg        = 'Ticket generation finished
 $s_plugin_QualificationTracker_generate_created    = 'created';
 $s_plugin_QualificationTracker_generate_skipped    = 'skipped';
 $s_plugin_QualificationTracker_label_soll_termin   = 'Target date';
+
+# --- Target/actual check (F2.5) ------------------------------------------
+$s_plugin_QualificationTracker_menu_sollist  = 'Target/actual check';
+$s_plugin_QualificationTracker_sollist_title = 'Target/actual check';
+$s_plugin_QualificationTracker_sollist_intro = 'Persons who require a measure per their profile for which no valid proof exists — including "appointment without a valid qualification".';
+$s_plugin_QualificationTracker_sollist_no_gaps = 'No gaps – every required measure has a valid proof.';
+$s_plugin_QualificationTracker_col_massnahme = 'Measure';
+$s_plugin_QualificationTracker_col_art       = 'Kind';
+$s_plugin_QualificationTracker_sollist_art_fehlt        = 'no proof';
+$s_plugin_QualificationTracker_sollist_art_offen        = 'in progress';
+$s_plugin_QualificationTracker_sollist_art_abgelaufen   = 'expired';
+$s_plugin_QualificationTracker_sollist_art_vorbedingung = 'prerequisite missing';

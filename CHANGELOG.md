@@ -26,6 +26,12 @@ die Versionierung folgt [Semantic Versioning](https://semver.org/lang/de/).
   Status-Mapping auf Standard-MantisBT-Status, Kategorien nach Maßnahmentyp.
   Vorschau + Erzeugung über *Profilzuordnung → Kette erzeugen*. Umsetzung der
   Entscheidungen G1–G5.
+- **F2.5 Soll-Ist-Prüfung:** Read-only-Report unter *Verwaltung →
+  QualificationTracker → Soll-Ist-Prüfung*: welche Person laut Profil eine
+  Maßnahme benötigt, für die kein gültiger Nachweis existiert (kein Nachweis /
+  in Bearbeitung / abgelaufen), inkl. Sonderfall „Beauftragung ohne gültige
+  Qualifikation" (gültige Maßnahme, deren Vorbedingung nicht gültig ist).
+  `core/QT_SollIst.php` mit reiner, unit-getesteter Bewertung; Abteilungsfilter.
 - Repository-Grundstruktur: Plugin-Hauptklasse, Verzeichnislayout, Lizenz, leere Sprachdateien.
 - Konzeptdokumentation (`ROADMAP.md`, `KONZEPT-Bordmittel.md`) und Projekt-README.
 - Lokale MantisBT-Testumgebung unter `docker/` (Docker Compose, MantisBT 2.28.3,
