@@ -1,0 +1,129 @@
+# QualificationTracker – Beispiel-Maßnahmenkatalog
+#
+# Ausdrücklich ein Startpunkt, KEIN Rechtskataster. Welche Maßnahmen ein Betrieb
+# tatsächlich braucht, entscheidet dessen Fachkraft für Arbeitssicherheit.
+# Rechtsgrundlagen und Intervalle vor dem Produktivbetrieb prüfen und anpassen.
+#
+# Format: eine YAML-Sequenz von Maßnahmen. Felder entsprechen dem Katalog (F1.2).
+# `vorbedingungen` ist eine kommagetrennte Liste von Schlüsseln (F1.3).
+
+- schluessel: UW-JAHR
+  bezeichnung: "Jährliche Unterweisung nach DGUV Vorschrift 1"
+  typ: UW
+  faelligkeitsmodus: kalenderjahr
+  intervall_monate: 12
+  karenz_tage: 42
+  vorlaufzeit_tage: 30
+  wiederkehrend: true
+  sicherheitsrelevant: false
+  rechtsgrundlage: "DGUV Vorschrift 1 § 4, ArbSchG § 12"
+  nachweisart: Unterschriftenliste
+
+- schluessel: UW-BRAND
+  bezeichnung: "Brandschutzunterweisung"
+  typ: UW
+  faelligkeitsmodus: kalenderjahr
+  intervall_monate: 12
+  karenz_tage: 42
+  vorlaufzeit_tage: 30
+  wiederkehrend: true
+  sicherheitsrelevant: false
+  rechtsgrundlage: "DGUV Vorschrift 1 § 4, ASR A2.2"
+  nachweisart: Unterschriftenliste
+
+- schluessel: UW-GEFAHR
+  bezeichnung: "Unterweisung Gefahrstoffe"
+  typ: UW
+  faelligkeitsmodus: kalenderjahr
+  intervall_monate: 12
+  karenz_tage: 42
+  vorlaufzeit_tage: 30
+  wiederkehrend: true
+  sicherheitsrelevant: false
+  rechtsgrundlage: "GefStoffV § 14"
+  nachweisart: Unterschriftenliste
+
+- schluessel: UW-LEITER
+  bezeichnung: "Unterweisung Leitern und Tritte"
+  typ: UW
+  faelligkeitsmodus: kalenderjahr
+  intervall_monate: 12
+  karenz_tage: 42
+  vorlaufzeit_tage: 30
+  wiederkehrend: true
+  sicherheitsrelevant: false
+  rechtsgrundlage: "DGUV Information 208-016, BetrSichV"
+  nachweisart: Unterschriftenliste
+
+- schluessel: QB-ERSTEHILFE
+  bezeichnung: "Ersthelfer-Ausbildung / Fortbildung"
+  typ: QB
+  faelligkeitsmodus: extern
+  wiederkehrend: true
+  sicherheitsrelevant: false
+  rechtsgrundlage: "DGUV Vorschrift 1 § 26"
+  nachweisart: Zertifikat
+
+- schluessel: QU-HAB
+  bezeichnung: "Bedienerschulung Hubarbeitsbühne"
+  typ: QU
+  faelligkeitsmodus: extern
+  wiederkehrend: false
+  sicherheitsrelevant: true
+  rechtsgrundlage: "DGUV Grundsatz 308-008"
+  nachweisart: Zertifikat
+
+- schluessel: BE-HAB
+  bezeichnung: "Beauftragung Bedienung Hubarbeitsbühne"
+  typ: BE
+  faelligkeitsmodus: extern
+  wiederkehrend: false
+  sicherheitsrelevant: true
+  rechtsgrundlage: "DGUV Vorschrift 1 § 7"
+  nachweisart: Beauftragungsschreiben
+  vorbedingungen: "QU-HAB"
+
+- schluessel: UW-HAB
+  bezeichnung: "Jahresunterweisung Hubarbeitsbühne"
+  typ: UW
+  faelligkeitsmodus: kalenderjahr
+  intervall_monate: 12
+  karenz_tage: 42
+  vorlaufzeit_tage: 30
+  wiederkehrend: true
+  sicherheitsrelevant: true
+  rechtsgrundlage: "DGUV Vorschrift 1 § 4"
+  nachweisart: Unterschriftenliste
+  vorbedingungen: "BE-HAB"
+
+- schluessel: QU-FFZ
+  bezeichnung: "Ausbildung Flurförderzeuge (Gabelstapler)"
+  typ: QU
+  faelligkeitsmodus: extern
+  wiederkehrend: false
+  sicherheitsrelevant: true
+  rechtsgrundlage: "DGUV Grundsatz 308-001"
+  nachweisart: Zertifikat
+
+- schluessel: BE-FFZ
+  bezeichnung: "Beauftragung Führen von Flurförderzeugen"
+  typ: BE
+  faelligkeitsmodus: extern
+  wiederkehrend: false
+  sicherheitsrelevant: true
+  rechtsgrundlage: "DGUV Vorschrift 1 § 7, DGUV Vorschrift 68"
+  nachweisart: Beauftragungsschreiben
+  vorbedingungen: "QU-FFZ"
+
+- schluessel: UW-FFZ
+  bezeichnung: "Jahresunterweisung Flurförderzeuge"
+  typ: UW
+  faelligkeitsmodus: kalenderjahr
+  intervall_monate: 12
+  karenz_tage: 42
+  vorlaufzeit_tage: 30
+  wiederkehrend: true
+  sicherheitsrelevant: true
+  rechtsgrundlage: "DGUV Vorschrift 68"
+  nachweisart: Unterschriftenliste
+  vorbedingungen: "BE-FFZ"

@@ -183,3 +183,19 @@ $s_plugin_QualificationTracker_config_help_customfields    = 'Diese Felder werde
 $s_plugin_QualificationTracker_cf_col_field  = 'Feld';
 $s_plugin_QualificationTracker_cf_col_exists = 'Vorhanden';
 $s_plugin_QualificationTracker_cf_col_linked = 'Mit Zielprojekt verknüpft';
+
+# --- Beispielkatalog-Import (F1.7) ---------------------------------------
+$s_plugin_QualificationTracker_btn_import_beispiel = 'Beispielkatalog importieren';
+$s_plugin_QualificationTracker_import_title        = 'Beispielkatalog importieren';
+$s_plugin_QualificationTracker_import_intro        = 'Ausdrücklich ein Startpunkt, kein Rechtskataster. Vor dem Produktivbetrieb von der Fachkraft für Arbeitssicherheit prüfen und an den Betrieb anpassen.';
+$s_plugin_QualificationTracker_import_col_status    = 'Status';
+$s_plugin_QualificationTracker_import_status_new    = 'neu';
+$s_plugin_QualificationTracker_import_status_exists = 'vorhanden';
+$s_plugin_QualificationTracker_import_overwrite     = 'Vorhandene Maßnahmen überschreiben';
+$s_plugin_QualificationTracker_btn_import_now       = 'Jetzt importieren';
+$s_plugin_QualificationTracker_import_file_missing  = 'Beispielkatalog-Datei nicht gefunden.';
+$s_plugin_QualificationTracker_msg_imported         = 'Import abgeschlossen:';
+$s_plugin_QualificationTracker_import_created       = 'neu';
+$s_plugin_QualificationTracker_import_updated       = 'aktualisiert';
+$s_plugin_QualificationTracker_import_skipped       = 'übersprungen';
+$s_plugin_QualificationTracker_import_errors        = 'fehlerhaft';

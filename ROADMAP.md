@@ -1,7 +1,7 @@
 # Roadmap — MantisBT QualificationTracker
 
 **Version dieses Dokuments:** 0.4 (2026-08-12)
-**Status Gesamtprojekt:** 🟡 Implementierung begonnen (M1 in Arbeit)
+**Status Gesamtprojekt:** 🟡 M1 (Fundament) abgeschlossen, M2 (Generator) als Nächstes
 
 ---
 
@@ -53,7 +53,7 @@ Für die Anbindung an Auswertungssysteme stellt das Plugin **REST-Endpunkte** be
 
 | # | Meilenstein | Ziel | Status |
 |---|---|---|---|
-| M1 | Fundament | Datenmodell, Schema-Migration, Katalogverwaltung | 🟡 in Arbeit |
+| M1 | Fundament | Datenmodell, Schema-Migration, Katalogverwaltung | 🟢 fertig |
 | M2 | Generator | Tätigkeitsprofile, automatische Ticketketten, Soll-Ist-Prüfung | ⬜ offen |
 | M3 | Veranstaltungen | Sammeltermine, Massenabschluss, Teilnehmerlisten | ⬜ offen |
 | M4 | Matrix & Auswertung | Matrix-Ansicht, Ampel, Export | ⬜ offen |
@@ -78,7 +78,7 @@ Legende: ⬜ offen · 🟡 in Arbeit · 🟢 fertig · ⚪ zurückgestellt
 | F1.4 | Personenregister | Personen unabhängig von Mantis-Benutzerkonten: Personalnummer, Name, Abteilung, Eintritt, Austritt, Vorgesetzter (Mantis-User-ID) | 🟢 |
 | F1.5 | Custom-Field-Bootstrap | Die in Teil 1 beschriebenen Custom Fields werden bei Installation automatisch angelegt und den Projekten zugeordnet | 🟢 |
 | F1.6 | Konfigurationsseite | Plugin-Konfiguration: Zielprojekt, Statuswerte-Mapping, Vorlaufzeiten, Eskalationsempfänger | 🟢 |
-| F1.7 | Beispielkatalog | Mitgelieferter Startkatalog (Jahresunterweisung, Brandschutz, Erste Hilfe, Hubarbeitsbühne, Flurförderzeuge, Leitern & Tritte, Gefahrstoffe) als importierbare YAML | ⬜ |
+| F1.7 | Beispielkatalog | Mitgelieferter Startkatalog (Jahresunterweisung, Brandschutz, Erste Hilfe, Hubarbeitsbühne, Flurförderzeuge, Leitern & Tritte, Gefahrstoffe) als importierbare YAML | 🟢 |
 | F1.8 | Fälligkeitsmodus je Maßnahme | Vier Modi: `rollierend`, `kalenderjahr`, `stichmonat` (mit Monatsangabe), `extern` (kein Rechnen, Datum aus Nachweis). Global konfigurierbarer Vorgabewert, je Maßnahme überschreibbar, je Abteilung für `stichmonat` staffelbar | 🟢 |
 | F1.9 | Karenzzeit und Ankererhalt | Feld `soll_termin` je Nachweis. Bei Durchführung innerhalb der Karenzzeit vor dem Soll-Termin wird der Folgezyklus vom Soll- statt vom Ist-Datum berechnet — verhindert Vorwärtsdrift des Intervalls über die Jahre | 🟢 |
 
@@ -199,6 +199,7 @@ Diese Punkte müssen vor M2 geklärt sein, da sie das Datenmodell beeinflussen:
 | Datum | Version | Änderung |
 |---|---|---|
 | 2026-08-12 | 0.1 | Ersterstellung: Zielbeschreibung, 8 Meilensteine, 46 Funktionen, offene Entscheidungen |
+| 2026-08-12 | 0.6 | **M1 (Fundament) abgeschlossen:** F1.1–F1.9 implementiert und in MantisBT 2.28.3 verifiziert. Fälligkeitsrechner `QT_DueDateCalculator` mit 100 % Zeilenabdeckung; 85 PHPUnit-Tests. Docker-Testumgebung, Katalog-/Personen-/Konfigurationsoberflächen, Custom-Field-Bootstrap, Beispielkatalog-Import |
 | 2026-08-12 | 0.5 | M1 begonnen. E1/E2/E3/E5/E6 entschieden (Surrogat-ID führend, Personalnummer nullable-unique; Fremdpersonal per `typ`-Diskriminator; anlassbezogen per `wiederkehrend`; Jugendschutz per Stichdatum statt Geburtsdatum; ein globaler Katalog). F1.1 (Schema-Migration) implementiert und in MantisBT 2.28.3 / MariaDB 10.11 verifiziert |
 | 2026-08-12 | 0.4 | Lizenz zurück auf MIT für Konsistenz mit den fünf bereits veröffentlichten Plugins des Autors. Reveille als optionale Integration für F5.2 aufgenommen; die vorhandenen Plugins dienen zusätzlich als API-Referenz für die Implementierung |
 | 2026-08-12 | 0.3 | Lizenz auf GPL-2.0-or-later umgestellt (Mantis-Konformität). Harte Abhängigkeit zu IssueRecurrence entfällt: Terminplanung wird nativ implementiert, Fremdplugins nur optional erkannt. Vorbereitung der öffentlichen Veröffentlichung |

@@ -183,3 +183,19 @@ $s_plugin_QualificationTracker_config_help_customfields    = 'These fields are c
 $s_plugin_QualificationTracker_cf_col_field  = 'Field';
 $s_plugin_QualificationTracker_cf_col_exists = 'Exists';
 $s_plugin_QualificationTracker_cf_col_linked = 'Linked to target project';
+
+# --- Example-catalogue import (F1.7) -------------------------------------
+$s_plugin_QualificationTracker_btn_import_beispiel = 'Import example catalogue';
+$s_plugin_QualificationTracker_import_title        = 'Import example catalogue';
+$s_plugin_QualificationTracker_import_intro        = 'Explicitly a starting point, not a legal register. Have your safety officer review and adapt it to the company before going live.';
+$s_plugin_QualificationTracker_import_col_status    = 'Status';
+$s_plugin_QualificationTracker_import_status_new    = 'new';
+$s_plugin_QualificationTracker_import_status_exists = 'exists';
+$s_plugin_QualificationTracker_import_overwrite     = 'Overwrite existing measures';
+$s_plugin_QualificationTracker_btn_import_now       = 'Import now';
+$s_plugin_QualificationTracker_import_file_missing  = 'Example catalogue file not found.';
+$s_plugin_QualificationTracker_msg_imported         = 'Import finished:';
+$s_plugin_QualificationTracker_import_created       = 'created';
+$s_plugin_QualificationTracker_import_updated       = 'updated';
+$s_plugin_QualificationTracker_import_skipped       = 'skipped';
+$s_plugin_QualificationTracker_import_errors        = 'with errors';

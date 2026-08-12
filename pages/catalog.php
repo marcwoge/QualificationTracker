@@ -52,6 +52,16 @@ layout_page_begin();
 	<div class="alert alert-warning"><?php echo plugin_lang_get( 'msg_referenced' ); ?></div>
 <?php } else if( $t_msg === 'deleted' ) { ?>
 	<div class="alert alert-success"><?php echo plugin_lang_get( 'msg_deleted' ); ?></div>
+<?php } else if( $t_msg === 'imported' ) {
+	$t_e = gpc_get_int( 'e', 0 );
+?>
+	<div class="alert <?php echo $t_e > 0 ? 'alert-warning' : 'alert-success'; ?>">
+		<?php echo plugin_lang_get( 'msg_imported' ) . ' '
+			. gpc_get_int( 'c', 0 ) . ' ' . plugin_lang_get( 'import_created' ) . ', '
+			. gpc_get_int( 'u', 0 ) . ' ' . plugin_lang_get( 'import_updated' ) . ', '
+			. gpc_get_int( 's', 0 ) . ' ' . plugin_lang_get( 'import_skipped' )
+			. ( $t_e > 0 ? ' &mdash; ' . $t_e . ' ' . plugin_lang_get( 'import_errors' ) : '' ) . '.'; ?>
+	</div>
 <?php } ?>
 
 <div class="widget-box widget-color-blue2">
@@ -68,6 +78,11 @@ layout_page_begin();
 			href="<?php echo plugin_page( 'catalog_edit' ); ?>">
 			<i class="ace-icon fa fa-plus"></i>
 			<?php echo plugin_lang_get( 'btn_new_massnahme' ); ?>
+		</a>
+		<a class="btn btn-white btn-round btn-sm"
+			href="<?php echo plugin_page( 'catalog_import' ); ?>">
+			<i class="ace-icon fa fa-download"></i>
+			<?php echo plugin_lang_get( 'btn_import_beispiel' ); ?>
 		</a>
 	</div>
 

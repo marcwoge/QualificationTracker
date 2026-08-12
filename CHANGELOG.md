@@ -50,6 +50,14 @@ die Versionierung folgt [Semantic Versioning](https://semver.org/lang/de/).
   gleichnamige Felder werden wiederverwendet statt dupliziert (Brücke aus der
   Bordmittel-Konfiguration). Statusanzeige je Feld auf der Konfigurationsseite.
   Datenschutz: kein Freitext-/Befundfeld.
+- **F1.7 Beispiel-Maßnahmenkatalog:** Mitgelieferter Startkatalog
+  (`files/beispielkatalog.yaml`, 11 Maßnahmen inkl. Vorbedingungsketten
+  Hubarbeitsbühne/Flurförderzeuge) und Import über *Katalog → Beispielkatalog
+  importieren* mit Vorschau. `core/QT_CatalogImport.php` enthält einen kleinen,
+  abhängigkeitsfreien YAML-Leser (unit-getestet) und nutzt die vorhandene
+  Validierung und Vorbedingungslogik; bestehende Maßnahmen werden übersprungen
+  oder wahlweise überschrieben. **Damit ist Meilenstein M1 (Fundament)
+  vollständig.**
 
 ### Behoben
 - Direktaufruf-Schutz der Hauptklasse prüfte die nicht existente Konstante
