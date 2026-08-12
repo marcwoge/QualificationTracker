@@ -43,9 +43,8 @@ class QualificationTrackerPlugin extends MantisPlugin {
 	function register() {
 		$this->name        = 'QualificationTracker';
 		$this->description  = 'Manage legally required safety instructions, qualifications and appointments as MantisBT tickets (ArbSchG, DGUV).';
-		# Landing page of the plugin. Points at the measure catalogue until the
-		# dedicated configuration page is built (F1.6).
-		$this->page         = 'catalog';
+		# Landing page of the plugin (the "gear" in the plugin manager).
+		$this->page         = 'config';
 
 		$this->version  = '0.1.0';
 		$this->requires = array(
@@ -88,9 +87,19 @@ class QualificationTrackerPlugin extends MantisPlugin {
 			# entry date (used to seed the initial soll_termin).
 			'ersteinweisung_frist_tage' => 14,
 
+			# Per-department reference-month override for the "stichmonat" mode
+			# (staffelung). Map department name => month (1-12); empty means the
+			# global default applies. Maintained on the configuration page (F1.6),
+			# consumed by the calculator via its abteilung_stichmonat parameter.
+			'stichmonat_abteilung'      => array(),
+
 			# --- Eskalation (F5.3), Vorgabestufen in Tagen -----------------
 			# Positive = days before expiry, negative = days after.
 			'eskalation_stufen_tage'    => array( 90, 30, 0, -30 ),
+
+			# --- Ticketerzeugung (ab M2) -----------------------------------
+			# Project the proof tickets are created in. 0 = not configured yet.
+			'zielprojekt_id'            => 0,
 		);
 	}
 
@@ -116,6 +125,8 @@ class QualificationTrackerPlugin extends MantisPlugin {
 				. plugin_lang_get( 'menu_catalog' ) . '</a>',
 			'<a href="' . plugin_page( 'person' ) . '">'
 				. plugin_lang_get( 'menu_person' ) . '</a>',
+			'<a href="' . plugin_page( 'config' ) . '">'
+				. plugin_lang_get( 'menu_config' ) . '</a>',
 		);
 	}
 

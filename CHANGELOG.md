@@ -38,6 +38,12 @@ die Versionierung folgt [Semantic Versioning](https://semver.org/lang/de/).
   Erstzyklus-Berechnung. Per-Abteilung-`stichmonat` als Parameter unterstützt.
   Vollständig per PHPUnit abgedeckt (100 % Zeilen der Klasse; alle beschriebenen
   Randfälle inkl. rückdatierter Nacherfassung).
+- **F1.6 Konfigurationsseite:** *Verwaltung → QualificationTracker → Konfiguration*
+  (Administrator) für Verwaltungs-Zugriffsstufe, Fälligkeits-Vorgaben (Modus,
+  Stichmonat, Karenz, Ersteinweisungsfrist), die per-Abteilung-`stichmonat`-
+  Staffelung, die Eskalationstage und das Zielprojekt. Neue Konfig-Vorgaben
+  `stichmonat_abteilung` und `zielprojekt_id`. Statuswerte-Mapping und
+  Eskalationsempfänger folgen mit M2/M5.
 
 ### Behoben
 - Direktaufruf-Schutz der Hauptklasse prüfte die nicht existente Konstante

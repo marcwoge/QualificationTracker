@@ -17,6 +17,7 @@ $s_plugin_QualificationTracker_description  = 'Manage legally required safety in
 # Management menu
 $s_plugin_QualificationTracker_menu_catalog = 'Measure catalogue';
 $s_plugin_QualificationTracker_menu_person  = 'Person register';
+$s_plugin_QualificationTracker_menu_config  = 'Configuration';
 
 # --- Measure catalogue (F1.2) --------------------------------------------
 $s_plugin_QualificationTracker_catalog_title = 'Measure catalogue';
@@ -155,3 +156,23 @@ $s_plugin_QualificationTracker_error_austritt_invalid         = 'Invalid exit da
 $s_plugin_QualificationTracker_error_jugendschutz_invalid     = 'Invalid "youth protection until" date (format YYYY-MM-DD).';
 $s_plugin_QualificationTracker_error_austritt_before_eintritt = 'The exit date must not be before the entry date.';
 $s_plugin_QualificationTracker_error_vorgesetzter_invalid     = 'The selected supervisor is not a valid user.';
+
+# --- Configuration (F1.6) ------------------------------------------------
+$s_plugin_QualificationTracker_config_title = 'Configuration';
+$s_plugin_QualificationTracker_config_section_access      = 'Access';
+$s_plugin_QualificationTracker_config_section_calc        = 'Due-date calculation (defaults)';
+$s_plugin_QualificationTracker_config_section_stichmonat  = 'Reference month per department';
+$s_plugin_QualificationTracker_config_section_eskalation  = 'Escalation stages';
+$s_plugin_QualificationTracker_config_section_zielprojekt = 'Target project';
+$s_plugin_QualificationTracker_config_label_manage_threshold = 'Management access level';
+$s_plugin_QualificationTracker_config_help_manage_threshold  = 'From this global access level upward, the catalogue, persons and profiles may be managed.';
+$s_plugin_QualificationTracker_config_label_modus_default    = 'Default due-date mode';
+$s_plugin_QualificationTracker_config_label_stichmonat_default = 'Default reference month (1–12)';
+$s_plugin_QualificationTracker_config_label_karenz_default     = 'Default grace period (days)';
+$s_plugin_QualificationTracker_config_label_ersteinweisung     = 'First-instruction deadline (days after entry)';
+$s_plugin_QualificationTracker_config_help_stichmonat_abteilung = 'Empty = global default. A differing month (1–12) staggers the reference date per department, spreading the load across the year.';
+$s_plugin_QualificationTracker_config_no_abteilungen           = 'No departments in the person register yet.';
+$s_plugin_QualificationTracker_config_label_eskalation         = 'Stages (days)';
+$s_plugin_QualificationTracker_config_help_eskalation          = 'Positive = days before expiry, negative = days after. The recipients per stage follow in M5.';
+$s_plugin_QualificationTracker_config_label_zielprojekt        = 'Target project for proof tickets';
+$s_plugin_QualificationTracker_config_help_zielprojekt         = 'Project the proof tickets are created in (used from the generator M2 onward).';

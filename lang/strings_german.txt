@@ -17,6 +17,7 @@ $s_plugin_QualificationTracker_description  = 'Verwaltet gesetzlich vorgeschrieb
 # Verwaltungsmenü
 $s_plugin_QualificationTracker_menu_catalog = 'Maßnahmenkatalog';
 $s_plugin_QualificationTracker_menu_person  = 'Personenregister';
+$s_plugin_QualificationTracker_menu_config  = 'Konfiguration';
 
 # --- Maßnahmenkatalog (F1.2) ---------------------------------------------
 $s_plugin_QualificationTracker_catalog_title = 'Maßnahmenkatalog';
@@ -155,3 +156,23 @@ $s_plugin_QualificationTracker_error_austritt_invalid         = 'Ungültiges Aus
 $s_plugin_QualificationTracker_error_jugendschutz_invalid     = 'Ungültiges Datum für „Jugendschutz bis" (Format JJJJ-MM-TT).';
 $s_plugin_QualificationTracker_error_austritt_before_eintritt = 'Das Austrittsdatum darf nicht vor dem Eintrittsdatum liegen.';
 $s_plugin_QualificationTracker_error_vorgesetzter_invalid     = 'Der gewählte Vorgesetzte ist kein gültiger Benutzer.';
+
+# --- Konfiguration (F1.6) ------------------------------------------------
+$s_plugin_QualificationTracker_config_title = 'Konfiguration';
+$s_plugin_QualificationTracker_config_section_access      = 'Zugriff';
+$s_plugin_QualificationTracker_config_section_calc        = 'Fälligkeitsberechnung (Vorgaben)';
+$s_plugin_QualificationTracker_config_section_stichmonat  = 'Stichmonat je Abteilung';
+$s_plugin_QualificationTracker_config_section_eskalation  = 'Eskalationsstufen';
+$s_plugin_QualificationTracker_config_section_zielprojekt = 'Zielprojekt';
+$s_plugin_QualificationTracker_config_label_manage_threshold = 'Verwaltungs-Zugriffsstufe';
+$s_plugin_QualificationTracker_config_help_manage_threshold  = 'Ab dieser globalen Zugriffsstufe dürfen Katalog, Personen und Profile verwaltet werden.';
+$s_plugin_QualificationTracker_config_label_modus_default    = 'Vorgabe-Fälligkeitsmodus';
+$s_plugin_QualificationTracker_config_label_stichmonat_default = 'Vorgabe-Stichmonat (1–12)';
+$s_plugin_QualificationTracker_config_label_karenz_default     = 'Vorgabe-Karenzzeit (Tage)';
+$s_plugin_QualificationTracker_config_label_ersteinweisung     = 'Ersteinweisungsfrist (Tage nach Eintritt)';
+$s_plugin_QualificationTracker_config_help_stichmonat_abteilung = 'Leer = globaler Vorgabewert. Ein abweichender Monat (1–12) staffelt den Stichtag je Abteilung und verteilt so die Last über das Jahr.';
+$s_plugin_QualificationTracker_config_no_abteilungen           = 'Noch keine Abteilungen im Personenregister vorhanden.';
+$s_plugin_QualificationTracker_config_label_eskalation         = 'Stufen (Tage)';
+$s_plugin_QualificationTracker_config_help_eskalation          = 'Positiv = Tage vor Ablauf, negativ = Tage danach. Die Empfängerkreise je Stufe folgen in M5.';
+$s_plugin_QualificationTracker_config_label_zielprojekt        = 'Zielprojekt für Nachweistickets';
+$s_plugin_QualificationTracker_config_help_zielprojekt         = 'Projekt, in dem die Nachweistickets angelegt werden (wird ab dem Generator M2 verwendet).';

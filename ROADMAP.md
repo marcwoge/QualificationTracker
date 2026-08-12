@@ -77,7 +77,7 @@ Legende: ⬜ offen · 🟡 in Arbeit · 🟢 fertig · ⚪ zurückgestellt
 | F1.3 | Vorbedingungen | Maßnahme kann andere Maßnahmen als Voraussetzung referenzieren (Qualifikation → Beauftragung → Unterweisung) | 🟢 |
 | F1.4 | Personenregister | Personen unabhängig von Mantis-Benutzerkonten: Personalnummer, Name, Abteilung, Eintritt, Austritt, Vorgesetzter (Mantis-User-ID) | 🟢 |
 | F1.5 | Custom-Field-Bootstrap | Die in Teil 1 beschriebenen Custom Fields werden bei Installation automatisch angelegt und den Projekten zugeordnet | ⬜ |
-| F1.6 | Konfigurationsseite | Plugin-Konfiguration: Zielprojekt, Statuswerte-Mapping, Vorlaufzeiten, Eskalationsempfänger | ⬜ |
+| F1.6 | Konfigurationsseite | Plugin-Konfiguration: Zielprojekt, Statuswerte-Mapping, Vorlaufzeiten, Eskalationsempfänger | 🟢 |
 | F1.7 | Beispielkatalog | Mitgelieferter Startkatalog (Jahresunterweisung, Brandschutz, Erste Hilfe, Hubarbeitsbühne, Flurförderzeuge, Leitern & Tritte, Gefahrstoffe) als importierbare YAML | ⬜ |
 | F1.8 | Fälligkeitsmodus je Maßnahme | Vier Modi: `rollierend`, `kalenderjahr`, `stichmonat` (mit Monatsangabe), `extern` (kein Rechnen, Datum aus Nachweis). Global konfigurierbarer Vorgabewert, je Maßnahme überschreibbar, je Abteilung für `stichmonat` staffelbar | 🟢 |
 | F1.9 | Karenzzeit und Ankererhalt | Feld `soll_termin` je Nachweis. Bei Durchführung innerhalb der Karenzzeit vor dem Soll-Termin wird der Folgezyklus vom Soll- statt vom Ist-Datum berechnet — verhindert Vorwärtsdrift des Intervalls über die Jahre | 🟢 |
