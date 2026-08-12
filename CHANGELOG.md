@@ -44,6 +44,12 @@ die Versionierung folgt [Semantic Versioning](https://semver.org/lang/de/).
   Staffelung, die Eskalationstage und das Zielprojekt. Neue Konfig-Vorgaben
   `stichmonat_abteilung` und `zielprojekt_id`. Statuswerte-Mapping und
   Eskalationsempfänger folgen mit M2/M5.
+- **F1.5 Custom-Field-Bootstrap:** Die 13 Nachweis-Custom-Fields aus dem Konzept
+  (§5) werden bei Installation angelegt (`core/QT_CustomFields.php`) und beim
+  Speichern der Konfiguration mit dem Zielprojekt verknüpft. Bestehende
+  gleichnamige Felder werden wiederverwendet statt dupliziert (Brücke aus der
+  Bordmittel-Konfiguration). Statusanzeige je Feld auf der Konfigurationsseite.
+  Datenschutz: kein Freitext-/Befundfeld.
 
 ### Behoben
 - Direktaufruf-Schutz der Hauptklasse prüfte die nicht existente Konstante

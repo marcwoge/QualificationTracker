@@ -176,3 +176,10 @@ $s_plugin_QualificationTracker_config_label_eskalation         = 'Stufen (Tage)'
 $s_plugin_QualificationTracker_config_help_eskalation          = 'Positiv = Tage vor Ablauf, negativ = Tage danach. Die Empfängerkreise je Stufe folgen in M5.';
 $s_plugin_QualificationTracker_config_label_zielprojekt        = 'Zielprojekt für Nachweistickets';
 $s_plugin_QualificationTracker_config_help_zielprojekt         = 'Projekt, in dem die Nachweistickets angelegt werden (wird ab dem Generator M2 verwendet).';
+
+# --- Custom-Field-Bootstrap (F1.5) ---------------------------------------
+$s_plugin_QualificationTracker_config_section_customfields = 'Custom Fields (Nachweistickets)';
+$s_plugin_QualificationTracker_config_help_customfields    = 'Diese Felder werden bei der Installation angelegt und beim Speichern mit dem Zielprojekt verknüpft. Bestehende gleichnamige Felder werden wiederverwendet.';
+$s_plugin_QualificationTracker_cf_col_field  = 'Feld';
+$s_plugin_QualificationTracker_cf_col_exists = 'Vorhanden';
+$s_plugin_QualificationTracker_cf_col_linked = 'Mit Zielprojekt verknüpft';

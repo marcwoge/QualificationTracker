@@ -274,12 +274,29 @@ class QualificationTrackerPlugin extends MantisPlugin {
 	}
 
 	/**
+	 * On install, create the proof-ticket custom fields (F1.5).
+	 *
+	 * Fields are only created when missing; existing fields of the same name are
+	 * reused. Linking them to a project happens on the configuration page once a
+	 * target project is chosen. Runs after the schema so it never blocks the
+	 * table creation.
+	 *
+	 * @return bool
+	 */
+	function install() {
+		require_once( dirname( __FILE__ ) . '/core/QT_CustomFields.php' );
+		qt_custom_fields_ensure();
+		return true;
+	}
+
+	/**
 	 * Remove the plugin's tables on uninstall (Issue #1: teardown).
 	 *
 	 * MantisBT does not drop plugin schema tables automatically. Dropping them
 	 * here also serves data protection: uninstalling removes the personal data
 	 * this plugin stored. The MantisBT ticket data (the actual proofs) is not
-	 * touched – it lives in the core tables.
+	 * touched – it lives in the core tables. The shared custom fields are left in
+	 * place (they may hold data and be used elsewhere).
 	 */
 	function uninstall() {
 		$t_tables = array(

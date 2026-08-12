@@ -32,6 +32,7 @@ access_ensure_global_level( config_get( 'manage_plugin_threshold' ) );
 
 plugin_require_api( 'core/QT_Catalog.php' );
 plugin_require_api( 'core/QT_Person.php' );
+plugin_require_api( 'core/QT_CustomFields.php' );
 
 /* -------------------------------------------------------------------------- *
  *  Save
@@ -58,7 +59,15 @@ if( gpc_get_string( 'action', '' ) === 'update' ) {
 	$t_stufen = array_map( 'intval', array_values( $t_stufen ) );
 	plugin_config_set( 'eskalation_stufen_tage', $t_stufen );
 
-	plugin_config_set( 'zielprojekt_id', gpc_get_int( 'zielprojekt_id', 0 ) );
+	$t_zielprojekt = gpc_get_int( 'zielprojekt_id', 0 );
+	plugin_config_set( 'zielprojekt_id', $t_zielprojekt );
+
+	# F1.5: make sure the proof-ticket custom fields exist and, when a target
+	# project is set, link them to it.
+	qt_custom_fields_ensure();
+	if( $t_zielprojekt > 0 ) {
+		qt_custom_fields_link( $t_zielprojekt );
+	}
 
 	# Per-department reference month: keep only valid 1-12 entries.
 	$t_raw = gpc_get_string_array( 'stichmonat_abteilung', array() );
@@ -88,6 +97,7 @@ $t_stufen           = (array)plugin_config_get( 'eskalation_stufen_tage' );
 $t_zielprojekt      = (int)plugin_config_get( 'zielprojekt_id' );
 $t_abt_map          = (array)plugin_config_get( 'stichmonat_abteilung' );
 $t_abteilungen      = qt_person_distinct_abteilungen();
+$t_cf_status        = qt_custom_fields_status( $t_zielprojekt );
 
 # Ensure exactly four escalation inputs.
 $t_stufen = array_pad( array_slice( $t_stufen, 0, 4 ), 4, 0 );
@@ -209,6 +219,31 @@ layout_page_begin();
 					<?php print_project_option_list( $t_zielprojekt, false ); ?>
 				</select>
 				<span class="help-block" style="margin:4px 0 0"><?php echo plugin_lang_get( 'config_help_zielprojekt' ); ?></span>
+			</td>
+		</tr>
+
+		<tr>
+			<td colspan="2" class="category"><strong><?php echo plugin_lang_get( 'config_section_customfields' ); ?></strong></td>
+		</tr>
+		<tr>
+			<td colspan="2">
+				<span class="help-block" style="margin:0 0 8px"><?php echo plugin_lang_get( 'config_help_customfields' ); ?></span>
+				<table class="table table-condensed" style="width:auto">
+					<thead><tr>
+						<th><?php echo plugin_lang_get( 'cf_col_field' ); ?></th>
+						<th class="center"><?php echo plugin_lang_get( 'cf_col_exists' ); ?></th>
+						<th class="center"><?php echo plugin_lang_get( 'cf_col_linked' ); ?></th>
+					</tr></thead>
+					<tbody>
+					<?php foreach( $t_cf_status as $t_cf ) { ?>
+						<tr>
+							<td><code><?php echo string_display_line( $t_cf['name'] ); ?></code></td>
+							<td class="center"><?php echo $t_cf['exists'] ? '<i class="ace-icon fa fa-check green"></i>' : '<i class="ace-icon fa fa-minus grey"></i>'; ?></td>
+							<td class="center"><?php echo $t_cf['linked'] ? '<i class="ace-icon fa fa-check green"></i>' : '<i class="ace-icon fa fa-minus grey"></i>'; ?></td>
+						</tr>
+					<?php } ?>
+					</tbody>
+				</table>
 			</td>
 		</tr>
 	</table>

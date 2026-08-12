@@ -176,3 +176,10 @@ $s_plugin_QualificationTracker_config_label_eskalation         = 'Stages (days)'
 $s_plugin_QualificationTracker_config_help_eskalation          = 'Positive = days before expiry, negative = days after. The recipients per stage follow in M5.';
 $s_plugin_QualificationTracker_config_label_zielprojekt        = 'Target project for proof tickets';
 $s_plugin_QualificationTracker_config_help_zielprojekt         = 'Project the proof tickets are created in (used from the generator M2 onward).';
+
+# --- Custom-field bootstrap (F1.5) ---------------------------------------
+$s_plugin_QualificationTracker_config_section_customfields = 'Custom fields (proof tickets)';
+$s_plugin_QualificationTracker_config_help_customfields    = 'These fields are created on installation and linked to the target project when you save. Existing fields of the same name are reused.';
+$s_plugin_QualificationTracker_cf_col_field  = 'Field';
+$s_plugin_QualificationTracker_cf_col_exists = 'Exists';
+$s_plugin_QualificationTracker_cf_col_linked = 'Linked to target project';

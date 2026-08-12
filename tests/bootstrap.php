@@ -14,3 +14,12 @@ require_once dirname( __DIR__ ) . '/core/QT_Catalog.php';
 require_once dirname( __DIR__ ) . '/core/QT_Prerequisite.php';
 require_once dirname( __DIR__ ) . '/core/QT_Person.php';
 require_once dirname( __DIR__ ) . '/core/QT_DueDateCalculator.php';
+
+# Minimal MantisBT constants so the pure parts of the core files load without a
+# running MantisBT (only the data-definition helpers are unit-tested).
+if( !defined( 'CUSTOM_FIELD_TYPE_STRING' ) )  { define( 'CUSTOM_FIELD_TYPE_STRING', 0 ); }
+if( !defined( 'CUSTOM_FIELD_TYPE_NUMERIC' ) ) { define( 'CUSTOM_FIELD_TYPE_NUMERIC', 1 ); }
+if( !defined( 'CUSTOM_FIELD_TYPE_ENUM' ) )    { define( 'CUSTOM_FIELD_TYPE_ENUM', 3 ); }
+if( !defined( 'CUSTOM_FIELD_TYPE_DATE' ) )    { define( 'CUSTOM_FIELD_TYPE_DATE', 8 ); }
+
+require_once dirname( __DIR__ ) . '/core/QT_CustomFields.php';
