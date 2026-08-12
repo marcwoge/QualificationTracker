@@ -31,6 +31,13 @@ die Versionierung folgt [Semantic Versioning](https://semver.org/lang/de/).
   → Personenregister*, mit Abteilungsfilter. `core/QT_Person.php` mit reiner,
   unit-getesteter Validierung. Setzt E1 (nullable-unique Personalnummer), E2
   (Typ-Diskriminator + Fremdfirma) und E5 (Jugendschutz-Stichdatum) um.
+- **F1.8/F1.9 Fälligkeitsrechner:** `core/QT_DueDateCalculator.php` als einzige
+  Stelle der Terminberechnung — reine, seiteneffektfreie Klasse mit den vier
+  Modi (`rollierend`/`kalenderjahr`/`stichmonat`/`extern`), Monatsende-Klemmung,
+  Schaltjahr-Behandlung, Ankererhalt gegen Vorwärtsdrift (Karenzfenster) und
+  Erstzyklus-Berechnung. Per-Abteilung-`stichmonat` als Parameter unterstützt.
+  Vollständig per PHPUnit abgedeckt (100 % Zeilen der Klasse; alle beschriebenen
+  Randfälle inkl. rückdatierter Nacherfassung).
 
 ### Behoben
 - Direktaufruf-Schutz der Hauptklasse prüfte die nicht existente Konstante

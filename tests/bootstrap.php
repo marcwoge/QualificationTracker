@@ -13,3 +13,4 @@
 require_once dirname( __DIR__ ) . '/core/QT_Catalog.php';
 require_once dirname( __DIR__ ) . '/core/QT_Prerequisite.php';
 require_once dirname( __DIR__ ) . '/core/QT_Person.php';
+require_once dirname( __DIR__ ) . '/core/QT_DueDateCalculator.php';
