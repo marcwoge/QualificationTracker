@@ -1,0 +1,18 @@
+<?php
+/**
+ * QualificationTracker – English language strings.
+ *
+ * MantisBT plugin language variables must carry the full
+ * "plugin_<Basename>_" prefix; plugin_lang_get('key') resolves to
+ * "$s_plugin_QualificationTracker_key".
+ *
+ * @package QualificationTracker
+ * @license MIT
+ */
+
+# Plugin manifest
+$s_plugin_QualificationTracker_title       = 'QualificationTracker';
+$s_plugin_QualificationTracker_description  = 'Manage legally required safety instructions, qualifications and appointments as MantisBT tickets (ArbSchG, DGUV).';
+
+# Management menu
+$s_plugin_QualificationTracker_menu_config = 'QualificationTracker Configuration';

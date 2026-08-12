@@ -1,0 +1,18 @@
+<?php
+/**
+ * QualificationTracker – Deutsche Sprachvariablen.
+ *
+ * MantisBT-Plugin-Sprachvariablen tragen das vollständige Präfix
+ * "plugin_<Basename>_"; plugin_lang_get('key') löst auf
+ * "$s_plugin_QualificationTracker_key" auf.
+ *
+ * @package QualificationTracker
+ * @license MIT
+ */
+
+# Plugin-Manifest
+$s_plugin_QualificationTracker_title       = 'QualificationTracker';
+$s_plugin_QualificationTracker_description  = 'Verwaltet gesetzlich vorgeschriebene Unterweisungen, Qualifikationen und Beauftragungen als MantisBT-Tickets (ArbSchG, DGUV).';
+
+# Verwaltungsmenü
+$s_plugin_QualificationTracker_menu_config = 'QualificationTracker-Konfiguration';
