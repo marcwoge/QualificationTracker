@@ -16,6 +16,7 @@ $s_plugin_QualificationTracker_description  = 'Manage legally required safety in
 
 # Management menu
 $s_plugin_QualificationTracker_menu_catalog = 'Measure catalogue';
+$s_plugin_QualificationTracker_menu_person  = 'Person register';
 
 # --- Measure catalogue (F1.2) --------------------------------------------
 $s_plugin_QualificationTracker_catalog_title = 'Measure catalogue';
@@ -98,3 +99,59 @@ $s_plugin_QualificationTracker_label_vorbedingungen = 'Prerequisites';
 $s_plugin_QualificationTracker_help_vorbedingungen  = 'Measures that must be in place first (e.g. qualification before appointment). Multi-select with Ctrl/Cmd. Cycles are not allowed.';
 $s_plugin_QualificationTracker_no_other_massnahmen  = 'No other measures available to use as a prerequisite.';
 $s_plugin_QualificationTracker_error_vorbedingung_cycle = 'The prerequisites form a cycle. Please adjust the selection.';
+
+# --- Person register (F1.4) ----------------------------------------------
+$s_plugin_QualificationTracker_person_title = 'Person register';
+$s_plugin_QualificationTracker_no_personen  = 'No persons defined yet.';
+$s_plugin_QualificationTracker_btn_new_person = 'New person';
+$s_plugin_QualificationTracker_filter_abteilung = 'Department';
+$s_plugin_QualificationTracker_filter_all       = 'All';
+$s_plugin_QualificationTracker_none             = '— none —';
+$s_plugin_QualificationTracker_confirm_delete_person = 'Really delete this person?';
+$s_plugin_QualificationTracker_person_msg_deleted    = 'Person deleted.';
+$s_plugin_QualificationTracker_person_msg_referenced = 'The person is still assigned to a profile and was not deleted. Deactivate instead.';
+
+# Columns
+$s_plugin_QualificationTracker_col_personalnummer = 'Personnel no.';
+$s_plugin_QualificationTracker_col_name           = 'Name';
+$s_plugin_QualificationTracker_col_person_typ     = 'Type';
+$s_plugin_QualificationTracker_col_abteilung      = 'Department';
+$s_plugin_QualificationTracker_col_eintritt       = 'Entry';
+$s_plugin_QualificationTracker_col_austritt       = 'Exit';
+$s_plugin_QualificationTracker_col_vorgesetzter   = 'Supervisor';
+$s_plugin_QualificationTracker_col_jugendschutz   = 'Youth prot. until';
+
+# Person types
+$s_plugin_QualificationTracker_person_typ_intern     = 'Internal';
+$s_plugin_QualificationTracker_person_typ_leiharbeit = 'Temporary worker';
+$s_plugin_QualificationTracker_person_typ_fremdfirma = 'Contractor';
+
+# Form
+$s_plugin_QualificationTracker_person_form_new_title  = 'New person';
+$s_plugin_QualificationTracker_person_form_edit_title = 'Edit person';
+$s_plugin_QualificationTracker_label_nachname       = 'Last name';
+$s_plugin_QualificationTracker_label_vorname        = 'First name';
+$s_plugin_QualificationTracker_label_personalnummer = 'Personnel number';
+$s_plugin_QualificationTracker_label_person_typ     = 'Type';
+$s_plugin_QualificationTracker_label_fremdfirma     = 'Contractor / employer';
+$s_plugin_QualificationTracker_label_abteilung      = 'Department';
+$s_plugin_QualificationTracker_label_eintritt       = 'Entry date';
+$s_plugin_QualificationTracker_label_austritt       = 'Exit date';
+$s_plugin_QualificationTracker_label_vorgesetzter   = 'Supervisor';
+$s_plugin_QualificationTracker_label_jugendschutz   = 'Youth protection until';
+$s_plugin_QualificationTracker_help_personalnummer  = 'Optional. Leave empty for temporary/contractor staff without a personnel number. Must be unique when set.';
+$s_plugin_QualificationTracker_help_vorgesetzter    = 'MantisBT user responsible for completion and notifications.';
+$s_plugin_QualificationTracker_help_jugendschutz    = 'Until this date (usually the 18th birthday) instructions use the shortened interval (JArbSchG § 29). No date of birth required.';
+$s_plugin_QualificationTracker_help_person_aktiv    = 'Only active persons are considered for new proofs.';
+
+# Error messages
+$s_plugin_QualificationTracker_error_nachname_required        = 'Please enter a last name.';
+$s_plugin_QualificationTracker_error_person_typ_invalid       = 'Invalid person type.';
+$s_plugin_QualificationTracker_error_fremdfirma_required      = 'For temporary/contractor staff the company is required.';
+$s_plugin_QualificationTracker_error_personalnummer_length    = 'The personnel number may be at most 64 characters long.';
+$s_plugin_QualificationTracker_error_personalnummer_duplicate = 'This personnel number is already in use.';
+$s_plugin_QualificationTracker_error_eintritt_invalid         = 'Invalid entry date (format YYYY-MM-DD).';
+$s_plugin_QualificationTracker_error_austritt_invalid         = 'Invalid exit date (format YYYY-MM-DD).';
+$s_plugin_QualificationTracker_error_jugendschutz_invalid     = 'Invalid "youth protection until" date (format YYYY-MM-DD).';
+$s_plugin_QualificationTracker_error_austritt_before_eintritt = 'The exit date must not be before the entry date.';
+$s_plugin_QualificationTracker_error_vorgesetzter_invalid     = 'The selected supervisor is not a valid user.';

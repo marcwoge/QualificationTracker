@@ -16,6 +16,7 @@ $s_plugin_QualificationTracker_description  = 'Verwaltet gesetzlich vorgeschrieb
 
 # Verwaltungsmenü
 $s_plugin_QualificationTracker_menu_catalog = 'Maßnahmenkatalog';
+$s_plugin_QualificationTracker_menu_person  = 'Personenregister';
 
 # --- Maßnahmenkatalog (F1.2) ---------------------------------------------
 $s_plugin_QualificationTracker_catalog_title = 'Maßnahmenkatalog';
@@ -98,3 +99,59 @@ $s_plugin_QualificationTracker_label_vorbedingungen = 'Vorbedingungen';
 $s_plugin_QualificationTracker_help_vorbedingungen  = 'Maßnahmen, die vorausgesetzt werden (z. B. Qualifikation vor Beauftragung). Mehrfachauswahl mit Strg/Cmd. Zyklen sind nicht erlaubt.';
 $s_plugin_QualificationTracker_no_other_massnahmen  = 'Keine weiteren Maßnahmen vorhanden, die als Vorbedingung dienen könnten.';
 $s_plugin_QualificationTracker_error_vorbedingung_cycle = 'Die Vorbedingungen bilden einen Zyklus. Bitte die Auswahl anpassen.';
+
+# --- Personenregister (F1.4) ---------------------------------------------
+$s_plugin_QualificationTracker_person_title = 'Personenregister';
+$s_plugin_QualificationTracker_no_personen  = 'Noch keine Personen angelegt.';
+$s_plugin_QualificationTracker_btn_new_person = 'Neue Person';
+$s_plugin_QualificationTracker_filter_abteilung = 'Abteilung';
+$s_plugin_QualificationTracker_filter_all       = 'Alle';
+$s_plugin_QualificationTracker_none             = '— keiner —';
+$s_plugin_QualificationTracker_confirm_delete_person = 'Diese Person wirklich löschen?';
+$s_plugin_QualificationTracker_person_msg_deleted    = 'Person gelöscht.';
+$s_plugin_QualificationTracker_person_msg_referenced = 'Die Person ist noch einem Profil zugeordnet und wurde nicht gelöscht. Deaktivieren Sie sie stattdessen.';
+
+# Spalten
+$s_plugin_QualificationTracker_col_personalnummer = 'Personalnummer';
+$s_plugin_QualificationTracker_col_name           = 'Name';
+$s_plugin_QualificationTracker_col_person_typ     = 'Typ';
+$s_plugin_QualificationTracker_col_abteilung      = 'Abteilung';
+$s_plugin_QualificationTracker_col_eintritt       = 'Eintritt';
+$s_plugin_QualificationTracker_col_austritt       = 'Austritt';
+$s_plugin_QualificationTracker_col_vorgesetzter   = 'Vorgesetzter';
+$s_plugin_QualificationTracker_col_jugendschutz   = 'Jugendschutz bis';
+
+# Personentypen
+$s_plugin_QualificationTracker_person_typ_intern     = 'Intern';
+$s_plugin_QualificationTracker_person_typ_leiharbeit = 'Leiharbeit';
+$s_plugin_QualificationTracker_person_typ_fremdfirma = 'Fremdfirma';
+
+# Formular
+$s_plugin_QualificationTracker_person_form_new_title  = 'Neue Person';
+$s_plugin_QualificationTracker_person_form_edit_title = 'Person bearbeiten';
+$s_plugin_QualificationTracker_label_nachname       = 'Nachname';
+$s_plugin_QualificationTracker_label_vorname        = 'Vorname';
+$s_plugin_QualificationTracker_label_personalnummer = 'Personalnummer';
+$s_plugin_QualificationTracker_label_person_typ     = 'Typ';
+$s_plugin_QualificationTracker_label_fremdfirma     = 'Fremdfirma / Einsatzbetrieb';
+$s_plugin_QualificationTracker_label_abteilung      = 'Abteilung';
+$s_plugin_QualificationTracker_label_eintritt       = 'Eintritt';
+$s_plugin_QualificationTracker_label_austritt       = 'Austritt';
+$s_plugin_QualificationTracker_label_vorgesetzter   = 'Vorgesetzter';
+$s_plugin_QualificationTracker_label_jugendschutz   = 'Jugendschutz bis';
+$s_plugin_QualificationTracker_help_personalnummer  = 'Optional. Für Leih- und Fremdpersonal ohne Personalnummer leer lassen. Muss eindeutig sein, wenn vergeben.';
+$s_plugin_QualificationTracker_help_vorgesetzter    = 'Mantis-Benutzer, der die Durchführung verantwortet und Erinnerungen erhält.';
+$s_plugin_QualificationTracker_help_jugendschutz    = 'Bis zu diesem Datum (i. d. R. der 18. Geburtstag) gilt für Unterweisungen das verkürzte Intervall (JArbSchG § 29). Kein Geburtsdatum erforderlich.';
+$s_plugin_QualificationTracker_help_person_aktiv    = 'Nur aktive Personen werden für neue Nachweise berücksichtigt.';
+
+# Fehlermeldungen
+$s_plugin_QualificationTracker_error_nachname_required        = 'Bitte einen Nachnamen angeben.';
+$s_plugin_QualificationTracker_error_person_typ_invalid       = 'Ungültiger Personentyp.';
+$s_plugin_QualificationTracker_error_fremdfirma_required      = 'Bei Leih- und Fremdpersonal ist die Firma anzugeben.';
+$s_plugin_QualificationTracker_error_personalnummer_length    = 'Die Personalnummer darf höchstens 64 Zeichen lang sein.';
+$s_plugin_QualificationTracker_error_personalnummer_duplicate = 'Diese Personalnummer ist bereits vergeben.';
+$s_plugin_QualificationTracker_error_eintritt_invalid         = 'Ungültiges Eintrittsdatum (Format JJJJ-MM-TT).';
+$s_plugin_QualificationTracker_error_austritt_invalid         = 'Ungültiges Austrittsdatum (Format JJJJ-MM-TT).';
+$s_plugin_QualificationTracker_error_jugendschutz_invalid     = 'Ungültiges Datum für „Jugendschutz bis" (Format JJJJ-MM-TT).';
+$s_plugin_QualificationTracker_error_austritt_before_eintritt = 'Das Austrittsdatum darf nicht vor dem Eintrittsdatum liegen.';
+$s_plugin_QualificationTracker_error_vorgesetzter_invalid     = 'Der gewählte Vorgesetzte ist kein gültiger Benutzer.';

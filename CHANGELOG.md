@@ -25,6 +25,12 @@ die Versionierung folgt [Semantic Versioning](https://semver.org/lang/de/).
   `qt_massnahme_vorbedingung`; `core/QT_Prerequisite.php` mit reiner,
   unit-getesteter Zyklenerkennung (Selbstreferenzen und Kreise werden beim
   Speichern abgewiesen). Auswahl im Katalog-Formular, Anzeige in der Liste.
+- **F1.4 Personenregister:** Verwaltung von Personen unabhängig von
+  Mantis-Benutzerkonten (Personalnummer, Name, Typ, Abteilung, Ein-/Austritt,
+  Vorgesetzter, Jugendschutz-Stichdatum) unter *Verwaltung → QualificationTracker
+  → Personenregister*, mit Abteilungsfilter. `core/QT_Person.php` mit reiner,
+  unit-getesteter Validierung. Setzt E1 (nullable-unique Personalnummer), E2
+  (Typ-Diskriminator + Fremdfirma) und E5 (Jugendschutz-Stichdatum) um.
 
 ### Behoben
 - Direktaufruf-Schutz der Hauptklasse prüfte die nicht existente Konstante
