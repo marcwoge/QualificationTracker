@@ -18,6 +18,14 @@ die Versionierung folgt [Semantic Versioning](https://semver.org/lang/de/).
   `core/QT_Assignment.php` mit reiner, unit-getesteter Validierung; historische
   (abgeschlossene) Zuordnungen bleiben erhalten, eine zweite *laufende* Zuordnung
   derselben Person zum selben Profil wird verhindert.
+- **F2.3 Ketten-Generator:** Erzeugt aus den aktiven Profilzuordnungen einer
+  Person die Nachweistickets — je Maßnahme ein offenes MantisBT-Ticket mit
+  Custom-Field-Belegung, Vorgesetztem als Bearbeiter, Fälligkeit aus dem Rechner
+  und `depends on`-Beziehungen aus den Vorbedingungen. Neue abgeleitete
+  Index-Tabelle `qt_nachweis` (Idempotenz + Matrix-Performance), konfigurierbares
+  Status-Mapping auf Standard-MantisBT-Status, Kategorien nach Maßnahmentyp.
+  Vorschau + Erzeugung über *Profilzuordnung → Kette erzeugen*. Umsetzung der
+  Entscheidungen G1–G5.
 - Repository-Grundstruktur: Plugin-Hauptklasse, Verzeichnislayout, Lizenz, leere Sprachdateien.
 - Konzeptdokumentation (`ROADMAP.md`, `KONZEPT-Bordmittel.md`) und Projekt-README.
 - Lokale MantisBT-Testumgebung unter `docker/` (Docker Compose, MantisBT 2.28.3,

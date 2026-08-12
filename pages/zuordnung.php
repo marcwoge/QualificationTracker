@@ -43,6 +43,15 @@ layout_page_begin();
 
 <?php if( $t_msg === 'deleted' ) { ?>
 	<div class="alert alert-success"><?php echo plugin_lang_get( 'zuordnung_msg_deleted' ); ?></div>
+<?php } else if( $t_msg === 'generated' ) {
+	$t_e = gpc_get_int( 'e', 0 );
+?>
+	<div class="alert <?php echo $t_e > 0 ? 'alert-warning' : 'alert-success'; ?>">
+		<?php echo plugin_lang_get( 'generate_msg' ) . ' '
+			. gpc_get_int( 'c', 0 ) . ' ' . plugin_lang_get( 'generate_created' ) . ', '
+			. gpc_get_int( 's', 0 ) . ' ' . plugin_lang_get( 'generate_skipped' )
+			. ( $t_e > 0 ? ' &mdash; ' . $t_e . ' ' . plugin_lang_get( 'import_errors' ) : '' ) . '.'; ?>
+	</div>
 <?php } ?>
 
 <div class="widget-box widget-color-blue2">
@@ -103,6 +112,10 @@ layout_page_begin();
 				<td><?php echo $t_z['gueltig_ab'] === null ? '&ndash;' : string_display_line( $t_z['gueltig_ab'] ); ?></td>
 				<td><?php echo $t_z['gueltig_bis'] === null ? '&ndash;' : string_display_line( $t_z['gueltig_bis'] ); ?></td>
 				<td class="center">
+					<a class="btn btn-xs btn-success btn-white btn-round"
+						href="<?php echo plugin_page( 'generate' ); ?>&amp;person_id=<?php echo (int)$t_z['person_id']; ?>">
+						<i class="ace-icon fa fa-cogs"></i> <?php echo plugin_lang_get( 'btn_generate_chain' ); ?>
+					</a>
 					<a class="btn btn-xs btn-primary btn-white btn-round"
 						href="<?php echo plugin_page( 'zuordnung_edit' ); ?>&amp;id=<?php echo $t_id; ?>">
 						<i class="ace-icon fa fa-edit"></i> <?php echo plugin_lang_get( 'btn_edit' ); ?>

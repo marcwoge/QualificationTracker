@@ -246,3 +246,18 @@ $s_plugin_QualificationTracker_error_gueltig_ab_invalid   = 'Ungültiges Datum �
 $s_plugin_QualificationTracker_error_gueltig_bis_invalid  = 'Ungültiges Datum „Gültig bis" (Format JJJJ-MM-TT).';
 $s_plugin_QualificationTracker_error_gueltig_bis_before_ab = 'Das Datum „Gültig bis" darf nicht vor „Gültig ab" liegen.';
 $s_plugin_QualificationTracker_error_zuordnung_duplicate_open = 'Für diese Person besteht bereits eine laufende Zuordnung zu diesem Profil.';
+
+# --- Ketten-Generator (F2.3) ---------------------------------------------
+$s_plugin_QualificationTracker_generate_title = 'Kette erzeugen';
+$s_plugin_QualificationTracker_generate_intro = 'Erzeugt je erforderlicher Maßnahme ein Nachweisticket (offen, mit Soll-Termin). Bereits vorhandene offene Nachweise werden übersprungen.';
+$s_plugin_QualificationTracker_generate_col_action    = 'Aktion';
+$s_plugin_QualificationTracker_generate_action_create = 'wird erstellt';
+$s_plugin_QualificationTracker_generate_action_skip   = 'vorhanden';
+$s_plugin_QualificationTracker_generate_nothing       = 'Keine erforderlichen Maßnahmen. Ist der Person ein aktives Profil mit Maßnahmen zugeordnet?';
+$s_plugin_QualificationTracker_generate_no_zielprojekt = 'Kein Zielprojekt konfiguriert. Bitte zuerst in der Konfiguration ein Zielprojekt wählen.';
+$s_plugin_QualificationTracker_btn_generate        = 'Tickets erzeugen';
+$s_plugin_QualificationTracker_btn_generate_chain  = 'Kette erzeugen';
+$s_plugin_QualificationTracker_generate_msg        = 'Ticketerzeugung abgeschlossen:';
+$s_plugin_QualificationTracker_generate_created    = 'erstellt';
+$s_plugin_QualificationTracker_generate_skipped    = 'übersprungen';
+$s_plugin_QualificationTracker_label_soll_termin   = 'Soll-Termin';

@@ -26,3 +26,4 @@ require_once dirname( __DIR__ ) . '/core/QT_CustomFields.php';
 require_once dirname( __DIR__ ) . '/core/QT_CatalogImport.php';
 require_once dirname( __DIR__ ) . '/core/QT_Profile.php';
 require_once dirname( __DIR__ ) . '/core/QT_Assignment.php';
+require_once dirname( __DIR__ ) . '/core/QT_Generator.php';

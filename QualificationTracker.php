@@ -100,6 +100,21 @@ class QualificationTrackerPlugin extends MantisPlugin {
 			# --- Ticketerzeugung (ab M2) -----------------------------------
 			# Project the proof tickets are created in. 0 = not configured yet.
 			'zielprojekt_id'            => 0,
+
+			# Mapping of the plugin's domain proof states onto MantisBT status
+			# values (decision G1). Defaults target the standard status enum so
+			# the plugin works without editing config_inc.php; overridable so an
+			# installation with custom statuses can point here instead.
+			# NEW_=10, feedback=20, acknowledged=30, confirmed=40, assigned=50,
+			# resolved=80, closed=90.
+			'status_mapping'            => array(
+				'offen'         => 10,
+				'geplant'       => 30,
+				'durchgefuehrt' => 40,
+				'gueltig'       => 80,
+				'abgelaufen'    => 20,
+				'entfallen'     => 90,
+			),
 		);
 	}
 
@@ -274,6 +289,30 @@ class QualificationTrackerPlugin extends MantisPlugin {
 				array( 'UNIQUE' ) ) ),
 			array( 'CreateIndexSQL', array( 'idx_qt_vorbed_voraussetzung',
 				plugin_table( 'massnahme_vorbedingung' ), 'voraussetzung_id' ) ),
+
+			# --- 16/17/18/19: qt_nachweis (derived index, F2.3 / decision G5) --
+			# One row per proof instance, pointing at the MantisBT ticket that is
+			# the source of truth. Denormalises the audit-relevant fields so the
+			# generator can be idempotent and the matrix (M4) can aggregate fast
+			# without the slow custom-field join.
+			array( 'CreateTableSQL', array( plugin_table( 'nachweis' ), "
+				id            I     UNSIGNED NOTNULL AUTOINCREMENT PRIMARY,
+				person_id     I     UNSIGNED NOTNULL,
+				massnahme_id  I     UNSIGNED NOTNULL,
+				bug_id        I     UNSIGNED NOTNULL DEFAULT '0',
+				soll_termin   D,
+				gueltig_bis   D,
+				status        C(16) NOTNULL DEFAULT \" 'offen' \",
+				zyklus        C(16),
+				date_created  I     UNSIGNED NOTNULL DEFAULT '0',
+				date_modified I     UNSIGNED NOTNULL DEFAULT '0'
+				" ) ),
+			array( 'CreateIndexSQL', array( 'idx_qt_nachweis_pm',
+				plugin_table( 'nachweis' ), 'person_id,massnahme_id' ) ),
+			array( 'CreateIndexSQL', array( 'idx_qt_nachweis_bug',
+				plugin_table( 'nachweis' ), 'bug_id' ) ),
+			array( 'CreateIndexSQL', array( 'idx_qt_nachweis_status',
+				plugin_table( 'nachweis' ), 'status' ) ),
 		);
 	}
 
@@ -304,7 +343,7 @@ class QualificationTrackerPlugin extends MantisPlugin {
 	 */
 	function uninstall() {
 		$t_tables = array(
-			'massnahme_vorbedingung', 'veranstaltung', 'zuordnung',
+			'nachweis', 'massnahme_vorbedingung', 'veranstaltung', 'zuordnung',
 			'profil_massnahme', 'profil', 'person', 'massnahme',
 		);
 		foreach( $t_tables as $t_name ) {
