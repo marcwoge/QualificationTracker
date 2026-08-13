@@ -593,3 +593,191 @@ function qt_generator_sync_person( $p_person_id, $p_today ) {
 		'errors'    => $t_gen['errors'],
 	);
 }
+
+/* -------------------------------------------------------------------------- *
+ *  Shared placement + forward-looking annual generation (F2.8)
+ * -------------------------------------------------------------------------- */
+
+/**
+ * Fetch a qt_nachweis row by id.
+ *
+ * @param int $p_id
+ * @return array|false
+ */
+function qt_nachweis_get( $p_id ) {
+	$t_result = db_query( 'SELECT * FROM ' . plugin_table( 'nachweis' ) . ' WHERE id = ' . db_param(),
+		array( (int)$p_id ) );
+	$t_row = db_fetch_array( $t_result );
+	return $t_row === false ? false : $t_row;
+}
+
+/**
+ * The non-cancelled proof of a person/measure for a given cycle, or false.
+ *
+ * @param int    $p_person_id
+ * @param int    $p_massnahme_id
+ * @param string $p_zyklus
+ * @return array|false
+ */
+function qt_nachweis_find_cycle( $p_person_id, $p_massnahme_id, $p_zyklus ) {
+	$t_result = db_query(
+		'SELECT * FROM ' . plugin_table( 'nachweis' )
+		. ' WHERE person_id = ' . db_param() . ' AND massnahme_id = ' . db_param()
+		. ' AND zyklus = ' . db_param() . " AND status <> 'entfallen'",
+		array( (int)$p_person_id, (int)$p_massnahme_id, (string)$p_zyklus ) );
+	$t_row = db_fetch_array( $t_result );
+	return $t_row === false ? false : $t_row;
+}
+
+/**
+ * Per-department reference month override for a department (config map), or null.
+ *
+ * @param string $p_abteilung
+ * @return int|null
+ */
+function qt_generator_abteilung_stichmonat( $p_abteilung ) {
+	$t_map = (array)plugin_config_get( 'stichmonat_abteilung' );
+	return ( isset( $t_map[$p_abteilung] ) && $t_map[$p_abteilung] !== '' )
+		? (int)$t_map[$p_abteilung] : null;
+}
+
+/**
+ * Create a ticket for a measure, record it in the index and wire the
+ * prerequisite "depends on" relationships to the person's current tickets.
+ *
+ * @param array       $p_person
+ * @param array       $p_massnahme
+ * @param string|null $p_soll_termin
+ * @param int         $p_project_id
+ * @param array       $p_category_ids
+ * @param array       $p_field_ids
+ * @return int Bug id.
+ */
+function qt_generator_place_ticket( array $p_person, array $p_massnahme, $p_soll_termin, $p_project_id, array $p_category_ids, array $p_field_ids ) {
+	$t_bug = qt_generator_create_ticket( $p_person, $p_massnahme, $p_soll_termin, $p_project_id, $p_category_ids, $p_field_ids );
+	$t_zyklus = ( $p_soll_termin === null ) ? '' : substr( $p_soll_termin, 0, 4 );
+	qt_nachweis_record( (int)$p_person['id'], (int)$p_massnahme['id'], $t_bug, $p_soll_termin, 'offen', $t_zyklus );
+
+	foreach( qt_vorbedingung_get_for( (int)$p_massnahme['id'] ) as $t_prereq_id ) {
+		$t_open = qt_nachweis_find_open( (int)$p_person['id'], (int)$t_prereq_id );
+		if( $t_open !== false && (int)$t_open['bug_id'] > 0 ) {
+			relationship_add( $t_bug, (int)$t_open['bug_id'], BUG_DEPENDANT );
+		}
+	}
+	return $t_bug;
+}
+
+/**
+ * Target date of a measure for a specific calendar year (forward-looking modes
+ * only). Returns null for modes that are not generated in advance.
+ *
+ * @param array    $p_massnahme
+ * @param int      $p_year
+ * @param int|null $p_abteilung_stichmonat
+ * @return string|null
+ */
+function qt_generator_cycle_termin( array $p_massnahme, $p_year, $p_abteilung_stichmonat ) {
+	if( $p_massnahme['faelligkeitsmodus'] === 'kalenderjahr' ) {
+		return sprintf( '%04d-12-31', (int)$p_year );
+	}
+	if( $p_massnahme['faelligkeitsmodus'] === 'stichmonat' ) {
+		$t_monat = ( $p_abteilung_stichmonat !== null )
+			? (int)$p_abteilung_stichmonat : (int)$p_massnahme['stichmonat'];
+		if( $t_monat < 1 || $t_monat > 12 ) {
+			return null;
+		}
+		return QT_DueDateCalculator::last_day_of_month( (int)$p_year, $t_monat );
+	}
+	return null;
+}
+
+/**
+ * Forward-looking plan for a whole cohort year (F2.8): the calendar-year and
+ * reference-month tickets that would be created in advance.
+ *
+ * @param int    $p_year
+ * @param string $p_today
+ * @param string $p_abteilung
+ * @return array Flat rows.
+ */
+function qt_generator_jahrgang_plan( $p_year, $p_today, $p_abteilung = '' ) {
+	$t_rows = array();
+	foreach( qt_person_load_all( $p_abteilung ) as $t_person ) {
+		if( !$t_person['aktiv'] ) {
+			continue;
+		}
+		$t_name = trim( $t_person['nachname'] . ', ' . $t_person['vorname'], ', ' );
+		$t_abt = qt_generator_abteilung_stichmonat( $t_person['abteilung'] );
+		foreach( qt_generator_required_massnahmen( (int)$t_person['id'], $p_today ) as $t_m ) {
+			if( !in_array( $t_m['faelligkeitsmodus'], array( 'kalenderjahr', 'stichmonat' ), true ) ) {
+				continue;
+			}
+			$t_soll = qt_generator_cycle_termin( $t_m, $p_year, $t_abt );
+			if( $t_soll === null ) {
+				continue;
+			}
+			$t_exists = qt_nachweis_find_cycle( (int)$t_person['id'], (int)$t_m['id'], (string)$p_year ) !== false;
+			$t_rows[] = array(
+				'person'      => $t_name,
+				'abteilung'   => $t_person['abteilung'],
+				'schluessel'  => $t_m['schluessel'],
+				'bezeichnung' => $t_m['bezeichnung'],
+				'typ'         => $t_m['typ'],
+				'modus'       => $t_m['faelligkeitsmodus'],
+				'soll_termin' => $t_soll,
+				'action'      => $t_exists ? 'skip' : 'create',
+			);
+		}
+	}
+	return $t_rows;
+}
+
+/**
+ * Generate the forward-looking cohort for a year (F2.8): calendar-year and
+ * reference-month tickets, idempotent per (person, measure, year).
+ *
+ * @param int    $p_year
+ * @param string $p_today
+ * @param string $p_abteilung
+ * @return array Summary: created, skipped, persons, errors[].
+ */
+function qt_generator_run_jahrgang( $p_year, $p_today, $p_abteilung = '' ) {
+	$t_sum = array( 'created' => 0, 'skipped' => 0, 'persons' => 0, 'errors' => array() );
+
+	$t_project_id = (int)plugin_config_get( 'zielprojekt_id' );
+	if( $t_project_id <= 0 ) {
+		$t_sum['errors'][] = 'error_no_zielprojekt';
+		return $t_sum;
+	}
+	qt_custom_fields_link( $t_project_id );
+	$t_cats = qt_generator_ensure_categories( $t_project_id );
+	$t_fids = qt_generator_field_ids();
+
+	foreach( qt_person_load_all( $p_abteilung ) as $t_person ) {
+		if( !$t_person['aktiv'] ) {
+			continue;
+		}
+		$t_abt = qt_generator_abteilung_stichmonat( $t_person['abteilung'] );
+		$t_any = false;
+		foreach( qt_generator_required_massnahmen( (int)$t_person['id'], $p_today ) as $t_m ) {
+			if( !in_array( $t_m['faelligkeitsmodus'], array( 'kalenderjahr', 'stichmonat' ), true ) ) {
+				continue;
+			}
+			$t_soll = qt_generator_cycle_termin( $t_m, $p_year, $t_abt );
+			if( $t_soll === null ) {
+				continue;
+			}
+			if( qt_nachweis_find_cycle( (int)$t_person['id'], (int)$t_m['id'], (string)$p_year ) !== false ) {
+				$t_sum['skipped']++;
+				continue;
+			}
+			qt_generator_place_ticket( $t_person, $t_m, $t_soll, $t_project_id, $t_cats, $t_fids );
+			$t_sum['created']++;
+			$t_any = true;
+		}
+		if( $t_any ) {
+			$t_sum['persons']++;
+		}
+	}
+	return $t_sum;
+}

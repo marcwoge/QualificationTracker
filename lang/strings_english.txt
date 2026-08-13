@@ -298,3 +298,24 @@ $s_plugin_QualificationTracker_note_entfallen = 'Measure cancelled due to a prof
 $s_plugin_QualificationTracker_sync_msg       = 'Profile sync finished:';
 $s_plugin_QualificationTracker_sync_entfallen = 'cancelled';
 $s_plugin_QualificationTracker_sync_kept      = 'kept';
+
+# --- Proofs / completion / cohort (F2.8) ---------------------------------
+$s_plugin_QualificationTracker_menu_nachweise  = 'Proofs';
+$s_plugin_QualificationTracker_nachweise_title = 'Open proofs';
+$s_plugin_QualificationTracker_nachweise_none  = 'No open proofs.';
+$s_plugin_QualificationTracker_btn_complete    = 'Complete';
+$s_plugin_QualificationTracker_complete_title  = 'Complete proof';
+$s_plugin_QualificationTracker_label_durchgefuehrt_am   = 'Performed on';
+$s_plugin_QualificationTracker_label_gueltig_bis_extern = 'Valid until (from document)';
+$s_plugin_QualificationTracker_help_gueltig_bis_extern  = 'Date from the presented proof (training provider, occupational physician).';
+$s_plugin_QualificationTracker_complete_auto_bis        = 'calculated automatically';
+$s_plugin_QualificationTracker_label_durchfuehrender    = 'Instructor / training body';
+$s_plugin_QualificationTracker_btn_complete_now         = 'Complete';
+$s_plugin_QualificationTracker_complete_msg             = 'Proof completed.';
+$s_plugin_QualificationTracker_complete_followup_created = 'Follow-up ticket created.';
+$s_plugin_QualificationTracker_jahrgang_title  = 'Forward-looking cohort generation';
+$s_plugin_QualificationTracker_jahrgang_intro  = 'Creates the tickets for calendar-year / reference-month measures of the chosen year in advance (a prerequisite for group events).';
+$s_plugin_QualificationTracker_jahrgang_year   = 'Year';
+$s_plugin_QualificationTracker_jahrgang_confirm = 'Generate the cohort for all listed entries?';
+$s_plugin_QualificationTracker_btn_generate_jahrgang = 'Generate cohort';
+$s_plugin_QualificationTracker_link_jahrgang   = 'Forward-looking cohort generation';

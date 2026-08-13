@@ -28,3 +28,4 @@ require_once dirname( __DIR__ ) . '/core/QT_Profile.php';
 require_once dirname( __DIR__ ) . '/core/QT_Assignment.php';
 require_once dirname( __DIR__ ) . '/core/QT_Generator.php';
 require_once dirname( __DIR__ ) . '/core/QT_SollIst.php';
+require_once dirname( __DIR__ ) . '/core/QT_Completion.php';

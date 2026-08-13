@@ -298,3 +298,24 @@ $s_plugin_QualificationTracker_note_entfallen = 'Maßnahme entfällt durch Profi
 $s_plugin_QualificationTracker_sync_msg       = 'Profilabgleich abgeschlossen:';
 $s_plugin_QualificationTracker_sync_entfallen = 'entfallen';
 $s_plugin_QualificationTracker_sync_kept      = 'behalten';
+
+# --- Nachweise / Abschluss / Jahrgang (F2.8) -----------------------------
+$s_plugin_QualificationTracker_menu_nachweise  = 'Nachweise';
+$s_plugin_QualificationTracker_nachweise_title = 'Offene Nachweise';
+$s_plugin_QualificationTracker_nachweise_none  = 'Keine offenen Nachweise.';
+$s_plugin_QualificationTracker_btn_complete    = 'Abschließen';
+$s_plugin_QualificationTracker_complete_title  = 'Nachweis abschließen';
+$s_plugin_QualificationTracker_label_durchgefuehrt_am   = 'Durchgeführt am';
+$s_plugin_QualificationTracker_label_gueltig_bis_extern = 'Gültig bis (aus Nachweis)';
+$s_plugin_QualificationTracker_help_gueltig_bis_extern  = 'Datum aus dem vorgelegten Nachweis (Ausbildungsträger, Betriebsarzt).';
+$s_plugin_QualificationTracker_complete_auto_bis        = 'wird automatisch berechnet';
+$s_plugin_QualificationTracker_label_durchfuehrender    = 'Durchführender / Ausbildungsstelle';
+$s_plugin_QualificationTracker_btn_complete_now         = 'Abschließen';
+$s_plugin_QualificationTracker_complete_msg             = 'Nachweis abgeschlossen.';
+$s_plugin_QualificationTracker_complete_followup_created = 'Folgeticket erzeugt.';
+$s_plugin_QualificationTracker_jahrgang_title  = 'Vorausschauende Jahrgangserzeugung';
+$s_plugin_QualificationTracker_jahrgang_intro  = 'Erzeugt die Tickets für Kalenderjahr-/Stichmonat-Maßnahmen des gewählten Jahres im Voraus (Voraussetzung für Sammeltermine).';
+$s_plugin_QualificationTracker_jahrgang_year   = 'Jahr';
+$s_plugin_QualificationTracker_jahrgang_confirm = 'Jahrgang für alle angezeigten Einträge erzeugen?';
+$s_plugin_QualificationTracker_btn_generate_jahrgang = 'Jahrgang erzeugen';
+$s_plugin_QualificationTracker_link_jahrgang   = 'Vorausschauende Jahrgangserzeugung';

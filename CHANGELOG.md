@@ -37,6 +37,15 @@ die Versionierung folgt [Semantic Versioning](https://semver.org/lang/de/).
   je Abteilung gefilterten) aktiven Personen entstünden, mit Sammel-Erzeugung
   („Alle Tickets erzeugen"). Ergänzt die Einzelperson-Vorschau aus F2.3
   (`qt_generator_plan_all` / `qt_generator_run_all`).
+- **F2.8 Zwei Erzeugungsstrategien:** *Ereignisgetrieben* — beim Abschluss eines
+  Nachweises (`core/QT_Completion.php`) werden `durchgefuehrt_am`/`gueltig_bis`/
+  `durchfuehrender` gesetzt, der Nachweis gültig gestellt und für wiederkehrende
+  Maßnahmen das Folgeticket erzeugt (`rollierend`/`extern`). *Vorausschauend* —
+  Jahrgangserzeugung (`qt_generator_run_jahrgang`) legt die `kalenderjahr`/
+  `stichmonat`-Tickets eines Jahres im Voraus an (Grundlage für Sammeltermine
+  M3). Neue Seiten: offene Nachweise, Abschluss-Formular, Jahrgangs-Vorschau.
+  Abschluss über Plugin-Aktion (Designentscheidung A), wiederverwendbar für den
+  Massenabschluss (M3).
 - **F2.7 Profiländerung:** „Profil abgleichen" je Person (Vorschau + Anwenden):
   nicht mehr benötigte Nachweise werden auf `entfallen` gesetzt und die Tickets
   geschlossen (mit Audit-Notiz), **bereits gültige Nachweise bleiben erhalten**,
