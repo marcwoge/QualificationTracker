@@ -97,6 +97,14 @@ class QualificationTrackerPlugin extends MantisPlugin {
 			# Positive = days before expiry, negative = days after.
 			'eskalation_stufen_tage'    => array( 90, 30, 0, -30 ),
 
+			# --- Ablaufreaktivierung (F5.2) --------------------------------
+			# Status a deferred ("sleeping") renewal ticket is parked at in the
+			# native fallback (no Reveille). Default 15 mirrors Reveille's own
+			# deferred status; register it in status_enum_string to hide such
+			# tickets from the active work list. When Reveille is installed the
+			# hand-off uses Reveille's configured deferred status instead.
+			'reactivation_held_status'  => 15,
+
 			# --- Ticketerzeugung (ab M2) -----------------------------------
 			# Project the proof tickets are created in. 0 = not configured yet.
 			'zielprojekt_id'            => 0,

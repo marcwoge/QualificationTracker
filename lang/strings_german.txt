@@ -455,3 +455,18 @@ $s_plugin_QualificationTracker_watchdog_intro = 'Setzt gültige Nachweise, deren
 $s_plugin_QualificationTracker_watchdog_run   = 'Ablaufwächter ausführen';
 $s_plugin_QualificationTracker_watchdog_none  = 'Keine abgelaufenen Nachweise offen.';
 $s_plugin_QualificationTracker_watchdog_msg_done = '%d Nachweis(e) auf „abgelaufen" gesetzt.';
+
+# --- Ablaufreaktivierung (F5.2) ------------------------------------------
+$s_plugin_QualificationTracker_reactivation_title = 'Ablaufreaktivierung (befristete Qualifikationen)';
+$s_plugin_QualificationTracker_reactivation_intro = 'Renewal-Tickets befristeter Qualifikationen werden bis „Ablauf minus Vorlauf" zurückgestellt und dann reaktiviert. Weckdatum aus dem Fälligkeitsrechner.';
+$s_plugin_QualificationTracker_reactivation_run   = 'Reaktivierung ausführen';
+$s_plugin_QualificationTracker_reactivation_none  = 'Keine befristeten Renewal-Nachweise vorhanden.';
+$s_plugin_QualificationTracker_reactivation_mode_reveille = 'Delegation an Reveille';
+$s_plugin_QualificationTracker_reactivation_mode_native   = 'Eigener Fallback';
+$s_plugin_QualificationTracker_reactivation_col_wake  = 'Weckdatum';
+$s_plugin_QualificationTracker_reactivation_col_state = 'Zustand';
+$s_plugin_QualificationTracker_reactivation_state_dormant = 'zurückgestellt';
+$s_plugin_QualificationTracker_reactivation_state_active  = 'aktiv';
+$s_plugin_QualificationTracker_reactivation_todo_defer      = 'wird zurückgestellt';
+$s_plugin_QualificationTracker_reactivation_todo_reactivate = 'wird reaktiviert';
+$s_plugin_QualificationTracker_reactivation_msg_done = 'Reaktivierung: %d zurückgestellt, %d reaktiviert.';

@@ -455,3 +455,18 @@ $s_plugin_QualificationTracker_watchdog_intro = 'Sets valid proofs whose validit
 $s_plugin_QualificationTracker_watchdog_run   = 'Run expiry watchdog';
 $s_plugin_QualificationTracker_watchdog_none  = 'No expired proofs outstanding.';
 $s_plugin_QualificationTracker_watchdog_msg_done = 'Set %d proof(s) to "expired".';
+
+# --- Expiry reactivation (F5.2) ------------------------------------------
+$s_plugin_QualificationTracker_reactivation_title = 'Expiry reactivation (time-limited qualifications)';
+$s_plugin_QualificationTracker_reactivation_intro = 'Renewal tickets of time-limited qualifications are held until "expiry minus lead time" and then reactivated. Wake date from the due-date calculator.';
+$s_plugin_QualificationTracker_reactivation_run   = 'Run reactivation';
+$s_plugin_QualificationTracker_reactivation_none  = 'No time-limited renewal proofs present.';
+$s_plugin_QualificationTracker_reactivation_mode_reveille = 'Delegated to Reveille';
+$s_plugin_QualificationTracker_reactivation_mode_native   = 'Native fallback';
+$s_plugin_QualificationTracker_reactivation_col_wake  = 'Wake date';
+$s_plugin_QualificationTracker_reactivation_col_state = 'State';
+$s_plugin_QualificationTracker_reactivation_state_dormant = 'held';
+$s_plugin_QualificationTracker_reactivation_state_active  = 'active';
+$s_plugin_QualificationTracker_reactivation_todo_defer      = 'will be held';
+$s_plugin_QualificationTracker_reactivation_todo_reactivate = 'will be reactivated';
+$s_plugin_QualificationTracker_reactivation_msg_done = 'Reactivation: %d held, %d reactivated.';

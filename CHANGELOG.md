@@ -8,6 +8,19 @@ die Versionierung folgt [Semantic Versioning](https://semver.org/lang/de/).
 ## [Unreleased]
 
 ### Hinzugefügt
+- **F5.2 Ablaufreaktivierung (M5):** Renewal-Tickets befristeter Qualifikationen
+  (Typ QB) werden bis „Ablauf minus Vorlauf" zurückgestellt und dann reaktiviert,
+  statt über die gesamte – oft mehrjährige – Gültigkeit offen zu bleiben. Das
+  Weckdatum kommt in jedem Fall aus dem Fälligkeitsrechner (`soll_termin` minus
+  Vorlaufzeit der Maßnahme bzw. größte Eskalationsstufe). **Reveille-Kopplung als
+  Hand-off:** ist das Reveille-Plugin installiert, wird das Ticket auf Reveilles
+  Schlaf-Status gelegt (mit gesetztem `due_date`) und Reveille übernimmt das
+  Wecken; ohne Reveille stellt der eigene Fallback zurück und reaktiviert selbst.
+  Neue reine, unit-getestete Helfer (`qt_reactivation_wake_date`,
+  `qt_reactivation_vorlauf`, `qt_reactivation_is_dormant`) und
+  `qt_reactivation_run` in `core/QT_Reactivation.php`; zweiter Abschnitt auf der
+  Automatik-Seite. Neue Konfiguration `reactivation_held_status` (Default 15,
+  wie Reveille) für den Fallback.
 - **F5.1 Ablaufwächter (M5):** Setzt gültige Nachweise, deren Gültigkeit
   abgelaufen ist (`gueltig_bis` in der Vergangenheit), auf den Status
   `abgelaufen` — im abgeleiteten Index und auf dem MantisBT-Ticket
