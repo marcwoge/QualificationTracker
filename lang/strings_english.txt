@@ -373,3 +373,17 @@ $s_plugin_QualificationTracker_teilnehmer_generate    = 'Create child tickets';
 $s_plugin_QualificationTracker_teilnehmer_col_ticket  = 'Ticket';
 $s_plugin_QualificationTracker_teilnehmer_ticket_open = 'open';
 $s_plugin_QualificationTracker_teilnehmer_msg_generated = 'Child tickets created: %d new, %d existing linked, %d skipped.';
+
+# --- Mass completion (F3.4) ----------------------------------------------
+$s_plugin_QualificationTracker_abschluss_title  = 'Mass completion';
+$s_plugin_QualificationTracker_abschluss_submit = 'Complete';
+$s_plugin_QualificationTracker_abschluss_none   = 'No completable participants. Please create the child tickets first.';
+$s_plugin_QualificationTracker_abschluss_hint   = 'Checked participants are completed as present; unchecked ones stay open and become due again.';
+$s_plugin_QualificationTracker_abschluss_label_datum          = 'Performed on';
+$s_plugin_QualificationTracker_abschluss_label_unterweisender = 'Instructor';
+$s_plugin_QualificationTracker_abschluss_col_anwesend = 'Present';
+$s_plugin_QualificationTracker_abschluss_msg_done = 'Mass completion: %d completed, %d follow-up tickets created, %d absent.';
+$s_plugin_QualificationTracker_teilnehmer_col_status      = 'Status';
+$s_plugin_QualificationTracker_teilnehmer_status_eingeplant   = 'planned';
+$s_plugin_QualificationTracker_teilnehmer_status_teilgenommen = 'attended';
+$s_plugin_QualificationTracker_teilnehmer_status_abwesend     = 'absent';

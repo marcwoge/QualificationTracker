@@ -91,4 +91,11 @@ final class EventValidateTest extends TestCase {
 		self::assertSame( '2026-03-15 09:00:00', qt_event_normalise_termin( '2026-03-15T09:00' ) );
 		self::assertSame( '2026-03-15 09:00:00', qt_event_normalise_termin( '2026-03-15 09:00' ) );
 	}
+
+	public function testTerminDateExtractsDatePart() {
+		self::assertSame( '2026-03-15', qt_event_termin_date( '2026-03-15 09:00:00' ) );
+		self::assertSame( '2026-03-15', qt_event_termin_date( '2026-03-15T09:00' ) );
+		self::assertSame( '2026-03-15', qt_event_termin_date( '2026-03-15' ) );
+		self::assertSame( '', qt_event_termin_date( '' ) );
+	}
 }

@@ -213,6 +213,30 @@ function qt_event_delete( $p_id ) {
 }
 
 /**
+ * The date part ("YYYY-MM-DD") of a termin string. Pure.
+ *
+ * @param string $p_termin
+ * @return string
+ */
+function qt_event_termin_date( $p_termin ) {
+	return substr( str_replace( 'T', ' ', trim( (string)$p_termin ) ), 0, 10 );
+}
+
+/**
+ * Update only the status of an event.
+ *
+ * @param int    $p_id
+ * @param string $p_status
+ * @return void
+ */
+function qt_event_update_status( $p_id, $p_status ) {
+	$t_status = in_array( $p_status, qt_event_statuses(), true ) ? $p_status : 'geplant';
+	db_query( 'UPDATE ' . plugin_table( 'veranstaltung' )
+		. ' SET status = ' . db_param() . ', date_modified = ' . db_param() . ' WHERE id = ' . db_param(),
+		array( $t_status, time(), (int)$p_id ) );
+}
+
+/**
  * Store the parent event ticket id on an event.
  *
  * @param int $p_id

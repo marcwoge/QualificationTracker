@@ -8,6 +8,16 @@ die Versionierung folgt [Semantic Versioning](https://semver.org/lang/de/).
 ## [Unreleased]
 
 ### Hinzugefügt
+- **F3.4 Massenabschluss (M3):** Eine Veranstaltung wird für alle Teilnehmer in
+  einem Schritt abgeschlossen. Über eine Anwesenheitsliste (Datum und
+  Durchführende/r sind mit Termin bzw. Unterweisendem der Veranstaltung
+  vorbelegt) werden die anwesenden Teilnehmer als *teilgenommen* markiert und
+  ihre Nachweise über die bestehende Abschluss-Logik (F2.8) gültig gesetzt
+  (`durchgefuehrt_am`, `gueltig_bis`, Durchführende/r, Ticketstatus, bei
+  wiederkehrenden Maßnahmen inkl. Folgeticket). Abwesende werden *abwesend*
+  markiert; ihr Nachweisticket bleibt offen und damit weiterhin fällig. Die
+  Veranstaltung wird auf *durchgeführt* gesetzt. `qt_teilnehmer_complete_event`
+  in `core/QT_Participant.php`; Auslösung über *Teilnehmer → Abschließen*.
 - **F3.3 Kind-Tickets (M3):** Für eine Veranstaltung werden auf Knopfdruck je
   Teilnehmer die Nachweistickets als Kinder eines gemeinsamen
   Veranstaltungstickets erzeugt. Das Veranstaltungsticket (der „Sammeltermin")

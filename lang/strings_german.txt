@@ -373,3 +373,17 @@ $s_plugin_QualificationTracker_teilnehmer_generate    = 'Kind-Tickets erzeugen';
 $s_plugin_QualificationTracker_teilnehmer_col_ticket  = 'Ticket';
 $s_plugin_QualificationTracker_teilnehmer_ticket_open = 'offen';
 $s_plugin_QualificationTracker_teilnehmer_msg_generated = 'Kind-Tickets erzeugt: %d neu angelegt, %d bestehende verknüpft, %d übersprungen.';
+
+# --- Massenabschluss (F3.4) ----------------------------------------------
+$s_plugin_QualificationTracker_abschluss_title  = 'Massenabschluss';
+$s_plugin_QualificationTracker_abschluss_submit = 'Abschließen';
+$s_plugin_QualificationTracker_abschluss_none   = 'Keine abschließbaren Teilnehmer. Bitte zuerst die Kind-Tickets erzeugen.';
+$s_plugin_QualificationTracker_abschluss_hint   = 'Angehakte Teilnehmer werden als anwesend abgeschlossen; nicht angehakte bleiben offen und werden erneut fällig.';
+$s_plugin_QualificationTracker_abschluss_label_datum          = 'Durchgeführt am';
+$s_plugin_QualificationTracker_abschluss_label_unterweisender = 'Durchführende/r';
+$s_plugin_QualificationTracker_abschluss_col_anwesend = 'Anwesend';
+$s_plugin_QualificationTracker_abschluss_msg_done = 'Massenabschluss: %d abgeschlossen, %d Folgetickets erzeugt, %d abwesend.';
+$s_plugin_QualificationTracker_teilnehmer_col_status      = 'Status';
+$s_plugin_QualificationTracker_teilnehmer_status_eingeplant   = 'eingeplant';
+$s_plugin_QualificationTracker_teilnehmer_status_teilgenommen = 'teilgenommen';
+$s_plugin_QualificationTracker_teilnehmer_status_abwesend     = 'abwesend';

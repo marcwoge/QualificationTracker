@@ -612,6 +612,19 @@ function qt_nachweis_get( $p_id ) {
 }
 
 /**
+ * Fetch a qt_nachweis row by its ticket id, or false.
+ *
+ * @param int $p_bug_id
+ * @return array|false
+ */
+function qt_nachweis_get_by_bug( $p_bug_id ) {
+	$t_result = db_query( 'SELECT * FROM ' . plugin_table( 'nachweis' ) . ' WHERE bug_id = ' . db_param(),
+		array( (int)$p_bug_id ) );
+	$t_row = db_fetch_array( $t_result );
+	return $t_row === false ? false : $t_row;
+}
+
+/**
  * The non-cancelled proof of a person/measure for a given cycle, or false.
  *
  * @param int    $p_person_id

@@ -190,6 +190,19 @@ function qt_teilnehmer_set_bug( $p_id, $p_bug_id ) {
 		. ' WHERE id = ' . db_param(), array( (int)$p_bug_id, (int)$p_id ) );
 }
 
+/**
+ * Set the participation status of a participant row.
+ *
+ * @param int    $p_id
+ * @param string $p_status
+ * @return void
+ */
+function qt_teilnehmer_set_status( $p_id, $p_status ) {
+	$t_status = qt_teilnehmer_status_valid( $p_status ) ? $p_status : 'eingeplant';
+	db_query( 'UPDATE ' . plugin_table( 'teilnehmer' ) . ' SET status = ' . db_param()
+		. ' WHERE id = ' . db_param(), array( $t_status, (int)$p_id ) );
+}
+
 /* -------------------------------------------------------------------------- *
  *  Child proof tickets (F3.3)
  * -------------------------------------------------------------------------- */
@@ -270,6 +283,68 @@ function qt_teilnehmer_generate_tickets( array $p_event, $p_today ) {
 
 		qt_teilnehmer_set_bug( (int)$t_p['id'], $t_bug_id );
 	}
+
+	return $t_summary;
+}
+
+/* -------------------------------------------------------------------------- *
+ *  Mass completion (F3.4)
+ * -------------------------------------------------------------------------- */
+
+/**
+ * Complete an event for all its participants in one action (F3.4).
+ *
+ * Present participants get their proof completed via QT_Completion (F2.8):
+ * durchgefuehrt_am / gueltig_bis / durchfuehrender are set, the proof becomes
+ * valid and – for recurring measures – a follow-up ticket is created; the
+ * participant is marked 'teilgenommen'. Absent participants are marked
+ * 'abwesend'; their proof ticket stays open, so they remain due and are picked
+ * up again for the next event. The event itself is set to 'durchgefuehrt'.
+ *
+ * Side-effectful; integration-tested.
+ *
+ * @param array  $p_event            Event row.
+ * @param array  $p_present_ids      Person ids that attended.
+ * @param string $p_durchgefuehrt_am ISO date the event was held.
+ * @param string $p_durchfuehrender  Instructor recorded on the proofs.
+ * @return array Summary: completed, followup_created, absent, skipped, errors[].
+ */
+function qt_teilnehmer_complete_event( array $p_event, array $p_present_ids, $p_durchgefuehrt_am, $p_durchfuehrender ) {
+	$t_summary = array( 'completed' => 0, 'followup_created' => 0, 'absent' => 0, 'skipped' => 0, 'errors' => array() );
+
+	$t_present = array();
+	foreach( $p_present_ids as $t_pid ) {
+		$t_present[(int)$t_pid] = true;
+	}
+
+	foreach( qt_teilnehmer_load( (int)$p_event['id'] ) as $t_p ) {
+		$t_row_id = (int)$t_p['id'];
+		$t_person_id = (int)$t_p['person_id'];
+		$t_bug = (int)$t_p['bug_id'];
+
+		if( !isset( $t_present[$t_person_id] ) ) {
+			qt_teilnehmer_set_status( $t_row_id, 'abwesend' );
+			$t_summary['absent']++;
+			continue;
+		}
+
+		# Present: complete the proof behind the child ticket.
+		if( $t_bug <= 0 ) {
+			$t_summary['skipped']++;
+			continue;
+		}
+		$t_nw = qt_nachweis_get_by_bug( $t_bug );
+		if( $t_nw !== false && $t_nw['status'] !== 'gueltig' ) {
+			$t_res = qt_completion_complete( (int)$t_nw['id'], $p_durchgefuehrt_am, '', $p_durchfuehrender );
+			$t_summary['completed'] += (int)$t_res['completed'];
+			$t_summary['followup_created'] += (int)$t_res['followup_created'];
+		} else {
+			$t_summary['skipped']++;
+		}
+		qt_teilnehmer_set_status( $t_row_id, 'teilgenommen' );
+	}
+
+	qt_event_update_status( (int)$p_event['id'], 'durchgefuehrt' );
 
 	return $t_summary;
 }

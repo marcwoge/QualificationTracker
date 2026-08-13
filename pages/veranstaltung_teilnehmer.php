@@ -100,6 +100,15 @@ layout_page_begin();
 		<i class="ace-icon fa fa-check"></i>
 		<?php echo sprintf( plugin_lang_get( 'teilnehmer_msg_generated' ), $t_created, $t_linked, $t_skipped ); ?>
 	</div>
+<?php } else if( $t_msg === 'completed' ) {
+	$t_c_done   = gpc_get_int( 'completed', 0 );
+	$t_c_follow = gpc_get_int( 'followup', 0 );
+	$t_c_absent = gpc_get_int( 'absent', 0 );
+	?>
+	<div class="alert alert-success">
+		<i class="ace-icon fa fa-check"></i>
+		<?php echo sprintf( plugin_lang_get( 'abschluss_msg_done' ), $t_c_done, $t_c_follow, $t_c_absent ); ?>
+	</div>
 <?php } else if( $t_msg === 'no_zielprojekt' ) { ?>
 	<div class="alert alert-danger"><?php echo plugin_lang_get( 'generate_no_zielprojekt' ); ?></div>
 <?php } else if( $t_msg !== '' ) { ?>
@@ -132,6 +141,12 @@ layout_page_begin();
 				<?php if( $t_open_count > 0 ) { echo '(' . $t_open_count . ')'; } ?>
 			</button>
 		</form>
+		<?php if( $t_count - $t_open_count > 0 ) { ?>
+		<a class="btn btn-sm btn-success btn-white btn-round"
+			href="<?php echo plugin_page( 'veranstaltung_abschluss' ); ?>&amp;id=<?php echo $f_id; ?>">
+			<i class="ace-icon fa fa-check-square-o"></i> <?php echo plugin_lang_get( 'abschluss_submit' ); ?>
+		</a>
+		<?php } ?>
 		<?php } ?>
 		<span class="pull-right">
 			<strong><?php echo string_display_line( (string)( $t_massnahme !== false ? $t_massnahme['schluessel'] . ' – ' . $t_massnahme['bezeichnung'] : '#' . $t_massnahme_id ) ); ?></strong>
@@ -160,11 +175,14 @@ layout_page_begin();
 				<th><?php echo plugin_lang_get( 'col_name' ); ?></th>
 				<th><?php echo plugin_lang_get( 'col_abteilung' ); ?></th>
 				<th class="center"><?php echo plugin_lang_get( 'teilnehmer_col_ticket' ); ?></th>
+				<th class="center"><?php echo plugin_lang_get( 'teilnehmer_col_status' ); ?></th>
 				<th class="center"><?php echo plugin_lang_get( 'col_aktionen' ); ?></th>
 			</tr>
 		</thead>
 		<tbody>
-		<?php foreach( $t_participants as $t_p ) { $t_bug = (int)$t_p['bug_id']; ?>
+		<?php
+		$t_status_class = array( 'eingeplant' => 'label-default', 'teilgenommen' => 'label-success', 'abwesend' => 'label-warning' );
+		foreach( $t_participants as $t_p ) { $t_bug = (int)$t_p['bug_id']; $t_st = (string)$t_p['status']; ?>
 			<tr>
 				<td><?php echo string_display_line( (string)$t_p['personalnummer'] ); ?></td>
 				<td><?php echo string_display_line( trim( $t_p['nachname'] . ', ' . $t_p['vorname'], ', ' ) ); ?></td>
@@ -177,6 +195,11 @@ layout_page_begin();
 					<?php } else { ?>
 						<span class="label label-default"><?php echo plugin_lang_get( 'teilnehmer_ticket_open' ); ?></span>
 					<?php } ?>
+				</td>
+				<td class="center">
+					<span class="label <?php echo isset( $t_status_class[$t_st] ) ? $t_status_class[$t_st] : 'label-default'; ?>">
+						<?php echo plugin_lang_get( 'teilnehmer_status_' . $t_st ); ?>
+					</span>
 				</td>
 				<td class="center">
 					<form class="form-inline" style="display:inline" method="post"
@@ -193,7 +216,7 @@ layout_page_begin();
 			</tr>
 		<?php } ?>
 		<?php if( empty( $t_participants ) ) { ?>
-			<tr><td colspan="5" class="center"><?php echo plugin_lang_get( 'teilnehmer_none' ); ?></td></tr>
+			<tr><td colspan="6" class="center"><?php echo plugin_lang_get( 'teilnehmer_none' ); ?></td></tr>
 		<?php } ?>
 		</tbody>
 	</table>
