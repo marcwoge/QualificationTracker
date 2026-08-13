@@ -8,6 +8,13 @@ die Versionierung folgt [Semantic Versioning](https://semver.org/lang/de/).
 ## [Unreleased]
 
 ### Hinzugefügt
+- **F4.4 CSV-Export (M4):** Zwei CSV-Downloads aus der Matrix, jeweils unter
+  Beibehaltung der aktiven Filter: die **Matrix** (eine Zeile je Person, eine
+  Spalte je Maßnahme, Zelle = Status inkl. Restlaufzeit) und die **Rohdaten**
+  (eine Zeile je Nachweis mit Person, Maßnahme, Status, Soll-Termin, Gültig-bis,
+  Zyklus und Ticket). Abhängigkeitsfrei über `fputcsv`; Semikolon-Trennung und
+  UTF-8-BOM, damit die Datei in deutschem Excel direkt korrekt öffnet.
+  `qt_matrix_raw_rows` in `core/QT_Matrix.php`, `pages/matrix_export.php`.
 - **F4.3 Paginierung & Performance (M4):** Der Matrixaufbau nutzt jetzt drei
   Aggregat-Abfragen (Personen, Soll-Maßnahmen, Nachweise) statt zwei Abfragen je
   Person — die Abfrageanzahl bleibt konstant, unabhängig von der Belegschaft

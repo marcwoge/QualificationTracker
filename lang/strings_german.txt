@@ -423,3 +423,11 @@ $s_plugin_QualificationTracker_matrix_transpose = 'Zeilen/Spalten tauschen';
 $s_plugin_QualificationTracker_matrix_page_info = 'Seite %d von %d (%d Personen)';
 $s_plugin_QualificationTracker_matrix_prev = 'Zurück';
 $s_plugin_QualificationTracker_matrix_next = 'Weiter';
+
+# --- CSV-Export (F4.4) ---------------------------------------------------
+$s_plugin_QualificationTracker_export_csv_matrix = 'CSV Matrix';
+$s_plugin_QualificationTracker_export_csv_raw    = 'CSV Rohdaten';
+$s_plugin_QualificationTracker_export_soll_termin = 'Soll-Termin';
+$s_plugin_QualificationTracker_export_gueltig_bis = 'Gültig bis';
+$s_plugin_QualificationTracker_export_zyklus      = 'Zyklus';
+$s_plugin_QualificationTracker_export_ticket      = 'Ticket';

@@ -157,6 +157,18 @@ layout_page_begin();
 				href="<?php echo plugin_page( 'matrix' ) . '&amp;' . str_replace( '&', '&amp;', $t_toggle_params ); ?>">
 				<i class="ace-icon fa fa-exchange"></i> <?php echo plugin_lang_get( 'matrix_transpose' ); ?>
 			</a>
+			<?php
+			$t_filter_qs = 'abteilung=' . urlencode( $f_abteilung ) . '&profil_id=' . $f_profil
+				. '&typ=' . urlencode( $f_typ ) . '&status=' . urlencode( $f_status );
+			?>
+			<a class="btn btn-xs btn-white btn-round" style="margin-left:6px"
+				href="<?php echo plugin_page( 'matrix_export' ) . '&amp;format=matrix&amp;' . str_replace( '&', '&amp;', $t_filter_qs ); ?>">
+				<i class="ace-icon fa fa-download"></i> <?php echo plugin_lang_get( 'export_csv_matrix' ); ?>
+			</a>
+			<a class="btn btn-xs btn-white btn-round"
+				href="<?php echo plugin_page( 'matrix_export' ) . '&amp;format=raw&amp;' . str_replace( '&', '&amp;', $t_filter_qs ); ?>">
+				<i class="ace-icon fa fa-download"></i> <?php echo plugin_lang_get( 'export_csv_raw' ); ?>
+			</a>
 		</form>
 	</div>
 

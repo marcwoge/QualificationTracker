@@ -1,7 +1,7 @@
 # Roadmap — MantisBT QualificationTracker
 
 **Version dieses Dokuments:** 0.4 (2026-08-12)
-**Status Gesamtprojekt:** 🟡 M1 (Fundament), M2 (Generator) und M3 (Veranstaltungen) abgeschlossen (F3.7 zurückgestellt auf 1.1), M4 (Matrix & Auswertung) in Arbeit (F4.1–F4.3 fertig)
+**Status Gesamtprojekt:** 🟡 M1 (Fundament), M2 (Generator) und M3 (Veranstaltungen) abgeschlossen (F3.7 zurückgestellt auf 1.1), M4 (Matrix & Auswertung) in Arbeit (F4.1–F4.4 fertig)
 
 ---
 
@@ -114,7 +114,7 @@ Legende: ⬜ offen · 🟡 in Arbeit · 🟢 fertig · ⚪ zurückgestellt
 | F4.1 | Matrix-Ansicht | Person × Maßnahme, Zellenfarbe nach Restgültigkeit, Zelle klickbar zum Ticket | 🟢 |
 | F4.2 | Filter & Gruppierung | Nach Abteilung, Profil, Maßnahmentyp, Status; Umschalten Zeilen/Spalten | 🟢 |
 | F4.3 | Paginierung & Performance | Serverseitige Aggregation, damit die Matrix bei 500 Personen in < 2 s rendert | 🟢 |
-| F4.4 | CSV-Export | Matrix und Rohdaten als CSV | ⬜ |
+| F4.4 | CSV-Export | Matrix und Rohdaten als CSV | 🟢 |
 | F4.5 | Audit-PDF | Stichtagsbezogener Nachweisbericht mit Erfüllungsgrad je Abteilung | ⬜ |
 | F4.6 | Kennzahlen-Widget | Mantis-Startseiten-Widget: eigener Erfüllungsgrad und überfällige Maßnahmen | ⬜ |
 

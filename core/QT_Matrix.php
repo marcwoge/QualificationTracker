@@ -190,6 +190,41 @@ function qt_matrix_nachweise( $p_today, array $p_filters ) {
 }
 
 /**
+ * The raw proof records for the filtered population, joined with person and
+ * measure, for the CSV raw-data export (F4.4). One row per qt_nachweis entry.
+ *
+ * @param string $p_today
+ * @param array  $p_filters abteilung, profil_id, typ.
+ * @return array List of associative rows.
+ */
+function qt_matrix_raw_rows( $p_today, array $p_filters ) {
+	list( $t_pfilter, $t_pparams ) = qt_matrix_person_filter_sql( $p_today, $p_filters );
+
+	$t_sql = 'SELECT p.personalnummer, p.nachname, p.vorname, p.abteilung,'
+		. ' m.schluessel, m.bezeichnung, m.typ,'
+		. ' n.status, n.soll_termin, n.gueltig_bis, n.zyklus, n.bug_id'
+		. ' FROM ' . plugin_table( 'nachweis' ) . ' n'
+		. ' JOIN ' . plugin_table( 'person' ) . ' p ON p.id = n.person_id AND p.aktiv = 1'
+		. ' JOIN ' . plugin_table( 'massnahme' ) . ' m ON m.id = n.massnahme_id'
+		. ' WHERE 1 = 1' . $t_pfilter;
+	$t_params = $t_pparams;
+
+	$t_typ = isset( $p_filters['typ'] ) ? (string)$p_filters['typ'] : '';
+	if( $t_typ !== '' ) {
+		$t_sql .= ' AND m.typ = ' . db_param();
+		$t_params[] = $t_typ;
+	}
+	$t_sql .= ' ORDER BY p.nachname, p.vorname, m.schluessel';
+
+	$t_result = db_query( $t_sql, $t_params );
+	$t_rows = array();
+	while( $t_row = db_fetch_array( $t_result ) ) {
+		$t_rows[] = $t_row;
+	}
+	return $t_rows;
+}
+
+/**
  * Build the qualification matrix.
  *
  * Rows are the active persons that require at least one (filtered) measure;

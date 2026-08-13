@@ -423,3 +423,11 @@ $s_plugin_QualificationTracker_matrix_transpose = 'Swap rows/columns';
 $s_plugin_QualificationTracker_matrix_page_info = 'Page %d of %d (%d persons)';
 $s_plugin_QualificationTracker_matrix_prev = 'Previous';
 $s_plugin_QualificationTracker_matrix_next = 'Next';
+
+# --- CSV export (F4.4) ---------------------------------------------------
+$s_plugin_QualificationTracker_export_csv_matrix = 'CSV matrix';
+$s_plugin_QualificationTracker_export_csv_raw    = 'CSV raw data';
+$s_plugin_QualificationTracker_export_soll_termin = 'Target date';
+$s_plugin_QualificationTracker_export_gueltig_bis = 'Valid until';
+$s_plugin_QualificationTracker_export_zyklus      = 'Cycle';
+$s_plugin_QualificationTracker_export_ticket      = 'Ticket';
