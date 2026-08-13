@@ -37,11 +37,15 @@ plugin_require_api( 'core/QT_SollIst.php' );
 plugin_require_api( 'core/QT_Profile.php' );
 plugin_require_api( 'core/QT_Matrix.php' );
 
+# Rows per page; kept modest so the rendered table stays light for large staffs.
+define( 'QT_MATRIX_PER_PAGE', 50 );
+
 $f_abteilung = gpc_get_string( 'abteilung', '' );
 $f_profil    = gpc_get_int( 'profil_id', 0 );
 $f_typ       = gpc_get_string( 'typ', '' );
 $f_status    = gpc_get_string( 'status', '' );
 $f_transpose = gpc_get_bool( 'transpose', false );
+$f_page      = gpc_get_int( 'mpage', 1 );
 $t_today     = date( 'Y-m-d' );
 
 $t_matrix = qt_matrix_build( $t_today, array(
@@ -49,7 +53,17 @@ $t_matrix = qt_matrix_build( $t_today, array(
 	'profil_id' => $f_profil,
 	'typ'       => $f_typ,
 	'status'    => $f_status,
+	'page'      => $f_page,
+	'per_page'  => QT_MATRIX_PER_PAGE,
 ) );
+
+# Effective page after clamping by the builder.
+$f_page = (int)$t_matrix['page'];
+
+# Base query string that preserves the current filters/layout for nav links.
+$t_base_qs = 'abteilung=' . urlencode( $f_abteilung ) . '&profil_id=' . $f_profil
+	. '&typ=' . urlencode( $f_typ ) . '&status=' . urlencode( $f_status )
+	. '&transpose=' . ( $f_transpose ? '1' : '0' );
 
 $t_abteilungen = qt_person_distinct_abteilungen();
 $t_profile     = qt_profil_load_all();
@@ -226,6 +240,25 @@ layout_page_begin();
 		</tbody>
 	</table>
 	</div>
+	</div>
+
+	<div class="widget-toolbox padding-8 clearfix">
+		<span class="pull-left" style="margin-top:4px">
+			<?php echo sprintf( plugin_lang_get( 'matrix_page_info' ),
+				(int)$t_matrix['page'], (int)$t_matrix['page_count'], (int)$t_matrix['total'] ); ?>
+		</span>
+		<?php if( (int)$t_matrix['page_count'] > 1 ) { ?>
+		<span class="btn-group pull-right">
+			<a class="btn btn-xs btn-white btn-round <?php echo $f_page <= 1 ? 'disabled' : ''; ?>"
+				href="<?php echo plugin_page( 'matrix' ) . '&amp;' . str_replace( '&', '&amp;', $t_base_qs ) . '&amp;mpage=' . ( $f_page - 1 ); ?>">
+				<i class="ace-icon fa fa-chevron-left"></i> <?php echo plugin_lang_get( 'matrix_prev' ); ?>
+			</a>
+			<a class="btn btn-xs btn-white btn-round <?php echo $f_page >= (int)$t_matrix['page_count'] ? 'disabled' : ''; ?>"
+				href="<?php echo plugin_page( 'matrix' ) . '&amp;' . str_replace( '&', '&amp;', $t_base_qs ) . '&amp;mpage=' . ( $f_page + 1 ); ?>">
+				<?php echo plugin_lang_get( 'matrix_next' ); ?> <i class="ace-icon fa fa-chevron-right"></i>
+			</a>
+		</span>
+		<?php } ?>
 	</div>
 	</div>
 </div>

@@ -420,3 +420,6 @@ $s_plugin_QualificationTracker_matrix_state_abgelaufen = 'abgelaufen';
 $s_plugin_QualificationTracker_matrix_state_fehlt      = 'kein Nachweis';
 $s_plugin_QualificationTracker_matrix_state_na         = 'nicht zugeordnet';
 $s_plugin_QualificationTracker_matrix_transpose = 'Zeilen/Spalten tauschen';
+$s_plugin_QualificationTracker_matrix_page_info = 'Seite %d von %d (%d Personen)';
+$s_plugin_QualificationTracker_matrix_prev = 'Zurück';
+$s_plugin_QualificationTracker_matrix_next = 'Weiter';

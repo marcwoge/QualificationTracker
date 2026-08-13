@@ -8,6 +8,15 @@ die Versionierung folgt [Semantic Versioning](https://semver.org/lang/de/).
 ## [Unreleased]
 
 ### Hinzugefügt
+- **F4.3 Paginierung & Performance (M4):** Der Matrixaufbau nutzt jetzt drei
+  Aggregat-Abfragen (Personen, Soll-Maßnahmen, Nachweise) statt zwei Abfragen je
+  Person — die Abfrageanzahl bleibt konstant, unabhängig von der Belegschaft
+  (kein N+1 mehr). Die Zeilen werden serverseitig paginiert (50 Personen je
+  Seite) mit Blättern unter Beibehaltung aller Filter. Messung im Testcontainer:
+  500 Personen in ~0,015 s mit 3 Abfragen (zuvor ~1000 Abfragen). Die
+  Zellergebnisse sind identisch zur vorherigen Implementierung (verifiziert).
+  Neue Helfer `qt_matrix_required_pairs`, `qt_matrix_nachweise`,
+  `qt_matrix_person_filter_sql`.
 - **F4.2 Filter & Gruppierung (M4):** Die Qualifikationsmatrix ist zusätzlich
   nach Profil, Maßnahmentyp und Zellstatus filterbar (kombinierbar mit dem
   Abteilungsfilter aus F4.1); der Statusfilter zeigt nur Personen mit

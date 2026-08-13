@@ -420,3 +420,6 @@ $s_plugin_QualificationTracker_matrix_state_abgelaufen = 'expired';
 $s_plugin_QualificationTracker_matrix_state_fehlt      = 'no proof';
 $s_plugin_QualificationTracker_matrix_state_na         = 'not assigned';
 $s_plugin_QualificationTracker_matrix_transpose = 'Swap rows/columns';
+$s_plugin_QualificationTracker_matrix_page_info = 'Page %d of %d (%d persons)';
+$s_plugin_QualificationTracker_matrix_prev = 'Previous';
+$s_plugin_QualificationTracker_matrix_next = 'Next';

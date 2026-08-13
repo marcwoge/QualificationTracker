@@ -98,23 +98,95 @@ function qt_matrix_row_has_state( array $p_cells, $p_state ) {
 }
 
 /**
- * The ids of persons with an active assignment to a profile (map id => true).
- * Active means no end date or an end date not in the past.
+ * The SQL fragment + params that restrict a person-joined query to the
+ * abteilung and profil filters. The joined person table must be aliased "p".
  *
- * @param int    $p_profil_id
  * @param string $p_today
+ * @param array  $p_filters
+ * @return array [sql_fragment, params]
+ */
+function qt_matrix_person_filter_sql( $p_today, array $p_filters ) {
+	$t_sql = '';
+	$t_params = array();
+
+	$t_abteilung = isset( $p_filters['abteilung'] ) ? (string)$p_filters['abteilung'] : '';
+	if( $t_abteilung !== '' ) {
+		$t_sql .= ' AND p.abteilung = ' . db_param();
+		$t_params[] = $t_abteilung;
+	}
+
+	$t_profil_id = isset( $p_filters['profil_id'] ) ? (int)$p_filters['profil_id'] : 0;
+	if( $t_profil_id > 0 ) {
+		$t_sql .= ' AND p.id IN ( SELECT person_id FROM ' . plugin_table( 'zuordnung' )
+			. ' WHERE profil_id = ' . db_param()
+			. ' AND ( gueltig_bis IS NULL OR gueltig_bis >= ' . db_param() . ' ) )';
+		$t_params[] = $t_profil_id;
+		$t_params[] = $p_today;
+	}
+
+	return array( $t_sql, $t_params );
+}
+
+/**
+ * All required person × measure pairs for the filtered population, in a single
+ * aggregate query (avoids the per-person N+1 of the naive build). Returns a map
+ * person_id => list of measure rows.
+ *
+ * @param string $p_today
+ * @param array  $p_filters abteilung, profil_id, typ.
  * @return array
  */
-function qt_matrix_profil_person_ids( $p_profil_id, $p_today ) {
-	$t_result = db_query( 'SELECT DISTINCT person_id FROM ' . plugin_table( 'zuordnung' )
-		. ' WHERE profil_id = ' . db_param()
-		. ' AND ( gueltig_bis IS NULL OR gueltig_bis >= ' . db_param() . ' )',
-		array( (int)$p_profil_id, $p_today ) );
-	$t_ids = array();
-	while( $t_row = db_fetch_array( $t_result ) ) {
-		$t_ids[(int)$t_row['person_id']] = true;
+function qt_matrix_required_pairs( $p_today, array $p_filters ) {
+	list( $t_pfilter, $t_pparams ) = qt_matrix_person_filter_sql( $p_today, $p_filters );
+
+	$t_sql = 'SELECT DISTINCT z.person_id AS qt_person_id, m.*'
+		. ' FROM ' . plugin_table( 'zuordnung' ) . ' z'
+		. ' JOIN ' . plugin_table( 'profil' ) . ' pr ON pr.id = z.profil_id AND pr.aktiv = 1'
+		. ' JOIN ' . plugin_table( 'profil_massnahme' ) . ' pm ON pm.profil_id = z.profil_id'
+		. ' JOIN ' . plugin_table( 'massnahme' ) . ' m ON m.id = pm.massnahme_id AND m.aktiv = 1'
+		. ' JOIN ' . plugin_table( 'person' ) . ' p ON p.id = z.person_id AND p.aktiv = 1'
+		. ' WHERE ( z.gueltig_bis IS NULL OR z.gueltig_bis >= ' . db_param() . ' )';
+	$t_params = array( $p_today );
+
+	$t_typ = isset( $p_filters['typ'] ) ? (string)$p_filters['typ'] : '';
+	if( $t_typ !== '' ) {
+		$t_sql .= ' AND m.typ = ' . db_param();
+		$t_params[] = $t_typ;
 	}
-	return $t_ids;
+	$t_sql .= $t_pfilter;
+	$t_params = array_merge( $t_params, $t_pparams );
+
+	$t_result = db_query( $t_sql, $t_params );
+	$t_pairs = array();
+	while( $t_row = db_fetch_array( $t_result ) ) {
+		$t_pid = (int)$t_row['qt_person_id'];
+		unset( $t_row['qt_person_id'] );
+		$t_pairs[$t_pid][] = $t_row;
+	}
+	return $t_pairs;
+}
+
+/**
+ * All proofs of the filtered population, in a single aggregate query. Returns a
+ * nested map person_id => massnahme_id => list of nachweis rows.
+ *
+ * @param string $p_today
+ * @param array  $p_filters abteilung, profil_id.
+ * @return array
+ */
+function qt_matrix_nachweise( $p_today, array $p_filters ) {
+	list( $t_pfilter, $t_pparams ) = qt_matrix_person_filter_sql( $p_today, $p_filters );
+
+	$t_sql = 'SELECT n.* FROM ' . plugin_table( 'nachweis' ) . ' n'
+		. ' JOIN ' . plugin_table( 'person' ) . ' p ON p.id = n.person_id AND p.aktiv = 1'
+		. ' WHERE 1 = 1' . $t_pfilter;
+
+	$t_result = db_query( $t_sql, $t_pparams );
+	$t_map = array();
+	while( $t_row = db_fetch_array( $t_result ) ) {
+		$t_map[(int)$t_row['person_id']][(int)$t_row['massnahme_id']][] = $t_row;
+	}
+	return $t_map;
 }
 
 /**
@@ -124,61 +196,47 @@ function qt_matrix_profil_person_ids( $p_profil_id, $p_today ) {
  * columns are the union of those measures. Cells exist only for required
  * person × measure pairs – every other pair renders as 'na'.
  *
- * Filters (all optional): 'abteilung' (department), 'profil_id' (only persons
- * assigned to that profile), 'typ' (only measures of that type), 'status'
- * (only persons that have at least one cell in that state).
+ * Data is gathered with three aggregate queries (persons, required pairs,
+ * proofs) instead of two queries per person, so the build stays flat as the
+ * population grows (F4.3). Rows are then paginated for rendering.
+ *
+ * Filters (all optional): 'abteilung', 'profil_id', 'typ', 'status'
+ * (keep only persons with at least one cell in that state), plus pagination
+ * 'page' (1-based) and 'per_page' (0 = all).
  *
  * @param string $p_today   ISO date "today".
  * @param array  $p_filters Filter map.
- * @return array persons[], massnahmen[], cells[person_id][massnahme_id], warn_days.
+ * @return array persons[] (page slice), massnahmen[], cells[pid][mid], warn_days,
+ *               total, page, per_page, page_count.
  */
 function qt_matrix_build( $p_today, array $p_filters = array() ) {
 	$t_warn = qt_matrix_warn_days( plugin_config_get( 'eskalation_stufen_tage' ) );
 
 	$t_abteilung = isset( $p_filters['abteilung'] ) ? (string)$p_filters['abteilung'] : '';
-	$t_profil_id = isset( $p_filters['profil_id'] ) ? (int)$p_filters['profil_id'] : 0;
-	$t_typ       = isset( $p_filters['typ'] ) ? (string)$p_filters['typ'] : '';
 	$t_status    = isset( $p_filters['status'] ) ? (string)$p_filters['status'] : '';
+	$t_per_page  = isset( $p_filters['per_page'] ) ? max( 0, (int)$p_filters['per_page'] ) : 0;
+	$t_page      = isset( $p_filters['page'] ) ? max( 1, (int)$p_filters['page'] ) : 1;
 
-	$t_profil_ids = $t_profil_id > 0 ? qt_matrix_profil_person_ids( $t_profil_id, $p_today ) : null;
+	$t_pairs = qt_matrix_required_pairs( $p_today, $p_filters );
+	$t_nachweise = qt_matrix_nachweise( $p_today, $p_filters );
 
+	# Assemble rows in person order (qt_person_load_all is ordered by name).
 	$t_persons = array();
 	$t_cells = array();
-
 	foreach( qt_person_load_all( $t_abteilung ) as $t_person ) {
-		if( !$t_person['aktiv'] ) {
-			continue;
-		}
 		$t_pid = (int)$t_person['id'];
-
-		if( $t_profil_ids !== null && !isset( $t_profil_ids[$t_pid] ) ) {
+		if( !isset( $t_pairs[$t_pid] ) ) {
 			continue;
-		}
-
-		$t_required = qt_generator_required_massnahmen( $t_pid, $p_today );
-		if( $t_typ !== '' ) {
-			$t_required = array_filter( $t_required, function( $m ) use ( $t_typ ) {
-				return $m['typ'] === $t_typ;
-			} );
-		}
-		if( empty( $t_required ) ) {
-			continue;
-		}
-
-		$t_by_massnahme = array();
-		foreach( qt_nachweis_load_for_person( $t_pid ) as $t_nw ) {
-			$t_by_massnahme[(int)$t_nw['massnahme_id']][] = $t_nw;
 		}
 
 		$t_row_cells = array();
-		foreach( $t_required as $t_m ) {
+		foreach( $t_pairs[$t_pid] as $t_m ) {
 			$t_mid = (int)$t_m['id'];
-			$t_rows = isset( $t_by_massnahme[$t_mid] ) ? $t_by_massnahme[$t_mid] : array();
+			$t_rows = isset( $t_nachweise[$t_pid][$t_mid] ) ? $t_nachweise[$t_pid][$t_mid] : array();
 			$t_row_cells[$t_mid] = qt_matrix_cell( $t_rows, $p_today, $t_warn );
 			$t_row_cells[$t_mid]['massnahme'] = $t_m;
 		}
 
-		# Status filter: keep only persons with a matching cell.
 		if( $t_status !== '' && !qt_matrix_row_has_state( $t_row_cells, $t_status ) ) {
 			continue;
 		}
@@ -187,7 +245,7 @@ function qt_matrix_build( $p_today, array $p_filters = array() ) {
 		$t_cells[$t_pid] = $t_row_cells;
 	}
 
-	# Columns: the measures actually present in the surviving rows.
+	# Columns: the measures present across all surviving rows (stable across pages).
 	$t_measure_map = array();
 	foreach( $t_cells as $t_row_cells ) {
 		foreach( $t_row_cells as $t_mid => $t_cell ) {
@@ -199,10 +257,24 @@ function qt_matrix_build( $p_today, array $p_filters = array() ) {
 		return strcmp( $a['schluessel'], $b['schluessel'] );
 	} );
 
+	# Paginate the rows.
+	$t_total = count( $t_persons );
+	$t_page_count = ( $t_per_page > 0 ) ? (int)max( 1, ceil( $t_total / $t_per_page ) ) : 1;
+	if( $t_page > $t_page_count ) {
+		$t_page = $t_page_count;
+	}
+	if( $t_per_page > 0 ) {
+		$t_persons = array_slice( $t_persons, ( $t_page - 1 ) * $t_per_page, $t_per_page );
+	}
+
 	return array(
 		'persons'    => $t_persons,
 		'massnahmen' => $t_measures,
 		'cells'      => $t_cells,
 		'warn_days'  => $t_warn,
+		'total'      => $t_total,
+		'page'       => $t_page,
+		'per_page'   => $t_per_page,
+		'page_count' => $t_page_count,
 	);
 }
