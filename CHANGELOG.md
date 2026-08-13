@@ -8,6 +8,16 @@ die Versionierung folgt [Semantic Versioning](https://semver.org/lang/de/).
 ## [Unreleased]
 
 ### Hinzugefügt
+- **F4.5 Audit-Bericht (M4):** Stichtagsbezogener Nachweisbericht unter
+  *Verwaltung → QualificationTracker → Auditbericht*: Erfüllungsgrad je Abteilung
+  (Soll-Pflichten, erfüllte/gültige Nachweise, Aufschlüsselung nach
+  offen/abgelaufen/fehlt, Prozentsatz) zzgl. Gesamtzeile, dazu eine Liste der
+  offenen Nachweise zum Stichtag. Die Gültigkeit wird zum wählbaren Stichtag
+  bewertet (Auswertung teilt sich die Zellenlogik mit der Matrix). Wie die
+  Teilnehmerliste abhängigkeitsfrei als druckoptimierte HTML-Seite
+  (*„Drucken → als PDF speichern"*). Neue reine, unit-getestete Funktion
+  `qt_audit_rate` und `qt_matrix_compliance` in `core/QT_Matrix.php`,
+  `pages/audit.php`.
 - **F4.4 CSV-Export (M4):** Zwei CSV-Downloads aus der Matrix, jeweils unter
   Beibehaltung der aktiven Filter: die **Matrix** (eine Zeile je Person, eine
   Spalte je Maßnahme, Zelle = Status inkl. Restlaufzeit) und die **Rohdaten**

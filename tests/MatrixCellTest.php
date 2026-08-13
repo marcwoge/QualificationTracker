@@ -111,4 +111,15 @@ final class MatrixCellTest extends TestCase {
 		self::assertFalse( qt_matrix_row_has_state( $t_cells, 'fehlt' ) );
 		self::assertFalse( qt_matrix_row_has_state( array(), 'gueltig' ) );
 	}
+
+	public function testAuditRateComputesPercentage() {
+		self::assertSame( 100.0, qt_audit_rate( 8, 8 ) );
+		self::assertSame( 50.0, qt_audit_rate( 5, 10 ) );
+		self::assertSame( 33.3, qt_audit_rate( 1, 3 ) );
+	}
+
+	public function testAuditRateIsZeroWhenNothingRequired() {
+		self::assertSame( 0.0, qt_audit_rate( 0, 0 ) );
+		self::assertSame( 0.0, qt_audit_rate( 5, 0 ) );
+	}
 }

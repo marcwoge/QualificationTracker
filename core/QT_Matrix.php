@@ -190,6 +190,76 @@ function qt_matrix_nachweise( $p_today, array $p_filters ) {
 }
 
 /**
+ * Compliance rate as a percentage. Pure. Returns 0.0 when nothing is required.
+ *
+ * @param int $p_erfuellt Fulfilled count.
+ * @param int $p_soll     Required count.
+ * @return float
+ */
+function qt_audit_rate( $p_erfuellt, $p_soll ) {
+	$t_soll = (int)$p_soll;
+	if( $t_soll <= 0 ) {
+		return 0.0;
+	}
+	return round( 100 * (int)$p_erfuellt / $t_soll, 1 );
+}
+
+/**
+ * As-of-date compliance report per department (F4.5). Built on the matrix, so
+ * validity is evaluated as of the given key date. A cell counts as fulfilled
+ * when it is valid (state 'gueltig' or 'bald'); 'offen', 'abgelaufen' and
+ * 'fehlt' are the deficiency kinds.
+ *
+ * @param string $p_stichtag ISO key date.
+ * @param array  $p_filters  abteilung, profil_id, typ.
+ * @return array stichtag, departments (name => counts+rate), total, matrix.
+ */
+function qt_matrix_compliance( $p_stichtag, array $p_filters = array() ) {
+	$t_filters = array_merge( $p_filters, array( 'status' => '', 'per_page' => 0, 'page' => 1 ) );
+	$t_matrix = qt_matrix_build( $p_stichtag, $t_filters );
+
+	$t_blank = array( 'persons' => 0, 'soll' => 0, 'erfuellt' => 0, 'fehlt' => 0, 'offen' => 0, 'abgelaufen' => 0 );
+	$t_by_dept = array();
+	$t_total = $t_blank;
+
+	foreach( $t_matrix['persons'] as $t_person ) {
+		$t_pid = (int)$t_person['id'];
+		$t_dept = ( $t_person['abteilung'] !== null && $t_person['abteilung'] !== '' ) ? $t_person['abteilung'] : '—';
+		if( !isset( $t_by_dept[$t_dept] ) ) {
+			$t_by_dept[$t_dept] = $t_blank;
+		}
+		$t_by_dept[$t_dept]['persons']++;
+		$t_total['persons']++;
+
+		foreach( $t_matrix['cells'][$t_pid] as $t_cell ) {
+			$t_state = $t_cell['state'];
+			$t_by_dept[$t_dept]['soll']++;
+			$t_total['soll']++;
+			if( $t_state === 'gueltig' || $t_state === 'bald' ) {
+				$t_by_dept[$t_dept]['erfuellt']++;
+				$t_total['erfuellt']++;
+			} else {
+				$t_by_dept[$t_dept][$t_state]++;
+				$t_total[$t_state]++;
+			}
+		}
+	}
+
+	ksort( $t_by_dept );
+	foreach( $t_by_dept as $t_name => $t_stats ) {
+		$t_by_dept[$t_name]['rate'] = qt_audit_rate( $t_stats['erfuellt'], $t_stats['soll'] );
+	}
+	$t_total['rate'] = qt_audit_rate( $t_total['erfuellt'], $t_total['soll'] );
+
+	return array(
+		'stichtag'    => $p_stichtag,
+		'departments' => $t_by_dept,
+		'total'       => $t_total,
+		'matrix'      => $t_matrix,
+	);
+}
+
+/**
  * The raw proof records for the filtered population, joined with person and
  * measure, for the CSV raw-data export (F4.4). One row per qt_nachweis entry.
  *

@@ -431,3 +431,16 @@ $s_plugin_QualificationTracker_export_soll_termin = 'Target date';
 $s_plugin_QualificationTracker_export_gueltig_bis = 'Valid until';
 $s_plugin_QualificationTracker_export_zyklus      = 'Cycle';
 $s_plugin_QualificationTracker_export_ticket      = 'Ticket';
+
+# --- Audit report (F4.5) -------------------------------------------------
+$s_plugin_QualificationTracker_menu_audit         = 'Audit report';
+$s_plugin_QualificationTracker_audit_title        = 'Proof report (audit)';
+$s_plugin_QualificationTracker_audit_stichtag     = 'Key date';
+$s_plugin_QualificationTracker_audit_by_department = 'Compliance rate per department';
+$s_plugin_QualificationTracker_audit_persons      = 'Persons';
+$s_plugin_QualificationTracker_audit_soll         = 'Required';
+$s_plugin_QualificationTracker_audit_erfuellt     = 'Fulfilled';
+$s_plugin_QualificationTracker_audit_rate         = 'Compliance';
+$s_plugin_QualificationTracker_audit_total        = 'Total';
+$s_plugin_QualificationTracker_audit_deficiencies = 'Outstanding proofs';
+$s_plugin_QualificationTracker_audit_no_deficiencies = 'No outstanding proofs as of the key date.';

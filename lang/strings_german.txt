@@ -431,3 +431,16 @@ $s_plugin_QualificationTracker_export_soll_termin = 'Soll-Termin';
 $s_plugin_QualificationTracker_export_gueltig_bis = 'Gültig bis';
 $s_plugin_QualificationTracker_export_zyklus      = 'Zyklus';
 $s_plugin_QualificationTracker_export_ticket      = 'Ticket';
+
+# --- Auditbericht (F4.5) -------------------------------------------------
+$s_plugin_QualificationTracker_menu_audit         = 'Auditbericht';
+$s_plugin_QualificationTracker_audit_title        = 'Nachweisbericht (Audit)';
+$s_plugin_QualificationTracker_audit_stichtag     = 'Stichtag';
+$s_plugin_QualificationTracker_audit_by_department = 'Erfüllungsgrad je Abteilung';
+$s_plugin_QualificationTracker_audit_persons      = 'Personen';
+$s_plugin_QualificationTracker_audit_soll         = 'Soll';
+$s_plugin_QualificationTracker_audit_erfuellt     = 'Erfüllt';
+$s_plugin_QualificationTracker_audit_rate         = 'Erfüllungsgrad';
+$s_plugin_QualificationTracker_audit_total        = 'Gesamt';
+$s_plugin_QualificationTracker_audit_deficiencies = 'Offene Nachweise';
+$s_plugin_QualificationTracker_audit_no_deficiencies = 'Zum Stichtag liegen keine offenen Nachweise vor.';
