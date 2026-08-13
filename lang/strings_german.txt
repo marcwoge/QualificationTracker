@@ -447,3 +447,11 @@ $s_plugin_QualificationTracker_audit_no_deficiencies = 'Zum Stichtag liegen kein
 
 # --- Kennzahlen-Widget (F4.6) --------------------------------------------
 $s_plugin_QualificationTracker_widget_title = 'Qualifikationen – Überblick';
+
+# --- Automatik / Ablaufwächter (F5.1) ------------------------------------
+$s_plugin_QualificationTracker_menu_automatik = 'Automatik';
+$s_plugin_QualificationTracker_watchdog_title = 'Ablaufwächter';
+$s_plugin_QualificationTracker_watchdog_intro = 'Setzt gültige Nachweise, deren Gültigkeit abgelaufen ist, auf den Status „abgelaufen" (Index und Ticket). Läuft normalerweise nächtlich; hier manuell auslösbar.';
+$s_plugin_QualificationTracker_watchdog_run   = 'Ablaufwächter ausführen';
+$s_plugin_QualificationTracker_watchdog_none  = 'Keine abgelaufenen Nachweise offen.';
+$s_plugin_QualificationTracker_watchdog_msg_done = '%d Nachweis(e) auf „abgelaufen" gesetzt.';

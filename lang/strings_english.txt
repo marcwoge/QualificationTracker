@@ -447,3 +447,11 @@ $s_plugin_QualificationTracker_audit_no_deficiencies = 'No outstanding proofs as
 
 # --- KPI widget (F4.6) ---------------------------------------------------
 $s_plugin_QualificationTracker_widget_title = 'Qualifications – overview';
+
+# --- Automation / expiry watchdog (F5.1) ---------------------------------
+$s_plugin_QualificationTracker_menu_automatik = 'Automation';
+$s_plugin_QualificationTracker_watchdog_title = 'Expiry watchdog';
+$s_plugin_QualificationTracker_watchdog_intro = 'Sets valid proofs whose validity has ended to the status "expired" (index and ticket). Normally runs nightly; can be triggered manually here.';
+$s_plugin_QualificationTracker_watchdog_run   = 'Run expiry watchdog';
+$s_plugin_QualificationTracker_watchdog_none  = 'No expired proofs outstanding.';
+$s_plugin_QualificationTracker_watchdog_msg_done = 'Set %d proof(s) to "expired".';

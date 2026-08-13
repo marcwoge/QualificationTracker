@@ -8,6 +8,14 @@ die Versionierung folgt [Semantic Versioning](https://semver.org/lang/de/).
 ## [Unreleased]
 
 ### Hinzugefügt
+- **F5.1 Ablaufwächter (M5):** Setzt gültige Nachweise, deren Gültigkeit
+  abgelaufen ist (`gueltig_bis` in der Vergangenheit), auf den Status
+  `abgelaufen` — im abgeleiteten Index und auf dem MantisBT-Ticket
+  (Status-Mapping). Der Lauf ist idempotent und für den nächtlichen Betrieb
+  gedacht (CLI-Runner in F5.5); unter *Verwaltung → QualificationTracker →
+  Automatik* mit Vorschau der betroffenen Nachweise auch manuell auslösbar.
+  Neue reine, unit-getestete Funktion `qt_expiry_is_expired` sowie
+  `qt_expiry_find`/`qt_expiry_run` in `core/QT_Expiry.php`.
 - **F4.6 Kennzahlen-Widget (M4):** Auf der Mantis-Startseite (My-View bzw.
   Hauptseite) erscheint für berechtigte Nutzer ein Überblicks-Widget mit dem
   aktuellen Gesamt-Erfüllungsgrad und den Zahlen der offenen Nachweise

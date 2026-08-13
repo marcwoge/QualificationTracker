@@ -1,7 +1,7 @@
 # Roadmap — MantisBT QualificationTracker
 
 **Version dieses Dokuments:** 0.4 (2026-08-12)
-**Status Gesamtprojekt:** 🟡 M1 (Fundament), M2 (Generator), M3 (Veranstaltungen) und M4 (Matrix & Auswertung) abgeschlossen (F3.7 zurückgestellt auf 1.1), M5 (Automatisierung) als Nächstes
+**Status Gesamtprojekt:** 🟡 M1 (Fundament), M2 (Generator), M3 (Veranstaltungen) und M4 (Matrix & Auswertung) abgeschlossen (F3.7 zurückgestellt auf 1.1), M5 (Automatisierung) in Arbeit (F5.1 fertig)
 
 ---
 
@@ -57,7 +57,7 @@ Für die Anbindung an Auswertungssysteme stellt das Plugin **REST-Endpunkte** be
 | M2 | Generator | Tätigkeitsprofile, automatische Ticketketten, Soll-Ist-Prüfung | 🟢 fertig |
 | M3 | Veranstaltungen | Sammeltermine, Massenabschluss, Teilnehmerlisten | 🟢 abgeschlossen |
 | M4 | Matrix & Auswertung | Matrix-Ansicht, Ampel, Export | 🟢 abgeschlossen |
-| M5 | Automatisierung | Recurrence-/Reveille-Kopplung, Eskalationsstufen | ⬜ offen |
+| M5 | Automatisierung | Recurrence-/Reveille-Kopplung, Eskalationsstufen | 🟡 in Arbeit |
 | M6 | Import & Migration | CSV-/REST-Import, HR-Sync, Ersterfassung | ⬜ offen |
 | M7 | Audit & Datenschutz | Berechtigungen, Löschkonzept, Auditbericht | ⬜ offen |
 | M8 | Release 1.0 | Doku, Docker-Testumgebung, Lasttest, Paketierung | ⬜ offen |
@@ -122,7 +122,7 @@ Legende: ⬜ offen · 🟡 in Arbeit · 🟢 fertig · ⚪ zurückgestellt
 
 | ID | Funktion | Beschreibung | Status |
 |---|---|---|---|
-| F5.1 | Ablaufwächter | Nächtlicher Lauf: setzt abgelaufene Nachweise auf `abgelaufen` | ⬜ |
+| F5.1 | Ablaufwächter | Nächtlicher Lauf: setzt abgelaufene Nachweise auf `abgelaufen` | 🟢 |
 | F5.2 | Ablaufreaktivierung | Befristete Qualifikationen werden zurückgestellt und zum Ablauf minus Vorlauf reaktiviert. Ist Reveille installiert, wird delegiert; sonst greift der eigene Fallback. Das Weckdatum liefert in beiden Fällen der Fälligkeitsrechner | ⬜ |
 | F5.3 | Eskalationsstufen | Vier konfigurierbare Stufen (90/30/0/−30 Tage) mit unterschiedlichen Empfängerkreisen | ⬜ |
 | F5.4 | Ruhensvermerk | Bei überfälliger sicherheitsrelevanter Beauftragung automatischer Vermerk und Statuswechsel der abhängigen Beauftragung | ⬜ |

@@ -33,3 +33,4 @@ require_once dirname( __DIR__ ) . '/core/QT_Integration.php';
 require_once dirname( __DIR__ ) . '/core/QT_Event.php';
 require_once dirname( __DIR__ ) . '/core/QT_Participant.php';
 require_once dirname( __DIR__ ) . '/core/QT_Matrix.php';
+require_once dirname( __DIR__ ) . '/core/QT_Expiry.php';
