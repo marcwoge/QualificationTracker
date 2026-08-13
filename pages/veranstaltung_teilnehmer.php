@@ -109,6 +109,15 @@ layout_page_begin();
 		<i class="ace-icon fa fa-check"></i>
 		<?php echo sprintf( plugin_lang_get( 'abschluss_msg_done' ), $t_c_done, $t_c_follow, $t_c_absent ); ?>
 	</div>
+<?php } else if( $t_msg === 'anhang_attached' ) { ?>
+	<div class="alert alert-success">
+		<i class="ace-icon fa fa-paperclip"></i>
+		<?php echo sprintf( plugin_lang_get( 'anhang_msg_attached' ), gpc_get_int( 'referenced', 0 ) ); ?>
+	</div>
+<?php } else if( $t_msg === 'anhang_no_file' ) { ?>
+	<div class="alert alert-warning"><?php echo plugin_lang_get( 'anhang_no_file' ); ?></div>
+<?php } else if( $t_msg === 'anhang_no_parent' ) { ?>
+	<div class="alert alert-danger"><?php echo plugin_lang_get( 'anhang_no_parent' ); ?></div>
 <?php } else if( $t_msg === 'no_zielprojekt' ) { ?>
 	<div class="alert alert-danger"><?php echo plugin_lang_get( 'generate_no_zielprojekt' ); ?></div>
 <?php } else if( $t_msg !== '' ) { ?>
@@ -228,6 +237,30 @@ layout_page_begin();
 	</table>
 	</div>
 	</div>
+
+	<?php $t_parent_bug = (int)$t_event['eltern_bug_id']; ?>
+	<?php if( $t_parent_bug > 0 ) { ?>
+	<div class="widget-toolbox padding-8 clearfix" style="border-top:1px solid #e5e5e5">
+		<span class="pull-left" style="margin:4px 12px 0 0">
+			<i class="ace-icon fa fa-sitemap"></i>
+			<?php echo plugin_lang_get( 'teilnehmer_parent_ticket' ); ?>:
+			<a href="<?php echo string_attribute( string_get_bug_view_url( $t_parent_bug ) ); ?>"><?php echo bug_format_id( $t_parent_bug ); ?></a>
+		</span>
+		<form class="form-inline pull-right" method="post" enctype="multipart/form-data"
+			action="<?php echo plugin_page( 'veranstaltung_anhang' ); ?>">
+			<?php echo form_security_field( 'plugin_QualificationTracker_veranstaltung_anhang' ); ?>
+			<input type="hidden" name="id" value="<?php echo $f_id; ?>" />
+			<label class="bold"><i class="ace-icon fa fa-paperclip"></i> <?php echo plugin_lang_get( 'anhang_label' ); ?>&nbsp;</label>
+			<input type="file" name="nachweis" required="required" />
+			<button type="submit" class="btn btn-sm btn-white btn-round">
+				<?php echo plugin_lang_get( 'anhang_submit' ); ?>
+			</button>
+		</form>
+	</div>
+	<div class="widget-toolbox padding-8">
+		<span class="help-block" style="margin:0"><?php echo plugin_lang_get( 'anhang_hint' ); ?></span>
+	</div>
+	<?php } ?>
 	</div>
 </div>
 

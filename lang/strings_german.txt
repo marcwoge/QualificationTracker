@@ -397,3 +397,13 @@ $s_plugin_QualificationTracker_liste_participants = 'Teilnehmer';
 $s_plugin_QualificationTracker_liste_col_signature = 'Unterschrift';
 $s_plugin_QualificationTracker_liste_sig_date_place = 'Ort, Datum';
 $s_plugin_QualificationTracker_liste_sig_instructor = 'Unterschrift Unterweisende/r';
+
+# --- Nachweis-Anhang (F3.6) ----------------------------------------------
+$s_plugin_QualificationTracker_teilnehmer_parent_ticket = 'Veranstaltungsticket';
+$s_plugin_QualificationTracker_anhang_label  = 'Unterschriebene Liste';
+$s_plugin_QualificationTracker_anhang_submit = 'Anhängen';
+$s_plugin_QualificationTracker_anhang_hint   = 'Die gescannte, unterschriebene Teilnehmerliste wird einmal am Veranstaltungsticket hinterlegt und in allen Kind-Tickets referenziert.';
+$s_plugin_QualificationTracker_anhang_note   = 'Unterschriebene Teilnehmerliste ist am Veranstaltungsticket %s hinterlegt (%s).';
+$s_plugin_QualificationTracker_anhang_msg_attached = 'Anhang hinterlegt und in %d Kind-Tickets referenziert.';
+$s_plugin_QualificationTracker_anhang_no_file   = 'Keine Datei ausgewählt oder Upload fehlgeschlagen.';
+$s_plugin_QualificationTracker_anhang_no_parent = 'Es existiert noch kein Veranstaltungsticket. Bitte zuerst die Kind-Tickets erzeugen.';

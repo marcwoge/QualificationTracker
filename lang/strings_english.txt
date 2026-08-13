@@ -397,3 +397,13 @@ $s_plugin_QualificationTracker_liste_participants = 'Participants';
 $s_plugin_QualificationTracker_liste_col_signature = 'Signature';
 $s_plugin_QualificationTracker_liste_sig_date_place = 'Place, date';
 $s_plugin_QualificationTracker_liste_sig_instructor = 'Signature instructor';
+
+# --- Proof attachment (F3.6) ---------------------------------------------
+$s_plugin_QualificationTracker_teilnehmer_parent_ticket = 'Event ticket';
+$s_plugin_QualificationTracker_anhang_label  = 'Signed list';
+$s_plugin_QualificationTracker_anhang_submit = 'Attach';
+$s_plugin_QualificationTracker_anhang_hint   = 'The scanned, signed attendance list is stored once on the event ticket and referenced in all child tickets.';
+$s_plugin_QualificationTracker_anhang_note   = 'Signed attendance list is filed on event ticket %s (%s).';
+$s_plugin_QualificationTracker_anhang_msg_attached = 'Attachment stored and referenced in %d child tickets.';
+$s_plugin_QualificationTracker_anhang_no_file   = 'No file selected or upload failed.';
+$s_plugin_QualificationTracker_anhang_no_parent = 'No event ticket exists yet. Please create the child tickets first.';

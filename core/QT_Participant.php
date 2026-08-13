@@ -350,6 +350,50 @@ function qt_teilnehmer_complete_event( array $p_event, array $p_present_ids, $p_
 }
 
 /* -------------------------------------------------------------------------- *
+ *  Proof attachment (F3.6)
+ * -------------------------------------------------------------------------- */
+
+/**
+ * Attach the scanned attendance list once to the parent event ticket and add a
+ * reference note to every child proof ticket (F3.6).
+ *
+ * The file lives only on the parent ticket; each child gets a bugnote pointing
+ * there, so the signed list is stored once, not per participant. Requires the
+ * parent ticket to exist (created by F3.3).
+ *
+ * Side-effectful; integration-tested.
+ *
+ * @param array  $p_event     Event row.
+ * @param array  $p_file      An $_FILES entry (from gpc_get_file()).
+ * @param string $p_note_text Localised reference note added to each child.
+ * @return array Summary: attached, referenced, errors[].
+ */
+function qt_teilnehmer_attach_nachweis( array $p_event, array $p_file, $p_note_text ) {
+	$t_summary = array( 'attached' => 0, 'referenced' => 0, 'errors' => array() );
+
+	$t_parent = (int)$p_event['eltern_bug_id'];
+	if( $t_parent <= 0 || !bug_exists( $t_parent ) ) {
+		$t_summary['errors'][] = 'error_no_parent';
+		return $t_summary;
+	}
+
+	# Store the scan once, on the parent event ticket.
+	file_add( $t_parent, $p_file, 'bug' );
+	$t_summary['attached'] = 1;
+
+	# Reference it from every child proof ticket (no duplicate upload).
+	foreach( qt_teilnehmer_load( (int)$p_event['id'] ) as $t_p ) {
+		$t_bug = (int)$t_p['bug_id'];
+		if( $t_bug > 0 && bug_exists( $t_bug ) ) {
+			bugnote_add( $t_bug, $p_note_text, '0:00', false, BUGNOTE, '', null, false );
+			$t_summary['referenced']++;
+		}
+	}
+
+	return $t_summary;
+}
+
+/* -------------------------------------------------------------------------- *
  *  Candidate pool
  * -------------------------------------------------------------------------- */
 

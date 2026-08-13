@@ -8,6 +8,16 @@ die Versionierung folgt [Semantic Versioning](https://semver.org/lang/de/).
 ## [Unreleased]
 
 ### Hinzugefügt
+- **F3.6 Nachweis-Anhang (M3):** Die gescannte, unterschriebene Teilnehmerliste
+  wird **einmal** am Veranstaltungsticket (Elternticket) als Datei-Anhang
+  hinterlegt und in **jedem** Kind-Ticket per Notiz referenziert (mit Link auf
+  das Elternticket und Dateiname) — statt die Datei je Teilnehmer mehrfach zu
+  speichern. Nutzt die Standard-MantisBT-Anhänge (`file_add`) und -Notizen
+  (`bugnote_add`), keine zusätzliche Ablage. Upload-Feld auf der
+  Teilnehmerseite (sichtbar, sobald die Kind-Tickets erzeugt sind);
+  `qt_teilnehmer_attach_nachweis` in `core/QT_Participant.php`,
+  `pages/veranstaltung_anhang.php`. **Schließt M3 ab** (F3.7 Terminvorschlag ist
+  auf Version 1.1 zurückgestellt).
 - **F3.5 Teilnehmerliste (M3):** Druckbare Anwesenheits- und Teilnehmerliste zu
   einer Veranstaltung mit Unterschriftenspalte, Maßnahmeninhalt und
   Rechtsgrundlage sowie Unterschriftszeilen für Ort/Datum und Unterweisende/n.
