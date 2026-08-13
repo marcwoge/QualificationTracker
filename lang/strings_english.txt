@@ -387,3 +387,13 @@ $s_plugin_QualificationTracker_teilnehmer_col_status      = 'Status';
 $s_plugin_QualificationTracker_teilnehmer_status_eingeplant   = 'planned';
 $s_plugin_QualificationTracker_teilnehmer_status_teilgenommen = 'attended';
 $s_plugin_QualificationTracker_teilnehmer_status_abwesend     = 'absent';
+
+# --- Attendance list / print (F3.5) --------------------------------------
+$s_plugin_QualificationTracker_liste_title        = 'Attendance list';
+$s_plugin_QualificationTracker_liste_heading      = 'Attendance and participant list';
+$s_plugin_QualificationTracker_liste_print        = 'Print / save as PDF';
+$s_plugin_QualificationTracker_liste_content      = 'Content of the measure';
+$s_plugin_QualificationTracker_liste_participants = 'Participants';
+$s_plugin_QualificationTracker_liste_col_signature = 'Signature';
+$s_plugin_QualificationTracker_liste_sig_date_place = 'Place, date';
+$s_plugin_QualificationTracker_liste_sig_instructor = 'Signature instructor';

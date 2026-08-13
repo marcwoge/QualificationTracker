@@ -1,7 +1,7 @@
 # Roadmap — MantisBT QualificationTracker
 
 **Version dieses Dokuments:** 0.4 (2026-08-12)
-**Status Gesamtprojekt:** 🟡 M1 (Fundament) und M2 (Generator) abgeschlossen, M3 (Veranstaltungen) in Arbeit (F3.1–F3.4 fertig)
+**Status Gesamtprojekt:** 🟡 M1 (Fundament) und M2 (Generator) abgeschlossen, M3 (Veranstaltungen) in Arbeit (F3.1–F3.5 fertig)
 
 ---
 
@@ -103,7 +103,7 @@ Legende: ⬜ offen · 🟡 in Arbeit · 🟢 fertig · ⚪ zurückgestellt
 | F3.2 | Teilnehmerauswahl | Auswahl aus fälligen Personen mit Filter nach Abteilung und Fälligkeit; Warnung bei Überbuchung | 🟢 |
 | F3.3 | Kind-Tickets | Erzeugt je Teilnehmer ein Nachweisticket als Kind des Veranstaltungstickets | 🟢 |
 | F3.4 | Massenabschluss | Ein Klick setzt für alle Teilnehmer Status, `durchgefuehrt_am` und `gueltig_bis`; Abwesende bleiben offen und werden neu terminiert | 🟢 |
-| F3.5 | Teilnehmerliste PDF | Druckbare Anwesenheitsliste mit Unterschriftenspalte, Maßnahmeninhalt und Rechtsgrundlage | ⬜ |
+| F3.5 | Teilnehmerliste PDF | Druckbare Anwesenheitsliste mit Unterschriftenspalte, Maßnahmeninhalt und Rechtsgrundlage | 🟢 |
 | F3.6 | Nachweis-Anhang | Gescannte Liste wird einmal am Elternticket hinterlegt und in allen Kindern referenziert | ⬜ |
 | F3.7 | Terminvorschlag | Schlägt auf Basis fälliger Maßnahmen Veranstaltungstermine mit optimaler Teilnehmerzahl vor | ⚪ zurückgestellt auf 1.1 |
 

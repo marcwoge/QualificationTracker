@@ -387,3 +387,13 @@ $s_plugin_QualificationTracker_teilnehmer_col_status      = 'Status';
 $s_plugin_QualificationTracker_teilnehmer_status_eingeplant   = 'eingeplant';
 $s_plugin_QualificationTracker_teilnehmer_status_teilgenommen = 'teilgenommen';
 $s_plugin_QualificationTracker_teilnehmer_status_abwesend     = 'abwesend';
+
+# --- Teilnehmerliste / Druck (F3.5) --------------------------------------
+$s_plugin_QualificationTracker_liste_title        = 'Teilnehmerliste';
+$s_plugin_QualificationTracker_liste_heading      = 'Anwesenheits- und Teilnehmerliste';
+$s_plugin_QualificationTracker_liste_print        = 'Drucken / als PDF speichern';
+$s_plugin_QualificationTracker_liste_content      = 'Inhalt der Maßnahme';
+$s_plugin_QualificationTracker_liste_participants = 'Teilnehmer';
+$s_plugin_QualificationTracker_liste_col_signature = 'Unterschrift';
+$s_plugin_QualificationTracker_liste_sig_date_place = 'Ort, Datum';
+$s_plugin_QualificationTracker_liste_sig_instructor = 'Unterschrift Unterweisende/r';

@@ -129,6 +129,12 @@ layout_page_begin();
 			<i class="ace-icon fa fa-arrow-left"></i> <?php echo plugin_lang_get( 'teilnehmer_back' ); ?>
 		</a>
 		<?php if( $t_count > 0 ) { ?>
+		<a class="btn btn-sm btn-white btn-round" target="_blank"
+			href="<?php echo plugin_page( 'veranstaltung_teilnehmerliste' ); ?>&amp;id=<?php echo $f_id; ?>">
+			<i class="ace-icon fa fa-print"></i> <?php echo plugin_lang_get( 'liste_title' ); ?>
+		</a>
+		<?php } ?>
+		<?php if( $t_count > 0 ) { ?>
 		<form class="form-inline" style="display:inline" method="post"
 			action="<?php echo plugin_page( 'veranstaltung_teilnehmer_update' ); ?>">
 			<?php echo form_security_field( 'plugin_QualificationTracker_veranstaltung_teilnehmer_update' ); ?>

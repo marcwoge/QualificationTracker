@@ -8,6 +8,13 @@ die Versionierung folgt [Semantic Versioning](https://semver.org/lang/de/).
 ## [Unreleased]
 
 ### Hinzugefügt
+- **F3.5 Teilnehmerliste (M3):** Druckbare Anwesenheits- und Teilnehmerliste zu
+  einer Veranstaltung mit Unterschriftenspalte, Maßnahmeninhalt und
+  Rechtsgrundlage sowie Unterschriftszeilen für Ort/Datum und Unterweisende/n.
+  Bewusst abhängigkeitsfrei umgesetzt als eigenständige, druckoptimierte
+  HTML-Seite (*„Drucken → als PDF speichern"* im Browser) statt einer
+  gebündelten PDF-Bibliothek. Aufruf über *Teilnehmer → Teilnehmerliste*
+  (`pages/veranstaltung_teilnehmerliste.php`).
 - **F3.4 Massenabschluss (M3):** Eine Veranstaltung wird für alle Teilnehmer in
   einem Schritt abgeschlossen. Über eine Anwesenheitsliste (Datum und
   Durchführende/r sind mit Termin bzw. Unterweisendem der Veranstaltung
