@@ -1,7 +1,7 @@
 # Roadmap — MantisBT QualificationTracker
 
 **Version dieses Dokuments:** 0.4 (2026-08-12)
-**Status Gesamtprojekt:** 🟡 M1 (Fundament) und M2 (Generator) abgeschlossen, M3 (Veranstaltungen) als Nächstes
+**Status Gesamtprojekt:** 🟡 M1 (Fundament) und M2 (Generator) abgeschlossen, M3 (Veranstaltungen) in Arbeit (F3.1 fertig)
 
 ---
 
@@ -55,7 +55,7 @@ Für die Anbindung an Auswertungssysteme stellt das Plugin **REST-Endpunkte** be
 |---|---|---|---|
 | M1 | Fundament | Datenmodell, Schema-Migration, Katalogverwaltung | 🟢 fertig |
 | M2 | Generator | Tätigkeitsprofile, automatische Ticketketten, Soll-Ist-Prüfung | 🟢 fertig |
-| M3 | Veranstaltungen | Sammeltermine, Massenabschluss, Teilnehmerlisten | ⬜ offen |
+| M3 | Veranstaltungen | Sammeltermine, Massenabschluss, Teilnehmerlisten | 🟡 in Arbeit |
 | M4 | Matrix & Auswertung | Matrix-Ansicht, Ampel, Export | ⬜ offen |
 | M5 | Automatisierung | Recurrence-/Reveille-Kopplung, Eskalationsstufen | ⬜ offen |
 | M6 | Import & Migration | CSV-/REST-Import, HR-Sync, Ersterfassung | ⬜ offen |
@@ -99,7 +99,7 @@ Legende: ⬜ offen · 🟡 in Arbeit · 🟢 fertig · ⚪ zurückgestellt
 
 | ID | Funktion | Beschreibung | Status |
 |---|---|---|---|
-| F3.1 | Veranstaltung anlegen | Maßnahme, Termin, Ort, Unterweisender, Kapazität | ⬜ |
+| F3.1 | Veranstaltung anlegen | Maßnahme, Termin, Ort, Unterweisender, Kapazität | 🟢 |
 | F3.2 | Teilnehmerauswahl | Auswahl aus fälligen Personen mit Filter nach Abteilung und Fälligkeit; Warnung bei Überbuchung | ⬜ |
 | F3.3 | Kind-Tickets | Erzeugt je Teilnehmer ein Nachweisticket als Kind des Veranstaltungstickets | ⬜ |
 | F3.4 | Massenabschluss | Ein Klick setzt für alle Teilnehmer Status, `durchgefuehrt_am` und `gueltig_bis`; Abwesende bleiben offen und werden neu terminiert | ⬜ |

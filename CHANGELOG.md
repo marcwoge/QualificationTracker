@@ -8,6 +8,14 @@ die Versionierung folgt [Semantic Versioning](https://semver.org/lang/de/).
 ## [Unreleased]
 
 ### Hinzugefügt
+- **F3.1 Veranstaltung anlegen (M3):** Verwaltung von Sammelterminen
+  (Veranstaltungen) unter *Verwaltung → QualificationTracker → Veranstaltungen*:
+  eine Maßnahme, an einem Termin für viele Personen gehalten, mit Ort,
+  Unterweisendem, Kapazität und Status (geplant/durchgeführt/abgesagt).
+  `core/QT_Event.php` mit reiner, unit-getesteter Validierung (`qt_event_validate`,
+  `qt_event_valid_termin`) und CRUD; der Termin nimmt Datum oder Datum+Uhrzeit
+  entgegen und wird normalisiert gespeichert. Grundlage für Teilnehmerauswahl
+  (F3.2), Kind-Tickets (F3.3) und Massenabschluss (F3.4).
 - **F2.1 Tätigkeitsprofile (M2):** Verwaltung von Profilen (benannte Mengen von
   Maßnahmen) unter *Verwaltung → QualificationTracker → Tätigkeitsprofile* mit
   Zuordnung der Maßnahmen (n:m). `core/QT_Profile.php` mit reiner, unit-getesteter
