@@ -95,4 +95,20 @@ final class MatrixCellTest extends TestCase {
 			self::TODAY, 90 );
 		self::assertSame( 'fehlt', $t['state'] );
 	}
+
+	public function testRowHasStateFindsMatch() {
+		$t_cells = array(
+			10 => array( 'state' => 'gueltig' ),
+			11 => array( 'state' => 'abgelaufen' ),
+			12 => array( 'state' => 'offen' ),
+		);
+		self::assertTrue( qt_matrix_row_has_state( $t_cells, 'abgelaufen' ) );
+		self::assertTrue( qt_matrix_row_has_state( $t_cells, 'gueltig' ) );
+	}
+
+	public function testRowHasStateReturnsFalseWhenAbsent() {
+		$t_cells = array( 10 => array( 'state' => 'gueltig' ) );
+		self::assertFalse( qt_matrix_row_has_state( $t_cells, 'fehlt' ) );
+		self::assertFalse( qt_matrix_row_has_state( array(), 'gueltig' ) );
+	}
 }

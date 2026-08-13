@@ -419,3 +419,4 @@ $s_plugin_QualificationTracker_matrix_state_offen      = 'in Bearbeitung';
 $s_plugin_QualificationTracker_matrix_state_abgelaufen = 'abgelaufen';
 $s_plugin_QualificationTracker_matrix_state_fehlt      = 'kein Nachweis';
 $s_plugin_QualificationTracker_matrix_state_na         = 'nicht zugeordnet';
+$s_plugin_QualificationTracker_matrix_transpose = 'Zeilen/Spalten tauschen';

@@ -82,48 +82,118 @@ function qt_matrix_cell( array $p_rows, $p_today, $p_warn_days ) {
 }
 
 /**
+ * Does a person's row contain at least one cell in the given state? Pure.
+ *
+ * @param array  $p_cells One person's cells (massnahme_id => cell).
+ * @param string $p_state
+ * @return bool
+ */
+function qt_matrix_row_has_state( array $p_cells, $p_state ) {
+	foreach( $p_cells as $t_cell ) {
+		if( isset( $t_cell['state'] ) && $t_cell['state'] === $p_state ) {
+			return true;
+		}
+	}
+	return false;
+}
+
+/**
+ * The ids of persons with an active assignment to a profile (map id => true).
+ * Active means no end date or an end date not in the past.
+ *
+ * @param int    $p_profil_id
+ * @param string $p_today
+ * @return array
+ */
+function qt_matrix_profil_person_ids( $p_profil_id, $p_today ) {
+	$t_result = db_query( 'SELECT DISTINCT person_id FROM ' . plugin_table( 'zuordnung' )
+		. ' WHERE profil_id = ' . db_param()
+		. ' AND ( gueltig_bis IS NULL OR gueltig_bis >= ' . db_param() . ' )',
+		array( (int)$p_profil_id, $p_today ) );
+	$t_ids = array();
+	while( $t_row = db_fetch_array( $t_result ) ) {
+		$t_ids[(int)$t_row['person_id']] = true;
+	}
+	return $t_ids;
+}
+
+/**
  * Build the qualification matrix.
  *
- * Rows are the active persons that require at least one measure; columns are the
- * union of the required measures. Cells exist only for required person × measure
- * pairs – every other pair renders as 'na'.
+ * Rows are the active persons that require at least one (filtered) measure;
+ * columns are the union of those measures. Cells exist only for required
+ * person × measure pairs – every other pair renders as 'na'.
  *
- * @param string $p_today            ISO date "today".
- * @param string $p_filter_abteilung Optional department filter.
+ * Filters (all optional): 'abteilung' (department), 'profil_id' (only persons
+ * assigned to that profile), 'typ' (only measures of that type), 'status'
+ * (only persons that have at least one cell in that state).
+ *
+ * @param string $p_today   ISO date "today".
+ * @param array  $p_filters Filter map.
  * @return array persons[], massnahmen[], cells[person_id][massnahme_id], warn_days.
  */
-function qt_matrix_build( $p_today, $p_filter_abteilung = '' ) {
+function qt_matrix_build( $p_today, array $p_filters = array() ) {
 	$t_warn = qt_matrix_warn_days( plugin_config_get( 'eskalation_stufen_tage' ) );
 
+	$t_abteilung = isset( $p_filters['abteilung'] ) ? (string)$p_filters['abteilung'] : '';
+	$t_profil_id = isset( $p_filters['profil_id'] ) ? (int)$p_filters['profil_id'] : 0;
+	$t_typ       = isset( $p_filters['typ'] ) ? (string)$p_filters['typ'] : '';
+	$t_status    = isset( $p_filters['status'] ) ? (string)$p_filters['status'] : '';
+
+	$t_profil_ids = $t_profil_id > 0 ? qt_matrix_profil_person_ids( $t_profil_id, $p_today ) : null;
+
 	$t_persons = array();
-	$t_measure_map = array();
 	$t_cells = array();
 
-	foreach( qt_person_load_all( $p_filter_abteilung ) as $t_person ) {
+	foreach( qt_person_load_all( $t_abteilung ) as $t_person ) {
 		if( !$t_person['aktiv'] ) {
 			continue;
 		}
 		$t_pid = (int)$t_person['id'];
 
+		if( $t_profil_ids !== null && !isset( $t_profil_ids[$t_pid] ) ) {
+			continue;
+		}
+
 		$t_required = qt_generator_required_massnahmen( $t_pid, $p_today );
+		if( $t_typ !== '' ) {
+			$t_required = array_filter( $t_required, function( $m ) use ( $t_typ ) {
+				return $m['typ'] === $t_typ;
+			} );
+		}
 		if( empty( $t_required ) ) {
 			continue;
 		}
-		$t_persons[] = $t_person;
 
 		$t_by_massnahme = array();
 		foreach( qt_nachweis_load_for_person( $t_pid ) as $t_nw ) {
 			$t_by_massnahme[(int)$t_nw['massnahme_id']][] = $t_nw;
 		}
 
+		$t_row_cells = array();
 		foreach( $t_required as $t_m ) {
 			$t_mid = (int)$t_m['id'];
-			$t_measure_map[$t_mid] = $t_m;
 			$t_rows = isset( $t_by_massnahme[$t_mid] ) ? $t_by_massnahme[$t_mid] : array();
-			$t_cells[$t_pid][$t_mid] = qt_matrix_cell( $t_rows, $p_today, $t_warn );
+			$t_row_cells[$t_mid] = qt_matrix_cell( $t_rows, $p_today, $t_warn );
+			$t_row_cells[$t_mid]['massnahme'] = $t_m;
 		}
+
+		# Status filter: keep only persons with a matching cell.
+		if( $t_status !== '' && !qt_matrix_row_has_state( $t_row_cells, $t_status ) ) {
+			continue;
+		}
+
+		$t_persons[] = $t_person;
+		$t_cells[$t_pid] = $t_row_cells;
 	}
 
+	# Columns: the measures actually present in the surviving rows.
+	$t_measure_map = array();
+	foreach( $t_cells as $t_row_cells ) {
+		foreach( $t_row_cells as $t_mid => $t_cell ) {
+			$t_measure_map[$t_mid] = $t_cell['massnahme'];
+		}
+	}
 	$t_measures = array_values( $t_measure_map );
 	usort( $t_measures, function( $a, $b ) {
 		return strcmp( $a['schluessel'], $b['schluessel'] );

@@ -1,10 +1,11 @@
 <?php
 /**
- * QualificationTracker – qualification matrix (F4.1).
+ * QualificationTracker – qualification matrix (F4.1 / F4.2).
  *
  * Read-only person × measure grid. Each cell is coloured by the remaining
- * validity of the proof and links to its ticket. Filterable by department.
- * Filtering/grouping (F4.2) and pagination (F4.3) build on this.
+ * validity of the proof and links to its ticket. Filterable by department,
+ * profile, measure type and cell status; the axes can be swapped (F4.2).
+ * Pagination (F4.3) builds on this.
  *
  * @package   QualificationTracker
  * @author    Marc-Philipp Woge <marc.woge@googlemail.com>
@@ -33,22 +34,26 @@ plugin_require_api( 'core/QT_CustomFields.php' );
 plugin_require_api( 'core/QT_DueDateCalculator.php' );
 plugin_require_api( 'core/QT_Generator.php' );
 plugin_require_api( 'core/QT_SollIst.php' );
+plugin_require_api( 'core/QT_Profile.php' );
 plugin_require_api( 'core/QT_Matrix.php' );
 
 $f_abteilung = gpc_get_string( 'abteilung', '' );
+$f_profil    = gpc_get_int( 'profil_id', 0 );
+$f_typ       = gpc_get_string( 'typ', '' );
+$f_status    = gpc_get_string( 'status', '' );
+$f_transpose = gpc_get_bool( 'transpose', false );
 $t_today     = date( 'Y-m-d' );
 
-$t_matrix      = qt_matrix_build( $t_today, $f_abteilung );
-$t_abteilungen = qt_person_distinct_abteilungen();
+$t_matrix = qt_matrix_build( $t_today, array(
+	'abteilung' => $f_abteilung,
+	'profil_id' => $f_profil,
+	'typ'       => $f_typ,
+	'status'    => $f_status,
+) );
 
-# State → bootstrap contextual background class and short label key.
-$t_state_class = array(
-	'gueltig'    => 'success',
-	'bald'       => 'warning',
-	'offen'      => 'info',
-	'abgelaufen' => 'danger',
-	'fehlt'      => 'default',
-);
+$t_abteilungen = qt_person_distinct_abteilungen();
+$t_profile     = qt_profil_load_all();
+
 $t_state_lang = array(
 	'gueltig'    => 'matrix_state_gueltig',
 	'bald'       => 'matrix_state_bald',
@@ -56,6 +61,11 @@ $t_state_lang = array(
 	'abgelaufen' => 'matrix_state_abgelaufen',
 	'fehlt'      => 'matrix_state_fehlt',
 );
+
+# Preserve the current filters when toggling the layout.
+$t_toggle_params = 'abteilung=' . urlencode( $f_abteilung ) . '&profil_id=' . $f_profil
+	. '&typ=' . urlencode( $f_typ ) . '&status=' . urlencode( $f_status )
+	. '&transpose=' . ( $f_transpose ? '0' : '1' );
 
 layout_page_header( plugin_lang_get( 'matrix_title' ) );
 layout_page_begin();
@@ -66,7 +76,7 @@ layout_page_begin();
 	table.qt-matrix th, table.qt-matrix td { border: 1px solid #ccc; padding: 3px 6px; font-size: 11px; }
 	table.qt-matrix thead th { background: #f5f5f5; white-space: nowrap; }
 	table.qt-matrix th.qt-rot { writing-mode: vertical-rl; transform: rotate(180deg); height: 130px; text-align: left; vertical-align: bottom; font-weight: normal; }
-	table.qt-matrix td.qt-person { white-space: nowrap; text-align: left; font-weight: bold; background: #fafafa; }
+	table.qt-matrix td.qt-head { white-space: nowrap; text-align: left; font-weight: bold; background: #fafafa; }
 	table.qt-matrix td.qt-cell { text-align: center; min-width: 34px; }
 	table.qt-matrix td.qt-cell a { display: block; color: inherit; text-decoration: none; }
 	td.qt-s-gueltig    { background: #d4edda; }
@@ -77,6 +87,7 @@ layout_page_begin();
 	td.qt-s-na         { background: #ffffff; color: #ccc; }
 	.qt-legend span { display: inline-block; margin-right: 12px; }
 	.qt-legend i.box { display: inline-block; width: 12px; height: 12px; border: 1px solid #ccc; vertical-align: middle; margin-right: 4px; }
+	form.qt-filters label { margin-left: 8px; }
 </style>
 
 <div class="col-md-12 col-xs-12">
@@ -92,48 +103,104 @@ layout_page_begin();
 
 	<div class="widget-body">
 	<div class="widget-toolbox padding-8 clearfix">
-		<span class="qt-legend pull-left" style="margin:4px 0">
+		<form class="form-inline qt-filters" method="get" action="<?php echo plugin_page( 'matrix' ); ?>">
+			<input type="hidden" name="page" value="QualificationTracker/matrix" />
+			<input type="hidden" name="transpose" value="<?php echo $f_transpose ? '1' : '0'; ?>" />
+
+			<label><?php echo plugin_lang_get( 'filter_abteilung' ); ?></label>
+			<select name="abteilung" class="input-sm" onchange="this.form.submit()">
+				<option value=""><?php echo plugin_lang_get( 'filter_all' ); ?></option>
+			<?php foreach( $t_abteilungen as $t_ab ) { ?>
+				<option value="<?php echo string_attribute( $t_ab ); ?>" <?php echo $f_abteilung === $t_ab ? 'selected="selected"' : ''; ?>><?php echo string_display_line( $t_ab ); ?></option>
+			<?php } ?>
+			</select>
+
+			<label><?php echo plugin_lang_get( 'menu_profil' ); ?></label>
+			<select name="profil_id" class="input-sm" onchange="this.form.submit()">
+				<option value="0"><?php echo plugin_lang_get( 'filter_all' ); ?></option>
+			<?php foreach( $t_profile as $t_pr ) { ?>
+				<option value="<?php echo (int)$t_pr['id']; ?>" <?php echo $f_profil === (int)$t_pr['id'] ? 'selected="selected"' : ''; ?>><?php echo string_display_line( $t_pr['name'] ); ?></option>
+			<?php } ?>
+			</select>
+
+			<label><?php echo plugin_lang_get( 'col_typ' ); ?></label>
+			<select name="typ" class="input-sm" onchange="this.form.submit()">
+				<option value=""><?php echo plugin_lang_get( 'filter_all' ); ?></option>
+			<?php foreach( qt_catalog_types() as $t_t ) { ?>
+				<option value="<?php echo $t_t; ?>" <?php echo $f_typ === $t_t ? 'selected="selected"' : ''; ?>><?php echo plugin_lang_get( 'type_' . $t_t ); ?></option>
+			<?php } ?>
+			</select>
+
+			<label><?php echo plugin_lang_get( 'event_col_status' ); ?></label>
+			<select name="status" class="input-sm" onchange="this.form.submit()">
+				<option value=""><?php echo plugin_lang_get( 'filter_all' ); ?></option>
+			<?php foreach( $t_state_lang as $t_key => $t_langkey ) { ?>
+				<option value="<?php echo $t_key; ?>" <?php echo $f_status === $t_key ? 'selected="selected"' : ''; ?>><?php echo plugin_lang_get( $t_langkey ); ?></option>
+			<?php } ?>
+			</select>
+
+			<a class="btn btn-xs btn-white btn-round" style="margin-left:12px"
+				href="<?php echo plugin_page( 'matrix' ) . '&amp;' . str_replace( '&', '&amp;', $t_toggle_params ); ?>">
+				<i class="ace-icon fa fa-exchange"></i> <?php echo plugin_lang_get( 'matrix_transpose' ); ?>
+			</a>
+		</form>
+	</div>
+
+	<div class="widget-toolbox padding-8">
+		<span class="qt-legend">
 			<?php foreach( $t_state_lang as $t_key => $t_langkey ) { ?>
 				<span><i class="box qt-s-<?php echo $t_key; ?>"></i><?php echo plugin_lang_get( $t_langkey ); ?></span>
 			<?php } ?>
 			<span><i class="box qt-s-na"></i><?php echo plugin_lang_get( 'matrix_state_na' ); ?></span>
 		</span>
-		<form class="form-inline pull-right" method="get" action="<?php echo plugin_page( 'matrix' ); ?>">
-			<input type="hidden" name="page" value="QualificationTracker/matrix" />
-			<label><?php echo plugin_lang_get( 'filter_abteilung' ); ?>&nbsp;</label>
-			<select name="abteilung" class="input-sm" onchange="this.form.submit()">
-				<option value=""><?php echo plugin_lang_get( 'filter_all' ); ?></option>
-			<?php foreach( $t_abteilungen as $t_ab ) { ?>
-				<option value="<?php echo string_attribute( $t_ab ); ?>" <?php echo $f_abteilung === $t_ab ? 'selected="selected"' : ''; ?>>
-					<?php echo string_display_line( $t_ab ); ?>
-				</option>
-			<?php } ?>
-			</select>
-		</form>
 	</div>
+
+	<?php
+	# Build the row/column axes; transpose swaps persons and measures.
+	$t_person_items = array();
+	foreach( $t_matrix['persons'] as $t_p ) {
+		$t_person_items[] = array(
+			'id'    => (int)$t_p['id'],
+			'label' => trim( $t_p['nachname'] . ', ' . $t_p['vorname'], ', ' ),
+			'title' => (string)$t_p['abteilung'],
+		);
+	}
+	$t_measure_items = array();
+	foreach( $t_matrix['massnahmen'] as $t_m ) {
+		$t_measure_items[] = array(
+			'id'    => (int)$t_m['id'],
+			'label' => $t_m['schluessel'],
+			'title' => $t_m['bezeichnung'],
+		);
+	}
+
+	if( $f_transpose ) {
+		$t_row_items = $t_measure_items; $t_col_items = $t_person_items; $t_rows_are_person = false;
+		$t_corner = plugin_lang_get( 'label_event_massnahme' );
+	} else {
+		$t_row_items = $t_person_items; $t_col_items = $t_measure_items; $t_rows_are_person = true;
+		$t_corner = plugin_lang_get( 'col_name' );
+	}
+	?>
 
 	<div class="widget-main no-padding">
 	<div class="table-responsive" style="overflow-x:auto">
 	<table class="qt-matrix">
 		<thead>
 			<tr>
-				<th><?php echo plugin_lang_get( 'col_name' ); ?></th>
-			<?php foreach( $t_matrix['massnahmen'] as $t_m ) { ?>
-				<th class="qt-rot" title="<?php echo string_attribute( $t_m['bezeichnung'] ); ?>">
-					<?php echo string_display_line( $t_m['schluessel'] ); ?>
-				</th>
+				<th><?php echo string_display_line( $t_corner ); ?></th>
+			<?php foreach( $t_col_items as $t_col ) { ?>
+				<th class="qt-rot" title="<?php echo string_attribute( $t_col['title'] ); ?>"><?php echo string_display_line( $t_col['label'] ); ?></th>
 			<?php } ?>
 			</tr>
 		</thead>
 		<tbody>
-		<?php foreach( $t_matrix['persons'] as $t_person ) {
-			$t_pid = (int)$t_person['id'];
-			$t_name = trim( $t_person['nachname'] . ', ' . $t_person['vorname'], ', ' );
-		?>
+		<?php foreach( $t_row_items as $t_row ) { ?>
 			<tr>
-				<td class="qt-person"><?php echo string_display_line( $t_name ); ?></td>
-			<?php foreach( $t_matrix['massnahmen'] as $t_m ) {
-				$t_mid = (int)$t_m['id'];
+				<td class="qt-head" title="<?php echo string_attribute( $t_row['title'] ); ?>"><?php echo string_display_line( $t_row['label'] ); ?></td>
+			<?php foreach( $t_col_items as $t_col ) {
+				$t_pid = $t_rows_are_person ? $t_row['id'] : $t_col['id'];
+				$t_mid = $t_rows_are_person ? $t_col['id'] : $t_row['id'];
 				$t_cell = isset( $t_matrix['cells'][$t_pid][$t_mid] ) ? $t_matrix['cells'][$t_pid][$t_mid] : null;
 				if( $t_cell === null ) { ?>
 					<td class="qt-cell qt-s-na">&middot;</td>
@@ -153,7 +220,7 @@ layout_page_begin();
 			<?php } ?>
 			</tr>
 		<?php } ?>
-		<?php if( empty( $t_matrix['persons'] ) ) { ?>
+		<?php if( empty( $t_row_items ) ) { ?>
 			<tr><td class="center"><?php echo plugin_lang_get( 'matrix_empty' ); ?></td></tr>
 		<?php } ?>
 		</tbody>

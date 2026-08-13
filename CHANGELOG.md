@@ -8,6 +8,15 @@ die Versionierung folgt [Semantic Versioning](https://semver.org/lang/de/).
 ## [Unreleased]
 
 ### Hinzugefügt
+- **F4.2 Filter & Gruppierung (M4):** Die Qualifikationsmatrix ist zusätzlich
+  nach Profil, Maßnahmentyp und Zellstatus filterbar (kombinierbar mit dem
+  Abteilungsfilter aus F4.1); der Statusfilter zeigt nur Personen mit
+  mindestens einer Zelle im gewählten Zustand (z. B. „abgelaufen", um Rückstände
+  zu finden). Der Maßnahmentyp-Filter beschränkt die Spalten, die verbleibenden
+  Spalten sind stets die tatsächlich vorkommenden Maßnahmen. Zeilen und Spalten
+  lassen sich vertauschen (Person × Maßnahme ↔ Maßnahme × Person), die Filter
+  bleiben dabei erhalten. Neue reine, unit-getestete Helfer
+  (`qt_matrix_row_has_state`) und `qt_matrix_profil_person_ids`.
 - **F4.1 Matrix-Ansicht (M4):** Qualifikationsmatrix Person × Maßnahme unter
   *Verwaltung → QualificationTracker → Matrix*. Jede Zelle ist nach dem
   Nachweisstatus eingefärbt — gültig (grün), läuft bald ab (gelb, innerhalb des

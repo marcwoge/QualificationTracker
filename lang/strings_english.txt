@@ -419,3 +419,4 @@ $s_plugin_QualificationTracker_matrix_state_offen      = 'in progress';
 $s_plugin_QualificationTracker_matrix_state_abgelaufen = 'expired';
 $s_plugin_QualificationTracker_matrix_state_fehlt      = 'no proof';
 $s_plugin_QualificationTracker_matrix_state_na         = 'not assigned';
+$s_plugin_QualificationTracker_matrix_transpose = 'Swap rows/columns';
