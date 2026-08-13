@@ -1,7 +1,7 @@
 # Roadmap — MantisBT QualificationTracker
 
 **Version dieses Dokuments:** 0.4 (2026-08-12)
-**Status Gesamtprojekt:** 🟡 M1 (Fundament) abgeschlossen, M2 (Generator) in Arbeit
+**Status Gesamtprojekt:** 🟡 M1 (Fundament) und M2 (Generator) abgeschlossen, M3 (Veranstaltungen) als Nächstes
 
 ---
 
@@ -54,7 +54,7 @@ Für die Anbindung an Auswertungssysteme stellt das Plugin **REST-Endpunkte** be
 | # | Meilenstein | Ziel | Status |
 |---|---|---|---|
 | M1 | Fundament | Datenmodell, Schema-Migration, Katalogverwaltung | 🟢 fertig |
-| M2 | Generator | Tätigkeitsprofile, automatische Ticketketten, Soll-Ist-Prüfung | 🟡 in Arbeit |
+| M2 | Generator | Tätigkeitsprofile, automatische Ticketketten, Soll-Ist-Prüfung | 🟢 fertig |
 | M3 | Veranstaltungen | Sammeltermine, Massenabschluss, Teilnehmerlisten | ⬜ offen |
 | M4 | Matrix & Auswertung | Matrix-Ansicht, Ampel, Export | ⬜ offen |
 | M5 | Automatisierung | Recurrence-/Reveille-Kopplung, Eskalationsstufen | ⬜ offen |
@@ -89,7 +89,7 @@ Legende: ⬜ offen · 🟡 in Arbeit · 🟢 fertig · ⚪ zurückgestellt
 | F2.1 | Tätigkeitsprofile | Profil = benannte Menge von Maßnahmen („Hubarbeitsbühnenführer", „Servicetechniker Außendienst", „Bürotätigkeit") | 🟢 |
 | F2.2 | Profilzuordnung | Person ↔ Profil (n:m), mit Gültigkeitszeitraum | 🟢 |
 | F2.3 | Ketten-Generator | Erzeugt aus Profilzuordnung die Tickets inkl. `depends on`-Beziehungen in korrekter Reihenfolge | 🟢 |
-| F2.4 | Native Terminplanung | Erzeugt Folgezyklen selbst — vorausschauend oder ereignisgetrieben je nach Fälligkeitsmodus. Ist IssueRecurrence installiert, wird es optional erkannt und kann alternativ genutzt werden; eine Abhängigkeit besteht nicht | ⬜ |
+| F2.4 | Native Terminplanung | Erzeugt Folgezyklen selbst — vorausschauend oder ereignisgetrieben je nach Fälligkeitsmodus. Ist IssueRecurrence installiert, wird es optional erkannt und kann alternativ genutzt werden; eine Abhängigkeit besteht nicht | 🟢 |
 | F2.5 | Soll-Ist-Prüfung | Report: Personen mit Profil, aber ohne gültigen Nachweis; inkl. „Beauftragung ohne Qualifikation" | 🟢 |
 | F2.6 | Vorschau vor Anlage | Dry-Run-Ansicht: welche Tickets würden entstehen, bevor sie erzeugt werden | 🟢 |
 | F2.7 | Profiländerung | Wechselt eine Person das Profil, werden entfallende Maßnahmen auf `entfallen` gesetzt und neue erzeugt | 🟢 |

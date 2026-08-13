@@ -319,3 +319,9 @@ $s_plugin_QualificationTracker_jahrgang_year   = 'Jahr';
 $s_plugin_QualificationTracker_jahrgang_confirm = 'Jahrgang für alle angezeigten Einträge erzeugen?';
 $s_plugin_QualificationTracker_btn_generate_jahrgang = 'Jahrgang erzeugen';
 $s_plugin_QualificationTracker_link_jahrgang   = 'Vorausschauende Jahrgangserzeugung';
+
+# --- Optionale Integrationen (F2.4) --------------------------------------
+$s_plugin_QualificationTracker_config_section_integration    = 'Optionale Integrationen';
+$s_plugin_QualificationTracker_config_help_integration       = 'Optionale Plugins werden zur Laufzeit erkannt; es besteht keine harte Abhängigkeit. Die Terminplanung erfolgt in jedem Fall nativ über QT_DueDateCalculator — IssueRecurrence wird nicht zur Terminberechnung herangezogen. Reveille wird ab F5.2 für die Ablaufreaktivierung genutzt, sofern installiert.';
+$s_plugin_QualificationTracker_config_integration_detected   = 'erkannt';
+$s_plugin_QualificationTracker_config_integration_absent     = 'nicht installiert';

@@ -33,6 +33,7 @@ access_ensure_global_level( config_get( 'manage_plugin_threshold' ) );
 plugin_require_api( 'core/QT_Catalog.php' );
 plugin_require_api( 'core/QT_Person.php' );
 plugin_require_api( 'core/QT_CustomFields.php' );
+plugin_require_api( 'core/QT_Integration.php' );
 
 /* -------------------------------------------------------------------------- *
  *  Save
@@ -243,6 +244,35 @@ layout_page_begin();
 						</tr>
 					<?php } ?>
 					</tbody>
+				</table>
+			</td>
+		</tr>
+
+		<tr>
+			<td colspan="2" class="category"><strong><?php echo plugin_lang_get( 'config_section_integration' ); ?></strong></td>
+		</tr>
+		<tr>
+			<td colspan="2">
+				<span class="help-block" style="margin:0 0 8px"><?php echo plugin_lang_get( 'config_help_integration' ); ?></span>
+				<table class="table table-condensed" style="width:auto">
+				<?php
+				$t_integrations = array(
+					'IssueRecurrence' => qt_integration_issuerecurrence(),
+					'Reveille'        => qt_integration_reveille(),
+				);
+				foreach( $t_integrations as $t_name => $t_present ) {
+				?>
+					<tr>
+						<td><code><?php echo string_display_line( $t_name ); ?></code></td>
+						<td>
+							<?php if( $t_present ) { ?>
+								<span class="label label-success"><?php echo plugin_lang_get( 'config_integration_detected' ); ?></span>
+							<?php } else { ?>
+								<span class="label label-default"><?php echo plugin_lang_get( 'config_integration_absent' ); ?></span>
+							<?php } ?>
+						</td>
+					</tr>
+				<?php } ?>
 				</table>
 			</td>
 		</tr>

@@ -319,3 +319,9 @@ $s_plugin_QualificationTracker_jahrgang_year   = 'Year';
 $s_plugin_QualificationTracker_jahrgang_confirm = 'Generate the cohort for all listed entries?';
 $s_plugin_QualificationTracker_btn_generate_jahrgang = 'Generate cohort';
 $s_plugin_QualificationTracker_link_jahrgang   = 'Forward-looking cohort generation';
+
+# --- Optional integrations (F2.4) ----------------------------------------
+$s_plugin_QualificationTracker_config_section_integration    = 'Optional integrations';
+$s_plugin_QualificationTracker_config_help_integration       = 'Optional plugins are detected at runtime; there is no hard dependency. Scheduling is always native via QT_DueDateCalculator — IssueRecurrence is never used to compute dates. Reveille is used from F5.2 for expiry reactivation when installed.';
+$s_plugin_QualificationTracker_config_integration_detected   = 'detected';
+$s_plugin_QualificationTracker_config_integration_absent     = 'not installed';

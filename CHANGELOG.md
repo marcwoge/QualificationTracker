@@ -37,6 +37,13 @@ die Versionierung folgt [Semantic Versioning](https://semver.org/lang/de/).
   je Abteilung gefilterten) aktiven Personen entstünden, mit Sammel-Erzeugung
   („Alle Tickets erzeugen"). Ergänzt die Einzelperson-Vorschau aus F2.3
   (`qt_generator_plan_all` / `qt_generator_run_all`).
+- **F2.4 Native Terminplanung:** Die Folgezyklus-Erzeugung ist vollständig nativ
+  (`QT_DueDateCalculator` als einzige Fälligkeitsquelle, vorausschauend und
+  ereignisgetrieben via F2.8) — **keine harte Plugin-Abhängigkeit**. Neue
+  `core/QT_Integration.php` erkennt optionale Plugins (IssueRecurrence, Reveille)
+  zur Laufzeit über `plugin_is_installed()` und degradiert sauber; der Status
+  wird auf der Konfigurationsseite angezeigt. **Damit ist Meilenstein M2
+  (Generator) vollständig.**
 - **F2.8 Zwei Erzeugungsstrategien:** *Ereignisgetrieben* — beim Abschluss eines
   Nachweises (`core/QT_Completion.php`) werden `durchgefuehrt_am`/`gueltig_bis`/
   `durchfuehrender` gesetzt, der Nachweis gültig gestellt und für wiederkehrende
