@@ -407,3 +407,15 @@ $s_plugin_QualificationTracker_anhang_note   = 'Signed attendance list is filed 
 $s_plugin_QualificationTracker_anhang_msg_attached = 'Attachment stored and referenced in %d child tickets.';
 $s_plugin_QualificationTracker_anhang_no_file   = 'No file selected or upload failed.';
 $s_plugin_QualificationTracker_anhang_no_parent = 'No event ticket exists yet. Please create the child tickets first.';
+
+# --- Qualification matrix (F4.1) -----------------------------------------
+$s_plugin_QualificationTracker_menu_matrix  = 'Matrix';
+$s_plugin_QualificationTracker_matrix_title = 'Qualification matrix';
+$s_plugin_QualificationTracker_matrix_empty = 'No persons with assigned measures.';
+$s_plugin_QualificationTracker_matrix_days  = 'days';
+$s_plugin_QualificationTracker_matrix_state_gueltig    = 'valid';
+$s_plugin_QualificationTracker_matrix_state_bald       = 'expiring soon';
+$s_plugin_QualificationTracker_matrix_state_offen      = 'in progress';
+$s_plugin_QualificationTracker_matrix_state_abgelaufen = 'expired';
+$s_plugin_QualificationTracker_matrix_state_fehlt      = 'no proof';
+$s_plugin_QualificationTracker_matrix_state_na         = 'not assigned';

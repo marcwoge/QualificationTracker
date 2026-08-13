@@ -8,6 +8,18 @@ die Versionierung folgt [Semantic Versioning](https://semver.org/lang/de/).
 ## [Unreleased]
 
 ### Hinzugefügt
+- **F4.1 Matrix-Ansicht (M4):** Qualifikationsmatrix Person × Maßnahme unter
+  *Verwaltung → QualificationTracker → Matrix*. Jede Zelle ist nach dem
+  Nachweisstatus eingefärbt — gültig (grün), läuft bald ab (gelb, innerhalb des
+  Warnfensters), in Bearbeitung (blau), abgelaufen (rot), kein Nachweis (grau)
+  bzw. nicht zugeordnet — und verlinkt auf das zugehörige Ticket; gültige Zellen
+  zeigen die Restlaufzeit in Tagen. Das Warnfenster ergibt sich aus der größten
+  positiven Eskalationsstufe (Standard 90 Tage). Spalten sind die tatsächlich
+  zugeordneten Maßnahmen, filterbar nach Abteilung. Aufbau auf dem
+  `qt_nachweis`-Index, Lückenbewertung geteilt mit der Soll-Ist-Prüfung (F2.5).
+  Neue `core/QT_Matrix.php` mit reinen, unit-getesteten Helfern
+  (`qt_matrix_cell`, `qt_matrix_warn_days`). Filter/Gruppierung (F4.2) und
+  serverseitige Aggregation für große Bestände (F4.3) folgen.
 - **F3.6 Nachweis-Anhang (M3):** Die gescannte, unterschriebene Teilnehmerliste
   wird **einmal** am Veranstaltungsticket (Elternticket) als Datei-Anhang
   hinterlegt und in **jedem** Kind-Ticket per Notiz referenziert (mit Link auf

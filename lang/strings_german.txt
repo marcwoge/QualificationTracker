@@ -407,3 +407,15 @@ $s_plugin_QualificationTracker_anhang_note   = 'Unterschriebene Teilnehmerliste 
 $s_plugin_QualificationTracker_anhang_msg_attached = 'Anhang hinterlegt und in %d Kind-Tickets referenziert.';
 $s_plugin_QualificationTracker_anhang_no_file   = 'Keine Datei ausgewählt oder Upload fehlgeschlagen.';
 $s_plugin_QualificationTracker_anhang_no_parent = 'Es existiert noch kein Veranstaltungsticket. Bitte zuerst die Kind-Tickets erzeugen.';
+
+# --- Qualifikationsmatrix (F4.1) -----------------------------------------
+$s_plugin_QualificationTracker_menu_matrix  = 'Matrix';
+$s_plugin_QualificationTracker_matrix_title = 'Qualifikationsmatrix';
+$s_plugin_QualificationTracker_matrix_empty = 'Keine Personen mit zugeordneten Maßnahmen.';
+$s_plugin_QualificationTracker_matrix_days  = 'Tage';
+$s_plugin_QualificationTracker_matrix_state_gueltig    = 'gültig';
+$s_plugin_QualificationTracker_matrix_state_bald       = 'läuft bald ab';
+$s_plugin_QualificationTracker_matrix_state_offen      = 'in Bearbeitung';
+$s_plugin_QualificationTracker_matrix_state_abgelaufen = 'abgelaufen';
+$s_plugin_QualificationTracker_matrix_state_fehlt      = 'kein Nachweis';
+$s_plugin_QualificationTracker_matrix_state_na         = 'nicht zugeordnet';

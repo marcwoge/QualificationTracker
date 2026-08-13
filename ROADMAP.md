@@ -1,7 +1,7 @@
 # Roadmap — MantisBT QualificationTracker
 
 **Version dieses Dokuments:** 0.4 (2026-08-12)
-**Status Gesamtprojekt:** 🟡 M1 (Fundament), M2 (Generator) und M3 (Veranstaltungen) abgeschlossen (F3.7 zurückgestellt auf 1.1), M4 (Matrix & Auswertung) als Nächstes
+**Status Gesamtprojekt:** 🟡 M1 (Fundament), M2 (Generator) und M3 (Veranstaltungen) abgeschlossen (F3.7 zurückgestellt auf 1.1), M4 (Matrix & Auswertung) in Arbeit (F4.1 fertig)
 
 ---
 
@@ -56,7 +56,7 @@ Für die Anbindung an Auswertungssysteme stellt das Plugin **REST-Endpunkte** be
 | M1 | Fundament | Datenmodell, Schema-Migration, Katalogverwaltung | 🟢 fertig |
 | M2 | Generator | Tätigkeitsprofile, automatische Ticketketten, Soll-Ist-Prüfung | 🟢 fertig |
 | M3 | Veranstaltungen | Sammeltermine, Massenabschluss, Teilnehmerlisten | 🟢 abgeschlossen |
-| M4 | Matrix & Auswertung | Matrix-Ansicht, Ampel, Export | ⬜ offen |
+| M4 | Matrix & Auswertung | Matrix-Ansicht, Ampel, Export | 🟡 in Arbeit |
 | M5 | Automatisierung | Recurrence-/Reveille-Kopplung, Eskalationsstufen | ⬜ offen |
 | M6 | Import & Migration | CSV-/REST-Import, HR-Sync, Ersterfassung | ⬜ offen |
 | M7 | Audit & Datenschutz | Berechtigungen, Löschkonzept, Auditbericht | ⬜ offen |
@@ -111,7 +111,7 @@ Legende: ⬜ offen · 🟡 in Arbeit · 🟢 fertig · ⚪ zurückgestellt
 
 | ID | Funktion | Beschreibung | Status |
 |---|---|---|---|
-| F4.1 | Matrix-Ansicht | Person × Maßnahme, Zellenfarbe nach Restgültigkeit, Zelle klickbar zum Ticket | ⬜ |
+| F4.1 | Matrix-Ansicht | Person × Maßnahme, Zellenfarbe nach Restgültigkeit, Zelle klickbar zum Ticket | 🟢 |
 | F4.2 | Filter & Gruppierung | Nach Abteilung, Profil, Maßnahmentyp, Status; Umschalten Zeilen/Spalten | ⬜ |
 | F4.3 | Paginierung & Performance | Serverseitige Aggregation, damit die Matrix bei 500 Personen in < 2 s rendert | ⬜ |
 | F4.4 | CSV-Export | Matrix und Rohdaten als CSV | ⬜ |
