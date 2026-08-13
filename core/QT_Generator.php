@@ -467,3 +467,129 @@ function qt_generator_run_all( $p_today, $p_abteilung = '' ) {
 	}
 	return $t_sum;
 }
+
+/* -------------------------------------------------------------------------- *
+ *  Profile change / sync (F2.7)
+ * -------------------------------------------------------------------------- */
+
+/**
+ * What to do with an obsolete proof, by its state (decision from F2.7). Pure.
+ *
+ * Already-valid proofs are kept (the qualification was earned – an audit fact);
+ * everything else is cancelled.
+ *
+ * @param string $p_status
+ * @return string 'behalten' | 'entfallen'
+ */
+function qt_sync_obsolete_action( $p_status ) {
+	return $p_status === 'gueltig' ? 'behalten' : 'entfallen';
+}
+
+/**
+ * Proofs a person still holds for measures they no longer require (any active
+ * profile), excluding already-cancelled ones.
+ *
+ * @param int    $p_person_id
+ * @param string $p_today
+ * @return array qt_nachweis rows.
+ */
+function qt_generator_obsolete_nachweise( $p_person_id, $p_today ) {
+	$t_required = array();
+	foreach( qt_generator_required_massnahmen( $p_person_id, $p_today ) as $t_m ) {
+		$t_required[(int)$t_m['id']] = true;
+	}
+
+	$t_out = array();
+	foreach( qt_nachweis_load_for_person( $p_person_id ) as $t_nw ) {
+		if( $t_nw['status'] === 'entfallen' ) {
+			continue;
+		}
+		if( !isset( $t_required[(int)$t_nw['massnahme_id']] ) ) {
+			$t_out[] = $t_nw;
+		}
+	}
+	return $t_out;
+}
+
+/**
+ * Cancel a proof: mark the index row 'entfallen', close the ticket and add an
+ * audit note. The ticket and its attachments are preserved.
+ *
+ * @param int $p_nachweis_id
+ * @param int $p_bug_id
+ * @return void
+ */
+function qt_nachweis_set_entfallen( $p_nachweis_id, $p_bug_id ) {
+	db_query( 'UPDATE ' . plugin_table( 'nachweis' )
+		. " SET status = 'entfallen', date_modified = " . db_param() . ' WHERE id = ' . db_param(),
+		array( time(), (int)$p_nachweis_id ) );
+
+	if( (int)$p_bug_id > 0 && bug_exists( (int)$p_bug_id ) ) {
+		bug_set_field( (int)$p_bug_id, 'status', qt_status_to_mantis( 'entfallen' ) );
+		bugnote_add( (int)$p_bug_id, plugin_lang_get( 'note_entfallen' ), '0:00', false, BUGNOTE, '', null, false );
+	}
+}
+
+/**
+ * Preview a profile-change sync for a person: which proofs would be cancelled or
+ * kept, and which new tickets would be created.
+ *
+ * @param array  $p_person
+ * @param string $p_today
+ * @return array [ obsolete => [ nachweis, massnahme, action ], new => [ plan items ] ]
+ */
+function qt_generator_sync_preview( array $p_person, $p_today ) {
+	$t_obsolete = array();
+	foreach( qt_generator_obsolete_nachweise( (int)$p_person['id'], $p_today ) as $t_nw ) {
+		$t_obsolete[] = array(
+			'nachweis'  => $t_nw,
+			'massnahme' => qt_massnahme_get( (int)$t_nw['massnahme_id'] ),
+			'action'    => qt_sync_obsolete_action( $t_nw['status'] ),
+		);
+	}
+
+	$t_new = array();
+	foreach( qt_generator_plan( $p_person, $p_today ) as $t_item ) {
+		if( $t_item['action'] === 'create' ) {
+			$t_new[] = $t_item;
+		}
+	}
+
+	return array( 'obsolete' => $t_obsolete, 'new' => $t_new );
+}
+
+/**
+ * Execute a profile-change sync: cancel obsolete non-valid proofs (keep valid
+ * ones), then generate the newly required tickets.
+ *
+ * @param int    $p_person_id
+ * @param string $p_today
+ * @return array Summary: entfallen, kept, created, skipped, errors[].
+ */
+function qt_generator_sync_person( $p_person_id, $p_today ) {
+	$t_person = qt_person_get( $p_person_id );
+	if( $t_person === false ) {
+		return array( 'entfallen' => 0, 'kept' => 0, 'created' => 0, 'skipped' => 0,
+			'errors' => array( 'error_person_not_found' ) );
+	}
+
+	$t_entfallen = 0;
+	$t_kept = 0;
+	foreach( qt_generator_obsolete_nachweise( $p_person_id, $p_today ) as $t_nw ) {
+		if( qt_sync_obsolete_action( $t_nw['status'] ) === 'behalten' ) {
+			$t_kept++;
+		} else {
+			qt_nachweis_set_entfallen( (int)$t_nw['id'], (int)$t_nw['bug_id'] );
+			$t_entfallen++;
+		}
+	}
+
+	$t_gen = qt_generator_run_for_person( $p_person_id, $p_today );
+	return array(
+		'entfallen' => $t_entfallen,
+		'kept'      => $t_kept,
+		'created'   => $t_gen['created'],
+		'skipped'   => $t_gen['skipped'],
+		'errors'    => $t_gen['errors'],
+	);
+}

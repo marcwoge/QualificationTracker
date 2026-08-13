@@ -282,3 +282,19 @@ $s_plugin_QualificationTracker_dryrun_nothing = 'No new tickets to create.';
 $s_plugin_QualificationTracker_dryrun_persons = 'persons';
 $s_plugin_QualificationTracker_dryrun_confirm = 'Create tickets for all listed persons?';
 $s_plugin_QualificationTracker_btn_generate_all = 'Create all tickets';
+
+# --- Profile change / sync (F2.7) ----------------------------------------
+$s_plugin_QualificationTracker_sync_title = 'Sync profile';
+$s_plugin_QualificationTracker_sync_intro = 'Cancels proofs that are no longer required (already-valid ones are kept) and creates newly required tickets.';
+$s_plugin_QualificationTracker_sync_section_obsolete = 'No longer required measures';
+$s_plugin_QualificationTracker_sync_section_new      = 'New tickets to create';
+$s_plugin_QualificationTracker_sync_action_behalten  = 'valid – kept';
+$s_plugin_QualificationTracker_sync_action_entfallen = 'cancelled';
+$s_plugin_QualificationTracker_sync_no_obsolete = 'No measures to cancel.';
+$s_plugin_QualificationTracker_sync_no_new      = 'No new tickets.';
+$s_plugin_QualificationTracker_btn_sync_chain = 'Sync';
+$s_plugin_QualificationTracker_btn_sync_apply = 'Apply sync';
+$s_plugin_QualificationTracker_note_entfallen = 'Measure cancelled due to a profile change (QualificationTracker).';
+$s_plugin_QualificationTracker_sync_msg       = 'Profile sync finished:';
+$s_plugin_QualificationTracker_sync_entfallen = 'cancelled';
+$s_plugin_QualificationTracker_sync_kept      = 'kept';

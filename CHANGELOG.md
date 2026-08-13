@@ -37,6 +37,11 @@ die Versionierung folgt [Semantic Versioning](https://semver.org/lang/de/).
   je Abteilung gefilterten) aktiven Personen entstünden, mit Sammel-Erzeugung
   („Alle Tickets erzeugen"). Ergänzt die Einzelperson-Vorschau aus F2.3
   (`qt_generator_plan_all` / `qt_generator_run_all`).
+- **F2.7 Profiländerung:** „Profil abgleichen" je Person (Vorschau + Anwenden):
+  nicht mehr benötigte Nachweise werden auf `entfallen` gesetzt und die Tickets
+  geschlossen (mit Audit-Notiz), **bereits gültige Nachweise bleiben erhalten**,
+  neu erforderliche Tickets werden erzeugt. Die Entscheidung „gültige behalten"
+  ist als reine Funktion `qt_sync_obsolete_action` unit-getestet.
 - Repository-Grundstruktur: Plugin-Hauptklasse, Verzeichnislayout, Lizenz, leere Sprachdateien.
 - Konzeptdokumentation (`ROADMAP.md`, `KONZEPT-Bordmittel.md`) und Projekt-README.
 - Lokale MantisBT-Testumgebung unter `docker/` (Docker Compose, MantisBT 2.28.3,

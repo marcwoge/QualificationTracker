@@ -52,6 +52,16 @@ layout_page_begin();
 			. gpc_get_int( 's', 0 ) . ' ' . plugin_lang_get( 'generate_skipped' )
 			. ( $t_e > 0 ? ' &mdash; ' . $t_e . ' ' . plugin_lang_get( 'import_errors' ) : '' ) . '.'; ?>
 	</div>
+<?php } else if( $t_msg === 'synced' ) {
+	$t_e = gpc_get_int( 'e', 0 );
+?>
+	<div class="alert <?php echo $t_e > 0 ? 'alert-warning' : 'alert-success'; ?>">
+		<?php echo plugin_lang_get( 'sync_msg' ) . ' '
+			. gpc_get_int( 'en', 0 ) . ' ' . plugin_lang_get( 'sync_entfallen' ) . ', '
+			. gpc_get_int( 'k', 0 ) . ' ' . plugin_lang_get( 'sync_kept' ) . ', '
+			. gpc_get_int( 'c', 0 ) . ' ' . plugin_lang_get( 'generate_created' )
+			. ( $t_e > 0 ? ' &mdash; ' . $t_e . ' ' . plugin_lang_get( 'import_errors' ) : '' ) . '.'; ?>
+	</div>
 <?php } ?>
 
 <div class="widget-box widget-color-blue2">
@@ -115,6 +125,10 @@ layout_page_begin();
 					<a class="btn btn-xs btn-success btn-white btn-round"
 						href="<?php echo plugin_page( 'generate' ); ?>&amp;person_id=<?php echo (int)$t_z['person_id']; ?>">
 						<i class="ace-icon fa fa-cogs"></i> <?php echo plugin_lang_get( 'btn_generate_chain' ); ?>
+					</a>
+					<a class="btn btn-xs btn-warning btn-white btn-round"
+						href="<?php echo plugin_page( 'sync' ); ?>&amp;person_id=<?php echo (int)$t_z['person_id']; ?>">
+						<i class="ace-icon fa fa-refresh"></i> <?php echo plugin_lang_get( 'btn_sync_chain' ); ?>
 					</a>
 					<a class="btn btn-xs btn-primary btn-white btn-round"
 						href="<?php echo plugin_page( 'zuordnung_edit' ); ?>&amp;id=<?php echo $t_id; ?>">

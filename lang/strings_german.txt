@@ -282,3 +282,19 @@ $s_plugin_QualificationTracker_dryrun_nothing = 'Keine neuen Tickets zu erzeugen
 $s_plugin_QualificationTracker_dryrun_persons = 'Personen';
 $s_plugin_QualificationTracker_dryrun_confirm = 'Für alle angezeigten Personen Tickets erzeugen?';
 $s_plugin_QualificationTracker_btn_generate_all = 'Alle Tickets erzeugen';
+
+# --- Profiländerung / Abgleich (F2.7) ------------------------------------
+$s_plugin_QualificationTracker_sync_title = 'Profil abgleichen';
+$s_plugin_QualificationTracker_sync_intro = 'Setzt nicht mehr benötigte Nachweise auf „entfallen" (bereits gültige bleiben erhalten) und erzeugt neu erforderliche Tickets.';
+$s_plugin_QualificationTracker_sync_section_obsolete = 'Nicht mehr benötigte Maßnahmen';
+$s_plugin_QualificationTracker_sync_section_new      = 'Neu zu erzeugende Tickets';
+$s_plugin_QualificationTracker_sync_action_behalten  = 'gültig – bleibt';
+$s_plugin_QualificationTracker_sync_action_entfallen = 'entfällt';
+$s_plugin_QualificationTracker_sync_no_obsolete = 'Keine entfallenden Maßnahmen.';
+$s_plugin_QualificationTracker_sync_no_new      = 'Keine neuen Tickets.';
+$s_plugin_QualificationTracker_btn_sync_chain = 'Abgleichen';
+$s_plugin_QualificationTracker_btn_sync_apply = 'Abgleich anwenden';
+$s_plugin_QualificationTracker_note_entfallen = 'Maßnahme entfällt durch Profiländerung (QualificationTracker).';
+$s_plugin_QualificationTracker_sync_msg       = 'Profilabgleich abgeschlossen:';
+$s_plugin_QualificationTracker_sync_entfallen = 'entfallen';
+$s_plugin_QualificationTracker_sync_kept      = 'behalten';
