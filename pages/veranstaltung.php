@@ -87,6 +87,10 @@ layout_page_begin();
 				<td class="center"><?php echo $t_e['kapazitaet'] === null ? '&ndash;' : (int)$t_e['kapazitaet']; ?></td>
 				<td><?php echo string_display_line( plugin_lang_get( 'event_status_' . $t_e['status'] ) ); ?></td>
 				<td class="center">
+					<a class="btn btn-xs btn-success btn-white btn-round"
+						href="<?php echo plugin_page( 'veranstaltung_teilnehmer' ); ?>&amp;id=<?php echo $t_id; ?>">
+						<i class="ace-icon fa fa-users"></i> <?php echo plugin_lang_get( 'menu_teilnehmer' ); ?>
+					</a>
 					<a class="btn btn-xs btn-primary btn-white btn-round"
 						href="<?php echo plugin_page( 'veranstaltung_edit' ); ?>&amp;id=<?php echo $t_id; ?>">
 						<i class="ace-icon fa fa-edit"></i> <?php echo plugin_lang_get( 'btn_edit' ); ?>

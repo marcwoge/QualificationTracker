@@ -8,6 +8,18 @@ die Versionierung folgt [Semantic Versioning](https://semver.org/lang/de/).
 ## [Unreleased]
 
 ### Hinzugefügt
+- **F3.2 Teilnehmerauswahl (M3):** Zu einer Veranstaltung werden Teilnehmer aus
+  dem Pool der *fälligen* Personen ausgewählt — Personen, die die Maßnahme der
+  Veranstaltung laut Profil benötigen und für die kein gültiger Nachweis
+  vorliegt. Der Pool ist nach Abteilung und Fälligkeit (kein Nachweis /
+  in Bearbeitung / abgelaufen) filterbar; die Auswertung teilt sich die Logik
+  mit der Soll-Ist-Prüfung (F2.5). Die Kapazität ist ein weiches Limit: eine
+  Überbuchung wird gewarnt, nie blockiert. Neue Tabelle `qt_teilnehmer`, neues
+  `core/QT_Participant.php` mit reinen, unit-getesteten Helfern
+  (`qt_teilnehmer_capacity_state`, `qt_teilnehmer_status_valid`,
+  `qt_teilnehmer_art_matches`) und idempotentem Hinzufügen. Erreichbar über
+  *Veranstaltungen → Teilnehmer*. Grundlage für die Kind-Tickets (F3.3) und den
+  Massenabschluss (F3.4).
 - **F3.1 Veranstaltung anlegen (M3):** Verwaltung von Sammelterminen
   (Veranstaltungen) unter *Verwaltung → QualificationTracker → Veranstaltungen*:
   eine Maßnahme, an einem Termin für viele Personen gehalten, mit Ort,

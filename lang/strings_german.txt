@@ -351,3 +351,19 @@ $s_plugin_QualificationTracker_error_event_titel_length       = 'Der Titel darf 
 $s_plugin_QualificationTracker_error_event_termin_required    = 'Bitte einen Termin angeben.';
 $s_plugin_QualificationTracker_error_event_termin_invalid     = 'Ungültiger Termin.';
 $s_plugin_QualificationTracker_error_event_kapazitaet_invalid = 'Die Kapazität muss eine nicht-negative Zahl sein.';
+
+# --- Teilnehmerauswahl (F3.2) --------------------------------------------
+$s_plugin_QualificationTracker_menu_teilnehmer   = 'Teilnehmer';
+$s_plugin_QualificationTracker_teilnehmer_title  = 'Teilnehmer';
+$s_plugin_QualificationTracker_teilnehmer_back   = 'Zurück zu den Veranstaltungen';
+$s_plugin_QualificationTracker_teilnehmer_none   = 'Noch keine Teilnehmer eingeplant.';
+$s_plugin_QualificationTracker_teilnehmer_remove = 'Entfernen';
+$s_plugin_QualificationTracker_teilnehmer_col_art = 'Fälligkeit';
+$s_plugin_QualificationTracker_teilnehmer_filter_art = 'Fälligkeit';
+$s_plugin_QualificationTracker_teilnehmer_candidates_title = 'Fällige Personen hinzufügen';
+$s_plugin_QualificationTracker_teilnehmer_candidates_intro = 'Personen, die die Maßnahme dieser Veranstaltung laut Profil benötigen und für die kein gültiger Nachweis vorliegt.';
+$s_plugin_QualificationTracker_teilnehmer_no_candidates = 'Keine fälligen Personen (mit dem gewählten Filter) gefunden.';
+$s_plugin_QualificationTracker_teilnehmer_add_selected  = 'Ausgewählte hinzufügen';
+$s_plugin_QualificationTracker_teilnehmer_warn_overbooked = 'Die Veranstaltung ist überbucht: Es sind mehr Teilnehmer eingeplant als Plätze vorhanden sind.';
+$s_plugin_QualificationTracker_teilnehmer_msg_added   = 'Teilnehmer hinzugefügt.';
+$s_plugin_QualificationTracker_teilnehmer_msg_removed = 'Teilnehmer entfernt.';

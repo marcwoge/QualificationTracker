@@ -351,3 +351,19 @@ $s_plugin_QualificationTracker_error_event_titel_length       = 'The title may b
 $s_plugin_QualificationTracker_error_event_termin_required    = 'Please enter a date.';
 $s_plugin_QualificationTracker_error_event_termin_invalid     = 'Invalid date.';
 $s_plugin_QualificationTracker_error_event_kapazitaet_invalid = 'Capacity must be a non-negative number.';
+
+# --- Participant selection (F3.2) ----------------------------------------
+$s_plugin_QualificationTracker_menu_teilnehmer   = 'Participants';
+$s_plugin_QualificationTracker_teilnehmer_title  = 'Participants';
+$s_plugin_QualificationTracker_teilnehmer_back   = 'Back to events';
+$s_plugin_QualificationTracker_teilnehmer_none   = 'No participants planned yet.';
+$s_plugin_QualificationTracker_teilnehmer_remove = 'Remove';
+$s_plugin_QualificationTracker_teilnehmer_col_art = 'Due status';
+$s_plugin_QualificationTracker_teilnehmer_filter_art = 'Due status';
+$s_plugin_QualificationTracker_teilnehmer_candidates_title = 'Add due persons';
+$s_plugin_QualificationTracker_teilnehmer_candidates_intro = 'Persons who require this event\'s measure per their profile and have no valid proof.';
+$s_plugin_QualificationTracker_teilnehmer_no_candidates = 'No due persons found (with the selected filter).';
+$s_plugin_QualificationTracker_teilnehmer_add_selected  = 'Add selected';
+$s_plugin_QualificationTracker_teilnehmer_warn_overbooked = 'The event is overbooked: more participants are planned than there are seats.';
+$s_plugin_QualificationTracker_teilnehmer_msg_added   = 'Participants added.';
+$s_plugin_QualificationTracker_teilnehmer_msg_removed = 'Participant removed.';

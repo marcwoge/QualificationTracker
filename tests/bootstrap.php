@@ -31,3 +31,4 @@ require_once dirname( __DIR__ ) . '/core/QT_SollIst.php';
 require_once dirname( __DIR__ ) . '/core/QT_Completion.php';
 require_once dirname( __DIR__ ) . '/core/QT_Integration.php';
 require_once dirname( __DIR__ ) . '/core/QT_Event.php';
+require_once dirname( __DIR__ ) . '/core/QT_Participant.php';

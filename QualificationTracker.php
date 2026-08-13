@@ -321,6 +321,24 @@ class QualificationTrackerPlugin extends MantisPlugin {
 				plugin_table( 'nachweis' ), 'bug_id' ) ),
 			array( 'CreateIndexSQL', array( 'idx_qt_nachweis_status',
 				plugin_table( 'nachweis' ), 'status' ) ),
+
+			# --- 20/21/22: qt_teilnehmer (event participants, F3.2) --------
+			# One row per person planned for a group event. bug_id links the
+			# child proof ticket created in F3.3; status carries the F3.4 mass
+			# completion outcome (eingeplant/teilgenommen/abwesend).
+			array( 'CreateTableSQL', array( plugin_table( 'teilnehmer' ), "
+				id               I     UNSIGNED NOTNULL AUTOINCREMENT PRIMARY,
+				veranstaltung_id I     UNSIGNED NOTNULL,
+				person_id        I     UNSIGNED NOTNULL,
+				bug_id           I     UNSIGNED NOTNULL DEFAULT '0',
+				status           C(16) NOTNULL DEFAULT \" 'eingeplant' \",
+				date_created     I     UNSIGNED NOTNULL DEFAULT '0'
+				" ) ),
+			array( 'CreateIndexSQL', array( 'idx_qt_teilnehmer_unique',
+				plugin_table( 'teilnehmer' ), 'veranstaltung_id,person_id',
+				array( 'UNIQUE' ) ) ),
+			array( 'CreateIndexSQL', array( 'idx_qt_teilnehmer_person',
+				plugin_table( 'teilnehmer' ), 'person_id' ) ),
 		);
 	}
 
@@ -351,8 +369,8 @@ class QualificationTrackerPlugin extends MantisPlugin {
 	 */
 	function uninstall() {
 		$t_tables = array(
-			'nachweis', 'massnahme_vorbedingung', 'veranstaltung', 'zuordnung',
-			'profil_massnahme', 'profil', 'person', 'massnahme',
+			'teilnehmer', 'nachweis', 'massnahme_vorbedingung', 'veranstaltung',
+			'zuordnung', 'profil_massnahme', 'profil', 'person', 'massnahme',
 		);
 		foreach( $t_tables as $t_name ) {
 			# Table names come from plugin_table(), never from user input.
