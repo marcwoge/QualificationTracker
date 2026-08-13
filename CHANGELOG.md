@@ -8,6 +8,19 @@ die Versionierung folgt [Semantic Versioning](https://semver.org/lang/de/).
 ## [Unreleased]
 
 ### Hinzugefügt
+- **F3.3 Kind-Tickets (M3):** Für eine Veranstaltung werden auf Knopfdruck je
+  Teilnehmer die Nachweistickets als Kinder eines gemeinsamen
+  Veranstaltungstickets erzeugt. Das Veranstaltungsticket (der „Sammeltermin")
+  wird einmalig angelegt und in `qt_veranstaltung.eltern_bug_id` gespeichert;
+  jedes Teilnehmerticket wird als Kind daruntergehängt (`depends on`). Der
+  Grundsatz *„ein Ticket = eine Nachweis-Instanz"* bleibt gewahrt: hat eine
+  Person aus der Kette (F2.3) bereits ein offenes Nachweisticket für die
+  Maßnahme, wird dieses wiederverwendet und nur verknüpft, sonst neu erzeugt
+  (mit `qt_nachweis`-Eintrag und Custom-Field-Belegung). Der Vorgang ist je
+  Teilnehmer idempotent (gemerkte `bug_id`). `core/QT_Participant.php`
+  (`qt_teilnehmer_generate_tickets`) und `core/QT_Event.php`
+  (`qt_event_ensure_parent_ticket`); Auslösung über *Teilnehmer → Kind-Tickets
+  erzeugen*. Grundlage für den Massenabschluss (F3.4).
 - **F3.2 Teilnehmerauswahl (M3):** Zu einer Veranstaltung werden Teilnehmer aus
   dem Pool der *fälligen* Personen ausgewählt — Personen, die die Maßnahme der
   Veranstaltung laut Profil benötigen und für die kein gültiger Nachweis

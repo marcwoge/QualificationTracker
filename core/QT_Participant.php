@@ -178,6 +178,102 @@ function qt_teilnehmer_remove( $p_id ) {
 		array( (int)$p_id ) );
 }
 
+/**
+ * Store the proof-ticket id on a participant row.
+ *
+ * @param int $p_id
+ * @param int $p_bug_id
+ * @return void
+ */
+function qt_teilnehmer_set_bug( $p_id, $p_bug_id ) {
+	db_query( 'UPDATE ' . plugin_table( 'teilnehmer' ) . ' SET bug_id = ' . db_param()
+		. ' WHERE id = ' . db_param(), array( (int)$p_bug_id, (int)$p_id ) );
+}
+
+/* -------------------------------------------------------------------------- *
+ *  Child proof tickets (F3.3)
+ * -------------------------------------------------------------------------- */
+
+/**
+ * Create the per-participant proof tickets for an event as children of the
+ * event's parent ticket (F3.3).
+ *
+ * Honours the "one ticket per person × measure × cycle" invariant: if a person
+ * already has an open proof ticket for the event's measure (e.g. from the chain
+ * generator F2.3), that ticket is reused and only linked as a child; otherwise a
+ * new proof ticket is created. Idempotent per participant via the stored bug_id.
+ *
+ * Side-effectful (creates MantisBT tickets); integration-tested, not a unit.
+ *
+ * @param array  $p_event Event row.
+ * @param string $p_today ISO date "today".
+ * @return array Summary: parent, created, linked, skipped, errors[].
+ */
+function qt_teilnehmer_generate_tickets( array $p_event, $p_today ) {
+	$t_summary = array( 'parent' => 0, 'created' => 0, 'linked' => 0, 'skipped' => 0, 'errors' => array() );
+
+	$t_project_id = (int)plugin_config_get( 'zielprojekt_id' );
+	if( $t_project_id <= 0 ) {
+		$t_summary['errors'][] = 'error_no_zielprojekt';
+		return $t_summary;
+	}
+
+	$t_massnahme = qt_massnahme_get( (int)$p_event['massnahme_id'] );
+	if( $t_massnahme === false ) {
+		$t_summary['errors'][] = 'error_event_massnahme_required';
+		return $t_summary;
+	}
+
+	$t_participants = qt_teilnehmer_load( (int)$p_event['id'] );
+	if( empty( $t_participants ) ) {
+		return $t_summary;
+	}
+
+	# Ensure fields/categories exist and are linked to the target project.
+	qt_custom_fields_link( $t_project_id );
+	$t_category_ids = qt_generator_ensure_categories( $t_project_id );
+	$t_field_ids = qt_generator_field_ids();
+
+	# The parent "Sammeltermin" ticket the children hang under.
+	$t_parent = qt_event_ensure_parent_ticket( $p_event, $t_massnahme, $t_project_id, $t_category_ids );
+	if( $t_parent > 0 && (int)$p_event['eltern_bug_id'] <= 0 ) {
+		$t_summary['parent'] = 1;
+	}
+
+	foreach( $t_participants as $t_p ) {
+		if( (int)$t_p['bug_id'] > 0 ) {
+			$t_summary['skipped']++;
+			continue;
+		}
+		$t_person = qt_person_get( (int)$t_p['person_id'] );
+		if( $t_person === false ) {
+			continue;
+		}
+
+		# Reuse an existing open proof ticket (one-ticket invariant) or create one.
+		$t_open = qt_nachweis_find_open( (int)$t_person['id'], (int)$t_massnahme['id'] );
+		if( $t_open !== false && (int)$t_open['bug_id'] > 0 && bug_exists( (int)$t_open['bug_id'] ) ) {
+			$t_bug_id = (int)$t_open['bug_id'];
+			$t_summary['linked']++;
+		} else {
+			$t_soll = qt_generator_initial_soll( $t_massnahme, $t_person, $p_today );
+			$t_bug_id = qt_generator_place_ticket(
+				$t_person, $t_massnahme, $t_soll, $t_project_id, $t_category_ids, $t_field_ids );
+			$t_summary['created']++;
+		}
+
+		# Wire the child under the parent event ticket.
+		if( $t_parent > 0 && $t_bug_id !== $t_parent
+			&& !relationship_same_type_exists( $t_bug_id, $t_parent, BUG_DEPENDANT ) ) {
+			relationship_add( $t_bug_id, $t_parent, BUG_DEPENDANT );
+		}
+
+		qt_teilnehmer_set_bug( (int)$t_p['id'], $t_bug_id );
+	}
+
+	return $t_summary;
+}
+
 /* -------------------------------------------------------------------------- *
  *  Candidate pool
  * -------------------------------------------------------------------------- */

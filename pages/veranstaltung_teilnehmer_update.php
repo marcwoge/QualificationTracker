@@ -13,17 +13,25 @@
 
 require_api( 'authentication_api.php' );
 require_api( 'access_api.php' );
+require_api( 'bug_api.php' );
 require_api( 'config_api.php' );
 require_api( 'database_api.php' );
 require_api( 'form_api.php' );
 require_api( 'gpc_api.php' );
 require_api( 'print_api.php' );
+require_api( 'relationship_api.php' );
 
 auth_reauthenticate();
 access_ensure_global_level( plugin_config_get( 'manage_threshold' ) );
 
 form_security_validate( 'plugin_QualificationTracker_veranstaltung_teilnehmer_update' );
 
+plugin_require_api( 'core/QT_Catalog.php' );
+plugin_require_api( 'core/QT_Person.php' );
+plugin_require_api( 'core/QT_Prerequisite.php' );
+plugin_require_api( 'core/QT_CustomFields.php' );
+plugin_require_api( 'core/QT_DueDateCalculator.php' );
+plugin_require_api( 'core/QT_Generator.php' );
 plugin_require_api( 'core/QT_Event.php' );
 plugin_require_api( 'core/QT_Participant.php' );
 
@@ -55,12 +63,24 @@ if( $f_action === 'add' ) {
 		qt_teilnehmer_remove( $f_teilnehmer_id );
 		$t_msg = 'removed';
 	}
+} else if( $f_action === 'generate' ) {
+	$t_result = qt_teilnehmer_generate_tickets( $t_event, date( 'Y-m-d' ) );
+	if( in_array( 'error_no_zielprojekt', $t_result['errors'], true ) ) {
+		$t_msg = 'no_zielprojekt';
+	} else {
+		$t_msg = 'generated';
+	}
 }
 
 form_security_purge( 'plugin_QualificationTracker_veranstaltung_teilnehmer_update' );
 
 $t_redirect = plugin_page( 'veranstaltung_teilnehmer', true ) . '&id=' . $f_id;
-if( $t_msg !== '' ) {
+if( $t_msg === 'generated' ) {
+	$t_redirect .= '&msg=generated'
+		. '&created=' . (int)$t_result['created']
+		. '&linked=' . (int)$t_result['linked']
+		. '&skipped=' . (int)$t_result['skipped'];
+} else if( $t_msg !== '' ) {
 	$t_redirect .= '&msg=' . $t_msg;
 }
 print_successful_redirect( $t_redirect );

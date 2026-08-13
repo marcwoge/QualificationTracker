@@ -211,3 +211,66 @@ function qt_event_delete( $p_id ) {
 	db_query( 'DELETE FROM ' . plugin_table( 'veranstaltung' ) . ' WHERE id = ' . db_param(),
 		array( (int)$p_id ) );
 }
+
+/**
+ * Store the parent event ticket id on an event.
+ *
+ * @param int $p_id
+ * @param int $p_bug_id
+ * @return void
+ */
+function qt_event_set_eltern_bug( $p_id, $p_bug_id ) {
+	db_query( 'UPDATE ' . plugin_table( 'veranstaltung' )
+		. ' SET eltern_bug_id = ' . db_param() . ', date_modified = ' . db_param()
+		. ' WHERE id = ' . db_param(),
+		array( (int)$p_bug_id, time(), (int)$p_id ) );
+}
+
+/**
+ * Ensure the group event has a parent MantisBT ticket (the "Sammeltermin"), the
+ * container the per-participant proof tickets hang under (F3.3). Creates it once
+ * and stores its id in eltern_bug_id; returns the existing one otherwise.
+ *
+ * Depends on the generator's category map; both files are loaded together on the
+ * pages that call this.
+ *
+ * @param array $p_event        Event row.
+ * @param array $p_massnahme     The event's measure row.
+ * @param int   $p_project_id
+ * @param array $p_category_ids  Category name => id, from qt_generator_ensure_categories().
+ * @return int Bug id of the parent ticket.
+ */
+function qt_event_ensure_parent_ticket( array $p_event, array $p_massnahme, $p_project_id, array $p_category_ids ) {
+	$t_existing = (int)$p_event['eltern_bug_id'];
+	if( $t_existing > 0 && bug_exists( $t_existing ) ) {
+		return $t_existing;
+	}
+
+	$t_category = qt_generator_category_map();
+	$t_category_id = isset( $t_category[$p_massnahme['typ']] )
+		? (int)$p_category_ids[$t_category[$p_massnahme['typ']]]
+		: (int)reset( $p_category_ids );
+
+	$t_termin = substr( (string)$p_event['termin'], 0, 16 );
+	$t_summary = mb_substr( $p_massnahme['schluessel'] . ' ' . $p_event['titel']
+		. ( $t_termin !== '' ? ' – ' . $t_termin : '' ), 0, 128 );
+
+	$t_description = $p_massnahme['bezeichnung'] . "\n" . $p_event['titel']
+		. ( $t_termin !== '' ? "\n" . $t_termin : '' )
+		. ( $p_event['ort'] !== null && $p_event['ort'] !== '' ? "\n" . $p_event['ort'] : '' )
+		. ( $p_event['unterweisender'] !== null && $p_event['unterweisender'] !== '' ? "\n" . $p_event['unterweisender'] : '' );
+
+	$t_bug = new BugData;
+	$t_bug->project_id  = (int)$p_project_id;
+	$t_bug->reporter_id = auth_get_current_user_id();
+	$t_bug->category_id = $t_category_id;
+	$t_bug->summary     = $t_summary;
+	$t_bug->description = $t_description;
+	if( $p_event['termin'] !== null && $p_event['termin'] !== '' ) {
+		$t_bug->due_date = strtotime( (string)$p_event['termin'] );
+	}
+	$t_bug_id = $t_bug->create();
+
+	qt_event_set_eltern_bug( (int)$p_event['id'], $t_bug_id );
+	return $t_bug_id;
+}

@@ -367,3 +367,9 @@ $s_plugin_QualificationTracker_teilnehmer_add_selected  = 'Add selected';
 $s_plugin_QualificationTracker_teilnehmer_warn_overbooked = 'The event is overbooked: more participants are planned than there are seats.';
 $s_plugin_QualificationTracker_teilnehmer_msg_added   = 'Participants added.';
 $s_plugin_QualificationTracker_teilnehmer_msg_removed = 'Participant removed.';
+
+# --- Child tickets (F3.3) ------------------------------------------------
+$s_plugin_QualificationTracker_teilnehmer_generate    = 'Create child tickets';
+$s_plugin_QualificationTracker_teilnehmer_col_ticket  = 'Ticket';
+$s_plugin_QualificationTracker_teilnehmer_ticket_open = 'open';
+$s_plugin_QualificationTracker_teilnehmer_msg_generated = 'Child tickets created: %d new, %d existing linked, %d skipped.';

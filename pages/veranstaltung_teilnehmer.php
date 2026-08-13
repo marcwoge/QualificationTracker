@@ -15,6 +15,7 @@
 
 require_api( 'authentication_api.php' );
 require_api( 'access_api.php' );
+require_api( 'bug_api.php' );
 require_api( 'config_api.php' );
 require_api( 'database_api.php' );
 require_api( 'form_api.php' );
@@ -54,6 +55,12 @@ $t_today        = date( 'Y-m-d' );
 
 $t_participants  = qt_teilnehmer_load( $f_id );
 $t_count         = count( $t_participants );
+$t_open_count    = 0;
+foreach( $t_participants as $t_pc ) {
+	if( (int)$t_pc['bug_id'] <= 0 ) {
+		$t_open_count++;
+	}
+}
 $t_cap_state     = qt_teilnehmer_capacity_state( $t_event['kapazitaet'], $t_count );
 $t_candidates    = qt_teilnehmer_candidates( $t_massnahme_id, $f_id, $t_today, $f_abteilung, $f_art );
 $t_abteilungen   = qt_person_distinct_abteilungen();
@@ -84,7 +91,18 @@ layout_page_begin();
 <div class="col-md-12 col-xs-12">
 <div class="space-10"></div>
 
-<?php if( $t_msg !== '' ) { ?>
+<?php if( $t_msg === 'generated' ) {
+	$t_created = gpc_get_int( 'created', 0 );
+	$t_linked  = gpc_get_int( 'linked', 0 );
+	$t_skipped = gpc_get_int( 'skipped', 0 );
+	?>
+	<div class="alert alert-success">
+		<i class="ace-icon fa fa-check"></i>
+		<?php echo sprintf( plugin_lang_get( 'teilnehmer_msg_generated' ), $t_created, $t_linked, $t_skipped ); ?>
+	</div>
+<?php } else if( $t_msg === 'no_zielprojekt' ) { ?>
+	<div class="alert alert-danger"><?php echo plugin_lang_get( 'generate_no_zielprojekt' ); ?></div>
+<?php } else if( $t_msg !== '' ) { ?>
 	<div class="alert alert-success"><?php echo string_display_line( plugin_lang_get( 'teilnehmer_msg_' . $t_msg ) ); ?></div>
 <?php } ?>
 
@@ -101,6 +119,20 @@ layout_page_begin();
 		<a class="btn btn-sm btn-white btn-round" href="<?php echo plugin_page( 'veranstaltung' ); ?>">
 			<i class="ace-icon fa fa-arrow-left"></i> <?php echo plugin_lang_get( 'teilnehmer_back' ); ?>
 		</a>
+		<?php if( $t_count > 0 ) { ?>
+		<form class="form-inline" style="display:inline" method="post"
+			action="<?php echo plugin_page( 'veranstaltung_teilnehmer_update' ); ?>">
+			<?php echo form_security_field( 'plugin_QualificationTracker_veranstaltung_teilnehmer_update' ); ?>
+			<input type="hidden" name="id" value="<?php echo $f_id; ?>" />
+			<input type="hidden" name="action" value="generate" />
+			<button type="submit" class="btn btn-sm btn-primary btn-white btn-round"
+				<?php echo $t_open_count === 0 ? 'disabled="disabled"' : ''; ?>>
+				<i class="ace-icon fa fa-ticket"></i>
+				<?php echo plugin_lang_get( 'teilnehmer_generate' ); ?>
+				<?php if( $t_open_count > 0 ) { echo '(' . $t_open_count . ')'; } ?>
+			</button>
+		</form>
+		<?php } ?>
 		<span class="pull-right">
 			<strong><?php echo string_display_line( (string)( $t_massnahme !== false ? $t_massnahme['schluessel'] . ' – ' . $t_massnahme['bezeichnung'] : '#' . $t_massnahme_id ) ); ?></strong>
 			&nbsp;·&nbsp;<?php echo string_display_line( substr( (string)$t_event['termin'], 0, 16 ) ); ?>
@@ -127,15 +159,25 @@ layout_page_begin();
 				<th><?php echo plugin_lang_get( 'col_personalnummer' ); ?></th>
 				<th><?php echo plugin_lang_get( 'col_name' ); ?></th>
 				<th><?php echo plugin_lang_get( 'col_abteilung' ); ?></th>
+				<th class="center"><?php echo plugin_lang_get( 'teilnehmer_col_ticket' ); ?></th>
 				<th class="center"><?php echo plugin_lang_get( 'col_aktionen' ); ?></th>
 			</tr>
 		</thead>
 		<tbody>
-		<?php foreach( $t_participants as $t_p ) { ?>
+		<?php foreach( $t_participants as $t_p ) { $t_bug = (int)$t_p['bug_id']; ?>
 			<tr>
 				<td><?php echo string_display_line( (string)$t_p['personalnummer'] ); ?></td>
 				<td><?php echo string_display_line( trim( $t_p['nachname'] . ', ' . $t_p['vorname'], ', ' ) ); ?></td>
 				<td><?php echo string_display_line( (string)$t_p['abteilung'] ); ?></td>
+				<td class="center">
+					<?php if( $t_bug > 0 ) { ?>
+						<a href="<?php echo string_attribute( string_get_bug_view_url( $t_bug ) ); ?>">
+							<?php echo bug_format_id( $t_bug ); ?>
+						</a>
+					<?php } else { ?>
+						<span class="label label-default"><?php echo plugin_lang_get( 'teilnehmer_ticket_open' ); ?></span>
+					<?php } ?>
+				</td>
 				<td class="center">
 					<form class="form-inline" style="display:inline" method="post"
 						action="<?php echo plugin_page( 'veranstaltung_teilnehmer_update' ); ?>">
@@ -151,7 +193,7 @@ layout_page_begin();
 			</tr>
 		<?php } ?>
 		<?php if( empty( $t_participants ) ) { ?>
-			<tr><td colspan="4" class="center"><?php echo plugin_lang_get( 'teilnehmer_none' ); ?></td></tr>
+			<tr><td colspan="5" class="center"><?php echo plugin_lang_get( 'teilnehmer_none' ); ?></td></tr>
 		<?php } ?>
 		</tbody>
 	</table>
