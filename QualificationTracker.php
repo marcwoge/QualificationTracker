@@ -125,8 +125,81 @@ class QualificationTrackerPlugin extends MantisPlugin {
 	 */
 	function hooks() {
 		return array(
-			'EVENT_MENU_MANAGE' => 'menu_manage',
+			'EVENT_MENU_MANAGE'           => 'menu_manage',
+			'EVENT_LAYOUT_CONTENT_BEGIN'  => 'dashboard_widget',
 		);
+	}
+
+	/**
+	 * Dashboard KPI widget (F4.6).
+	 *
+	 * Rendered at the top of the front / My-View page for users allowed to manage
+	 * the plugin: the overall compliance rate and the outstanding-measure counts
+	 * as of today, with links into the matrix and the audit report. Gated to the
+	 * dashboard pages so it does not appear elsewhere, and it does no database
+	 * work until after that check.
+	 *
+	 * @param string $p_event Event name.
+	 * @return string HTML (EVENT_LAYOUT_CONTENT_BEGIN is an output event).
+	 */
+	function dashboard_widget( $p_event ) {
+		$t_script = basename( isset( $_SERVER['SCRIPT_NAME'] ) ? $_SERVER['SCRIPT_NAME'] : '' );
+		if( $t_script !== 'my_view_page.php' && $t_script !== 'main_page.php' ) {
+			return '';
+		}
+		if( !access_has_global_level( plugin_config_get( 'manage_threshold' ) ) ) {
+			return '';
+		}
+
+		plugin_require_api( 'core/QT_Catalog.php' );
+		plugin_require_api( 'core/QT_Person.php' );
+		plugin_require_api( 'core/QT_Prerequisite.php' );
+		plugin_require_api( 'core/QT_CustomFields.php' );
+		plugin_require_api( 'core/QT_DueDateCalculator.php' );
+		plugin_require_api( 'core/QT_Generator.php' );
+		plugin_require_api( 'core/QT_SollIst.php' );
+		plugin_require_api( 'core/QT_Matrix.php' );
+
+		$t_report = qt_matrix_compliance( date( 'Y-m-d' ), array() );
+		$t = $t_report['total'];
+		if( (int)$t['soll'] <= 0 ) {
+			return '';
+		}
+
+		$t_rate = (float)$t['rate'];
+		$t_rate_class = $t_rate >= 90 ? 'success' : ( $t_rate >= 70 ? 'warning' : 'danger' );
+
+		$t_lang = function( $p_key ) {
+			return plugin_lang_get( $p_key );
+		};
+		$t_kpi = function( $p_value, $p_label, $p_class ) {
+			return '<div class="col-sm-3 col-xs-6 center">'
+				. '<h2 class="bigger-200 ' . ( $p_class === 'grey' ? 'grey' : 'text-' . $p_class ) . '" style="margin:4px 0">' . (int)$p_value . '</h2>'
+				. '<span class="grey">' . string_display_line( $p_label ) . '</span></div>';
+		};
+
+		$t_html = '<div class="col-md-12 col-xs-12"><div class="space-10"></div>'
+			. '<div class="widget-box widget-color-blue2">'
+			. '<div class="widget-header widget-header-small"><h4 class="widget-title lighter">'
+			. '<i class="ace-icon fa fa-shield"></i> ' . string_display_line( $t_lang( 'widget_title' ) )
+			. '</h4></div><div class="widget-body"><div class="widget-main">'
+			. '<div class="row">'
+			. '<div class="col-sm-3 col-xs-6 center">'
+			. '<h2 class="bigger-200 text-' . $t_rate_class . '" style="margin:4px 0">' . number_format( $t_rate, 1 ) . '&nbsp;%</h2>'
+			. '<span class="grey">' . string_display_line( $t_lang( 'audit_rate' ) ) . '</span></div>'
+			. $t_kpi( (int)$t['abgelaufen'], $t_lang( 'matrix_state_abgelaufen' ), 'danger' )
+			. $t_kpi( (int)$t['fehlt'], $t_lang( 'matrix_state_fehlt' ), 'grey' )
+			. $t_kpi( (int)$t['offen'], $t_lang( 'matrix_state_offen' ), 'info' )
+			. '</div>'
+			. '<div class="clearfix" style="margin-top:8px">'
+			. '<a class="btn btn-xs btn-primary btn-white btn-round" href="' . plugin_page( 'matrix' ) . '">'
+			. '<i class="ace-icon fa fa-th"></i> ' . string_display_line( $t_lang( 'menu_matrix' ) ) . '</a> '
+			. '<a class="btn btn-xs btn-white btn-round" href="' . plugin_page( 'audit' ) . '">'
+			. '<i class="ace-icon fa fa-file-text-o"></i> ' . string_display_line( $t_lang( 'menu_audit' ) ) . '</a>'
+			. '</div>'
+			. '</div></div></div></div>';
+
+		return $t_html;
 	}
 
 	/**

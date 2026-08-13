@@ -444,3 +444,6 @@ $s_plugin_QualificationTracker_audit_rate         = 'Erfüllungsgrad';
 $s_plugin_QualificationTracker_audit_total        = 'Gesamt';
 $s_plugin_QualificationTracker_audit_deficiencies = 'Offene Nachweise';
 $s_plugin_QualificationTracker_audit_no_deficiencies = 'Zum Stichtag liegen keine offenen Nachweise vor.';
+
+# --- Kennzahlen-Widget (F4.6) --------------------------------------------
+$s_plugin_QualificationTracker_widget_title = 'Qualifikationen – Überblick';

@@ -444,3 +444,6 @@ $s_plugin_QualificationTracker_audit_rate         = 'Compliance';
 $s_plugin_QualificationTracker_audit_total        = 'Total';
 $s_plugin_QualificationTracker_audit_deficiencies = 'Outstanding proofs';
 $s_plugin_QualificationTracker_audit_no_deficiencies = 'No outstanding proofs as of the key date.';
+
+# --- KPI widget (F4.6) ---------------------------------------------------
+$s_plugin_QualificationTracker_widget_title = 'Qualifications – overview';

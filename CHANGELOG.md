@@ -8,6 +8,13 @@ die Versionierung folgt [Semantic Versioning](https://semver.org/lang/de/).
 ## [Unreleased]
 
 ### Hinzugefügt
+- **F4.6 Kennzahlen-Widget (M4):** Auf der Mantis-Startseite (My-View bzw.
+  Hauptseite) erscheint für berechtigte Nutzer ein Überblicks-Widget mit dem
+  aktuellen Gesamt-Erfüllungsgrad und den Zahlen der offenen Nachweise
+  (abgelaufen / kein Nachweis / in Bearbeitung), samt Verknüpfung zu Matrix und
+  Auditbericht. Umgesetzt über den `EVENT_LAYOUT_CONTENT_BEGIN`-Hook, streng auf
+  die Startseiten begrenzt und ohne Datenbankzugriff, solange diese Prüfung
+  nicht greift. **Schließt M4 ab.**
 - **F4.5 Audit-Bericht (M4):** Stichtagsbezogener Nachweisbericht unter
   *Verwaltung → QualificationTracker → Auditbericht*: Erfüllungsgrad je Abteilung
   (Soll-Pflichten, erfüllte/gültige Nachweise, Aufschlüsselung nach
