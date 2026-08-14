@@ -8,6 +8,13 @@ die Versionierung folgt [Semantic Versioning](https://semver.org/lang/de/).
 ## [Unreleased]
 
 ### Hinzugefügt
+- **F5.6 Laufprotokoll (M5):** Jeder ausgeführte Automatiklauf – aus dem
+  CLI-Runner (F5.5) wie aus den manuellen Auslösern der Automatik-Seite – wird in
+  der neuen Tabelle `qt_lauf` mit Zeitpunkt, Lauf, Quelle (cli/ui),
+  Ergebnis-Zusammenfassung (JSON) und auslösendem Nutzer protokolliert und ist
+  unten auf der Automatik-Seite einsehbar (letzte 25 Läufe). Neue reine,
+  unit-getestete `qt_lauf_format_result` sowie `qt_lauf_record`/`qt_lauf_load`
+  in `core/QT_RunLog.php`.
 - **F5.5 CLI-Runner (M5):** `scripts/qt_cron.php` bündelt die vier
   Automatikläufe (Ablaufwächter, Ruhensvermerk, Ablaufreaktivierung,
   Eskalation) für Cron bzw. systemd-Timer. CLI-only (Web-Aufruf wird

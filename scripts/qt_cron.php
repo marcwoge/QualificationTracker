@@ -104,6 +104,7 @@ plugin_require_api( 'core/QT_Expiry.php' );
 plugin_require_api( 'core/QT_Reactivation.php' );
 plugin_require_api( 'core/QT_Escalation.php' );
 plugin_require_api( 'core/QT_Ruhen.php' );
+plugin_require_api( 'core/QT_RunLog.php' );
 
 $t_today = date( 'Y-m-d' );
 
@@ -183,6 +184,9 @@ foreach( $t_passes as $t_name => $t_fn ) {
 	}
 	try {
 		$t_result = $g_dry_run ? $t_dry[$t_name]() : $t_fn();
+		if( !$g_dry_run ) {
+			qt_lauf_record( $t_name, $t_result, 'cli' );
+		}
 		qt_cron_log( $t_name . ': ' . json_encode( $t_result ) );
 	} catch( Exception $e ) {
 		qt_cron_log( $t_name . ' ERROR: ' . $e->getMessage() );

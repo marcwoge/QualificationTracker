@@ -492,3 +492,12 @@ $s_plugin_QualificationTracker_ruhen_todo_lift     = 'wird aufgehoben';
 $s_plugin_QualificationTracker_ruhen_note_set    = 'QualificationTracker – Ruhensvermerk: Die Beauftragung ruht, da eine sicherheitsrelevante Voraussetzung keinen gültigen Nachweis hat.';
 $s_plugin_QualificationTracker_ruhen_note_lifted = 'QualificationTracker – Ruhensvermerk aufgehoben: Die sicherheitsrelevanten Voraussetzungen liegen wieder gültig vor.';
 $s_plugin_QualificationTracker_ruhen_msg_done = 'Ruhensvermerk: %d gesetzt, %d aufgehoben.';
+
+# --- Laufprotokoll (F5.6) ------------------------------------------------
+$s_plugin_QualificationTracker_protokoll_title = 'Laufprotokoll';
+$s_plugin_QualificationTracker_protokoll_none  = 'Noch keine Automatikläufe protokolliert.';
+$s_plugin_QualificationTracker_protokoll_col_time   = 'Zeitpunkt';
+$s_plugin_QualificationTracker_protokoll_col_lauf   = 'Lauf';
+$s_plugin_QualificationTracker_protokoll_col_source = 'Quelle';
+$s_plugin_QualificationTracker_protokoll_col_result = 'Ergebnis';
+$s_plugin_QualificationTracker_protokoll_col_user   = 'Ausgelöst von';

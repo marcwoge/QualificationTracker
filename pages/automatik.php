@@ -22,6 +22,7 @@ require_api( 'html_api.php' );
 require_api( 'lang_api.php' );
 require_api( 'print_api.php' );
 require_api( 'string_api.php' );
+require_api( 'user_api.php' );
 
 auth_reauthenticate();
 access_ensure_global_level( plugin_config_get( 'manage_threshold' ) );
@@ -38,10 +39,12 @@ plugin_require_api( 'core/QT_Expiry.php' );
 plugin_require_api( 'core/QT_Reactivation.php' );
 plugin_require_api( 'core/QT_Escalation.php' );
 plugin_require_api( 'core/QT_Ruhen.php' );
+plugin_require_api( 'core/QT_RunLog.php' );
 
 $t_today   = date( 'Y-m-d' );
 $t_preview = qt_expiry_find( $t_today );
 $t_msg     = gpc_get_string( 'msg', '' );
+$t_laeufe  = qt_lauf_load( 25 );
 
 # Reactivation preview (F5.2).
 $t_reveille = qt_integration_reveille();
@@ -399,6 +402,52 @@ layout_page_begin();
 		<?php } ?>
 		<?php if( empty( $t_ruhen ) ) { ?>
 			<tr><td colspan="4" class="center"><?php echo plugin_lang_get( 'ruhen_none' ); ?></td></tr>
+		<?php } ?>
+		</tbody>
+	</table>
+	</div>
+	</div>
+	</div>
+</div>
+
+<!-- Laufprotokoll (F5.6) -->
+<div class="widget-box widget-color-grey">
+	<div class="widget-header widget-header-small">
+		<h4 class="widget-title lighter">
+			<i class="ace-icon fa fa-history"></i>
+			<?php echo plugin_lang_get( 'protokoll_title' ); ?>
+		</h4>
+	</div>
+
+	<div class="widget-body">
+	<div class="widget-main no-padding">
+	<div class="table-responsive">
+	<table class="table table-bordered table-condensed table-striped">
+		<thead>
+			<tr>
+				<th><?php echo plugin_lang_get( 'protokoll_col_time' ); ?></th>
+				<th><?php echo plugin_lang_get( 'protokoll_col_lauf' ); ?></th>
+				<th><?php echo plugin_lang_get( 'protokoll_col_source' ); ?></th>
+				<th><?php echo plugin_lang_get( 'protokoll_col_result' ); ?></th>
+				<th><?php echo plugin_lang_get( 'protokoll_col_user' ); ?></th>
+			</tr>
+		</thead>
+		<tbody>
+		<?php foreach( $t_laeufe as $t_l ) {
+			$t_ergebnis = json_decode( (string)$t_l['ergebnis'], true );
+			if( !is_array( $t_ergebnis ) ) { $t_ergebnis = array(); }
+			$t_uid = (int)$t_l['user_id'];
+		?>
+			<tr>
+				<td><?php echo date( 'Y-m-d H:i', (int)$t_l['date_created'] ); ?></td>
+				<td><?php echo string_display_line( (string)$t_l['lauf'] ); ?></td>
+				<td><span class="label label-default"><?php echo string_display_line( (string)$t_l['quelle'] ); ?></span></td>
+				<td><?php echo string_display_line( qt_lauf_format_result( $t_ergebnis ) ); ?></td>
+				<td><?php echo $t_uid > 0 && user_exists( $t_uid ) ? string_display_line( user_get_name( $t_uid ) ) : '&ndash;'; ?></td>
+			</tr>
+		<?php } ?>
+		<?php if( empty( $t_laeufe ) ) { ?>
+			<tr><td colspan="5" class="center"><?php echo plugin_lang_get( 'protokoll_none' ); ?></td></tr>
 		<?php } ?>
 		</tbody>
 	</table>

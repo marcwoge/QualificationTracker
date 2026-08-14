@@ -1,7 +1,7 @@
 # Roadmap — MantisBT QualificationTracker
 
 **Version dieses Dokuments:** 0.4 (2026-08-12)
-**Status Gesamtprojekt:** 🟡 M1 (Fundament), M2 (Generator), M3 (Veranstaltungen) und M4 (Matrix & Auswertung) abgeschlossen (F3.7 zurückgestellt auf 1.1), M5 (Automatisierung) in Arbeit (F5.1–F5.5 fertig)
+**Status Gesamtprojekt:** 🟡 M1 (Fundament), M2 (Generator), M3 (Veranstaltungen) und M4 (Matrix & Auswertung) abgeschlossen (F3.7 zurückgestellt auf 1.1), M5 (Automatisierung) in Arbeit (F5.1–F5.6 fertig)
 
 ---
 
@@ -127,7 +127,7 @@ Legende: ⬜ offen · 🟡 in Arbeit · 🟢 fertig · ⚪ zurückgestellt
 | F5.3 | Eskalationsstufen | Vier konfigurierbare Stufen (90/30/0/−30 Tage) mit unterschiedlichen Empfängerkreisen | 🟢 |
 | F5.4 | Ruhensvermerk | Bei überfälliger sicherheitsrelevanter Beauftragung automatischer Vermerk und Statuswechsel der abhängigen Beauftragung | 🟢 |
 | F5.5 | CLI-Runner | `php qt_cron.php` für Cron beziehungsweise systemd-Timer, mit Exit-Codes für Monitoring | 🟢 |
-| F5.6 | Laufprotokoll | Jeder Automatiklauf wird protokolliert und ist in der Oberfläche einsehbar | ⬜ |
+| F5.6 | Laufprotokoll | Jeder Automatiklauf wird protokolliert und ist in der Oberfläche einsehbar | 🟢 |
 | F5.7 | Moduswechsel im Bestand | Wird der Fälligkeitsmodus einer Maßnahme im laufenden Betrieb geändert, zeigt eine Simulation die betroffenen Nachweise und die neuen Termine vor der Übernahme. Bereits abgeschlossene Zyklen werden **nicht** rückwirkend neu berechnet, sonst bricht die Auditspur | ⬜ |
 
 ### M6 — Import & Migration

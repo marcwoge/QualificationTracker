@@ -22,6 +22,8 @@ access_ensure_global_level( plugin_config_get( 'manage_threshold' ) );
 
 form_security_validate( 'plugin_QualificationTracker_automatik_run' );
 
+plugin_require_api( 'core/QT_RunLog.php' );
+
 $f_action = gpc_get_string( 'action', 'expiry' );
 $t_today  = date( 'Y-m-d' );
 
@@ -36,6 +38,7 @@ if( $f_action === 'ruhen' ) {
 
 	$t_result = qt_ruhen_run( $t_today );
 
+	qt_lauf_record( 'ruhen', $t_result, 'ui' );
 	form_security_purge( 'plugin_QualificationTracker_automatik_run' );
 	print_successful_redirect( plugin_page( 'automatik', true )
 		. '&msg=ruhen&suspended=' . (int)$t_result['suspended']
@@ -49,6 +52,7 @@ if( $f_action === 'escalation' ) {
 
 	$t_result = qt_eskalation_run( $t_today );
 
+	qt_lauf_record( 'escalation', $t_result, 'ui' );
 	form_security_purge( 'plugin_QualificationTracker_automatik_run' );
 	print_successful_redirect( plugin_page( 'automatik', true )
 		. '&msg=escalated&notified=' . (int)$t_result['notified']
@@ -65,6 +69,7 @@ if( $f_action === 'reactivation' ) {
 
 	$t_result = qt_reactivation_run( $t_today );
 
+	qt_lauf_record( 'reactivation', $t_result, 'ui' );
 	form_security_purge( 'plugin_QualificationTracker_automatik_run' );
 	print_successful_redirect( plugin_page( 'automatik', true )
 		. '&msg=reactivated&deferred=' . (int)$t_result['deferred']
@@ -76,5 +81,6 @@ plugin_require_api( 'core/QT_Expiry.php' );
 
 $t_result = qt_expiry_run( $t_today );
 
+qt_lauf_record( 'expiry', $t_result, 'ui' );
 form_security_purge( 'plugin_QualificationTracker_automatik_run' );
 print_successful_redirect( plugin_page( 'automatik', true ) . '&msg=expired&count=' . (int)$t_result['expired'] );

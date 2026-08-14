@@ -492,3 +492,12 @@ $s_plugin_QualificationTracker_ruhen_todo_lift     = 'will be lifted';
 $s_plugin_QualificationTracker_ruhen_note_set    = 'QualificationTracker – suspension note: the appointment rests because a safety-relevant prerequisite has no valid proof.';
 $s_plugin_QualificationTracker_ruhen_note_lifted = 'QualificationTracker – suspension note lifted: the safety-relevant prerequisites are valid again.';
 $s_plugin_QualificationTracker_ruhen_msg_done = 'Suspension: %d set, %d lifted.';
+
+# --- Run log (F5.6) ------------------------------------------------------
+$s_plugin_QualificationTracker_protokoll_title = 'Run log';
+$s_plugin_QualificationTracker_protokoll_none  = 'No automation runs logged yet.';
+$s_plugin_QualificationTracker_protokoll_col_time   = 'Time';
+$s_plugin_QualificationTracker_protokoll_col_lauf   = 'Pass';
+$s_plugin_QualificationTracker_protokoll_col_source = 'Source';
+$s_plugin_QualificationTracker_protokoll_col_result = 'Result';
+$s_plugin_QualificationTracker_protokoll_col_user   = 'Triggered by';

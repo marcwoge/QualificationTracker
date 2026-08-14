@@ -458,6 +458,20 @@ class QualificationTrackerPlugin extends MantisPlugin {
 			# reversible when the prerequisite becomes valid again.
 			array( 'AddColumnSQL', array( plugin_table( 'nachweis' ),
 				"ruht L NOTNULL DEFAULT '0'" ) ),
+
+			# --- 25/26: qt_lauf (automation run log, F5.6) -----------------
+			# One row per executed automation pass (CLI or UI), with its JSON
+			# result summary, so every run is auditable in the interface.
+			array( 'CreateTableSQL', array( plugin_table( 'lauf' ), "
+				id           I     UNSIGNED NOTNULL AUTOINCREMENT PRIMARY,
+				lauf         C(16) NOTNULL,
+				quelle       C(8)  NOTNULL DEFAULT \" 'ui' \",
+				ergebnis     X,
+				user_id      I     UNSIGNED NOTNULL DEFAULT '0',
+				date_created I     UNSIGNED NOTNULL DEFAULT '0'
+				" ) ),
+			array( 'CreateIndexSQL', array( 'idx_qt_lauf_created',
+				plugin_table( 'lauf' ), 'date_created' ) ),
 		);
 	}
 
@@ -488,7 +502,7 @@ class QualificationTrackerPlugin extends MantisPlugin {
 	 */
 	function uninstall() {
 		$t_tables = array(
-			'teilnehmer', 'nachweis', 'massnahme_vorbedingung', 'veranstaltung',
+			'lauf', 'teilnehmer', 'nachweis', 'massnahme_vorbedingung', 'veranstaltung',
 			'zuordnung', 'profil_massnahme', 'profil', 'person', 'massnahme',
 		);
 		foreach( $t_tables as $t_name ) {
