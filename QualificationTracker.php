@@ -112,6 +112,12 @@ class QualificationTrackerPlugin extends MantisPlugin {
 			# hand-off uses Reveille's configured deferred status instead.
 			'reactivation_held_status'  => 15,
 
+			# --- Ruhensvermerk (F5.4) --------------------------------------
+			# Status a dependent appointment (Beauftragung) ticket is set to
+			# while it rests because a safety-relevant prerequisite has lapsed.
+			# Default 20 (feedback) = needs attention; overridable.
+			'ruhens_status'             => 20,
+
 			# --- Ticketerzeugung (ab M2) -----------------------------------
 			# Project the proof tickets are created in. 0 = not configured yet.
 			'zielprojekt_id'            => 0,
@@ -439,6 +445,13 @@ class QualificationTrackerPlugin extends MantisPlugin {
 			# Lets the nightly escalation run fire each stage exactly once.
 			array( 'AddColumnSQL', array( plugin_table( 'nachweis' ),
 				"eskalation_stufe I2 NOTNULL DEFAULT '0'" ) ),
+
+			# --- 24: qt_nachweis.ruht (suspension flag, F5.4) --------------
+			# 1 while a dependent appointment rests because a safety-relevant
+			# prerequisite has lapsed; makes the suspension idempotent and
+			# reversible when the prerequisite becomes valid again.
+			array( 'AddColumnSQL', array( plugin_table( 'nachweis' ),
+				"ruht L NOTNULL DEFAULT '0'" ) ),
 		);
 	}
 

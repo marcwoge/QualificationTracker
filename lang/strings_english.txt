@@ -480,3 +480,15 @@ $s_plugin_QualificationTracker_eskalation_col_stage = 'Stage';
 $s_plugin_QualificationTracker_eskalation_todo  = 'due';
 $s_plugin_QualificationTracker_eskalation_note  = 'QualificationTracker – escalation stage %d/%d (%d days). Target date: %s.';
 $s_plugin_QualificationTracker_eskalation_msg_done = 'Escalation: %d proof(s) notified, %d stage(s) fired.';
+
+# --- Suspension note (F5.4) ----------------------------------------------
+$s_plugin_QualificationTracker_ruhen_title = 'Suspension note (appointments)';
+$s_plugin_QualificationTracker_ruhen_intro = 'Appointments rest automatically as soon as a safety-relevant prerequisite has no valid proof; the note is lifted once the prerequisite is valid again.';
+$s_plugin_QualificationTracker_ruhen_run   = 'Update suspension notes';
+$s_plugin_QualificationTracker_ruhen_none  = 'No appointments with safety-relevant prerequisites.';
+$s_plugin_QualificationTracker_ruhen_state_resting = 'resting';
+$s_plugin_QualificationTracker_ruhen_todo_suspend  = 'will be set';
+$s_plugin_QualificationTracker_ruhen_todo_lift     = 'will be lifted';
+$s_plugin_QualificationTracker_ruhen_note_set    = 'QualificationTracker – suspension note: the appointment rests because a safety-relevant prerequisite has no valid proof.';
+$s_plugin_QualificationTracker_ruhen_note_lifted = 'QualificationTracker – suspension note lifted: the safety-relevant prerequisites are valid again.';
+$s_plugin_QualificationTracker_ruhen_msg_done = 'Suspension: %d set, %d lifted.';

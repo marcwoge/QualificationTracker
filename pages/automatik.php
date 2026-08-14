@@ -27,13 +27,17 @@ auth_reauthenticate();
 access_ensure_global_level( plugin_config_get( 'manage_threshold' ) );
 
 plugin_require_api( 'core/QT_Catalog.php' );
+plugin_require_api( 'core/QT_Person.php' );
+plugin_require_api( 'core/QT_Prerequisite.php' );
 plugin_require_api( 'core/QT_DueDateCalculator.php' );
 plugin_require_api( 'core/QT_Generator.php' );
+plugin_require_api( 'core/QT_SollIst.php' );
 plugin_require_api( 'core/QT_Matrix.php' );
 plugin_require_api( 'core/QT_Integration.php' );
 plugin_require_api( 'core/QT_Expiry.php' );
 plugin_require_api( 'core/QT_Reactivation.php' );
 plugin_require_api( 'core/QT_Escalation.php' );
+plugin_require_api( 'core/QT_Ruhen.php' );
 
 $t_today   = date( 'Y-m-d' );
 $t_preview = qt_expiry_find( $t_today );
@@ -80,6 +84,37 @@ foreach( qt_eskalation_candidates() as $t_c ) {
 	$t_esk[] = $t_c;
 }
 
+# Ruhensvermerk preview (F5.4).
+$t_ruhen = array();
+$t_ruhen_todo = 0;
+$t_ruhen_cache = array();
+foreach( qt_ruhen_candidates() as $t_c ) {
+	$t_pid = (int)$t_c['person_id'];
+	if( !isset( $t_ruhen_cache[$t_pid] ) ) {
+		$t_by = array();
+		foreach( qt_nachweis_load_for_person( $t_pid ) as $t_nw ) {
+			$t_by[(int)$t_nw['massnahme_id']][] = $t_nw;
+		}
+		$t_ruhen_cache[$t_pid] = $t_by;
+	}
+	$t_states = qt_ruhen_prereq_states( (int)$t_c['massnahme_id'], $t_ruhen_cache[$t_pid], $t_today );
+	$t_c['rest'] = qt_ruhen_should_rest( $t_states );
+	$t_c['is_ruht'] = !empty( $t_c['ruht'] );
+	if( $t_c['rest'] && !$t_c['is_ruht'] ) {
+		$t_c['todo'] = 'suspend';
+		$t_ruhen_todo++;
+	} else if( !$t_c['rest'] && $t_c['is_ruht'] ) {
+		$t_c['todo'] = 'lift';
+		$t_ruhen_todo++;
+	} else {
+		$t_c['todo'] = '';
+	}
+	# Only appointments that actually have safety-relevant prerequisites are of interest.
+	if( !empty( $t_states ) ) {
+		$t_ruhen[] = $t_c;
+	}
+}
+
 layout_page_header( plugin_lang_get( 'menu_automatik' ) );
 layout_page_begin();
 ?>
@@ -101,6 +136,11 @@ layout_page_begin();
 	<div class="alert alert-success">
 		<i class="ace-icon fa fa-check"></i>
 		<?php echo sprintf( plugin_lang_get( 'eskalation_msg_done' ), gpc_get_int( 'notified', 0 ), gpc_get_int( 'stages', 0 ) ); ?>
+	</div>
+<?php } else if( $t_msg === 'ruhen' ) { ?>
+	<div class="alert alert-success">
+		<i class="ace-icon fa fa-check"></i>
+		<?php echo sprintf( plugin_lang_get( 'ruhen_msg_done' ), gpc_get_int( 'suspended', 0 ), gpc_get_int( 'lifted', 0 ) ); ?>
 	</div>
 <?php } ?>
 
@@ -292,6 +332,73 @@ layout_page_begin();
 		<?php } ?>
 		<?php if( empty( $t_esk ) ) { ?>
 			<tr><td colspan="4" class="center"><?php echo plugin_lang_get( 'eskalation_none' ); ?></td></tr>
+		<?php } ?>
+		</tbody>
+	</table>
+	</div>
+	</div>
+	</div>
+</div>
+
+<!-- Ruhensvermerk (F5.4) -->
+<div class="widget-box widget-color-red">
+	<div class="widget-header widget-header-small">
+		<h4 class="widget-title lighter">
+			<i class="ace-icon fa fa-ban"></i>
+			<?php echo plugin_lang_get( 'ruhen_title' ); ?>
+		</h4>
+	</div>
+
+	<div class="widget-body">
+	<div class="widget-toolbox padding-8 clearfix">
+		<span class="help-block pull-left" style="margin:4px 12px 0 0"><?php echo plugin_lang_get( 'ruhen_intro' ); ?></span>
+		<form class="form-inline pull-right" method="post" action="<?php echo plugin_page( 'automatik_run' ); ?>">
+			<?php echo form_security_field( 'plugin_QualificationTracker_automatik_run' ); ?>
+			<input type="hidden" name="action" value="ruhen" />
+			<button type="submit" class="btn btn-sm btn-primary btn-white btn-round"
+				<?php echo $t_ruhen_todo === 0 ? 'disabled="disabled"' : ''; ?>>
+				<i class="ace-icon fa fa-play"></i>
+				<?php echo plugin_lang_get( 'ruhen_run' ); ?>
+				<?php if( $t_ruhen_todo > 0 ) { echo '(' . $t_ruhen_todo . ')'; } ?>
+			</button>
+		</form>
+	</div>
+
+	<div class="widget-main no-padding">
+	<div class="table-responsive">
+	<table class="table table-bordered table-condensed table-striped">
+		<thead>
+			<tr>
+				<th><?php echo plugin_lang_get( 'col_name' ); ?></th>
+				<th><?php echo plugin_lang_get( 'label_event_massnahme' ); ?></th>
+				<th><?php echo plugin_lang_get( 'reactivation_col_state' ); ?></th>
+				<th class="center"><?php echo plugin_lang_get( 'teilnehmer_col_ticket' ); ?></th>
+			</tr>
+		</thead>
+		<tbody>
+		<?php foreach( $t_ruhen as $t_c ) { $t_bug = (int)$t_c['bug_id']; ?>
+			<tr>
+				<td><?php echo string_display_line( trim( $t_c['nachname'] . ', ' . $t_c['vorname'], ', ' ) ); ?></td>
+				<td><?php echo string_display_line( $t_c['schluessel'] . ' – ' . $t_c['bezeichnung'] ); ?></td>
+				<td>
+					<?php if( $t_c['is_ruht'] ) { ?>
+						<span class="label label-danger"><?php echo plugin_lang_get( 'ruhen_state_resting' ); ?></span>
+					<?php } else { ?>
+						<span class="label label-success"><?php echo plugin_lang_get( 'reactivation_state_active' ); ?></span>
+					<?php }
+					if( $t_c['todo'] === 'suspend' ) { echo ' <span class="label label-warning">' . plugin_lang_get( 'ruhen_todo_suspend' ) . '</span>'; }
+					else if( $t_c['todo'] === 'lift' ) { echo ' <span class="label label-primary">' . plugin_lang_get( 'ruhen_todo_lift' ) . '</span>'; }
+					?>
+				</td>
+				<td class="center">
+					<?php if( $t_bug > 0 ) { ?>
+						<a href="<?php echo string_attribute( string_get_bug_view_url( $t_bug ) ); ?>"><?php echo bug_format_id( $t_bug ); ?></a>
+					<?php } else { echo '&ndash;'; } ?>
+				</td>
+			</tr>
+		<?php } ?>
+		<?php if( empty( $t_ruhen ) ) { ?>
+			<tr><td colspan="4" class="center"><?php echo plugin_lang_get( 'ruhen_none' ); ?></td></tr>
 		<?php } ?>
 		</tbody>
 	</table>

@@ -480,3 +480,15 @@ $s_plugin_QualificationTracker_eskalation_col_stage = 'Stufe';
 $s_plugin_QualificationTracker_eskalation_todo  = 'fällig';
 $s_plugin_QualificationTracker_eskalation_note  = 'QualificationTracker – Eskalationsstufe %d/%d (%d Tage). Soll-Termin: %s.';
 $s_plugin_QualificationTracker_eskalation_msg_done = 'Eskalation: %d Nachweis(e) benachrichtigt, %d Stufe(n) ausgelöst.';
+
+# --- Ruhensvermerk (F5.4) ------------------------------------------------
+$s_plugin_QualificationTracker_ruhen_title = 'Ruhensvermerk (Beauftragungen)';
+$s_plugin_QualificationTracker_ruhen_intro = 'Beauftragungen ruhen automatisch, sobald eine sicherheitsrelevante Voraussetzung ohne gültigen Nachweis ist; der Vermerk wird aufgehoben, sobald die Voraussetzung wieder gültig ist.';
+$s_plugin_QualificationTracker_ruhen_run   = 'Ruhensvermerk aktualisieren';
+$s_plugin_QualificationTracker_ruhen_none  = 'Keine Beauftragungen mit sicherheitsrelevanten Voraussetzungen.';
+$s_plugin_QualificationTracker_ruhen_state_resting = 'ruht';
+$s_plugin_QualificationTracker_ruhen_todo_suspend  = 'wird gesetzt';
+$s_plugin_QualificationTracker_ruhen_todo_lift     = 'wird aufgehoben';
+$s_plugin_QualificationTracker_ruhen_note_set    = 'QualificationTracker – Ruhensvermerk: Die Beauftragung ruht, da eine sicherheitsrelevante Voraussetzung keinen gültigen Nachweis hat.';
+$s_plugin_QualificationTracker_ruhen_note_lifted = 'QualificationTracker – Ruhensvermerk aufgehoben: Die sicherheitsrelevanten Voraussetzungen liegen wieder gültig vor.';
+$s_plugin_QualificationTracker_ruhen_msg_done = 'Ruhensvermerk: %d gesetzt, %d aufgehoben.';

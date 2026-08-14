@@ -37,3 +37,4 @@ require_once dirname( __DIR__ ) . '/core/QT_Expiry.php';
 require_once dirname( __DIR__ ) . '/core/QT_Integration.php';
 require_once dirname( __DIR__ ) . '/core/QT_Reactivation.php';
 require_once dirname( __DIR__ ) . '/core/QT_Escalation.php';
+require_once dirname( __DIR__ ) . '/core/QT_Ruhen.php';

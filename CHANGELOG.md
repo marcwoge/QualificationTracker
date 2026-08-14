@@ -8,6 +8,17 @@ die Versionierung folgt [Semantic Versioning](https://semver.org/lang/de/).
 ## [Unreleased]
 
 ### Hinzugefügt
+- **F5.4 Ruhensvermerk (M5):** Eine Beauftragung (Typ BE) ruht automatisch,
+  sobald eine ihrer **sicherheitsrelevanten** Voraussetzungen für die Person
+  keinen gültigen Nachweis mehr hat: das Beauftragungsticket erhält einen
+  Ruhensvermerk (Notiz) und wechselt auf den konfigurierten Ruhens-Status
+  (`ruhens_status`, Default 20). Sobald die Voraussetzung wieder gültig ist, wird
+  der Vermerk aufgehoben und der vorherige Status wiederhergestellt. Nutzt den
+  Vorbedingungsgraphen (F1.3) und die Gültigkeitsbewertung der Soll-Ist-Prüfung
+  (F2.5). Neue Spalte `qt_nachweis.ruht` (Schema 24) macht den Vorgang idempotent
+  und umkehrbar. Neue reine, unit-getestete `qt_ruhen_should_rest` und
+  `qt_ruhen_run` in `core/QT_Ruhen.php`; vierter Abschnitt auf der
+  Automatik-Seite.
 - **F5.3 Eskalationsstufen (M5):** Offene Nachweise mit Fälligkeit werden
   gestaffelt an den konfigurierten Tages-Stufen (Default 90/30/0/−30, positiv =
   vor, negativ = nach Fälligkeit) eskaliert. Je erreichte Stufe wird eine Notiz

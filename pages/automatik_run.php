@@ -25,6 +25,23 @@ form_security_validate( 'plugin_QualificationTracker_automatik_run' );
 $f_action = gpc_get_string( 'action', 'expiry' );
 $t_today  = date( 'Y-m-d' );
 
+if( $f_action === 'ruhen' ) {
+	require_api( 'bugnote_api.php' );
+	plugin_require_api( 'core/QT_Catalog.php' );
+	plugin_require_api( 'core/QT_Prerequisite.php' );
+	plugin_require_api( 'core/QT_DueDateCalculator.php' );
+	plugin_require_api( 'core/QT_Generator.php' );
+	plugin_require_api( 'core/QT_SollIst.php' );
+	plugin_require_api( 'core/QT_Ruhen.php' );
+
+	$t_result = qt_ruhen_run( $t_today );
+
+	form_security_purge( 'plugin_QualificationTracker_automatik_run' );
+	print_successful_redirect( plugin_page( 'automatik', true )
+		. '&msg=ruhen&suspended=' . (int)$t_result['suspended']
+		. '&lifted=' . (int)$t_result['lifted'] );
+}
+
 if( $f_action === 'escalation' ) {
 	require_api( 'bugnote_api.php' );
 	plugin_require_api( 'core/QT_DueDateCalculator.php' );
