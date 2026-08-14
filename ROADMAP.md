@@ -1,7 +1,7 @@
 # Roadmap — MantisBT QualificationTracker
 
 **Version dieses Dokuments:** 0.4 (2026-08-12)
-**Status Gesamtprojekt:** 🟡 M1 (Fundament), M2 (Generator), M3 (Veranstaltungen) und M4 (Matrix & Auswertung) abgeschlossen (F3.7 zurückgestellt auf 1.1), M5 (Automatisierung) in Arbeit (F5.1–F5.6 fertig)
+**Status Gesamtprojekt:** 🟡 M1–M5 abgeschlossen (M1 Fundament, M2 Generator, M3 Veranstaltungen, M4 Matrix & Auswertung, M5 Automatisierung; F3.7 zurückgestellt auf 1.1), M6 (Import & Migration) als Nächstes
 
 ---
 
@@ -57,7 +57,7 @@ Für die Anbindung an Auswertungssysteme stellt das Plugin **REST-Endpunkte** be
 | M2 | Generator | Tätigkeitsprofile, automatische Ticketketten, Soll-Ist-Prüfung | 🟢 fertig |
 | M3 | Veranstaltungen | Sammeltermine, Massenabschluss, Teilnehmerlisten | 🟢 abgeschlossen |
 | M4 | Matrix & Auswertung | Matrix-Ansicht, Ampel, Export | 🟢 abgeschlossen |
-| M5 | Automatisierung | Recurrence-/Reveille-Kopplung, Eskalationsstufen | 🟡 in Arbeit |
+| M5 | Automatisierung | Recurrence-/Reveille-Kopplung, Eskalationsstufen | 🟢 abgeschlossen |
 | M6 | Import & Migration | CSV-/REST-Import, HR-Sync, Ersterfassung | ⬜ offen |
 | M7 | Audit & Datenschutz | Berechtigungen, Löschkonzept, Auditbericht | ⬜ offen |
 | M8 | Release 1.0 | Doku, Docker-Testumgebung, Lasttest, Paketierung | ⬜ offen |
@@ -128,7 +128,7 @@ Legende: ⬜ offen · 🟡 in Arbeit · 🟢 fertig · ⚪ zurückgestellt
 | F5.4 | Ruhensvermerk | Bei überfälliger sicherheitsrelevanter Beauftragung automatischer Vermerk und Statuswechsel der abhängigen Beauftragung | 🟢 |
 | F5.5 | CLI-Runner | `php qt_cron.php` für Cron beziehungsweise systemd-Timer, mit Exit-Codes für Monitoring | 🟢 |
 | F5.6 | Laufprotokoll | Jeder Automatiklauf wird protokolliert und ist in der Oberfläche einsehbar | 🟢 |
-| F5.7 | Moduswechsel im Bestand | Wird der Fälligkeitsmodus einer Maßnahme im laufenden Betrieb geändert, zeigt eine Simulation die betroffenen Nachweise und die neuen Termine vor der Übernahme. Bereits abgeschlossene Zyklen werden **nicht** rückwirkend neu berechnet, sonst bricht die Auditspur | ⬜ |
+| F5.7 | Moduswechsel im Bestand | Wird der Fälligkeitsmodus einer Maßnahme im laufenden Betrieb geändert, zeigt eine Simulation die betroffenen Nachweise und die neuen Termine vor der Übernahme. Bereits abgeschlossene Zyklen werden **nicht** rückwirkend neu berechnet, sonst bricht die Auditspur | 🟢 |
 
 ### M6 — Import & Migration
 

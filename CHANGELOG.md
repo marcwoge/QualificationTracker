@@ -8,6 +8,19 @@ die Versionierung folgt [Semantic Versioning](https://semver.org/lang/de/).
 ## [Unreleased]
 
 ### Hinzugefügt
+- **F5.7 Moduswechsel im Bestand (M5):** Wird der Fälligkeitsmodus einer
+  Maßnahme im laufenden Betrieb geändert, zeigt eine **Simulation** unter
+  *Verwaltung → QualificationTracker → Moduswechsel* zuerst, welche **offenen**
+  Nachweise betroffen sind und welchen neuen Soll-Termin sie erhielten (alt/neu),
+  bevor etwas übernommen wird. Erst auf Bestätigung werden der Maßnahmenmodus und
+  die offenen Nachweise (Soll-Termin, Ticket-Fälligkeit, Custom-Field)
+  aktualisiert. **Bereits abgeschlossene Zyklen** (gültig/abgelaufen/entfallen)
+  werden nie rückwirkend neu berechnet — die Auditspur bleibt intakt. Der neue
+  Termin behält das Zyklusjahr und platziert nur innerhalb dessen neu
+  (Kalenderjahr → 31.12., Stichmonat → Monatsende, extern → kein Termin,
+  rollierend → unverändert bis zum nächsten Abschluss). Neue reine,
+  unit-getestete `qt_moduswechsel_new_soll` sowie `qt_moduswechsel_simulate`/
+  `qt_moduswechsel_apply` in `core/QT_ModeChange.php`. **Schließt M5 ab.**
 - **F5.6 Laufprotokoll (M5):** Jeder ausgeführte Automatiklauf – aus dem
   CLI-Runner (F5.5) wie aus den manuellen Auslösern der Automatik-Seite – wird in
   der neuen Tabelle `qt_lauf` mit Zeitpunkt, Lauf, Quelle (cli/ui),

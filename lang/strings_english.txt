@@ -501,3 +501,16 @@ $s_plugin_QualificationTracker_protokoll_col_lauf   = 'Pass';
 $s_plugin_QualificationTracker_protokoll_col_source = 'Source';
 $s_plugin_QualificationTracker_protokoll_col_result = 'Result';
 $s_plugin_QualificationTracker_protokoll_col_user   = 'Triggered by';
+
+# --- In-place mode change (F5.7) -----------------------------------------
+$s_plugin_QualificationTracker_menu_moduswechsel  = 'Mode change';
+$s_plugin_QualificationTracker_moduswechsel_title = 'In-place mode change';
+$s_plugin_QualificationTracker_moduswechsel_intro = 'Simulates the effect of a changed due-date mode on the open proofs before applying it. Completed cycles (valid/expired/cancelled) are not recomputed retroactively.';
+$s_plugin_QualificationTracker_moduswechsel_simulate = 'Simulate';
+$s_plugin_QualificationTracker_moduswechsel_apply    = 'Apply';
+$s_plugin_QualificationTracker_moduswechsel_confirm  = 'Apply the new due-date mode and the new target dates of the open proofs?';
+$s_plugin_QualificationTracker_moduswechsel_summary  = '%d open proofs affected, %d completed remain unchanged.';
+$s_plugin_QualificationTracker_moduswechsel_none     = 'No open proofs for this measure.';
+$s_plugin_QualificationTracker_moduswechsel_col_old  = 'Target date old';
+$s_plugin_QualificationTracker_moduswechsel_col_new  = 'Target date new';
+$s_plugin_QualificationTracker_moduswechsel_msg_applied = 'Mode change applied: %d proofs updated, %d unchanged.';

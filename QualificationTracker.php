@@ -238,6 +238,8 @@ class QualificationTrackerPlugin extends MantisPlugin {
 		return array(
 			'<a href="' . plugin_page( 'catalog' ) . '">'
 				. plugin_lang_get( 'menu_catalog' ) . '</a>',
+			'<a href="' . plugin_page( 'moduswechsel' ) . '">'
+				. plugin_lang_get( 'menu_moduswechsel' ) . '</a>',
 			'<a href="' . plugin_page( 'person' ) . '">'
 				. plugin_lang_get( 'menu_person' ) . '</a>',
 			'<a href="' . plugin_page( 'profil' ) . '">'

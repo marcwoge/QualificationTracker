@@ -501,3 +501,16 @@ $s_plugin_QualificationTracker_protokoll_col_lauf   = 'Lauf';
 $s_plugin_QualificationTracker_protokoll_col_source = 'Quelle';
 $s_plugin_QualificationTracker_protokoll_col_result = 'Ergebnis';
 $s_plugin_QualificationTracker_protokoll_col_user   = 'Ausgelöst von';
+
+# --- Moduswechsel im Bestand (F5.7) --------------------------------------
+$s_plugin_QualificationTracker_menu_moduswechsel  = 'Moduswechsel';
+$s_plugin_QualificationTracker_moduswechsel_title = 'Moduswechsel im Bestand';
+$s_plugin_QualificationTracker_moduswechsel_intro = 'Simuliert die Auswirkung eines geänderten Fälligkeitsmodus auf die offenen Nachweise vor der Übernahme. Abgeschlossene Zyklen (gültig/abgelaufen/entfallen) werden nicht rückwirkend neu berechnet.';
+$s_plugin_QualificationTracker_moduswechsel_simulate = 'Simulieren';
+$s_plugin_QualificationTracker_moduswechsel_apply    = 'Übernehmen';
+$s_plugin_QualificationTracker_moduswechsel_confirm  = 'Neuen Fälligkeitsmodus und die neuen Termine der offenen Nachweise übernehmen?';
+$s_plugin_QualificationTracker_moduswechsel_summary  = '%d offene Nachweise betroffen, %d abgeschlossene bleiben unverändert.';
+$s_plugin_QualificationTracker_moduswechsel_none     = 'Keine offenen Nachweise für diese Maßnahme.';
+$s_plugin_QualificationTracker_moduswechsel_col_old  = 'Soll-Termin alt';
+$s_plugin_QualificationTracker_moduswechsel_col_new  = 'Soll-Termin neu';
+$s_plugin_QualificationTracker_moduswechsel_msg_applied = 'Moduswechsel übernommen: %d Nachweise aktualisiert, %d unverändert.';
