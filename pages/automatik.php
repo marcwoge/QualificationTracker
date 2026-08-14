@@ -33,6 +33,7 @@ plugin_require_api( 'core/QT_Matrix.php' );
 plugin_require_api( 'core/QT_Integration.php' );
 plugin_require_api( 'core/QT_Expiry.php' );
 plugin_require_api( 'core/QT_Reactivation.php' );
+plugin_require_api( 'core/QT_Escalation.php' );
 
 $t_today   = date( 'Y-m-d' );
 $t_preview = qt_expiry_find( $t_today );
@@ -61,6 +62,24 @@ foreach( qt_reactivation_candidates() as $t_c ) {
 	$t_react[] = $t_c;
 }
 
+# Escalation preview (F5.3).
+$t_esk_stufen = (array)plugin_config_get( 'eskalation_stufen_tage' );
+$t_esk = array();
+$t_esk_todo = 0;
+foreach( qt_eskalation_candidates() as $t_c ) {
+	$t_reached = qt_eskalation_reached_count( $t_c['soll_termin'], $t_today, $t_esk_stufen );
+	$t_stored = (int)$t_c['eskalation_stufe'];
+	if( $t_reached <= 0 && $t_stored <= 0 ) {
+		continue;
+	}
+	$t_c['reached'] = $t_reached;
+	$t_c['stored']  = $t_stored;
+	if( $t_reached > $t_stored ) {
+		$t_esk_todo++;
+	}
+	$t_esk[] = $t_c;
+}
+
 layout_page_header( plugin_lang_get( 'menu_automatik' ) );
 layout_page_begin();
 ?>
@@ -77,6 +96,11 @@ layout_page_begin();
 	<div class="alert alert-success">
 		<i class="ace-icon fa fa-check"></i>
 		<?php echo sprintf( plugin_lang_get( 'reactivation_msg_done' ), gpc_get_int( 'deferred', 0 ), gpc_get_int( 'reactivated', 0 ) ); ?>
+	</div>
+<?php } else if( $t_msg === 'escalated' ) { ?>
+	<div class="alert alert-success">
+		<i class="ace-icon fa fa-check"></i>
+		<?php echo sprintf( plugin_lang_get( 'eskalation_msg_done' ), gpc_get_int( 'notified', 0 ), gpc_get_int( 'stages', 0 ) ); ?>
 	</div>
 <?php } ?>
 
@@ -208,6 +232,66 @@ layout_page_begin();
 		<?php } ?>
 		<?php if( empty( $t_react ) ) { ?>
 			<tr><td colspan="6" class="center"><?php echo plugin_lang_get( 'reactivation_none' ); ?></td></tr>
+		<?php } ?>
+		</tbody>
+	</table>
+	</div>
+	</div>
+	</div>
+</div>
+
+<!-- Eskalationsstufen (F5.3) -->
+<div class="widget-box widget-color-orange">
+	<div class="widget-header widget-header-small">
+		<h4 class="widget-title lighter">
+			<i class="ace-icon fa fa-bullhorn"></i>
+			<?php echo plugin_lang_get( 'eskalation_title' ); ?>
+			<span class="grey" style="font-weight:normal">(<?php echo string_display_line( implode( ' / ', array_map( 'intval', $t_esk_stufen ) ) ); ?>)</span>
+		</h4>
+	</div>
+
+	<div class="widget-body">
+	<div class="widget-toolbox padding-8 clearfix">
+		<span class="help-block pull-left" style="margin:4px 12px 0 0"><?php echo plugin_lang_get( 'eskalation_intro' ); ?></span>
+		<form class="form-inline pull-right" method="post" action="<?php echo plugin_page( 'automatik_run' ); ?>">
+			<?php echo form_security_field( 'plugin_QualificationTracker_automatik_run' ); ?>
+			<input type="hidden" name="action" value="escalation" />
+			<button type="submit" class="btn btn-sm btn-primary btn-white btn-round"
+				<?php echo $t_esk_todo === 0 ? 'disabled="disabled"' : ''; ?>>
+				<i class="ace-icon fa fa-play"></i>
+				<?php echo plugin_lang_get( 'eskalation_run' ); ?>
+				<?php if( $t_esk_todo > 0 ) { echo '(' . $t_esk_todo . ')'; } ?>
+			</button>
+		</form>
+	</div>
+
+	<div class="widget-main no-padding">
+	<div class="table-responsive">
+	<table class="table table-bordered table-condensed table-striped">
+		<thead>
+			<tr>
+				<th><?php echo plugin_lang_get( 'col_name' ); ?></th>
+				<th><?php echo plugin_lang_get( 'label_event_massnahme' ); ?></th>
+				<th><?php echo plugin_lang_get( 'export_soll_termin' ); ?></th>
+				<th class="center"><?php echo plugin_lang_get( 'eskalation_col_stage' ); ?></th>
+			</tr>
+		</thead>
+		<tbody>
+		<?php foreach( $t_esk as $t_c ) { ?>
+			<tr>
+				<td><?php echo string_display_line( trim( $t_c['nachname'] . ', ' . $t_c['vorname'], ', ' ) ); ?></td>
+				<td><?php echo string_display_line( $t_c['schluessel'] . ' – ' . $t_c['bezeichnung'] ); ?></td>
+				<td><?php echo string_display_line( (string)$t_c['soll_termin'] ); ?></td>
+				<td class="center">
+					<span class="label <?php echo $t_c['reached'] > $t_c['stored'] ? 'label-warning' : 'label-default'; ?>">
+						<?php echo (int)$t_c['reached'] . ' / ' . count( $t_esk_stufen ); ?>
+					</span>
+					<?php if( $t_c['reached'] > $t_c['stored'] ) { echo '<span class="label label-primary">' . plugin_lang_get( 'eskalation_todo' ) . '</span>'; } ?>
+				</td>
+			</tr>
+		<?php } ?>
+		<?php if( empty( $t_esk ) ) { ?>
+			<tr><td colspan="4" class="center"><?php echo plugin_lang_get( 'eskalation_none' ); ?></td></tr>
 		<?php } ?>
 		</tbody>
 	</table>

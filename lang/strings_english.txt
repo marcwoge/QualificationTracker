@@ -470,3 +470,13 @@ $s_plugin_QualificationTracker_reactivation_state_active  = 'active';
 $s_plugin_QualificationTracker_reactivation_todo_defer      = 'will be held';
 $s_plugin_QualificationTracker_reactivation_todo_reactivate = 'will be reactivated';
 $s_plugin_QualificationTracker_reactivation_msg_done = 'Reactivation: %d held, %d reactivated.';
+
+# --- Escalation stages (F5.3) --------------------------------------------
+$s_plugin_QualificationTracker_eskalation_title = 'Escalation stages';
+$s_plugin_QualificationTracker_eskalation_intro = 'Notifies in stages before and after the due date (days). One note per stage on the ticket; recipients configured per stage are additionally added as monitors.';
+$s_plugin_QualificationTracker_eskalation_run   = 'Run escalation';
+$s_plugin_QualificationTracker_eskalation_none  = 'No open proofs with a due date in the escalation window.';
+$s_plugin_QualificationTracker_eskalation_col_stage = 'Stage';
+$s_plugin_QualificationTracker_eskalation_todo  = 'due';
+$s_plugin_QualificationTracker_eskalation_note  = 'QualificationTracker – escalation stage %d/%d (%d days). Target date: %s.';
+$s_plugin_QualificationTracker_eskalation_msg_done = 'Escalation: %d proof(s) notified, %d stage(s) fired.';

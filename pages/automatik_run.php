@@ -25,6 +25,19 @@ form_security_validate( 'plugin_QualificationTracker_automatik_run' );
 $f_action = gpc_get_string( 'action', 'expiry' );
 $t_today  = date( 'Y-m-d' );
 
+if( $f_action === 'escalation' ) {
+	require_api( 'bugnote_api.php' );
+	plugin_require_api( 'core/QT_DueDateCalculator.php' );
+	plugin_require_api( 'core/QT_Escalation.php' );
+
+	$t_result = qt_eskalation_run( $t_today );
+
+	form_security_purge( 'plugin_QualificationTracker_automatik_run' );
+	print_successful_redirect( plugin_page( 'automatik', true )
+		. '&msg=escalated&notified=' . (int)$t_result['notified']
+		. '&stages=' . (int)$t_result['stages'] );
+}
+
 if( $f_action === 'reactivation' ) {
 	plugin_require_api( 'core/QT_Catalog.php' );
 	plugin_require_api( 'core/QT_DueDateCalculator.php' );

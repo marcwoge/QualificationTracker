@@ -8,6 +8,17 @@ die Versionierung folgt [Semantic Versioning](https://semver.org/lang/de/).
 ## [Unreleased]
 
 ### Hinzugefügt
+- **F5.3 Eskalationsstufen (M5):** Offene Nachweise mit Fälligkeit werden
+  gestaffelt an den konfigurierten Tages-Stufen (Default 90/30/0/−30, positiv =
+  vor, negativ = nach Fälligkeit) eskaliert. Je erreichte Stufe wird eine Notiz
+  am Nachweisticket ergänzt (MantisBT benachrichtigt Bearbeiter/Beobachter);
+  über `eskalation_empfaenger` lassen sich je Stufe zusätzliche Empfänger
+  festlegen, die dann als Beobachter aufgenommen werden – so weitet sich der
+  Empfängerkreis mit steigender Stufe. Eine neue Spalte
+  `qt_nachweis.eskalation_stufe` merkt die höchste bereits ausgelöste Stufe, so
+  dass jede Stufe genau einmal feuert (idempotent). Neue reine, unit-getestete
+  `qt_eskalation_reached_count` und `qt_eskalation_run` in
+  `core/QT_Escalation.php`; dritter Abschnitt auf der Automatik-Seite.
 - **F5.2 Ablaufreaktivierung (M5):** Renewal-Tickets befristeter Qualifikationen
   (Typ QB) werden bis „Ablauf minus Vorlauf" zurückgestellt und dann reaktiviert,
   statt über die gesamte – oft mehrjährige – Gültigkeit offen zu bleiben. Das

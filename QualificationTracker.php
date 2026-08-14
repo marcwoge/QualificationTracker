@@ -97,6 +97,13 @@ class QualificationTrackerPlugin extends MantisPlugin {
 			# Positive = days before expiry, negative = days after.
 			'eskalation_stufen_tage'    => array( 90, 30, 0, -30 ),
 
+			# Extra notification recipients per escalation stage (F5.3): one
+			# entry per stage above, each a list of MantisBT user ids added as
+			# ticket monitors when that stage fires, so later stages widen the
+			# circle. The ticket handler (the supervisor) is always notified by
+			# the stage bugnote; this only adds people on top. Default: none.
+			'eskalation_empfaenger'     => array( array(), array(), array(), array() ),
+
 			# --- Ablaufreaktivierung (F5.2) --------------------------------
 			# Status a deferred ("sleeping") renewal ticket is parked at in the
 			# native fallback (no Reveille). Default 15 mirrors Reveille's own
@@ -426,6 +433,12 @@ class QualificationTrackerPlugin extends MantisPlugin {
 				array( 'UNIQUE' ) ) ),
 			array( 'CreateIndexSQL', array( 'idx_qt_teilnehmer_person',
 				plugin_table( 'teilnehmer' ), 'person_id' ) ),
+
+			# --- 23: qt_nachweis.eskalation_stufe (escalation state, F5.3) --
+			# Highest escalation stage already notified for this proof (0 = none).
+			# Lets the nightly escalation run fire each stage exactly once.
+			array( 'AddColumnSQL', array( plugin_table( 'nachweis' ),
+				"eskalation_stufe I2 NOTNULL DEFAULT '0'" ) ),
 		);
 	}
 
