@@ -118,6 +118,12 @@ class QualificationTrackerPlugin extends MantisPlugin {
 			# Default 20 (feedback) = needs attention; overridable.
 			'ruhens_status'             => 20,
 
+			# --- CLI-Runner (F5.5) -----------------------------------------
+			# The MantisBT user the nightly cron runner acts as (author of the
+			# escalation/suspension notes, ticket status changes). Override with
+			# a dedicated service account. The --user CLI flag takes precedence.
+			'cron_user'                 => 'administrator',
+
 			# --- Ticketerzeugung (ab M2) -----------------------------------
 			# Project the proof tickets are created in. 0 = not configured yet.
 			'zielprojekt_id'            => 0,

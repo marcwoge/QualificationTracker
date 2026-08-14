@@ -8,6 +8,15 @@ die Versionierung folgt [Semantic Versioning](https://semver.org/lang/de/).
 ## [Unreleased]
 
 ### Hinzugefügt
+- **F5.5 CLI-Runner (M5):** `scripts/qt_cron.php` bündelt die vier
+  Automatikläufe (Ablaufwächter, Ruhensvermerk, Ablaufreaktivierung,
+  Eskalation) für Cron bzw. systemd-Timer. CLI-only (Web-Aufruf wird
+  abgewiesen), bootstrappt MantisBT selbst und agiert als konfigurierbarer
+  Dienstnutzer (`cron_user`, Default `administrator`; `--user` überschreibt).
+  Optionen `--dry-run` (meldet je Lauf, was passieren würde, ohne Änderung),
+  `--only=<lauf>`, `--help`. Monitoring-taugliche Exit-Codes: 0 ok, 1 Fehler in
+  einem Lauf, 2 kein Nutzerkontext, 3 unbekannter Lauf. Zeitgestempeltes
+  Protokoll je Lauf auf stdout.
 - **F5.4 Ruhensvermerk (M5):** Eine Beauftragung (Typ BE) ruht automatisch,
   sobald eine ihrer **sicherheitsrelevanten** Voraussetzungen für die Person
   keinen gültigen Nachweis mehr hat: das Beauftragungsticket erhält einen
