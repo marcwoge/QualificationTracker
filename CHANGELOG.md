@@ -8,6 +8,18 @@ die Versionierung folgt [Semantic Versioning](https://semver.org/lang/de/).
 ## [Unreleased]
 
 ### Hinzugefügt
+- **F6.2 CSV-Import Bestandsnachweise (M6):** Historische Nachweise werden über
+  *Verwaltung → QualificationTracker → Import Nachweise* aus einer CSV
+  (Personalnummer, Maßnahmen-Schlüssel, Durchführungs- und Ablaufdatum,
+  Durchführende/r, Zyklus) importiert. Je Zeile entsteht ein Nachweisticket im
+  **Zielstatus** — `gültig`, solange „gültig bis" leer oder nicht in der
+  Vergangenheit ist, sonst `abgelaufen` — mit gesetzten Audit-Feldern
+  (durchgeführt am, gültig bis, Durchführende/r) und einem `qt_nachweis`-Eintrag.
+  Der Import ist je Zyklus idempotent (bereits vorhandene werden übersprungen)
+  und bietet einen Probelauf. Neue reine, unit-getestete Helfer
+  (`qt_import_nachweise_map_row`, `qt_import_nachweise_target_status`,
+  `qt_import_nachweise_zyklus`) und `qt_import_nachweise_run` in
+  `core/QT_ImportNachweise.php`; nutzt Generator + Nachweis-Index wieder.
 - **F6.1 CSV-Import Personen (M6):** Personalstamm-Import über *Verwaltung →
   QualificationTracker → Import Personen*: semikolongetrennte CSV mit Kopfzeile
   (UTF-8), inkl. Abteilung und Vorgesetztem (als MantisBT-Benutzername, der zur

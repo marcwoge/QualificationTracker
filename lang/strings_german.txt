@@ -528,3 +528,15 @@ $s_plugin_QualificationTracker_import_errors_title = 'Fehlerhafte Zeilen';
 $s_plugin_QualificationTracker_import_col_row    = 'Zeile';
 $s_plugin_QualificationTracker_import_col_errors = 'Fehler';
 $s_plugin_QualificationTracker_error_import_vorgesetzter_unknown = 'Vorgesetzter (Benutzername) nicht gefunden.';
+
+# --- CSV-Import Bestandsnachweise (F6.2) ---------------------------------
+$s_plugin_QualificationTracker_menu_import_nachweise  = 'Import Nachweise';
+$s_plugin_QualificationTracker_import_nachweise_title = 'Bestandsnachweise importieren (CSV)';
+$s_plugin_QualificationTracker_import_nachweise_intro = 'CSV mit Kopfzeile, Semikolon-getrennt (UTF-8). Person über Personalnummer, Maßnahme über Schlüssel. Je Zeile wird ein Nachweisticket im Zielstatus erzeugt (gültig bzw. abgelaufen je nach „gültig bis"). Bereits vorhandene Zyklen werden übersprungen. Erwartete Spalten:';
+$s_plugin_QualificationTracker_import_col_ref = 'Personalnr. / Maßnahme';
+$s_plugin_QualificationTracker_import_nachweise_msg_done   = 'Import abgeschlossen: %d erzeugt, %d übersprungen, %d Fehler.';
+$s_plugin_QualificationTracker_import_nachweise_msg_dryrun = 'Probelauf: %d würden erzeugt, %d übersprungen, %d Fehler.';
+$s_plugin_QualificationTracker_error_import_person_unknown       = 'Person (Personalnummer) nicht gefunden.';
+$s_plugin_QualificationTracker_error_import_massnahme_unknown    = 'Maßnahme (Schlüssel) nicht gefunden.';
+$s_plugin_QualificationTracker_error_import_durchgefuehrt_invalid = 'Durchführungsdatum fehlt oder ist ungültig.';
+$s_plugin_QualificationTracker_error_import_gueltig_bis_invalid   = 'Ablaufdatum (gültig bis) ist ungültig.';

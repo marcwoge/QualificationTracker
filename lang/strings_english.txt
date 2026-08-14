@@ -528,3 +528,15 @@ $s_plugin_QualificationTracker_import_errors_title = 'Rows with errors';
 $s_plugin_QualificationTracker_import_col_row    = 'Row';
 $s_plugin_QualificationTracker_import_col_errors = 'Errors';
 $s_plugin_QualificationTracker_error_import_vorgesetzter_unknown = 'Supervisor (username) not found.';
+
+# --- CSV import historical proofs (F6.2) ---------------------------------
+$s_plugin_QualificationTracker_menu_import_nachweise  = 'Import proofs';
+$s_plugin_QualificationTracker_import_nachweise_title = 'Import historical proofs (CSV)';
+$s_plugin_QualificationTracker_import_nachweise_intro = 'CSV with a header row, semicolon-separated (UTF-8). Person by personnel number, measure by key. Each row creates a proof ticket in the target status (valid or expired based on "valid until"). Existing cycles are skipped. Expected columns:';
+$s_plugin_QualificationTracker_import_col_ref = 'Personnel no. / measure';
+$s_plugin_QualificationTracker_import_nachweise_msg_done   = 'Import finished: %d created, %d skipped, %d errors.';
+$s_plugin_QualificationTracker_import_nachweise_msg_dryrun = 'Dry run: %d would be created, %d skipped, %d errors.';
+$s_plugin_QualificationTracker_error_import_person_unknown       = 'Person (personnel number) not found.';
+$s_plugin_QualificationTracker_error_import_massnahme_unknown    = 'Measure (key) not found.';
+$s_plugin_QualificationTracker_error_import_durchgefuehrt_invalid = 'Performed date missing or invalid.';
+$s_plugin_QualificationTracker_error_import_gueltig_bis_invalid   = 'Validity end date is invalid.';

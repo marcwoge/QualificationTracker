@@ -1,7 +1,7 @@
 # Roadmap — MantisBT QualificationTracker
 
 **Version dieses Dokuments:** 0.4 (2026-08-12)
-**Status Gesamtprojekt:** 🟡 M1–M5 abgeschlossen (M1 Fundament, M2 Generator, M3 Veranstaltungen, M4 Matrix & Auswertung, M5 Automatisierung; F3.7 zurückgestellt auf 1.1), M6 (Import & Migration) in Arbeit (F6.1 fertig)
+**Status Gesamtprojekt:** 🟡 M1–M5 abgeschlossen (M1 Fundament, M2 Generator, M3 Veranstaltungen, M4 Matrix & Auswertung, M5 Automatisierung; F3.7 zurückgestellt auf 1.1), M6 (Import & Migration) in Arbeit (F6.1, F6.2 fertig)
 
 ---
 
@@ -135,7 +135,7 @@ Legende: ⬜ offen · 🟡 in Arbeit · 🟢 fertig · ⚪ zurückgestellt
 | ID | Funktion | Beschreibung | Status |
 |---|---|---|---|
 | F6.1 | CSV-Import Personen | Personalstamm inkl. Abteilung und Vorgesetztem | 🟢 |
-| F6.2 | CSV-Import Bestandsnachweise | Historische Nachweise mit Durchführungs- und Ablaufdatum; erzeugt Tickets im Zielstatus | ⬜ |
+| F6.2 | CSV-Import Bestandsnachweise | Historische Nachweise mit Durchführungs- und Ablaufdatum; erzeugt Tickets im Zielstatus | 🟢 |
 | F6.3 | REST-Endpunkte | `GET /qt/nachweise`, `GET /qt/personen`, `POST /qt/import` — für NiFi-Anbindung | ⬜ |
 | F6.4 | HR-Sync | Wiederkehrender Abgleich: Neueintritt → Ketten anlegen, Austritt → offene Tickets auf `entfallen` | ⬜ |
 | F6.5 | Dublettenprüfung | Import erkennt bestehende Nachweise über (Personalnummer, Maßnahme, Zeitraum) | ⬜ |
