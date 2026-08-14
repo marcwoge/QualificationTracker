@@ -8,6 +8,17 @@ die Versionierung folgt [Semantic Versioning](https://semver.org/lang/de/).
 ## [Unreleased]
 
 ### Hinzugefügt
+- **F6.1 CSV-Import Personen (M6):** Personalstamm-Import über *Verwaltung →
+  QualificationTracker → Import Personen*: semikolongetrennte CSV mit Kopfzeile
+  (UTF-8), inkl. Abteilung und Vorgesetztem (als MantisBT-Benutzername, der zur
+  User-ID aufgelöst wird). Bestehende Personen werden anhand der Personalnummer
+  aktualisiert (Upsert), neue angelegt; jede Zeile durchläuft dieselbe
+  Validierung wie das Personenregister (F1.4). Ein **Probelauf** prüft und meldet
+  Anlegen/Aktualisieren/Fehler zeilengenau, ohne zu schreiben. Neue reine,
+  unit-getestete Parser/Mapper (`qt_import_personen_parse`,
+  `qt_import_personen_map_row`, `qt_import_personen_bool`) und
+  `qt_import_personen_run` in `core/QT_ImportPersonen.php`; abhängigkeitsfrei
+  (kein CSV-Paket).
 - **F5.7 Moduswechsel im Bestand (M5):** Wird der Fälligkeitsmodus einer
   Maßnahme im laufenden Betrieb geändert, zeigt eine **Simulation** unter
   *Verwaltung → QualificationTracker → Moduswechsel* zuerst, welche **offenen**

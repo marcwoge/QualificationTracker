@@ -40,3 +40,4 @@ require_once dirname( __DIR__ ) . '/core/QT_Escalation.php';
 require_once dirname( __DIR__ ) . '/core/QT_Ruhen.php';
 require_once dirname( __DIR__ ) . '/core/QT_RunLog.php';
 require_once dirname( __DIR__ ) . '/core/QT_ModeChange.php';
+require_once dirname( __DIR__ ) . '/core/QT_ImportPersonen.php';

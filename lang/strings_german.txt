@@ -514,3 +514,17 @@ $s_plugin_QualificationTracker_moduswechsel_none     = 'Keine offenen Nachweise 
 $s_plugin_QualificationTracker_moduswechsel_col_old  = 'Soll-Termin alt';
 $s_plugin_QualificationTracker_moduswechsel_col_new  = 'Soll-Termin neu';
 $s_plugin_QualificationTracker_moduswechsel_msg_applied = 'Moduswechsel übernommen: %d Nachweise aktualisiert, %d unverändert.';
+
+# --- CSV-Import Personen (F6.1) ------------------------------------------
+$s_plugin_QualificationTracker_menu_import_personen  = 'Import Personen';
+$s_plugin_QualificationTracker_import_personen_title = 'Personalstamm importieren (CSV)';
+$s_plugin_QualificationTracker_import_personen_intro = 'CSV mit Kopfzeile, Semikolon-getrennt (UTF-8). Bestehende Personen werden anhand der Personalnummer aktualisiert. Der Vorgesetzte wird als MantisBT-Benutzername angegeben. Erwartete Spalten:';
+$s_plugin_QualificationTracker_import_dry_run = 'Nur prüfen (Probelauf, ohne Speichern)';
+$s_plugin_QualificationTracker_import_submit  = 'Importieren';
+$s_plugin_QualificationTracker_import_no_file = 'Keine Datei ausgewählt oder Upload fehlgeschlagen.';
+$s_plugin_QualificationTracker_import_msg_done   = 'Import abgeschlossen: %d angelegt, %d aktualisiert, %d Fehler.';
+$s_plugin_QualificationTracker_import_msg_dryrun = 'Probelauf: %d würden angelegt, %d aktualisiert, %d Fehler.';
+$s_plugin_QualificationTracker_import_errors_title = 'Fehlerhafte Zeilen';
+$s_plugin_QualificationTracker_import_col_row    = 'Zeile';
+$s_plugin_QualificationTracker_import_col_errors = 'Fehler';
+$s_plugin_QualificationTracker_error_import_vorgesetzter_unknown = 'Vorgesetzter (Benutzername) nicht gefunden.';

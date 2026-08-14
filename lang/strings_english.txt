@@ -514,3 +514,17 @@ $s_plugin_QualificationTracker_moduswechsel_none     = 'No open proofs for this 
 $s_plugin_QualificationTracker_moduswechsel_col_old  = 'Target date old';
 $s_plugin_QualificationTracker_moduswechsel_col_new  = 'Target date new';
 $s_plugin_QualificationTracker_moduswechsel_msg_applied = 'Mode change applied: %d proofs updated, %d unchanged.';
+
+# --- CSV import persons (F6.1) -------------------------------------------
+$s_plugin_QualificationTracker_menu_import_personen  = 'Import persons';
+$s_plugin_QualificationTracker_import_personen_title = 'Import personnel master (CSV)';
+$s_plugin_QualificationTracker_import_personen_intro = 'CSV with a header row, semicolon-separated (UTF-8). Existing persons are updated by personnel number. The supervisor is given as a MantisBT username. Expected columns:';
+$s_plugin_QualificationTracker_import_dry_run = 'Check only (dry run, no saving)';
+$s_plugin_QualificationTracker_import_submit  = 'Import';
+$s_plugin_QualificationTracker_import_no_file = 'No file selected or upload failed.';
+$s_plugin_QualificationTracker_import_msg_done   = 'Import finished: %d created, %d updated, %d errors.';
+$s_plugin_QualificationTracker_import_msg_dryrun = 'Dry run: %d would be created, %d updated, %d errors.';
+$s_plugin_QualificationTracker_import_errors_title = 'Rows with errors';
+$s_plugin_QualificationTracker_import_col_row    = 'Row';
+$s_plugin_QualificationTracker_import_col_errors = 'Errors';
+$s_plugin_QualificationTracker_error_import_vorgesetzter_unknown = 'Supervisor (username) not found.';

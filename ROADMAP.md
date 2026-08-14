@@ -1,7 +1,7 @@
 # Roadmap — MantisBT QualificationTracker
 
 **Version dieses Dokuments:** 0.4 (2026-08-12)
-**Status Gesamtprojekt:** 🟡 M1–M5 abgeschlossen (M1 Fundament, M2 Generator, M3 Veranstaltungen, M4 Matrix & Auswertung, M5 Automatisierung; F3.7 zurückgestellt auf 1.1), M6 (Import & Migration) als Nächstes
+**Status Gesamtprojekt:** 🟡 M1–M5 abgeschlossen (M1 Fundament, M2 Generator, M3 Veranstaltungen, M4 Matrix & Auswertung, M5 Automatisierung; F3.7 zurückgestellt auf 1.1), M6 (Import & Migration) in Arbeit (F6.1 fertig)
 
 ---
 
@@ -58,7 +58,7 @@ Für die Anbindung an Auswertungssysteme stellt das Plugin **REST-Endpunkte** be
 | M3 | Veranstaltungen | Sammeltermine, Massenabschluss, Teilnehmerlisten | 🟢 abgeschlossen |
 | M4 | Matrix & Auswertung | Matrix-Ansicht, Ampel, Export | 🟢 abgeschlossen |
 | M5 | Automatisierung | Recurrence-/Reveille-Kopplung, Eskalationsstufen | 🟢 abgeschlossen |
-| M6 | Import & Migration | CSV-/REST-Import, HR-Sync, Ersterfassung | ⬜ offen |
+| M6 | Import & Migration | CSV-/REST-Import, HR-Sync, Ersterfassung | 🟡 in Arbeit |
 | M7 | Audit & Datenschutz | Berechtigungen, Löschkonzept, Auditbericht | ⬜ offen |
 | M8 | Release 1.0 | Doku, Docker-Testumgebung, Lasttest, Paketierung | ⬜ offen |
 
@@ -134,7 +134,7 @@ Legende: ⬜ offen · 🟡 in Arbeit · 🟢 fertig · ⚪ zurückgestellt
 
 | ID | Funktion | Beschreibung | Status |
 |---|---|---|---|
-| F6.1 | CSV-Import Personen | Personalstamm inkl. Abteilung und Vorgesetztem | ⬜ |
+| F6.1 | CSV-Import Personen | Personalstamm inkl. Abteilung und Vorgesetztem | 🟢 |
 | F6.2 | CSV-Import Bestandsnachweise | Historische Nachweise mit Durchführungs- und Ablaufdatum; erzeugt Tickets im Zielstatus | ⬜ |
 | F6.3 | REST-Endpunkte | `GET /qt/nachweise`, `GET /qt/personen`, `POST /qt/import` — für NiFi-Anbindung | ⬜ |
 | F6.4 | HR-Sync | Wiederkehrender Abgleich: Neueintritt → Ketten anlegen, Austritt → offene Tickets auf `entfallen` | ⬜ |
