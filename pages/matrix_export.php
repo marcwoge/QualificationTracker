@@ -20,7 +20,8 @@ require_api( 'gpc_api.php' );
 require_api( 'lang_api.php' );
 
 auth_reauthenticate();
-access_ensure_global_level( plugin_config_get( 'manage_threshold' ) );
+plugin_require_api( 'core/QT_Access.php' );
+qt_access_ensure( 'view' );
 
 plugin_require_api( 'core/QT_Catalog.php' );
 plugin_require_api( 'core/QT_Person.php' );

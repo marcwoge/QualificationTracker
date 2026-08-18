@@ -22,7 +22,8 @@ require_api( 'print_api.php' );
 require_api( 'string_api.php' );
 
 auth_reauthenticate();
-access_ensure_global_level( plugin_config_get( 'manage_threshold' ) );
+plugin_require_api( 'core/QT_Access.php' );
+qt_access_ensure( 'view' );
 
 plugin_require_api( 'core/QT_Catalog.php' );
 plugin_require_api( 'core/QT_Person.php' );
@@ -33,6 +34,8 @@ plugin_require_api( 'core/QT_Generator.php' );
 plugin_require_api( 'core/QT_SollIst.php' );
 
 $f_abteilung   = gpc_get_string( 'abteilung', '' );
+# A pure viewer is restricted to their own department (F7.1).
+$f_abteilung   = qt_access_effective_abteilung( $f_abteilung, qt_access_viewer_abteilung() );
 $t_today       = date( 'Y-m-d' );
 $t_gaps        = qt_sollist_gaps( $t_today, $f_abteilung );
 $t_abteilungen = qt_person_distinct_abteilungen();

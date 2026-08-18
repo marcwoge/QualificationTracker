@@ -24,7 +24,8 @@ require_api( 'string_api.php' );
 require_api( 'user_api.php' );
 
 auth_reauthenticate();
-access_ensure_global_level( plugin_config_get( 'manage_threshold' ) );
+plugin_require_api( 'core/QT_Access.php' );
+qt_access_ensure( 'edit' );
 
 plugin_require_api( 'core/QT_Person.php' );
 

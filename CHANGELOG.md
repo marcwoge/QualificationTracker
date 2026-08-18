@@ -8,6 +8,19 @@ die Versionierung folgt [Semantic Versioning](https://semver.org/lang/de/).
 ## [Unreleased]
 
 ### Hinzugefügt
+- **F7.1 Berechtigungsstufen (M7):** Vier abgestufte Rollen, jeweils auf ein
+  globales MantisBT-Access-Level abgebildet und konfigurierbar: *Betrachter*
+  (`view_threshold`, Default VIEWER – nur Lesen), *Sachbearbeiter*
+  (`edit_threshold`, Default UPDATER – Personen, Veranstaltungen, Abschlüsse,
+  Import), *SiFa* (`manage_threshold`, Default MANAGER – Katalog, Profile,
+  Generator, Automatik) und *Administrator* (`admin_threshold`, Default
+  ADMINISTRATOR – Konfiguration). Jede Seite prüft nun ihre Rolle über
+  `core/QT_Access.php` (`qt_access_ensure`); die Lese-Berichte (Matrix,
+  Soll-Ist) lassen sich für Betrachter über die Zuordnung
+  `abteilung_betrachter` (Benutzer → Abteilung) auf die **eigene Abteilung**
+  einschränken. Da das Verwaltungsmenü managergesperrt ist, gibt es zusätzlich
+  einen Seitenleisten-Eintrag (`EVENT_MENU_MAIN`) für Betrachter. Neue reine,
+  unit-getestete `qt_access_effective_abteilung`.
 - **F6.3 REST-Endpunkte (M6):** Für die NiFi-Anbindung stellt das Plugin über
   den MantisBT-REST-Hook (`EVENT_REST_API_ROUTES`, Slim) drei Endpunkte unter
   `/api/rest/plugins/QualificationTracker/` bereit: `GET personen` (Personenregister

@@ -28,7 +28,8 @@ require_api( 'string_api.php' );
 
 auth_reauthenticate();
 # Configuring the plugin (including who may manage it) is an administrator task.
-access_ensure_global_level( config_get( 'manage_plugin_threshold' ) );
+plugin_require_api( 'core/QT_Access.php' );
+qt_access_ensure( 'admin' );
 
 plugin_require_api( 'core/QT_Catalog.php' );
 plugin_require_api( 'core/QT_Person.php' );

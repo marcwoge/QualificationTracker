@@ -1,7 +1,7 @@
 # Roadmap — MantisBT QualificationTracker
 
 **Version dieses Dokuments:** 0.4 (2026-08-12)
-**Status Gesamtprojekt:** 🟡 M1–M6 abgeschlossen (M1 Fundament, M2 Generator, M3 Veranstaltungen, M4 Matrix & Auswertung, M5 Automatisierung, M6 Import & Migration; F3.7 zurückgestellt auf 1.1), M7 (Recht & Datenschutz) als Nächstes
+**Status Gesamtprojekt:** 🟡 M1–M6 abgeschlossen (M1 Fundament, M2 Generator, M3 Veranstaltungen, M4 Matrix & Auswertung, M5 Automatisierung, M6 Import & Migration; F3.7 zurückgestellt auf 1.1), M7 (Audit & Datenschutz) in Arbeit (F7.1 fertig)
 
 ---
 
@@ -59,7 +59,7 @@ Für die Anbindung an Auswertungssysteme stellt das Plugin **REST-Endpunkte** be
 | M4 | Matrix & Auswertung | Matrix-Ansicht, Ampel, Export | 🟢 abgeschlossen |
 | M5 | Automatisierung | Recurrence-/Reveille-Kopplung, Eskalationsstufen | 🟢 abgeschlossen |
 | M6 | Import & Migration | CSV-/REST-Import, HR-Sync, Ersterfassung | 🟢 abgeschlossen |
-| M7 | Audit & Datenschutz | Berechtigungen, Löschkonzept, Auditbericht | ⬜ offen |
+| M7 | Audit & Datenschutz | Berechtigungen, Löschkonzept, Auditbericht | 🟡 in Arbeit |
 | M8 | Release 1.0 | Doku, Docker-Testumgebung, Lasttest, Paketierung | ⬜ offen |
 
 Legende: ⬜ offen · 🟡 in Arbeit · 🟢 fertig · ⚪ zurückgestellt
@@ -145,7 +145,7 @@ Legende: ⬜ offen · 🟡 in Arbeit · 🟢 fertig · ⚪ zurückgestellt
 
 | ID | Funktion | Beschreibung | Status |
 |---|---|---|---|
-| F7.1 | Berechtigungsstufen | Eigene Access Level: Betrachter (nur eigene Abteilung), Sachbearbeiter, SiFa, Administrator | ⬜ |
+| F7.1 | Berechtigungsstufen | Eigene Access Level: Betrachter (nur eigene Abteilung), Sachbearbeiter, SiFa, Administrator | 🟢 |
 | F7.2 | Vorsorge-Trennung | Maßnahmen vom Typ `VO` nur in gesondertem Projekt sichtbar, Feldsatz technisch beschränkt | ⬜ |
 | F7.3 | Löschkonzept | Aufbewahrungsfrist je Maßnahmenart; Löschvorschlagsliste; Löschung wird protokolliert | ⬜ |
 | F7.4 | Auskunftsexport | Alle zu einer Person gespeicherten Daten als PDF (DSGVO Art. 15) | ⬜ |

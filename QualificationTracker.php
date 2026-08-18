@@ -67,11 +67,23 @@ class QualificationTrackerPlugin extends MantisPlugin {
 	 */
 	function config() {
 		return array(
-			# --- Zugriff ---------------------------------------------------
-			# Minimum global access level allowed to manage master data
-			# (catalogue, profiles, persons). Refined into dedicated levels in
-			# F7.1; MANAGER by default so the safety officer can maintain it.
+			# --- Zugriff / Berechtigungsstufen (F7.1) ----------------------
+			# Four graded roles mapped to global access levels:
+			#   view   – Betrachter (read-only reports; optionally scoped to
+			#            their own department via abteilung_betrachter)
+			#   edit   – Sachbearbeiter (persons, events, completions, import)
+			#   manage – SiFa/safety officer (catalogue, profiles, generator,
+			#            automation) – the historical manage_threshold
+			#   admin  – Administrator (configuration)
+			'view_threshold'            => VIEWER,
+			'edit_threshold'            => UPDATER,
 			'manage_threshold'          => MANAGER,
+			'admin_threshold'           => ADMINISTRATOR,
+
+			# Optional map MantisBT user id => department name. A user that only
+			# reaches the view level is restricted to this department in the
+			# read reports; users with edit level or higher see everything.
+			'abteilung_betrachter'      => array(),
 
 			# --- Fälligkeitsberechnung (F1.8 / F1.9) -----------------------
 			# Global default due-date mode; overridable per measure.
@@ -159,9 +171,32 @@ class QualificationTrackerPlugin extends MantisPlugin {
 	function hooks() {
 		return array(
 			'EVENT_MENU_MANAGE'           => 'menu_manage',
+			'EVENT_MENU_MAIN'             => 'menu_main',
 			'EVENT_LAYOUT_CONTENT_BEGIN'  => 'dashboard_widget',
 			'EVENT_REST_API_ROUTES'       => 'rest_routes',
 		);
+	}
+
+	/**
+	 * Main-menu (sidebar) entry point for the read reports (F7.1).
+	 *
+	 * The management menu is manager-gated, so viewers and clerks would have no
+	 * way to reach the matrix. This adds a "Qualifikationen" sidebar link for
+	 * everyone who reaches the view threshold; the pages themselves enforce the
+	 * per-role access.
+	 *
+	 * @return array
+	 */
+	function menu_main() {
+		plugin_require_api( 'core/QT_Access.php' );
+		if( !qt_access_has( 'view' ) ) {
+			return array();
+		}
+		return array( array(
+			'title' => plugin_lang_get( 'menu_matrix' ),
+			'url'   => plugin_page( 'matrix' ),
+			'icon'  => 'fa-shield',
+		) );
 	}
 
 	/**
