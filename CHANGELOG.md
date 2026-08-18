@@ -8,6 +8,18 @@ die Versionierung folgt [Semantic Versioning](https://semver.org/lang/de/).
 ## [Unreleased]
 
 ### Hinzugefügt
+- **F6.3 REST-Endpunkte (M6):** Für die NiFi-Anbindung stellt das Plugin über
+  den MantisBT-REST-Hook (`EVENT_REST_API_ROUTES`, Slim) drei Endpunkte unter
+  `/api/rest/plugins/QualificationTracker/` bereit: `GET personen` (Personenregister
+  als JSON, Filter `abteilung`, `limit`, `offset`), `GET nachweise`
+  (`qt_nachweis`-Index, Filter `person_id`, `massnahme_id`, `status`) und
+  `POST import` (Bulk-Import von Personen bzw. Nachweisen, Wiederverwendung von
+  F6.1/F6.2, mit `dry_run`). Die MantisBT-Auth-Middleware authentifiziert
+  (API-Token/Session); jeder Handler verlangt zusätzlich das `manage_threshold`.
+  Der schreibende Import ist per Konfiguration `rest_import_enabled` (Default
+  **aus**) freizuschalten — sonst `403`. Neue reine, unit-getestete Serialisierer
+  (`qt_rest_person_json`, `qt_rest_nachweis_json`) in `core/QT_Rest.php`.
+  **Schließt M6 ab.**
 - **F6.2 CSV-Import Bestandsnachweise (M6):** Historische Nachweise werden über
   *Verwaltung → QualificationTracker → Import Nachweise* aus einer CSV
   (Personalnummer, Maßnahmen-Schlüssel, Durchführungs- und Ablaufdatum,

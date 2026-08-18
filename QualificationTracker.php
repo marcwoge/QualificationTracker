@@ -124,6 +124,12 @@ class QualificationTrackerPlugin extends MantisPlugin {
 			# a dedicated service account. The --user CLI flag takes precedence.
 			'cron_user'                 => 'administrator',
 
+			# --- REST-Endpunkte (F6.3) -------------------------------------
+			# Whether POST .../import may write (create/update persons and
+			# proofs) via REST. Off by default; the read endpoints stay
+			# available. Turn on for a NiFi service account after review.
+			'rest_import_enabled'       => 0,
+
 			# --- Ticketerzeugung (ab M2) -----------------------------------
 			# Project the proof tickets are created in. 0 = not configured yet.
 			'zielprojekt_id'            => 0,
@@ -154,7 +160,33 @@ class QualificationTrackerPlugin extends MantisPlugin {
 		return array(
 			'EVENT_MENU_MANAGE'           => 'menu_manage',
 			'EVENT_LAYOUT_CONTENT_BEGIN'  => 'dashboard_widget',
+			'EVENT_REST_API_ROUTES'       => 'rest_routes',
 		);
+	}
+
+	/**
+	 * Register the plugin's REST routes (F6.3) under
+	 * /api/rest/plugins/QualificationTracker/. The core AuthMiddleware has
+	 * already authenticated the caller; each handler additionally enforces the
+	 * manage threshold, and the import handler the rest_import_enabled flag.
+	 *
+	 * @param string $p_event
+	 * @param array  $p_args  Carries the Slim app under 'app'.
+	 * @return void
+	 */
+	function rest_routes( $p_event, $p_args ) {
+		$t_app = $p_args['app'];
+		$t_plugin = $this->basename;
+		plugin_require_api( 'core/QT_Rest.php' );
+
+		$t_app->group( '/plugins/' . $t_plugin, function() use ( $t_app ) {
+			$t_app->get( '/personen', 'qt_rest_personen' );
+			$t_app->get( '/personen/', 'qt_rest_personen' );
+			$t_app->get( '/nachweise', 'qt_rest_nachweise' );
+			$t_app->get( '/nachweise/', 'qt_rest_nachweise' );
+			$t_app->post( '/import', 'qt_rest_import' );
+			$t_app->post( '/import/', 'qt_rest_import' );
+		} );
 	}
 
 	/**

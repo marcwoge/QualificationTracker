@@ -42,3 +42,4 @@ require_once dirname( __DIR__ ) . '/core/QT_RunLog.php';
 require_once dirname( __DIR__ ) . '/core/QT_ModeChange.php';
 require_once dirname( __DIR__ ) . '/core/QT_ImportPersonen.php';
 require_once dirname( __DIR__ ) . '/core/QT_ImportNachweise.php';
+require_once dirname( __DIR__ ) . '/core/QT_Rest.php';
