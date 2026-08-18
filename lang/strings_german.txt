@@ -540,3 +540,7 @@ $s_plugin_QualificationTracker_error_import_person_unknown       = 'Person (Pers
 $s_plugin_QualificationTracker_error_import_massnahme_unknown    = 'Maßnahme (Schlüssel) nicht gefunden.';
 $s_plugin_QualificationTracker_error_import_durchgefuehrt_invalid = 'Durchführungsdatum fehlt oder ist ungültig.';
 $s_plugin_QualificationTracker_error_import_gueltig_bis_invalid   = 'Ablaufdatum (gültig bis) ist ungültig.';
+
+# --- Vorsorge-Trennung (F7.2) --------------------------------------------
+$s_plugin_QualificationTracker_config_label_vorsorgeprojekt = 'Projekt für Vorsorge (VO)';
+$s_plugin_QualificationTracker_config_help_vorsorgeprojekt  = 'Gesondertes Projekt für Maßnahmen vom Typ Vorsorge (VO). Deren Nachweistickets werden hier statt im Zielprojekt angelegt, damit nur arbeitsmedizinisch Berechtigte sie sehen. Leer = kein gesondertes Projekt (VO landet im Zielprojekt).';

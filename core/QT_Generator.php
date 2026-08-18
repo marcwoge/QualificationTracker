@@ -266,19 +266,31 @@ function qt_generator_field_ids() {
  * @return int Bug id.
  */
 function qt_generator_create_ticket( array $p_person, array $p_massnahme, $p_soll_termin, $p_project_id, array $p_category_ids, array $p_field_ids ) {
+	if( !function_exists( 'qt_vorsorge_project' ) ) {
+		plugin_require_api( 'core/QT_Vorsorge.php' );
+	}
+	$t_typ = $p_massnahme['typ'];
+	$t_is_vo = ( $t_typ === 'VO' );
+
+	# VO measures are isolated in the dedicated occupational-health project and
+	# use that project's categories (categories are project-specific).
+	$t_project_id = qt_vorsorge_project( $t_typ, (int)$p_project_id, (int)plugin_config_get( 'vorsorge_projekt_id' ) );
+	$t_category_ids = ( $t_project_id !== (int)$p_project_id ) ? qt_vorsorge_categories( $t_project_id ) : $p_category_ids;
+
 	$t_name = trim( $p_person['nachname'] . ', ' . $p_person['vorname'], ', ' );
 	$t_zyklus = ( $p_soll_termin === null ) ? '' : substr( $p_soll_termin, 0, 4 );
 	$t_category = qt_generator_category_map();
-	$t_category_id = isset( $t_category[$p_massnahme['typ']] )
-		? (int)$p_category_ids[$t_category[$p_massnahme['typ']]]
-		: (int)reset( $p_category_ids );
+	$t_category_id = isset( $t_category[$t_typ] )
+		? (int)$t_category_ids[$t_category[$t_typ]]
+		: (int)reset( $t_category_ids );
 
 	$t_summary = $p_massnahme['schluessel'] . ' ' . $p_massnahme['bezeichnung'] . ' – ' . $t_name
 		. ( $t_zyklus !== '' ? ' (' . $t_zyklus . ')' : '' );
 	$t_summary = mb_substr( $t_summary, 0, 128 );
 
+	# VO: minimised description (no program metadata), identification only.
 	$t_description = $p_massnahme['bezeichnung']
-		. ( $p_massnahme['rechtsgrundlage'] !== null && $p_massnahme['rechtsgrundlage'] !== '' ? "\n" . $p_massnahme['rechtsgrundlage'] : '' )
+		. ( !$t_is_vo && $p_massnahme['rechtsgrundlage'] !== null && $p_massnahme['rechtsgrundlage'] !== '' ? "\n" . $p_massnahme['rechtsgrundlage'] : '' )
 		. "\n" . $t_name
 		. ( $p_person['personalnummer'] !== null && $p_person['personalnummer'] !== '' ? ' (' . $p_person['personalnummer'] . ')' : '' )
 		. ( $p_person['abteilung'] !== '' ? ' – ' . $p_person['abteilung'] : '' );
@@ -289,7 +301,7 @@ function qt_generator_create_ticket( array $p_person, array $p_massnahme, $p_sol
 	}
 
 	$t_bug = new BugData;
-	$t_bug->project_id  = (int)$p_project_id;
+	$t_bug->project_id  = (int)$t_project_id;
 	$t_bug->reporter_id = auth_get_current_user_id();
 	$t_bug->handler_id  = $t_handler;
 	$t_bug->category_id = $t_category_id;
@@ -316,12 +328,13 @@ function qt_generator_create_ticket( array $p_person, array $p_massnahme, $p_sol
 		'nachweisart'          => (string)$p_massnahme['nachweisart'],
 	);
 	foreach( $t_values as $t_name_cf => $t_val ) {
-		if( isset( $p_field_ids[$t_name_cf] ) ) {
+		if( isset( $p_field_ids[$t_name_cf] ) && qt_vorsorge_field_allowed( $t_name_cf, $t_typ ) ) {
 			custom_field_set_value( $p_field_ids[$t_name_cf], $t_bug_id, $t_val );
 		}
 	}
 	# soll_termin is a date custom field -> store as timestamp.
-	if( $p_soll_termin !== null && $p_soll_termin !== '' && isset( $p_field_ids['soll_termin'] ) ) {
+	if( $p_soll_termin !== null && $p_soll_termin !== '' && isset( $p_field_ids['soll_termin'] )
+		&& qt_vorsorge_field_allowed( 'soll_termin', $t_typ ) ) {
 		custom_field_set_value( $p_field_ids['soll_termin'], $t_bug_id, strtotime( $p_soll_termin . ' 00:00:00' ) );
 	}
 

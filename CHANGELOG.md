@@ -8,6 +8,17 @@ die Versionierung folgt [Semantic Versioning](https://semver.org/lang/de/).
 ## [Unreleased]
 
 ### Hinzugefügt
+- **F7.2 Vorsorge-Trennung (M7):** Nachweistickets für Maßnahmen vom Typ
+  **VO** (arbeitsmedizinische Vorsorge) werden in ein gesondertes, über die
+  Konfiguration `vorsorge_projekt_id` wählbares MantisBT-Projekt angelegt statt
+  ins allgemeine Zielprojekt — so sehen sie nur arbeitsmedizinisch Berechtigte
+  (Projekt-Zugriffssteuerung). Zusätzlich Datenminimierung: ein VO-Ticket trägt
+  nur Identifikations- und Terminfelder; Programm-Metadaten (Rechtsgrundlage,
+  Intervall, Fälligkeitsmodus) werden weggelassen, und das Datenmodell hat
+  ohnehin nirgends ein Freitext-Befundfeld. Neue reine, unit-getestete
+  `qt_vorsorge_project` und `qt_vorsorge_field_allowed` in `core/QT_Vorsorge.php`;
+  der Ketten-Generator (und darüber Completion und Import) leitet VO-Tickets
+  entsprechend um. Auswahl des Vorsorge-Projekts auf der Konfigurationsseite.
 - **F7.1 Berechtigungsstufen (M7):** Vier abgestufte Rollen, jeweils auf ein
   globales MantisBT-Access-Level abgebildet und konfigurierbar: *Betrachter*
   (`view_threshold`, Default VIEWER – nur Lesen), *Sachbearbeiter*

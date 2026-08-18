@@ -64,11 +64,18 @@ if( gpc_get_string( 'action', '' ) === 'update' ) {
 	$t_zielprojekt = gpc_get_int( 'zielprojekt_id', 0 );
 	plugin_config_set( 'zielprojekt_id', $t_zielprojekt );
 
+	$t_vorsorgeprojekt = gpc_get_int( 'vorsorge_projekt_id', 0 );
+	plugin_config_set( 'vorsorge_projekt_id', $t_vorsorgeprojekt );
+
 	# F1.5: make sure the proof-ticket custom fields exist and, when a target
 	# project is set, link them to it.
 	qt_custom_fields_ensure();
 	if( $t_zielprojekt > 0 ) {
 		qt_custom_fields_link( $t_zielprojekt );
+	}
+	# F7.2: link the fields to the occupational-health project too.
+	if( $t_vorsorgeprojekt > 0 ) {
+		qt_custom_fields_link( $t_vorsorgeprojekt );
 	}
 
 	# Per-department reference month: keep only valid 1-12 entries.
@@ -97,6 +104,7 @@ $t_karenz_def       = (int)plugin_config_get( 'karenz_tage_default' );
 $t_ersteinweisung   = (int)plugin_config_get( 'ersteinweisung_frist_tage' );
 $t_stufen           = (array)plugin_config_get( 'eskalation_stufen_tage' );
 $t_zielprojekt      = (int)plugin_config_get( 'zielprojekt_id' );
+$t_vorsorgeprojekt  = (int)plugin_config_get( 'vorsorge_projekt_id' );
 $t_abt_map          = (array)plugin_config_get( 'stichmonat_abteilung' );
 $t_abteilungen      = qt_person_distinct_abteilungen();
 $t_cf_status        = qt_custom_fields_status( $t_zielprojekt );
@@ -221,6 +229,16 @@ layout_page_begin();
 					<?php print_project_option_list( $t_zielprojekt, false ); ?>
 				</select>
 				<span class="help-block" style="margin:4px 0 0"><?php echo plugin_lang_get( 'config_help_zielprojekt' ); ?></span>
+			</td>
+		</tr>
+		<tr>
+			<th class="category"><?php echo plugin_lang_get( 'config_label_vorsorgeprojekt' ); ?></th>
+			<td>
+				<select name="vorsorge_projekt_id" class="input-sm">
+					<option value="0"><?php echo plugin_lang_get( 'none' ); ?></option>
+					<?php print_project_option_list( $t_vorsorgeprojekt, false ); ?>
+				</select>
+				<span class="help-block" style="margin:4px 0 0"><?php echo plugin_lang_get( 'config_help_vorsorgeprojekt' ); ?></span>
 			</td>
 		</tr>
 

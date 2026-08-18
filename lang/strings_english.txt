@@ -540,3 +540,7 @@ $s_plugin_QualificationTracker_error_import_person_unknown       = 'Person (pers
 $s_plugin_QualificationTracker_error_import_massnahme_unknown    = 'Measure (key) not found.';
 $s_plugin_QualificationTracker_error_import_durchgefuehrt_invalid = 'Performed date missing or invalid.';
 $s_plugin_QualificationTracker_error_import_gueltig_bis_invalid   = 'Validity end date is invalid.';
+
+# --- Occupational-health separation (F7.2) -------------------------------
+$s_plugin_QualificationTracker_config_label_vorsorgeprojekt = 'Occupational-health project (VO)';
+$s_plugin_QualificationTracker_config_help_vorsorgeprojekt  = 'Dedicated project for occupational-health (VO) measures. Their proof tickets are created here instead of the target project, so only occupational-health staff can see them. Empty = no separate project (VO goes to the target project).';

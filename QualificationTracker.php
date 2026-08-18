@@ -146,6 +146,12 @@ class QualificationTrackerPlugin extends MantisPlugin {
 			# Project the proof tickets are created in. 0 = not configured yet.
 			'zielprojekt_id'            => 0,
 
+			# Dedicated occupational-health project for VO measures (F7.2).
+			# 0 = none configured -> VO tickets fall back to zielprojekt_id.
+			# Set a separate project so only occupational-health staff can see
+			# them (project-level access control).
+			'vorsorge_projekt_id'       => 0,
+
 			# Mapping of the plugin's domain proof states onto MantisBT status
 			# values (decision G1). Defaults target the standard status enum so
 			# the plugin works without editing config_inc.php; overridable so an

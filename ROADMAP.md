@@ -1,7 +1,7 @@
 # Roadmap — MantisBT QualificationTracker
 
 **Version dieses Dokuments:** 0.4 (2026-08-12)
-**Status Gesamtprojekt:** 🟡 M1–M6 abgeschlossen (M1 Fundament, M2 Generator, M3 Veranstaltungen, M4 Matrix & Auswertung, M5 Automatisierung, M6 Import & Migration; F3.7 zurückgestellt auf 1.1), M7 (Audit & Datenschutz) in Arbeit (F7.1 fertig)
+**Status Gesamtprojekt:** 🟡 M1–M6 abgeschlossen (M1 Fundament, M2 Generator, M3 Veranstaltungen, M4 Matrix & Auswertung, M5 Automatisierung, M6 Import & Migration; F3.7 zurückgestellt auf 1.1), M7 (Audit & Datenschutz) in Arbeit (F7.1, F7.2 fertig)
 
 ---
 
@@ -146,7 +146,7 @@ Legende: ⬜ offen · 🟡 in Arbeit · 🟢 fertig · ⚪ zurückgestellt
 | ID | Funktion | Beschreibung | Status |
 |---|---|---|---|
 | F7.1 | Berechtigungsstufen | Eigene Access Level: Betrachter (nur eigene Abteilung), Sachbearbeiter, SiFa, Administrator | 🟢 |
-| F7.2 | Vorsorge-Trennung | Maßnahmen vom Typ `VO` nur in gesondertem Projekt sichtbar, Feldsatz technisch beschränkt | ⬜ |
+| F7.2 | Vorsorge-Trennung | Maßnahmen vom Typ `VO` nur in gesondertem Projekt sichtbar, Feldsatz technisch beschränkt | 🟢 |
 | F7.3 | Löschkonzept | Aufbewahrungsfrist je Maßnahmenart; Löschvorschlagsliste; Löschung wird protokolliert | ⬜ |
 | F7.4 | Auskunftsexport | Alle zu einer Person gespeicherten Daten als PDF (DSGVO Art. 15) | ⬜ |
 | F7.5 | Änderungsprotokoll | Plugin-eigene Änderungen (Katalog, Profile) werden analog zur Mantis-History protokolliert | ⬜ |
