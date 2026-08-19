@@ -157,7 +157,7 @@ Legende: ⬜ offen · 🟡 in Arbeit · 🟢 fertig · ⚪ zurückgestellt
 | ID | Funktion | Beschreibung | Status |
 |---|---|---|---|
 | F8.1 | Docker-Testumgebung | Compose-Setup mit Mantis, MariaDB, Seed-Daten (50 Personen, 8 Maßnahmen) | 🟢 |
-| F8.2 | Lasttest | Nachweis der Zielgrößen: 500 Personen, 25.000 Tickets, Matrix < 2 s | ⬜ |
+| F8.2 | Lasttest | Nachweis der Zielgrößen: 500 Personen, 25.000 Tickets, Matrix < 2 s | 🟢 |
 | F8.3 | Übersetzungen | Vollständige Sprachdateien DE/EN | ⬜ |
 | F8.4 | Administratorhandbuch | Installation, Konfiguration, Betrieb, Backup, Upgrade | ⬜ |
 | F8.5 | Anwenderhandbuch | Kurzanleitungen für Führungskräfte und Sachbearbeitung, je max. 2 Seiten | ⬜ |
@@ -189,7 +189,7 @@ Diese Punkte müssen vor M2 geklärt sein, da sie das Datenmodell beeinflussen:
 | Fachlicher Maßnahmenkatalog liegt nicht rechtzeitig vor | hoch, häufigster Projektkiller | Beispielkatalog mitliefern, Pilot mit 3 Maßnahmen starten |
 | Akzeptanz der Führungskräfte | hoch | Startseiten-Widget (F4.6), Standardfilter, max. 2 Seiten Anleitung |
 | Datenschutzbedenken Betriebsrat | mittel | Vorsorge-Trennung und Löschkonzept vor Rollout vorlegen; Mitbestimmung nach BetrVG § 87 prüfen |
-| Performance der Matrix bei 500 Personen | mittel | serverseitige Aggregation von Beginn an, Lasttest in M8 |
+| Performance der Matrix bei 500 Personen | mittel | serverseitige Aggregation von Beginn an; in M8 nachgewiesen (F8.2): 550 Personen / 27.500 Nachweise, Matrix ~220 ms |
 | Öffentliche Veröffentlichung mit privater Pflichtabhängigkeit | ausgeschlossen | keine harten Plugin-Abhängigkeiten; Fremdplugins nur optional erkennen |
 
 ---

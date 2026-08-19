@@ -8,6 +8,18 @@ die Versionierung folgt [Semantic Versioning](https://semver.org/lang/de/).
 ## [Unreleased]
 
 ### Hinzugefügt
+- **F8.2 Lasttest (M8):** Ein Lasttest-Skript `scripts/qt_loadtest.php` weist die
+  Zielgrößen nach: 500 Personen, ≥ 25.000 Nachweis-Instanzen, Matrix unter 2 s.
+  Es erzeugt synthetische Personen (Personalnummern ab 800000), ein Profil über
+  den gesamten Katalog und die nötigen Index-Zeilen und misst die drei
+  schwersten Lesepfade. Referenzmessung (Docker, PHP 8.2, MariaDB 10.11):
+  550 Personen × 11 Maßnahmen, **27.500 Nachweise → vollständige Matrix ~220 ms,
+  Matrix-Seite ~200 ms, Auditbericht ~160 ms, Spitzenspeicher 66 MB** — alle
+  Pfade deutlich unter der 2-Sekunden-Grenze (Exit-Code 1 bei Überschreitung).
+  Die Matrix liest per Konstruktion den denormalisierten Index `qt_nachweis`
+  (eine Zeile je Nachweis-Instanz = ein Ticket), nicht die Bug-Tabelle; der Test
+  füllt daher 25.000 Index-Zeilen. Option `--cleanup` entfernt die Testdaten.
+  Dokumentiert in `docker/README.md`.
 - **F8.1 Docker-Testumgebung – Seed-Daten (M8):** Das bereits vorhandene
   Compose-Setup (MantisBT, MariaDB, Mailpit) erhält ein reproduzierbares
   Seed-Skript `scripts/qt_seed.php`, das die Testumgebung mit **rein

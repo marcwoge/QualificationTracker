@@ -63,6 +63,30 @@ konfigurieren (Manage → QualificationTracker → Konfiguration) und anschließ
 den Generator laufen lassen (Manage → QualificationTracker → Trockenlauf bzw.
 Generieren).
 
+## Lasttest
+
+Ein Skript weist die Zielgrößen nach (500 Personen, ≥ 25.000 Nachweise, Matrix
+unter 2 s). Es legt synthetische Personen (Personalnummern ab 800000), ein
+Profil über den gesamten Katalog und die nötigen Nachweis-Index-Zeilen an und
+misst die drei schwersten Lesepfade.
+
+```bash
+docker compose exec mantis php plugins/QualificationTracker/scripts/qt_loadtest.php
+# danach die Testdaten wieder entfernen:
+docker compose exec mantis php plugins/QualificationTracker/scripts/qt_loadtest.php --cleanup
+```
+
+Die Matrix liest per Konstruktion (Entscheidung G5) den denormalisierten
+Nachweis-Index `qt_nachweis`, nicht die MantisBT-Ticket-Tabelle — eine
+Index-Zeile je Nachweis-Instanz entspricht einem Ticket. Der Lasttest füllt
+daher 25.000 Index-Zeilen (das, was die Matrix aggregiert) statt 25.000
+Core-Bug-Zeilen anzulegen.
+
+Referenzmessung (Docker, PHP 8.2, MariaDB 10.11): 550 Personen × 11 Maßnahmen,
+27.500 Nachweise → vollständige Matrix ~220 ms, Matrix-Seite ~200 ms,
+Auditbericht ~160 ms, Spitzenspeicher 66 MB. Alle Pfade deutlich unter der
+2-Sekunden-Grenze.
+
 ## Häufige Befehle
 
 ```bash
