@@ -669,3 +669,14 @@ $s_plugin_QualificationTracker_migration_row_errors   = 'Fehler';
 $s_plugin_QualificationTracker_error_migrate_no_person      = 'Weder Mitarbeiter noch Personalnummer im Ticket.';
 $s_plugin_QualificationTracker_error_migrate_no_measure     = 'Kein Maßnahmenschlüssel im Ticket.';
 $s_plugin_QualificationTracker_error_migrate_measure_invalid = 'Maßnahmen-Grundgerüst konnte nicht angelegt werden (ungültige Daten).';
+
+# --- Terminvorschlag (F3.7) ----------------------------------------------
+$s_plugin_QualificationTracker_menu_terminvorschlag   = 'Terminvorschlag';
+$s_plugin_QualificationTracker_terminvorschlag_title  = 'Terminvorschlag für Sammeltermine';
+$s_plugin_QualificationTracker_terminvorschlag_intro  = 'Schlägt auf Basis fälliger Maßnahmen Veranstaltungstermine vor und teilt die betroffenen Personen anhand der optimalen Teilnehmerzahl in Sitzungen auf. Reine Planungshilfe – die Veranstaltungen werden anschließend angelegt.';
+$s_plugin_QualificationTracker_terminvorschlag_capacity = 'Teilnehmer je Termin';
+$s_plugin_QualificationTracker_terminvorschlag_refresh  = 'Aktualisieren';
+$s_plugin_QualificationTracker_terminvorschlag_none   = 'Aktuell sind keine Sammeltermine erforderlich.';
+$s_plugin_QualificationTracker_terminvorschlag_summary = '%1$d Personen · %2$d Termin(e)';
+$s_plugin_QualificationTracker_terminvorschlag_proposed = 'Vorschlag:';
+$s_plugin_QualificationTracker_terminvorschlag_session = 'Termin %1$d – %2$d Teilnehmer';

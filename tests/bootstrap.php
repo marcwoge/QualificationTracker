@@ -50,3 +50,4 @@ require_once dirname( __DIR__ ) . '/core/QT_Disclosure.php';
 require_once dirname( __DIR__ ) . '/core/QT_History.php';
 require_once dirname( __DIR__ ) . '/core/QT_Register.php';
 require_once dirname( __DIR__ ) . '/core/QT_Migration.php';
+require_once dirname( __DIR__ ) . '/core/QT_Suggestion.php';

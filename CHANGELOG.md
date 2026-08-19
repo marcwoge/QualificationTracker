@@ -7,6 +7,20 @@ die Versionierung folgt [Semantic Versioning](https://semver.org/lang/de/).
 
 ## [Unreleased]
 
+### Hinzugefügt
+- **F3.7 Terminvorschlag (1.1):** Eine Planungshilfe schlägt auf Basis fälliger
+  Maßnahmen Sammeltermine vor. Sie sammelt je Maßnahme die Personen mit
+  Handlungsbedarf (kein Nachweis, abgelaufen, in Bearbeitung oder läuft bald ab),
+  ordnet sie nach Dringlichkeit, schlägt ein Datum vor (nahe dem frühesten
+  Fälligkeitstermin, mindestens jedoch mit organisatorischem Vorlauf) und teilt
+  die Betroffenen anhand der konfigurierbaren **optimalen Teilnehmerzahl**
+  (`vorschlag_kapazitaet`, Vorgabe 15) in Sitzungen auf. Die Seite
+  **Terminvorschlag** (`pages/terminvorschlag.php`, SiFa-Stufe) ist eine reine
+  Lese-/Planungsansicht; die Veranstaltungen werden anschließend regulär
+  angelegt. Neue reine, unit-getestete Helfer in `core/QT_Suggestion.php`
+  (`qt_vorschlag_sessions`, `qt_vorschlag_termin`, `qt_vorschlag_target_date`,
+  `qt_vorschlag_state_rank`, `qt_vorschlag_actionable`).
+
 ## [1.0.0] - 2026-08-19
 
 Erste stabile Veröffentlichung. Alle Meilensteine M1–M8 abgeschlossen:

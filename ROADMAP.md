@@ -1,7 +1,7 @@
 # Roadmap — MantisBT QualificationTracker
 
 **Version dieses Dokuments:** 1.0 (2026-08-19)
-**Status Gesamtprojekt:** 🟢 Release 1.0 — alle Meilensteine M1–M8 abgeschlossen (F3.7 Terminvorschlag zurückgestellt auf 1.1)
+**Status Gesamtprojekt:** 🟢 Release 1.0 veröffentlicht (alle Meilensteine M1–M8). Version 1.1 in Arbeit: F3.7 Terminvorschlag umgesetzt.
 
 ---
 
@@ -105,7 +105,7 @@ Legende: ⬜ offen · 🟡 in Arbeit · 🟢 fertig · ⚪ zurückgestellt
 | F3.4 | Massenabschluss | Ein Klick setzt für alle Teilnehmer Status, `durchgefuehrt_am` und `gueltig_bis`; Abwesende bleiben offen und werden neu terminiert | 🟢 |
 | F3.5 | Teilnehmerliste PDF | Druckbare Anwesenheitsliste mit Unterschriftenspalte, Maßnahmeninhalt und Rechtsgrundlage | 🟢 |
 | F3.6 | Nachweis-Anhang | Gescannte Liste wird einmal am Elternticket hinterlegt und in allen Kindern referenziert | 🟢 |
-| F3.7 | Terminvorschlag | Schlägt auf Basis fälliger Maßnahmen Veranstaltungstermine mit optimaler Teilnehmerzahl vor | ⚪ zurückgestellt auf 1.1 |
+| F3.7 | Terminvorschlag | Schlägt auf Basis fälliger Maßnahmen Veranstaltungstermine mit optimaler Teilnehmerzahl vor | 🟢 (1.1) |
 
 ### M4 — Matrix & Auswertung
 

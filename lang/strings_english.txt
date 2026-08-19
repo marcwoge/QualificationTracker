@@ -669,3 +669,14 @@ $s_plugin_QualificationTracker_migration_row_errors   = 'Errors';
 $s_plugin_QualificationTracker_error_migrate_no_person      = 'Neither employee nor personnel number on the ticket.';
 $s_plugin_QualificationTracker_error_migrate_no_measure     = 'No measure key on the ticket.';
 $s_plugin_QualificationTracker_error_migrate_measure_invalid = 'Could not create the measure stub (invalid data).';
+
+# --- Event suggestions (F3.7) --------------------------------------------
+$s_plugin_QualificationTracker_menu_terminvorschlag   = 'Event suggestions';
+$s_plugin_QualificationTracker_terminvorschlag_title  = 'Group-event suggestions';
+$s_plugin_QualificationTracker_terminvorschlag_intro  = 'Suggests group-event dates from due measures and splits the affected persons into sessions of the optimal size. A planning aid – the events are created afterwards.';
+$s_plugin_QualificationTracker_terminvorschlag_capacity = 'Participants per event';
+$s_plugin_QualificationTracker_terminvorschlag_refresh  = 'Refresh';
+$s_plugin_QualificationTracker_terminvorschlag_none   = 'No group events are needed right now.';
+$s_plugin_QualificationTracker_terminvorschlag_summary = '%1$d persons · %2$d event(s)';
+$s_plugin_QualificationTracker_terminvorschlag_proposed = 'Suggested:';
+$s_plugin_QualificationTracker_terminvorschlag_session = 'Event %1$d – %2$d participants';

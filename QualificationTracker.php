@@ -115,6 +115,11 @@ class QualificationTrackerPlugin extends MantisPlugin {
 			# consumed by the calculator via its abteilung_stichmonat parameter.
 			'stichmonat_abteilung'      => array(),
 
+			# --- Terminvorschlag (F3.7) ------------------------------------
+			# Optimal participant count per suggested group event; the planner
+			# splits the candidates of a measure into sessions of this size.
+			'vorschlag_kapazitaet'      => 15,
+
 			# --- Eskalation (F5.3), Vorgabestufen in Tagen -----------------
 			# Positive = days before expiry, negative = days after.
 			'eskalation_stufen_tage'    => array( 90, 30, 0, -30 ),
@@ -357,6 +362,8 @@ class QualificationTrackerPlugin extends MantisPlugin {
 				. plugin_lang_get( 'menu_verzeichnis' ) . '</a>',
 			'<a href="' . plugin_page( 'veranstaltung' ) . '">'
 				. plugin_lang_get( 'menu_event' ) . '</a>',
+			'<a href="' . plugin_page( 'terminvorschlag' ) . '">'
+				. plugin_lang_get( 'menu_terminvorschlag' ) . '</a>',
 			'<a href="' . plugin_page( 'config' ) . '">'
 				. plugin_lang_get( 'menu_config' ) . '</a>',
 		);
