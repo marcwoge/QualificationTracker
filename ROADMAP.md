@@ -158,7 +158,7 @@ Legende: ⬜ offen · 🟡 in Arbeit · 🟢 fertig · ⚪ zurückgestellt
 |---|---|---|---|
 | F8.1 | Docker-Testumgebung | Compose-Setup mit Mantis, MariaDB, Seed-Daten (50 Personen, 8 Maßnahmen) | 🟢 |
 | F8.2 | Lasttest | Nachweis der Zielgrößen: 500 Personen, 25.000 Tickets, Matrix < 2 s | 🟢 |
-| F8.3 | Übersetzungen | Vollständige Sprachdateien DE/EN | ⬜ |
+| F8.3 | Übersetzungen | Vollständige Sprachdateien DE/EN | 🟢 |
 | F8.4 | Administratorhandbuch | Installation, Konfiguration, Betrieb, Backup, Upgrade | ⬜ |
 | F8.5 | Anwenderhandbuch | Kurzanleitungen für Führungskräfte und Sachbearbeitung, je max. 2 Seiten | ⬜ |
 | F8.6 | Upgrade-Pfad | Migrationsroutine von der reinen Bordmittel-Konfiguration in die Plugin-Datenstruktur | ⬜ |

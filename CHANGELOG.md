@@ -8,6 +8,13 @@ die Versionierung folgt [Semantic Versioning](https://semver.org/lang/de/).
 ## [Unreleased]
 
 ### Hinzugefügt
+- **F8.3 Übersetzungen (M8):** Die Sprachdateien Deutsch und Englisch sind
+  vollständig und deckungsgleich (je 535 Schlüssel, identische Schlüsselmengen,
+  keine Duplikate, keine leeren Werte); alle dynamisch gebildeten Schlüssel
+  (Zustände, Typen, Modi, Personen-/Teilnehmerstatus, Historie) sind in beiden
+  Sprachen mit allen Laufzeitvarianten hinterlegt. Ein neuer Test
+  `tests/LangParityTest.php` sichert das dauerhaft ab und schlägt an, sobald ein
+  Schlüssel nur in einer Sprache ergänzt wird.
 - **F8.2 Lasttest (M8):** Ein Lasttest-Skript `scripts/qt_loadtest.php` weist die
   Zielgrößen nach: 500 Personen, ≥ 25.000 Nachweis-Instanzen, Matrix unter 2 s.
   Es erzeugt synthetische Personen (Personalnummern ab 800000), ein Profil über
