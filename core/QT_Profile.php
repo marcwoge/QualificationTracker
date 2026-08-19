@@ -99,7 +99,10 @@ function qt_profil_create( array $p_data ) {
 			$t_now,
 			$t_now,
 		) );
-	return db_insert_id( $t_table );
+	$t_id = db_insert_id( $t_table );
+	if( !function_exists( 'qt_historie_created' ) ) { plugin_require_api( 'core/QT_History.php' ); }
+	qt_historie_created( 'profil', $t_id, trim( (string)$p_data['name'] ) );
+	return $t_id;
 }
 
 /**
@@ -110,6 +113,7 @@ function qt_profil_create( array $p_data ) {
  * @return void
  */
 function qt_profil_update( $p_id, array $p_data ) {
+	$t_old = qt_profil_get( $p_id );
 	db_query(
 		'UPDATE ' . plugin_table( 'profil' )
 		. ' SET name = ' . db_param() . ', beschreibung = ' . db_param()
@@ -121,6 +125,11 @@ function qt_profil_update( $p_id, array $p_data ) {
 			time(),
 			(int)$p_id,
 		) );
+	if( !function_exists( 'qt_historie_updated' ) ) { plugin_require_api( 'core/QT_History.php' ); }
+	$t_new = qt_profil_get( $p_id );
+	if( is_array( $t_old ) && is_array( $t_new ) ) {
+		qt_historie_updated( 'profil', (int)$p_id, $t_old, $t_new, array( 'name', 'beschreibung', 'aktiv' ) );
+	}
 }
 
 /**
@@ -160,6 +169,7 @@ function qt_profil_get_massnahmen( $p_profil_id ) {
 function qt_profil_set_massnahmen( $p_profil_id, array $p_massnahme_ids ) {
 	$t_id = (int)$p_profil_id;
 	$t_table = plugin_table( 'profil_massnahme' );
+	$t_before = qt_profil_get_massnahmen( $t_id );
 
 	db_query( 'DELETE FROM ' . $t_table . ' WHERE profil_id = ' . db_param(), array( $t_id ) );
 
@@ -173,6 +183,36 @@ function qt_profil_set_massnahmen( $p_profil_id, array $p_massnahme_ids ) {
 		db_query( 'INSERT INTO ' . $t_table . ' ( profil_id, massnahme_id ) VALUES ( '
 			. db_param() . ', ' . db_param() . ' )', array( $t_id, $t_mid ) );
 	}
+
+	# History: record the composition change as one field entry (measure keys).
+	$t_alt = qt_profil_massnahme_label( $t_before );
+	$t_neu = qt_profil_massnahme_label( array_keys( $t_seen ) );
+	if( $t_alt !== $t_neu ) {
+		if( !function_exists( 'qt_historie_field' ) ) { plugin_require_api( 'core/QT_History.php' ); }
+		qt_historie_field( 'profil', $t_id, 'massnahmen', $t_alt, $t_neu );
+	}
+}
+
+/**
+ * A stable, human-readable label for a set of measure ids: their keys, sorted
+ * and comma-joined (falls back to "#id" for a missing measure). Used by the
+ * change history to describe a profile's composition.
+ *
+ * @param array $p_massnahme_ids
+ * @return string
+ */
+function qt_profil_massnahme_label( array $p_massnahme_ids ) {
+	$t_keys = array();
+	foreach( $p_massnahme_ids as $t_mid ) {
+		$t_mid = (int)$t_mid;
+		if( $t_mid <= 0 ) {
+			continue;
+		}
+		$t_m = qt_massnahme_get( $t_mid );
+		$t_keys[] = ( is_array( $t_m ) && (string)$t_m['schluessel'] !== '' ) ? (string)$t_m['schluessel'] : ( '#' . $t_mid );
+	}
+	sort( $t_keys );
+	return implode( ', ', $t_keys );
 }
 
 /**
@@ -196,8 +236,11 @@ function qt_profil_is_referenced( $p_id ) {
  */
 function qt_profil_delete( $p_id ) {
 	$t_id = (int)$p_id;
+	$t_row = qt_profil_get( $t_id );
 	db_query( 'DELETE FROM ' . plugin_table( 'profil_massnahme' ) . ' WHERE profil_id = ' . db_param(),
 		array( $t_id ) );
 	db_query( 'DELETE FROM ' . plugin_table( 'profil' ) . ' WHERE id = ' . db_param(),
 		array( $t_id ) );
+	if( !function_exists( 'qt_historie_deleted' ) ) { plugin_require_api( 'core/QT_History.php' ); }
+	qt_historie_deleted( 'profil', $t_id, is_array( $t_row ) ? (string)$t_row['name'] : '' );
 }

@@ -8,6 +8,17 @@ die Versionierung folgt [Semantic Versioning](https://semver.org/lang/de/).
 ## [Unreleased]
 
 ### Hinzugefügt
+- **F7.5 Änderungsprotokoll (M7):** MantisBT protokolliert die Historie jedes
+  Tickets, aber die plugin-eigenen Stammdaten liegen in eigenen Tabellen und
+  sind dieser Historie nicht zugänglich. Anlage, Änderung und Löschung von
+  **Maßnahmen, Tätigkeitsprofilen** (inkl. ihrer Maßnahmen-Zusammensetzung) und
+  **Zuordnungen** werden nun in eine append-only Tabelle `qt_historie`
+  geschrieben — je geändertem Feld eine Zeile mit Alt-/Neu-Wert, Benutzer und
+  Zeitpunkt, analog zur Ticket-Historie. Die Datenschicht ruft die
+  Protokoll-Helfer über einen Lazy-Require auf, sodass die reinen Datendateien
+  weiterhin ohne dieses Modul ladbar bleiben. Neue Seite **Änderungsprotokoll**
+  (`pages/historie.php`, nach Objektart filterbar). Neue reine, unit-getestete
+  `qt_historie_diff` in `core/QT_History.php`.
 - **F7.4 Auskunftsexport (M7):** Für eine Betroffenenauskunft nach DSGVO
   Art. 15 stellt die Seite **Auskunft** (`pages/auskunft.php`,
   administratorgesperrt) alle zu einer Person im Plugin gespeicherten Daten

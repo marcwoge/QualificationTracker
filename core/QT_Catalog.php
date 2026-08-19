@@ -203,7 +203,10 @@ function qt_massnahme_create( array $p_data ) {
 	$t_query = 'INSERT INTO ' . $t_table . ' ( ' . implode( ', ', $t_columns ) . ' ) VALUES ( ' . $t_placeholders . ' )';
 	db_query( $t_query, $t_values );
 
-	return db_insert_id( $t_table );
+	$t_id = db_insert_id( $t_table );
+	if( !function_exists( 'qt_historie_created' ) ) { plugin_require_api( 'core/QT_History.php' ); }
+	qt_historie_created( 'massnahme', $t_id, trim( (string)$p_data['schluessel'] ) );
+	return $t_id;
 }
 
 /**
@@ -215,6 +218,7 @@ function qt_massnahme_create( array $p_data ) {
  */
 function qt_massnahme_update( $p_id, array $p_data ) {
 	$t_table = plugin_table( 'massnahme' );
+	$t_old = qt_massnahme_get( $p_id );
 	$t_columns = qt_massnahme_columns();
 	$t_values = qt_massnahme_bind_values( $p_data );
 
@@ -228,6 +232,12 @@ function qt_massnahme_update( $p_id, array $p_data ) {
 	$t_values[] = (int)$p_id;
 	$t_query = 'UPDATE ' . $t_table . ' SET ' . implode( ', ', $t_set ) . ' WHERE id = ' . db_param();
 	db_query( $t_query, $t_values );
+
+	if( !function_exists( 'qt_historie_updated' ) ) { plugin_require_api( 'core/QT_History.php' ); }
+	$t_new = qt_massnahme_get( $p_id );
+	if( is_array( $t_old ) && is_array( $t_new ) ) {
+		qt_historie_updated( 'massnahme', (int)$p_id, $t_old, $t_new, qt_massnahme_columns() );
+	}
 }
 
 /**
@@ -258,6 +268,9 @@ function qt_massnahme_is_referenced( $p_id ) {
  * @return void
  */
 function qt_massnahme_delete( $p_id ) {
+	$t_row = qt_massnahme_get( $p_id );
 	db_query( 'DELETE FROM ' . plugin_table( 'massnahme' ) . ' WHERE id = ' . db_param(),
 		array( (int)$p_id ) );
+	if( !function_exists( 'qt_historie_deleted' ) ) { plugin_require_api( 'core/QT_History.php' ); }
+	qt_historie_deleted( 'massnahme', (int)$p_id, is_array( $t_row ) ? (string)$t_row['schluessel'] : '' );
 }

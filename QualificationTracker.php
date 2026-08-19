@@ -349,6 +349,8 @@ class QualificationTrackerPlugin extends MantisPlugin {
 				. plugin_lang_get( 'menu_loeschung' ) . '</a>',
 			'<a href="' . plugin_page( 'auskunft' ) . '">'
 				. plugin_lang_get( 'menu_auskunft' ) . '</a>',
+			'<a href="' . plugin_page( 'historie' ) . '">'
+				. plugin_lang_get( 'menu_historie' ) . '</a>',
 			'<a href="' . plugin_page( 'veranstaltung' ) . '">'
 				. plugin_lang_get( 'menu_event' ) . '</a>',
 			'<a href="' . plugin_page( 'config' ) . '">'
@@ -585,6 +587,27 @@ class QualificationTrackerPlugin extends MantisPlugin {
 				" ) ),
 			array( 'CreateIndexSQL', array( 'idx_qt_loeschung_created',
 				plugin_table( 'loeschung' ), 'date_created' ) ),
+
+			# --- 29/30/31: qt_historie (master-data change log, F7.5) ------
+			# Append-only history of create/update/delete changes to the
+			# plugin's own master data (catalogue, profiles, assignments),
+			# analogous to the MantisBT bug history which cannot see these
+			# plugin tables. One row per changed field.
+			array( 'CreateTableSQL', array( plugin_table( 'historie' ), "
+				id           I     UNSIGNED NOTNULL AUTOINCREMENT PRIMARY,
+				entity_typ   C(16) NOTNULL,
+				entity_id    I     UNSIGNED NOTNULL DEFAULT '0',
+				aktion       C(8)  NOTNULL DEFAULT \" 'update' \",
+				feld         C(64),
+				alt_wert     X,
+				neu_wert     X,
+				user_id      I     UNSIGNED NOTNULL DEFAULT '0',
+				date_created I     UNSIGNED NOTNULL DEFAULT '0'
+				" ) ),
+			array( 'CreateIndexSQL', array( 'idx_qt_historie_entity',
+				plugin_table( 'historie' ), 'entity_typ,entity_id' ) ),
+			array( 'CreateIndexSQL', array( 'idx_qt_historie_created',
+				plugin_table( 'historie' ), 'date_created' ) ),
 		);
 	}
 
@@ -615,7 +638,7 @@ class QualificationTrackerPlugin extends MantisPlugin {
 	 */
 	function uninstall() {
 		$t_tables = array(
-			'loeschung', 'lauf', 'teilnehmer', 'nachweis', 'massnahme_vorbedingung', 'veranstaltung',
+			'historie', 'loeschung', 'lauf', 'teilnehmer', 'nachweis', 'massnahme_vorbedingung', 'veranstaltung',
 			'zuordnung', 'profil_massnahme', 'profil', 'person', 'massnahme',
 		);
 		foreach( $t_tables as $t_name ) {

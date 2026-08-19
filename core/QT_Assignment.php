@@ -128,7 +128,10 @@ function qt_zuordnung_create( array $p_data ) {
 			$t_now,
 			$t_now,
 		) );
-	return db_insert_id( $t_table );
+	$t_id = db_insert_id( $t_table );
+	if( !function_exists( 'qt_historie_created' ) ) { plugin_require_api( 'core/QT_History.php' ); }
+	qt_historie_created( 'zuordnung', $t_id, 'P' . (int)$p_data['person_id'] . '/Prof' . (int)$p_data['profil_id'] );
+	return $t_id;
 }
 
 /**
@@ -139,6 +142,7 @@ function qt_zuordnung_create( array $p_data ) {
  * @return void
  */
 function qt_zuordnung_update( $p_id, array $p_data ) {
+	$t_old = qt_zuordnung_get( $p_id );
 	db_query(
 		'UPDATE ' . plugin_table( 'zuordnung' )
 		. ' SET person_id = ' . db_param() . ', profil_id = ' . db_param()
@@ -152,6 +156,12 @@ function qt_zuordnung_update( $p_id, array $p_data ) {
 			time(),
 			(int)$p_id,
 		) );
+	if( !function_exists( 'qt_historie_updated' ) ) { plugin_require_api( 'core/QT_History.php' ); }
+	$t_new = qt_zuordnung_get( $p_id );
+	if( is_array( $t_old ) && is_array( $t_new ) ) {
+		qt_historie_updated( 'zuordnung', (int)$p_id, $t_old, $t_new,
+			array( 'person_id', 'profil_id', 'gueltig_ab', 'gueltig_bis' ) );
+	}
 }
 
 /**
@@ -173,6 +183,10 @@ function qt_zuordnung_date( array $p_data, $p_key ) {
  * @return void
  */
 function qt_zuordnung_delete( $p_id ) {
+	$t_row = qt_zuordnung_get( $p_id );
 	db_query( 'DELETE FROM ' . plugin_table( 'zuordnung' ) . ' WHERE id = ' . db_param(),
 		array( (int)$p_id ) );
+	if( !function_exists( 'qt_historie_deleted' ) ) { plugin_require_api( 'core/QT_History.php' ); }
+	$t_label = is_array( $t_row ) ? ( 'P' . (int)$t_row['person_id'] . '/Prof' . (int)$t_row['profil_id'] ) : '';
+	qt_historie_deleted( 'zuordnung', (int)$p_id, $t_label );
 }

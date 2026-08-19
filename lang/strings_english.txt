@@ -599,3 +599,25 @@ $s_plugin_QualificationTracker_auskunft_doc_title       = 'Disclosure under GDPR
 $s_plugin_QualificationTracker_auskunft_doc_meta        = 'Generated on %1$s at %2$s by %3$s.';
 $s_plugin_QualificationTracker_auskunft_btn_print       = 'Print / Save as PDF';
 $s_plugin_QualificationTracker_auskunft_legal           = 'This statement covers all personal data the QualificationTracker plugin processes about the named person. The data model has no free-text findings field; occupational-health proofs appear only as metadata (type, dates, status).';
+
+# --- Master-data change log (F7.5) ---------------------------------------
+$s_plugin_QualificationTracker_menu_historie          = 'Change log';
+$s_plugin_QualificationTracker_historie_title         = 'Change log';
+$s_plugin_QualificationTracker_historie_intro         = 'Records the creation, modification and deletion of the plugin master data (measure catalogue, activity profiles, assignments), analogous to the MantisBT ticket history.';
+$s_plugin_QualificationTracker_historie_filter_typ    = 'Entity type';
+$s_plugin_QualificationTracker_historie_all           = 'All';
+$s_plugin_QualificationTracker_historie_empty         = 'No changes recorded yet.';
+$s_plugin_QualificationTracker_historie_entity_massnahme = 'Measure';
+$s_plugin_QualificationTracker_historie_entity_profil    = 'Profile';
+$s_plugin_QualificationTracker_historie_entity_zuordnung = 'Assignment';
+$s_plugin_QualificationTracker_historie_action_create = 'created';
+$s_plugin_QualificationTracker_historie_action_update = 'changed';
+$s_plugin_QualificationTracker_historie_action_delete = 'deleted';
+$s_plugin_QualificationTracker_historie_col_when      = 'When';
+$s_plugin_QualificationTracker_historie_col_user      = 'User';
+$s_plugin_QualificationTracker_historie_col_entity    = 'Entity';
+$s_plugin_QualificationTracker_historie_col_action    = 'Action';
+$s_plugin_QualificationTracker_historie_col_field     = 'Field';
+$s_plugin_QualificationTracker_historie_col_old       = 'Old';
+$s_plugin_QualificationTracker_historie_col_new       = 'New';
+$s_plugin_QualificationTracker_label_massnahmen       = 'Measures';

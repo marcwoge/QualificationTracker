@@ -599,3 +599,25 @@ $s_plugin_QualificationTracker_auskunft_doc_title       = 'Auskunft nach DSGVO A
 $s_plugin_QualificationTracker_auskunft_doc_meta        = 'Erstellt am %1$s um %2$s Uhr durch %3$s.';
 $s_plugin_QualificationTracker_auskunft_btn_print       = 'Drucken / Als PDF speichern';
 $s_plugin_QualificationTracker_auskunft_legal           = 'Diese Aufstellung umfasst alle personenbezogenen Daten, die das Plugin QualificationTracker über die genannte Person verarbeitet. Ein Freitext-Befundfeld existiert im Datenmodell nicht; arbeitsmedizinische Nachweise erscheinen nur als Metadaten (Art, Termine, Status).';
+
+# --- Änderungsprotokoll (F7.5) -------------------------------------------
+$s_plugin_QualificationTracker_menu_historie          = 'Änderungsprotokoll';
+$s_plugin_QualificationTracker_historie_title         = 'Änderungsprotokoll';
+$s_plugin_QualificationTracker_historie_intro         = 'Protokolliert Anlage, Änderung und Löschung der Plugin-Stammdaten (Maßnahmenkatalog, Tätigkeitsprofile, Zuordnungen) analog zur Mantis-Ticket-Historie.';
+$s_plugin_QualificationTracker_historie_filter_typ    = 'Objektart';
+$s_plugin_QualificationTracker_historie_all           = 'Alle';
+$s_plugin_QualificationTracker_historie_empty         = 'Noch keine Änderungen protokolliert.';
+$s_plugin_QualificationTracker_historie_entity_massnahme = 'Maßnahme';
+$s_plugin_QualificationTracker_historie_entity_profil    = 'Profil';
+$s_plugin_QualificationTracker_historie_entity_zuordnung = 'Zuordnung';
+$s_plugin_QualificationTracker_historie_action_create = 'angelegt';
+$s_plugin_QualificationTracker_historie_action_update = 'geändert';
+$s_plugin_QualificationTracker_historie_action_delete = 'gelöscht';
+$s_plugin_QualificationTracker_historie_col_when      = 'Zeitpunkt';
+$s_plugin_QualificationTracker_historie_col_user      = 'Benutzer';
+$s_plugin_QualificationTracker_historie_col_entity    = 'Objekt';
+$s_plugin_QualificationTracker_historie_col_action    = 'Aktion';
+$s_plugin_QualificationTracker_historie_col_field     = 'Feld';
+$s_plugin_QualificationTracker_historie_col_old       = 'Alt';
+$s_plugin_QualificationTracker_historie_col_new       = 'Neu';
+$s_plugin_QualificationTracker_label_massnahmen       = 'Maßnahmen';
