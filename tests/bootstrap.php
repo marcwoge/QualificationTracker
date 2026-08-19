@@ -46,3 +46,4 @@ require_once dirname( __DIR__ ) . '/core/QT_Rest.php';
 require_once dirname( __DIR__ ) . '/core/QT_Access.php';
 require_once dirname( __DIR__ ) . '/core/QT_Vorsorge.php';
 require_once dirname( __DIR__ ) . '/core/QT_Deletion.php';
+require_once dirname( __DIR__ ) . '/core/QT_Disclosure.php';

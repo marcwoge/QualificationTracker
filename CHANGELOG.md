@@ -8,6 +8,19 @@ die Versionierung folgt [Semantic Versioning](https://semver.org/lang/de/).
 ## [Unreleased]
 
 ### Hinzugefügt
+- **F7.4 Auskunftsexport (M7):** Für eine Betroffenenauskunft nach DSGVO
+  Art. 15 stellt die Seite **Auskunft** (`pages/auskunft.php`,
+  administratorgesperrt) alle zu einer Person im Plugin gespeicherten Daten
+  zusammen: Stammdaten, Tätigkeitsprofil-Zuordnungen, sämtliche Nachweise,
+  Veranstaltungsteilnahmen und etwaige Einträge im Löschprotokoll. Die
+  Standardansicht zeigt eine Vorschau; `format=print` liefert ein
+  **eigenständiges, druckoptimiertes HTML-Dokument** (ohne MantisBT-Rahmen),
+  das der Browser als PDF speichert — so bleibt das Plugin ohne
+  Laufzeitabhängigkeit git-clone-fähig (MantisBT bringt keine PDF-Bibliothek
+  mit). Arbeitsmedizinische (VO-)Nachweise erscheinen nur als Metadaten (Art,
+  Termine, Status); das Datenmodell hat ohnehin kein Freitext-Befundfeld.
+  Neue reine, unit-getestete `qt_auskunft_person_fields` und
+  `qt_auskunft_filename` in `core/QT_Disclosure.php`.
 - **F7.3 Löschkonzept (M7):** Personenbezogene Nachweisdaten werden nicht mehr
   unbegrenzt aufbewahrt (DSGVO Art. 17). Je Maßnahmentyp gilt eine
   **Aufbewahrungsfrist** (`aufbewahrung_monate_typ` mit globalem Default

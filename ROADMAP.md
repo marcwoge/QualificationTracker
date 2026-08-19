@@ -148,7 +148,7 @@ Legende: ⬜ offen · 🟡 in Arbeit · 🟢 fertig · ⚪ zurückgestellt
 | F7.1 | Berechtigungsstufen | Eigene Access Level: Betrachter (nur eigene Abteilung), Sachbearbeiter, SiFa, Administrator | 🟢 |
 | F7.2 | Vorsorge-Trennung | Maßnahmen vom Typ `VO` nur in gesondertem Projekt sichtbar, Feldsatz technisch beschränkt | 🟢 |
 | F7.3 | Löschkonzept | Aufbewahrungsfrist je Maßnahmenart; Löschvorschlagsliste; Löschung wird protokolliert | 🟢 |
-| F7.4 | Auskunftsexport | Alle zu einer Person gespeicherten Daten als PDF (DSGVO Art. 15) | ⬜ |
+| F7.4 | Auskunftsexport | Alle zu einer Person gespeicherten Daten als PDF (DSGVO Art. 15) | 🟢 |
 | F7.5 | Änderungsprotokoll | Plugin-eigene Änderungen (Katalog, Profile) werden analog zur Mantis-History protokolliert | ⬜ |
 | F7.6 | Verarbeitungsverzeichnis | Vorlagentext als Anhang der Dokumentation | ⬜ |
 

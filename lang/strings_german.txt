@@ -573,3 +573,29 @@ $s_plugin_QualificationTracker_loeschung_col_when       = 'Zeitpunkt';
 $s_plugin_QualificationTracker_loeschung_col_grund      = 'Grund';
 $s_plugin_QualificationTracker_loeschung_col_user       = 'Durch';
 $s_plugin_QualificationTracker_loeschung_log_empty      = 'Noch keine Löschungen protokolliert.';
+
+# --- Auskunftsexport (F7.4) ----------------------------------------------
+$s_plugin_QualificationTracker_bool_yes = 'ja';
+$s_plugin_QualificationTracker_bool_no  = 'nein';
+$s_plugin_QualificationTracker_state_offen         = 'offen';
+$s_plugin_QualificationTracker_state_geplant       = 'geplant';
+$s_plugin_QualificationTracker_state_durchgefuehrt = 'durchgeführt';
+$s_plugin_QualificationTracker_state_gueltig       = 'gültig';
+
+$s_plugin_QualificationTracker_menu_auskunft            = 'Auskunft (Art. 15)';
+$s_plugin_QualificationTracker_auskunft_title           = 'Auskunftsexport';
+$s_plugin_QualificationTracker_auskunft_intro           = 'Stellt alle zu einer Person in diesem Plugin gespeicherten Daten für eine Auskunft nach DSGVO Art. 15 zusammen. Die Druckansicht erzeugt ein eigenständiges Dokument, das der Browser als PDF speichern kann.';
+$s_plugin_QualificationTracker_auskunft_show            = 'Anzeigen';
+$s_plugin_QualificationTracker_auskunft_preview         = 'Vorschau';
+$s_plugin_QualificationTracker_auskunft_open_print      = 'Druckansicht / Als PDF';
+$s_plugin_QualificationTracker_auskunft_person_unknown  = 'Person nicht gefunden.';
+$s_plugin_QualificationTracker_auskunft_none            = 'Keine Einträge.';
+$s_plugin_QualificationTracker_auskunft_section_stammdaten  = 'Stammdaten';
+$s_plugin_QualificationTracker_auskunft_section_zuordnungen = 'Tätigkeitsprofile (Zuordnungen)';
+$s_plugin_QualificationTracker_auskunft_section_nachweise   = 'Nachweise';
+$s_plugin_QualificationTracker_auskunft_section_teilnahmen  = 'Veranstaltungsteilnahmen';
+$s_plugin_QualificationTracker_auskunft_section_loeschungen = 'Protokollierte Löschungen';
+$s_plugin_QualificationTracker_auskunft_doc_title       = 'Auskunft nach DSGVO Art. 15';
+$s_plugin_QualificationTracker_auskunft_doc_meta        = 'Erstellt am %1$s um %2$s Uhr durch %3$s.';
+$s_plugin_QualificationTracker_auskunft_btn_print       = 'Drucken / Als PDF speichern';
+$s_plugin_QualificationTracker_auskunft_legal           = 'Diese Aufstellung umfasst alle personenbezogenen Daten, die das Plugin QualificationTracker über die genannte Person verarbeitet. Ein Freitext-Befundfeld existiert im Datenmodell nicht; arbeitsmedizinische Nachweise erscheinen nur als Metadaten (Art, Termine, Status).';

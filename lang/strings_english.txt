@@ -573,3 +573,29 @@ $s_plugin_QualificationTracker_loeschung_col_when       = 'When';
 $s_plugin_QualificationTracker_loeschung_col_grund      = 'Reason';
 $s_plugin_QualificationTracker_loeschung_col_user       = 'By';
 $s_plugin_QualificationTracker_loeschung_log_empty      = 'No deletions logged yet.';
+
+# --- Data-subject disclosure (F7.4) --------------------------------------
+$s_plugin_QualificationTracker_bool_yes = 'yes';
+$s_plugin_QualificationTracker_bool_no  = 'no';
+$s_plugin_QualificationTracker_state_offen         = 'open';
+$s_plugin_QualificationTracker_state_geplant       = 'planned';
+$s_plugin_QualificationTracker_state_durchgefuehrt = 'completed';
+$s_plugin_QualificationTracker_state_gueltig       = 'valid';
+
+$s_plugin_QualificationTracker_menu_auskunft            = 'Disclosure (Art. 15)';
+$s_plugin_QualificationTracker_auskunft_title           = 'Data-subject disclosure';
+$s_plugin_QualificationTracker_auskunft_intro           = 'Compiles everything this plugin stores about a person for a GDPR Art. 15 subject-access request. The print view produces a standalone document the browser can save as a PDF.';
+$s_plugin_QualificationTracker_auskunft_show            = 'Show';
+$s_plugin_QualificationTracker_auskunft_preview         = 'Preview';
+$s_plugin_QualificationTracker_auskunft_open_print      = 'Print view / Save as PDF';
+$s_plugin_QualificationTracker_auskunft_person_unknown  = 'Person not found.';
+$s_plugin_QualificationTracker_auskunft_none            = 'No entries.';
+$s_plugin_QualificationTracker_auskunft_section_stammdaten  = 'Master record';
+$s_plugin_QualificationTracker_auskunft_section_zuordnungen = 'Activity profiles (assignments)';
+$s_plugin_QualificationTracker_auskunft_section_nachweise   = 'Proofs';
+$s_plugin_QualificationTracker_auskunft_section_teilnahmen  = 'Event participations';
+$s_plugin_QualificationTracker_auskunft_section_loeschungen = 'Logged deletions';
+$s_plugin_QualificationTracker_auskunft_doc_title       = 'Disclosure under GDPR Art. 15';
+$s_plugin_QualificationTracker_auskunft_doc_meta        = 'Generated on %1$s at %2$s by %3$s.';
+$s_plugin_QualificationTracker_auskunft_btn_print       = 'Print / Save as PDF';
+$s_plugin_QualificationTracker_auskunft_legal           = 'This statement covers all personal data the QualificationTracker plugin processes about the named person. The data model has no free-text findings field; occupational-health proofs appear only as metadata (type, dates, status).';
