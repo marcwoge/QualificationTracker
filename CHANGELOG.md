@@ -8,6 +8,15 @@ die Versionierung folgt [Semantic Versioning](https://semver.org/lang/de/).
 ## [Unreleased]
 
 ### Hinzugefügt
+- **F8.4 Administratorhandbuch (M8):** Vollständiges Betriebshandbuch
+  `docs/Administratorhandbuch.md` – Architektur, Voraussetzungen, Installation,
+  eine Referenztabelle aller Konfigurationsschlüssel, erste Schritte, die
+  nächtliche Automatik (CLI-Runner mit Optionen und Exit-Codes), CSV-/REST-
+  Schnittstelle, Übersicht der Datenschutz-Funktionen, Datensicherung, Upgrade,
+  Deinstallation und eine Fehlersuchtabelle. Dabei zwei Ungenauigkeiten im
+  README korrigiert: der Cron-Pfad (`scripts/qt_cron.php`) und das
+  REST-Beispiel (Basisname `QualificationTracker`, reale Filter statt eines
+  nicht existierenden `updated_since`-Parameters).
 - **F8.3 Übersetzungen (M8):** Die Sprachdateien Deutsch und Englisch sind
   vollständig und deckungsgleich (je 535 Schlüssel, identische Schlüsselmengen,
   keine Duplikate, keine leeren Werte); alle dynamisch gebildeten Schlüssel

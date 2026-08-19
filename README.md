@@ -79,7 +79,7 @@ Das Plugin legt seine Tabellen (Präfix `qt_`) sowie die benötigten Custom Fiel
 
 ```bash
 # /etc/cron.d/qualificationtracker
-30 5 * * *  www-data  php /var/www/mantisbt/plugins/QualificationTracker/qt_cron.php >> /var/log/mantis/qt_cron.log 2>&1
+30 5 * * *  www-data  php /var/www/mantisbt/plugins/QualificationTracker/scripts/qt_cron.php >> /var/log/mantis/qt_cron.log 2>&1
 ```
 
 Der Lauf setzt abgelaufene Nachweise, reaktiviert zurückgestellte Tickets und versendet die Eskalationsstufen. Er ist idempotent und kann gefahrlos mehrfach am Tag laufen.
@@ -132,10 +132,10 @@ Danach in MantisBT die Plugin-Verwaltung öffnen; nötige Schema-Migrationen wer
 Die REST-Endpunkte liefern den Nachweisbestand denormalisiert:
 
 ```
-GET /api/rest/plugins/qt/nachweise?updated_since=2026-08-01
+GET /api/rest/plugins/QualificationTracker/nachweise?status=abgelaufen&limit=1000&offset=0
 ```
 
-Im Referenzaufbau zieht Apache NiFi diese Daten inkrementell nach Elasticsearch; Kibana rendert daraus die Ampel-Heatmap Person × Maßnahme sowie den Erfüllungsgrad je Abteilung über die Zeit. Details in [KONZEPT-Bordmittel.md](KONZEPT-Bordmittel.md), Abschnitt 10.
+Im Referenzaufbau zieht Apache NiFi diese Daten periodisch (seitenweise über `limit`/`offset`) nach Elasticsearch; Kibana rendert daraus die Ampel-Heatmap Person × Maßnahme sowie den Erfüllungsgrad je Abteilung über die Zeit. Details in [KONZEPT-Bordmittel.md](KONZEPT-Bordmittel.md), Abschnitt 10, und im [Administratorhandbuch](docs/Administratorhandbuch.md).
 
 ---
 
