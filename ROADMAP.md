@@ -1,7 +1,7 @@
 # Roadmap — MantisBT QualificationTracker
 
-**Version dieses Dokuments:** 0.4 (2026-08-12)
-**Status Gesamtprojekt:** 🟡 M1–M6 abgeschlossen (M1 Fundament, M2 Generator, M3 Veranstaltungen, M4 Matrix & Auswertung, M5 Automatisierung, M6 Import & Migration; F3.7 zurückgestellt auf 1.1), M7 (Audit & Datenschutz) in Arbeit (F7.1, F7.2 fertig)
+**Version dieses Dokuments:** 1.0 (2026-08-19)
+**Status Gesamtprojekt:** 🟢 Release 1.0 — alle Meilensteine M1–M8 abgeschlossen (F3.7 Terminvorschlag zurückgestellt auf 1.1)
 
 ---
 
@@ -60,7 +60,7 @@ Für die Anbindung an Auswertungssysteme stellt das Plugin **REST-Endpunkte** be
 | M5 | Automatisierung | Recurrence-/Reveille-Kopplung, Eskalationsstufen | 🟢 abgeschlossen |
 | M6 | Import & Migration | CSV-/REST-Import, HR-Sync, Ersterfassung | 🟢 abgeschlossen |
 | M7 | Audit & Datenschutz | Berechtigungen, Löschkonzept, Auditbericht | 🟢 abgeschlossen |
-| M8 | Release 1.0 | Doku, Docker-Testumgebung, Lasttest, Paketierung | ⬜ offen |
+| M8 | Release 1.0 | Doku, Docker-Testumgebung, Lasttest, Paketierung | 🟢 abgeschlossen |
 
 Legende: ⬜ offen · 🟡 in Arbeit · 🟢 fertig · ⚪ zurückgestellt
 
@@ -162,7 +162,7 @@ Legende: ⬜ offen · 🟡 in Arbeit · 🟢 fertig · ⚪ zurückgestellt
 | F8.4 | Administratorhandbuch | Installation, Konfiguration, Betrieb, Backup, Upgrade | 🟢 |
 | F8.5 | Anwenderhandbuch | Kurzanleitungen für Führungskräfte und Sachbearbeitung, je max. 2 Seiten | 🟢 |
 | F8.6 | Upgrade-Pfad | Migrationsroutine von der reinen Bordmittel-Konfiguration in die Plugin-Datenstruktur | 🟢 |
-| F8.7 | Paketierung | Release-Artefakt, Versionierung, Changelog | ⬜ |
+| F8.7 | Paketierung | Release-Artefakt, Versionierung, Changelog | 🟢 |
 
 ---
 

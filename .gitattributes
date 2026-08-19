@@ -5,3 +5,12 @@
 *.png binary
 *.jpg binary
 *.pdf binary
+
+# Development-only paths excluded from the release archive (git archive).
+/.gitattributes   export-ignore
+/.gitignore       export-ignore
+/docker            export-ignore
+/docker-compose.yml export-ignore
+/tests             export-ignore
+/phpunit.xml.dist  export-ignore
+/setup-github.sh   export-ignore

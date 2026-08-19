@@ -45,7 +45,7 @@ Ehrlichkeit spart beiden Seiten Zeit:
 
 ## Status
 
-🟢 **Release 1.0 in Vorbereitung.** Die Meilensteine M1–M7 sind abgeschlossen (Katalog, Ticketerzeugung, Veranstaltungen, Matrix, Automatisierung, Import/REST, Audit & Datenschutz); M8 (Release) läuft. Siehe [ROADMAP.md](ROADMAP.md) und [CHANGELOG.md](CHANGELOG.md).
+🟢 **Release 1.0.** Alle Meilensteine M1–M8 sind abgeschlossen (Katalog, Ticketerzeugung, Veranstaltungen, Matrix, Automatisierung, Import/REST, Audit & Datenschutz, Release-Reife). Siehe [ROADMAP.md](ROADMAP.md) und [CHANGELOG.md](CHANGELOG.md).
 
 Wer den Kern **ohne dieses Plugin** allein durch Konfiguration von MantisBT abbilden will, findet das im Konzept [KONZEPT-Bordmittel.md](KONZEPT-Bordmittel.md); das Plugin automatisiert, was dort Handarbeit bleibt. Ein Migrationspfad von der Bordmittel-Konfiguration in die Plugin-Datenstruktur ist vorgesehen (F8.6).
 

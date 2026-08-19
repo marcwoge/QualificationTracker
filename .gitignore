@@ -7,3 +7,6 @@
 .phpunit.cache/
 .phpunit.result.cache
 /tests/coverage/
+
+# Release archives built by scripts/qt_package.sh
+/QualificationTracker-*.tar.gz

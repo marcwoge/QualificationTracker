@@ -7,7 +7,22 @@ die Versionierung folgt [Semantic Versioning](https://semver.org/lang/de/).
 
 ## [Unreleased]
 
+## [1.0.0] - 2026-08-19
+
+Erste stabile Veröffentlichung. Alle Meilensteine M1–M8 abgeschlossen:
+Fundament und Katalog (M1), Ticketerzeugung und Tätigkeitsprofile (M2),
+Veranstaltungen (M3), Matrix und Auswertung (M4), Automatisierung (M5),
+Import und REST (M6), Audit und Datenschutz (M7) sowie Release-Reife (M8).
+
 ### Hinzugefügt
+- **F8.7 Paketierung (M8):** Plugin-Version auf **1.0.0** angehoben. Diese
+  Changelog-Fassung markiert das Release. Ein Skript `scripts/qt_package.sh`
+  erzeugt aus einem committeten Stand über `git archive` ein sauberes, sofort
+  einsetzbares Plugin-Archiv `QualificationTracker-<version>.tar.gz`;
+  Entwicklungspfade (`docker/`, `tests/`, `phpunit.xml.dist`, …) sind per
+  `export-ignore` in `.gitattributes` ausgeschlossen. Das Archiv entpackt in ein
+  Verzeichnis `QualificationTracker/`, das direkt nach `<mantis>/plugins/` gelegt
+  werden kann. **Damit ist Meilenstein M8 (Release 1.0) abgeschlossen.**
 - **F8.6 Upgrade-Pfad – Bordmittel-Migration (M8):** Eine bestehende reine
   MantisBT-Konfiguration (ein Ticket je Nachweis, Maßnahmentyp als Kategorie,
   Nachweisdaten in Custom Fields – siehe `KONZEPT-Bordmittel.md`) lässt sich in
@@ -472,4 +487,5 @@ die Versionierung folgt [Semantic Versioning](https://semver.org/lang/de/).
   `MANTIS_DIR` und verhinderte dadurch das Laden im Plugin-Manager; jetzt
   korrekt `MANTIS_VERSION` (wie im Schwester-Plugin Reveille).
 
-[Unreleased]: https://github.com/marcwoge/QualificationTracker/commits/main
+[Unreleased]: https://github.com/marcwoge/QualificationTracker/compare/v1.0.0...HEAD
+[1.0.0]: https://github.com/marcwoge/QualificationTracker/releases/tag/v1.0.0

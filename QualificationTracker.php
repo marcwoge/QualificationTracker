@@ -46,7 +46,7 @@ class QualificationTrackerPlugin extends MantisPlugin {
 		# Landing page of the plugin (the "gear" in the plugin manager).
 		$this->page         = 'config';
 
-		$this->version  = '0.1.0';
+		$this->version  = '1.0.0';
 		$this->requires = array(
 			'MantisCore' => '2.25.0',
 		);
