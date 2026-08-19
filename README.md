@@ -143,7 +143,7 @@ Im Referenzaufbau zieht Apache NiFi diese Daten inkrementell nach Elasticsearch;
 
 Das Plugin verarbeitet personenbezogene Daten. Vor Inbetriebnahme zu klären:
 
-- Eintrag im Verzeichnis von Verarbeitungstätigkeiten (Vorlage liegt der Dokumentation bei)
+- Eintrag im Verzeichnis von Verarbeitungstätigkeiten — Vorlagentext unter [docs/Verarbeitungsverzeichnis.md](docs/Verarbeitungsverzeichnis.md); die Verwaltungsseite „Verarbeitungsverzeichnis" zeigt zusätzlich eine konfigurationsbezogene Fassung mit Druck-/PDF-Ansicht
 - Beteiligung des Betriebsrats prüfen — die Auswertung von Qualifikationsdaten kann der Mitbestimmung nach BetrVG § 87 unterliegen
 - Arbeitsmedizinische Vorsorge gehört in ein **separates Projekt** mit eigener Sichtbarkeit. Es werden ausschließlich Art, Datum und Nachuntersuchungsfrist geführt — **keine Befunde**
 - Löschfristen je Maßnahmenart festlegen; bei Gefahrstoffexposition gelten teils jahrzehntelange Aufbewahrungspflichten

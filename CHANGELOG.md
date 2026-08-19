@@ -8,6 +8,18 @@ die Versionierung folgt [Semantic Versioning](https://semver.org/lang/de/).
 ## [Unreleased]
 
 ### Hinzugefügt
+- **F7.6 Verarbeitungsverzeichnis (M7):** Für den Eintrag ins Verzeichnis von
+  Verarbeitungstätigkeiten (DSGVO Art. 30) liegt der Dokumentation ein
+  **Vorlagentext** bei (`docs/Verarbeitungsverzeichnis.md`) — mit Zwecken,
+  betroffenen Personen, Datenkategorien, Empfängern, Rechtsgrundlagen,
+  Löschfristen, Drittlandhinweis und TOM, und Platzhaltern für die
+  organisationsspezifischen Angaben. Zusätzlich rendert die Seite
+  **Verarbeitungsverzeichnis** (`pages/verzeichnis.php`) eine
+  **konfigurationsbezogene Fassung**, in der Aufbewahrungsfristen, Projekte und
+  Rollenstufen den tatsächlich konfigurierten Werten entsprechen, samt Druck-/
+  PDF-Ansicht. Neue reine, unit-getestete
+  `qt_verzeichnis_aufbewahrung_zeilen` in `core/QT_Register.php`. **Damit ist
+  M7 (Audit & Datenschutz) abgeschlossen.**
 - **F7.5 Änderungsprotokoll (M7):** MantisBT protokolliert die Historie jedes
   Tickets, aber die plugin-eigenen Stammdaten liegen in eigenen Tabellen und
   sind dieser Historie nicht zugänglich. Anlage, Änderung und Löschung von

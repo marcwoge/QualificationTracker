@@ -59,7 +59,7 @@ Für die Anbindung an Auswertungssysteme stellt das Plugin **REST-Endpunkte** be
 | M4 | Matrix & Auswertung | Matrix-Ansicht, Ampel, Export | 🟢 abgeschlossen |
 | M5 | Automatisierung | Recurrence-/Reveille-Kopplung, Eskalationsstufen | 🟢 abgeschlossen |
 | M6 | Import & Migration | CSV-/REST-Import, HR-Sync, Ersterfassung | 🟢 abgeschlossen |
-| M7 | Audit & Datenschutz | Berechtigungen, Löschkonzept, Auditbericht | 🟡 in Arbeit |
+| M7 | Audit & Datenschutz | Berechtigungen, Löschkonzept, Auditbericht | 🟢 abgeschlossen |
 | M8 | Release 1.0 | Doku, Docker-Testumgebung, Lasttest, Paketierung | ⬜ offen |
 
 Legende: ⬜ offen · 🟡 in Arbeit · 🟢 fertig · ⚪ zurückgestellt
@@ -150,7 +150,7 @@ Legende: ⬜ offen · 🟡 in Arbeit · 🟢 fertig · ⚪ zurückgestellt
 | F7.3 | Löschkonzept | Aufbewahrungsfrist je Maßnahmenart; Löschvorschlagsliste; Löschung wird protokolliert | 🟢 |
 | F7.4 | Auskunftsexport | Alle zu einer Person gespeicherten Daten als PDF (DSGVO Art. 15) | 🟢 |
 | F7.5 | Änderungsprotokoll | Plugin-eigene Änderungen (Katalog, Profile) werden analog zur Mantis-History protokolliert | 🟢 |
-| F7.6 | Verarbeitungsverzeichnis | Vorlagentext als Anhang der Dokumentation | ⬜ |
+| F7.6 | Verarbeitungsverzeichnis | Vorlagentext als Anhang der Dokumentation | 🟢 |
 
 ### M8 — Release 1.0
 
