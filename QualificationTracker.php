@@ -85,6 +85,16 @@ class QualificationTrackerPlugin extends MantisPlugin {
 			# read reports; users with edit level or higher see everything.
 			'abteilung_betrachter'      => array(),
 
+			# --- Löschkonzept / Aufbewahrung (F7.3) ------------------------
+			# Retention period (months) after a finished proof's anchor date,
+			# after which it becomes a deletion candidate. The anchor is the
+			# end of validity for expired proofs and the modification date for
+			# cancelled ones. A global default plus an optional per-measure-type
+			# override; 0 disables deletion for that type. These are starting
+			# points – set them to your own legal retention requirements.
+			'aufbewahrung_monate_default' => 36,
+			'aufbewahrung_monate_typ'     => array(),
+
 			# --- Fälligkeitsberechnung (F1.8 / F1.9) -----------------------
 			# Global default due-date mode; overridable per measure.
 			# One of: rollierend | kalenderjahr | stichmonat | extern
@@ -335,6 +345,8 @@ class QualificationTrackerPlugin extends MantisPlugin {
 				. plugin_lang_get( 'menu_nachweise' ) . '</a>',
 			'<a href="' . plugin_page( 'automatik' ) . '">'
 				. plugin_lang_get( 'menu_automatik' ) . '</a>',
+			'<a href="' . plugin_page( 'loeschung' ) . '">'
+				. plugin_lang_get( 'menu_loeschung' ) . '</a>',
 			'<a href="' . plugin_page( 'veranstaltung' ) . '">'
 				. plugin_lang_get( 'menu_event' ) . '</a>',
 			'<a href="' . plugin_page( 'config' ) . '">'
@@ -551,6 +563,26 @@ class QualificationTrackerPlugin extends MantisPlugin {
 				" ) ),
 			array( 'CreateIndexSQL', array( 'idx_qt_lauf_created',
 				plugin_table( 'lauf' ), 'date_created' ) ),
+
+			# --- 27/28: qt_loeschung (deletion log, F7.3) ------------------
+			# Append-only protocol of executed proof deletions (Löschprotokoll).
+			# Keeps the business identifiers (personnel number, measure key,
+			# ticket id, validity end) so the erasure stays provable after the
+			# ticket and the master data are gone – DSGVO Art. 17 accountability.
+			array( 'CreateTableSQL', array( plugin_table( 'loeschung' ), "
+				id                   I     UNSIGNED NOTNULL AUTOINCREMENT PRIMARY,
+				bug_id               I     UNSIGNED NOTNULL DEFAULT '0',
+				person_id            I     UNSIGNED NOTNULL DEFAULT '0',
+				massnahme_id         I     UNSIGNED NOTNULL DEFAULT '0',
+				personalnummer       C(64),
+				massnahme_schluessel C(64),
+				gueltig_bis          D,
+				grund                C(191),
+				user_id              I     UNSIGNED NOTNULL DEFAULT '0',
+				date_created         I     UNSIGNED NOTNULL DEFAULT '0'
+				" ) ),
+			array( 'CreateIndexSQL', array( 'idx_qt_loeschung_created',
+				plugin_table( 'loeschung' ), 'date_created' ) ),
 		);
 	}
 
@@ -581,7 +613,7 @@ class QualificationTrackerPlugin extends MantisPlugin {
 	 */
 	function uninstall() {
 		$t_tables = array(
-			'lauf', 'teilnehmer', 'nachweis', 'massnahme_vorbedingung', 'veranstaltung',
+			'loeschung', 'lauf', 'teilnehmer', 'nachweis', 'massnahme_vorbedingung', 'veranstaltung',
 			'zuordnung', 'profil_massnahme', 'profil', 'person', 'massnahme',
 		);
 		foreach( $t_tables as $t_name ) {

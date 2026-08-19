@@ -544,3 +544,32 @@ $s_plugin_QualificationTracker_error_import_gueltig_bis_invalid   = 'Validity en
 # --- Occupational-health separation (F7.2) -------------------------------
 $s_plugin_QualificationTracker_config_label_vorsorgeprojekt = 'Occupational-health project (VO)';
 $s_plugin_QualificationTracker_config_help_vorsorgeprojekt  = 'Dedicated project for occupational-health (VO) measures. Their proof tickets are created here instead of the target project, so only occupational-health staff can see them. Empty = no separate project (VO goes to the target project).';
+
+# --- Retention & deletion concept (F7.3) ---------------------------------
+$s_plugin_QualificationTracker_config_section_aufbewahrung       = 'Retention & deletion';
+$s_plugin_QualificationTracker_config_label_aufbewahrung_default = 'Retention period (months)';
+$s_plugin_QualificationTracker_config_help_aufbewahrung          = 'Months after a finished proof\'s anchor date (end of validity for expired proofs, modification date for cancelled ones) after which it is proposed for deletion. Overridable per measure type; 0 = never delete. Set these to your own legal retention requirements.';
+$s_plugin_QualificationTracker_config_col_aufbewahrung_typ       = 'Period (months)';
+
+$s_plugin_QualificationTracker_state_abgelaufen = 'expired';
+$s_plugin_QualificationTracker_state_entfallen  = 'cancelled';
+
+$s_plugin_QualificationTracker_menu_loeschung           = 'Deletion concept';
+$s_plugin_QualificationTracker_loeschung_title          = 'Deletion concept';
+$s_plugin_QualificationTracker_loeschung_proposal_title = 'Deletion proposals';
+$s_plugin_QualificationTracker_loeschung_intro          = 'Finished proofs whose retention period has elapsed as of today. Selected entries are deleted permanently (the ticket with its notes, fields and attachments, plus the index). Every deletion is logged.';
+$s_plugin_QualificationTracker_loeschung_none           = 'No proofs are currently due for deletion.';
+$s_plugin_QualificationTracker_loeschung_confirm        = 'The selected proofs will be deleted irreversibly. Continue?';
+$s_plugin_QualificationTracker_loeschung_col_anker      = 'Anchor date';
+$s_plugin_QualificationTracker_loeschung_col_frist      = 'Period (mo.)';
+$s_plugin_QualificationTracker_loeschung_col_faellig    = 'Deletable from';
+$s_plugin_QualificationTracker_loeschung_col_ticket     = 'Ticket';
+$s_plugin_QualificationTracker_loeschung_label_grund    = 'Reason / legal basis';
+$s_plugin_QualificationTracker_loeschung_grund_default  = 'Retention period elapsed';
+$s_plugin_QualificationTracker_loeschung_execute        = 'Delete selected';
+$s_plugin_QualificationTracker_loeschung_msg_done        = '%d proof(s) deleted, %d skipped.';
+$s_plugin_QualificationTracker_loeschung_log_title      = 'Deletion log';
+$s_plugin_QualificationTracker_loeschung_col_when       = 'When';
+$s_plugin_QualificationTracker_loeschung_col_grund      = 'Reason';
+$s_plugin_QualificationTracker_loeschung_col_user       = 'By';
+$s_plugin_QualificationTracker_loeschung_log_empty      = 'No deletions logged yet.';

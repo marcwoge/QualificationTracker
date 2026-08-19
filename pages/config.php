@@ -67,6 +67,18 @@ if( gpc_get_string( 'action', '' ) === 'update' ) {
 	$t_vorsorgeprojekt = gpc_get_int( 'vorsorge_projekt_id', 0 );
 	plugin_config_set( 'vorsorge_projekt_id', $t_vorsorgeprojekt );
 
+	# F7.3: retention default and per-measure-type overrides (months).
+	plugin_config_set( 'aufbewahrung_monate_default', max( 0, gpc_get_int( 'aufbewahrung_monate_default', 36 ) ) );
+	$t_raw_typ = gpc_get_string_array( 'aufbewahrung_typ', array() );
+	$t_typ_map = array();
+	foreach( $t_raw_typ as $t_typ => $t_months ) {
+		$t_months = (int)$t_months;
+		if( $t_months > 0 ) {
+			$t_typ_map[(string)$t_typ] = $t_months;
+		}
+	}
+	plugin_config_set( 'aufbewahrung_monate_typ', $t_typ_map );
+
 	# F1.5: make sure the proof-ticket custom fields exist and, when a target
 	# project is set, link them to it.
 	qt_custom_fields_ensure();
@@ -105,6 +117,8 @@ $t_ersteinweisung   = (int)plugin_config_get( 'ersteinweisung_frist_tage' );
 $t_stufen           = (array)plugin_config_get( 'eskalation_stufen_tage' );
 $t_zielprojekt      = (int)plugin_config_get( 'zielprojekt_id' );
 $t_vorsorgeprojekt  = (int)plugin_config_get( 'vorsorge_projekt_id' );
+$t_aufbew_default   = (int)plugin_config_get( 'aufbewahrung_monate_default' );
+$t_aufbew_typ       = (array)plugin_config_get( 'aufbewahrung_monate_typ' );
 $t_abt_map          = (array)plugin_config_get( 'stichmonat_abteilung' );
 $t_abteilungen      = qt_person_distinct_abteilungen();
 $t_cf_status        = qt_custom_fields_status( $t_zielprojekt );
@@ -239,6 +253,41 @@ layout_page_begin();
 					<?php print_project_option_list( $t_vorsorgeprojekt, false ); ?>
 				</select>
 				<span class="help-block" style="margin:4px 0 0"><?php echo plugin_lang_get( 'config_help_vorsorgeprojekt' ); ?></span>
+			</td>
+		</tr>
+
+		<tr>
+			<td colspan="2" class="category"><strong><?php echo plugin_lang_get( 'config_section_aufbewahrung' ); ?></strong></td>
+		</tr>
+		<tr>
+			<th class="category"><?php echo plugin_lang_get( 'config_label_aufbewahrung_default' ); ?></th>
+			<td>
+				<input type="number" min="0" name="aufbewahrung_monate_default" class="input-sm" style="width:8em"
+					value="<?php echo $t_aufbew_default; ?>" />
+				<span class="help-block" style="margin:4px 0 0"><?php echo plugin_lang_get( 'config_help_aufbewahrung' ); ?></span>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="2">
+				<table class="table table-condensed" style="width:auto">
+					<thead><tr>
+						<th><?php echo plugin_lang_get( 'col_typ' ); ?></th>
+						<th><?php echo plugin_lang_get( 'config_col_aufbewahrung_typ' ); ?></th>
+					</tr></thead>
+					<tbody>
+					<?php foreach( qt_catalog_types() as $t_typ ) {
+						$t_cur = isset( $t_aufbew_typ[$t_typ] ) ? (int)$t_aufbew_typ[$t_typ] : '';
+					?>
+						<tr>
+							<td><?php echo string_display_line( plugin_lang_get( 'type_' . $t_typ ) ); ?></td>
+							<td><input type="number" min="0" style="width:6em"
+								name="aufbewahrung_typ[<?php echo string_attribute( $t_typ ); ?>]"
+								placeholder="<?php echo $t_aufbew_default; ?>"
+								value="<?php echo $t_cur === '' ? '' : (int)$t_cur; ?>" /></td>
+						</tr>
+					<?php } ?>
+					</tbody>
+				</table>
 			</td>
 		</tr>
 

@@ -544,3 +544,32 @@ $s_plugin_QualificationTracker_error_import_gueltig_bis_invalid   = 'Ablaufdatum
 # --- Vorsorge-Trennung (F7.2) --------------------------------------------
 $s_plugin_QualificationTracker_config_label_vorsorgeprojekt = 'Projekt für Vorsorge (VO)';
 $s_plugin_QualificationTracker_config_help_vorsorgeprojekt  = 'Gesondertes Projekt für Maßnahmen vom Typ Vorsorge (VO). Deren Nachweistickets werden hier statt im Zielprojekt angelegt, damit nur arbeitsmedizinisch Berechtigte sie sehen. Leer = kein gesondertes Projekt (VO landet im Zielprojekt).';
+
+# --- Löschkonzept / Aufbewahrung (F7.3) ----------------------------------
+$s_plugin_QualificationTracker_config_section_aufbewahrung       = 'Aufbewahrung & Löschung';
+$s_plugin_QualificationTracker_config_label_aufbewahrung_default = 'Aufbewahrungsfrist (Monate)';
+$s_plugin_QualificationTracker_config_help_aufbewahrung          = 'Frist in Monaten nach dem Ankerdatum eines abgeschlossenen Nachweises (Gültigkeitsende bei abgelaufenen, Änderungsdatum bei entfallenen), nach der er zur Löschung vorgeschlagen wird. Je Maßnahmentyp überschreibbar; 0 = nie löschen. Setzen Sie die Werte auf Ihre gesetzlichen Aufbewahrungspflichten.';
+$s_plugin_QualificationTracker_config_col_aufbewahrung_typ       = 'Frist (Monate)';
+
+$s_plugin_QualificationTracker_state_abgelaufen = 'abgelaufen';
+$s_plugin_QualificationTracker_state_entfallen  = 'entfallen';
+
+$s_plugin_QualificationTracker_menu_loeschung           = 'Löschkonzept';
+$s_plugin_QualificationTracker_loeschung_title          = 'Löschkonzept';
+$s_plugin_QualificationTracker_loeschung_proposal_title = 'Löschvorschläge';
+$s_plugin_QualificationTracker_loeschung_intro          = 'Abgeschlossene Nachweise, deren Aufbewahrungsfrist zum heutigen Tag abgelaufen ist. Ausgewählte Einträge werden endgültig gelöscht (Ticket samt Notizen, Feldern, Anhängen und Index). Jede Löschung wird protokolliert.';
+$s_plugin_QualificationTracker_loeschung_none           = 'Aktuell sind keine Nachweise zur Löschung fällig.';
+$s_plugin_QualificationTracker_loeschung_confirm        = 'Die ausgewählten Nachweise werden unwiderruflich gelöscht. Fortfahren?';
+$s_plugin_QualificationTracker_loeschung_col_anker      = 'Ankerdatum';
+$s_plugin_QualificationTracker_loeschung_col_frist      = 'Frist (Mon.)';
+$s_plugin_QualificationTracker_loeschung_col_faellig    = 'Löschbar ab';
+$s_plugin_QualificationTracker_loeschung_col_ticket     = 'Ticket';
+$s_plugin_QualificationTracker_loeschung_label_grund    = 'Grund / Rechtsgrundlage';
+$s_plugin_QualificationTracker_loeschung_grund_default  = 'Aufbewahrungsfrist abgelaufen';
+$s_plugin_QualificationTracker_loeschung_execute        = 'Ausgewählte löschen';
+$s_plugin_QualificationTracker_loeschung_msg_done        = '%d Nachweis(e) gelöscht, %d übersprungen.';
+$s_plugin_QualificationTracker_loeschung_log_title      = 'Löschprotokoll';
+$s_plugin_QualificationTracker_loeschung_col_when       = 'Zeitpunkt';
+$s_plugin_QualificationTracker_loeschung_col_grund      = 'Grund';
+$s_plugin_QualificationTracker_loeschung_col_user       = 'Durch';
+$s_plugin_QualificationTracker_loeschung_log_empty      = 'Noch keine Löschungen protokolliert.';

@@ -8,6 +8,25 @@ die Versionierung folgt [Semantic Versioning](https://semver.org/lang/de/).
 ## [Unreleased]
 
 ### Hinzugefügt
+- **F7.3 Löschkonzept (M7):** Personenbezogene Nachweisdaten werden nicht mehr
+  unbegrenzt aufbewahrt (DSGVO Art. 17). Je Maßnahmentyp gilt eine
+  **Aufbewahrungsfrist** (`aufbewahrung_monate_typ` mit globalem Default
+  `aufbewahrung_monate_default`, Standard 36 Monate); nach Ablauf der Frist ab
+  dem Ankerdatum eines **abgeschlossenen** Nachweises (Gültigkeitsende bei
+  *abgelaufen*, Änderungsdatum bei *entfallen*) erscheint er auf der
+  **Löschvorschlagsliste** (`pages/loeschung.php`, administratorgesperrt). Eine
+  bestätigte Löschung entfernt das MantisBT-Ticket samt Notizen, Feldern,
+  Anhängen und Beziehungen, den Index-Datensatz sowie etwaige Teilnehmer-Verweise
+  und schreibt je Nachweis eine Zeile in ein **append-only Löschprotokoll**
+  (Tabelle `qt_loeschung`: Personalnummer, Maßnahmenschlüssel, Ticket-Nr.,
+  Gültigkeitsende, Grund, Benutzer, Zeitpunkt), damit die Löschung nach dem
+  Wegfall von Ticket und Stammdaten nachweisbar bleibt. Die Fälligkeit wird bei
+  der Ausführung serverseitig erneut geprüft, sodass ein veralteter oder
+  gefälschter Datensatz-Verweis nie einen noch fristgebundenen Nachweis löschen
+  kann. Neue reine, unit-getestete Helfer in `core/QT_Deletion.php`
+  (`qt_loesch_retention_months`, `qt_loesch_anchor`, `qt_loesch_delete_on`,
+  `qt_loesch_is_due`, `qt_loesch_state_final`), Konfiguration der Fristen auf der
+  Konfigurationsseite.
 - **F7.2 Vorsorge-Trennung (M7):** Nachweistickets für Maßnahmen vom Typ
   **VO** (arbeitsmedizinische Vorsorge) werden in ein gesondertes, über die
   Konfiguration `vorsorge_projekt_id` wählbares MantisBT-Projekt angelegt statt
