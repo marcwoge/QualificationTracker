@@ -45,9 +45,15 @@ Ehrlichkeit spart beiden Seiten Zeit:
 
 ## Status
 
-🔵 **In Konzeption.** Das Datenmodell und der Funktionsumfang stehen (siehe [ROADMAP.md](ROADMAP.md)), die Implementierung hat noch nicht begonnen.
+🟢 **Release 1.0 in Vorbereitung.** Die Meilensteine M1–M7 sind abgeschlossen (Katalog, Ticketerzeugung, Veranstaltungen, Matrix, Automatisierung, Import/REST, Audit & Datenschutz); M8 (Release) läuft. Siehe [ROADMAP.md](ROADMAP.md) und [CHANGELOG.md](CHANGELOG.md).
 
-Wer heute schon starten will: Das Konzept [KONZEPT-Bordmittel.md](KONZEPT-Bordmittel.md) beschreibt, wie sich der Kern **ohne dieses Plugin** allein durch Konfiguration von MantisBT abbilden lässt. Das Plugin automatisiert später, was dort Handarbeit bleibt. Ein Migrationspfad von der Bordmittel-Konfiguration in die Plugin-Datenstruktur ist vorgesehen (F8.6).
+Wer den Kern **ohne dieses Plugin** allein durch Konfiguration von MantisBT abbilden will, findet das im Konzept [KONZEPT-Bordmittel.md](KONZEPT-Bordmittel.md); das Plugin automatisiert, was dort Handarbeit bleibt. Ein Migrationspfad von der Bordmittel-Konfiguration in die Plugin-Datenstruktur ist vorgesehen (F8.6).
+
+### Dokumentation
+
+- [Administratorhandbuch](docs/Administratorhandbuch.md) – Installation, Konfiguration, Betrieb, Datensicherung, Upgrade
+- [Anwenderhandbuch](docs/Anwenderhandbuch.md) – Kurzanleitungen für Führungskräfte und Sachbearbeitung
+- [Verarbeitungsverzeichnis](docs/Verarbeitungsverzeichnis.md) – Vorlage nach DSGVO Art. 30
 
 ---
 

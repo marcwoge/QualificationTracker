@@ -8,6 +8,14 @@ die Versionierung folgt [Semantic Versioning](https://semver.org/lang/de/).
 ## [Unreleased]
 
 ### Hinzugefügt
+- **F8.5 Anwenderhandbuch (M8):** `docs/Anwenderhandbuch.md` mit zwei
+  rollenbezogenen Kurzanleitungen (je ~2 Seiten): **Führungskräfte** (Matrix und
+  Ampel lesen, Startseiten-Kachel, Auditbericht, auf Eskalationen reagieren) und
+  **Sachbearbeitung** (Personen pflegen/importieren, Einzelnachweis abschließen,
+  Sammeltermine mit Teilnehmerliste und Massenabschluss, Bestandsimport). README
+  aktualisiert: veralteter Status „In Konzeption" durch den realen Release-Stand
+  ersetzt und ein Dokumentationsverzeichnis (Admin-/Anwenderhandbuch,
+  Verarbeitungsverzeichnis) ergänzt.
 - **F8.4 Administratorhandbuch (M8):** Vollständiges Betriebshandbuch
   `docs/Administratorhandbuch.md` – Architektur, Voraussetzungen, Installation,
   eine Referenztabelle aller Konfigurationsschlüssel, erste Schritte, die
