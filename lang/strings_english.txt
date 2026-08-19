@@ -650,3 +650,22 @@ $s_plugin_QualificationTracker_verz_b_drittland       = 'None. All data stays wi
 $s_plugin_QualificationTracker_verz_s_tom             = 'Technical and organisational measures';
 $s_plugin_QualificationTracker_verz_b_tom             = 'Role-based access (viewer from %1$s, clerk from %2$s, safety officer from %3$s, administrator from %4$s); separation of occupational-health data into a dedicated project without a free-text findings field; type-based retention periods with logged deletion; immutable ticket history and a plugin-owned change log; disclosure under Art. 15 as an export.';
 $s_plugin_QualificationTracker_verz_vorsorge_none     = 'not configured';
+
+# --- Native-setup migration (F8.6) ---------------------------------------
+$s_plugin_QualificationTracker_menu_migration        = 'Native migration';
+$s_plugin_QualificationTracker_migration_title       = 'Migration from the native setup';
+$s_plugin_QualificationTracker_migration_intro       = 'Lifts an existing plain-MantisBT setup (proofs as tickets with custom fields, measure type as category) into the plugin data structure: person register, a stub measure catalogue and the proof index. The tickets themselves are not changed; each proof points back at its original ticket. Idempotent – run a dry run first.';
+$s_plugin_QualificationTracker_migration_label_project = 'Source project';
+$s_plugin_QualificationTracker_migration_run         = 'Run migration';
+$s_plugin_QualificationTracker_migration_msg_dryrun  = 'Dry run – nothing was written. The figures show what would be created.';
+$s_plugin_QualificationTracker_migration_msg_done    = 'Migration executed.';
+$s_plugin_QualificationTracker_migration_row_tickets  = 'Tickets read';
+$s_plugin_QualificationTracker_migration_row_persons  = 'New persons';
+$s_plugin_QualificationTracker_migration_row_measures = 'New measures (stubs)';
+$s_plugin_QualificationTracker_migration_row_proofs   = 'New proofs';
+$s_plugin_QualificationTracker_migration_row_existing = 'Existing proofs (skipped)';
+$s_plugin_QualificationTracker_migration_row_skipped  = 'Skipped (no measure / master data)';
+$s_plugin_QualificationTracker_migration_row_errors   = 'Errors';
+$s_plugin_QualificationTracker_error_migrate_no_person      = 'Neither employee nor personnel number on the ticket.';
+$s_plugin_QualificationTracker_error_migrate_no_measure     = 'No measure key on the ticket.';
+$s_plugin_QualificationTracker_error_migrate_measure_invalid = 'Could not create the measure stub (invalid data).';

@@ -650,3 +650,22 @@ $s_plugin_QualificationTracker_verz_b_drittland       = 'Keine. Alle Daten verbl
 $s_plugin_QualificationTracker_verz_s_tom             = 'Technische und organisatorische Maßnahmen';
 $s_plugin_QualificationTracker_verz_b_tom             = 'Rollenbasierter Zugriff (Betrachter ab %1$s, Sachbearbeiter ab %2$s, Fachkraft ab %3$s, Administrator ab %4$s); Trennung der Vorsorge-Daten in ein gesondertes Projekt ohne Freitext-Befundfeld; typbezogene Aufbewahrungsfristen mit protokollierter Löschung; unveränderbare Ticket-Historie und plugin-eigenes Änderungsprotokoll; Auskunft nach Art. 15 als Export.';
 $s_plugin_QualificationTracker_verz_vorsorge_none     = 'nicht konfiguriert';
+
+# --- Bordmittel-Migration (F8.6) -----------------------------------------
+$s_plugin_QualificationTracker_menu_migration        = 'Bordmittel-Migration';
+$s_plugin_QualificationTracker_migration_title       = 'Migration aus der Bordmittel-Konfiguration';
+$s_plugin_QualificationTracker_migration_intro       = 'Übernimmt eine bestehende reine MantisBT-Konfiguration (Nachweise als Tickets mit Custom Fields, Maßnahmentyp als Kategorie) in die Plugin-Datenstruktur: Personenregister, Maßnahmen-Grundgerüst und Nachweis-Index. Die Tickets selbst werden nicht verändert; jeder Nachweis verweist auf sein Ursprungsticket. Wiederholbar – zuerst einen Trockenlauf ausführen.';
+$s_plugin_QualificationTracker_migration_label_project = 'Quellprojekt';
+$s_plugin_QualificationTracker_migration_run         = 'Migration ausführen';
+$s_plugin_QualificationTracker_migration_msg_dryrun  = 'Trockenlauf – es wurde nichts geschrieben. Die Zahlen zeigen, was angelegt würde.';
+$s_plugin_QualificationTracker_migration_msg_done    = 'Migration ausgeführt.';
+$s_plugin_QualificationTracker_migration_row_tickets  = 'Gelesene Tickets';
+$s_plugin_QualificationTracker_migration_row_persons  = 'Neue Personen';
+$s_plugin_QualificationTracker_migration_row_measures = 'Neue Maßnahmen (Grundgerüst)';
+$s_plugin_QualificationTracker_migration_row_proofs   = 'Neue Nachweise';
+$s_plugin_QualificationTracker_migration_row_existing = 'Bereits vorhandene Nachweise (übersprungen)';
+$s_plugin_QualificationTracker_migration_row_skipped  = 'Übersprungen (keine Maßnahme/Stammdaten)';
+$s_plugin_QualificationTracker_migration_row_errors   = 'Fehler';
+$s_plugin_QualificationTracker_error_migrate_no_person      = 'Weder Mitarbeiter noch Personalnummer im Ticket.';
+$s_plugin_QualificationTracker_error_migrate_no_measure     = 'Kein Maßnahmenschlüssel im Ticket.';
+$s_plugin_QualificationTracker_error_migrate_measure_invalid = 'Maßnahmen-Grundgerüst konnte nicht angelegt werden (ungültige Daten).';

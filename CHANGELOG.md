@@ -8,6 +8,19 @@ die Versionierung folgt [Semantic Versioning](https://semver.org/lang/de/).
 ## [Unreleased]
 
 ### Hinzugefügt
+- **F8.6 Upgrade-Pfad – Bordmittel-Migration (M8):** Eine bestehende reine
+  MantisBT-Konfiguration (ein Ticket je Nachweis, Maßnahmentyp als Kategorie,
+  Nachweisdaten in Custom Fields – siehe `KONZEPT-Bordmittel.md`) lässt sich in
+  die Plugin-Datenstruktur überführen, ohne die Tickets anzufassen. Das Plugin
+  hat dieselben Custom-Field-Namen übernommen, daher liest die Migration die
+  vorhandenen Felder direkt: Sie legt Personenregister, ein
+  Maßnahmen-Grundgerüst und den Nachweis-Index an; jeder Nachweis verweist über
+  `bug_id` auf sein Ursprungsticket. Kategorie → Maßnahmentyp,
+  MantisBT-Statusnummer → Nachweiszustand, „Nachname, Vorname"/„Vorname Nachname"
+  → getrennte Namensfelder. Der Lauf ist idempotent (Personen über
+  Personalnummer, Maßnahmen über Schlüssel, Nachweise über Ticket-ID) und bietet
+  einen Trockenlauf. Neue Seite **Bordmittel-Migration** (`pages/migration.php`,
+  administratorgesperrt), reine, unit-getestete Helfer in `core/QT_Migration.php`.
 - **F8.5 Anwenderhandbuch (M8):** `docs/Anwenderhandbuch.md` mit zwei
   rollenbezogenen Kurzanleitungen (je ~2 Seiten): **Führungskräfte** (Matrix und
   Ampel lesen, Startseiten-Kachel, Auditbericht, auf Eskalationen reagieren) und

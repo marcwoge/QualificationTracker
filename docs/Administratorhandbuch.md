@@ -145,6 +145,16 @@ solche Betrachter sehen die Lese-Berichte **nur für ihre Abteilung**.
 Für eine schnelle Demo in der Docker-Umgebung siehe `scripts/qt_seed.php`
 (`docker/README.md`).
 
+**Bestehende Bordmittel-Installation?** Wer den Kern bisher rein mit MantisBT
+betrieben hat (Nachweise als Tickets mit Custom Fields, Maßnahmentyp als
+Kategorie), übernimmt den Bestand über *Verwaltung → QualificationTracker →
+Bordmittel-Migration*: Quellprojekt wählen, **Trockenlauf** prüfen, dann
+ausführen. Dabei entstehen Personenregister, ein Maßnahmen-Grundgerüst und der
+Nachweis-Index; die Tickets selbst bleiben unverändert (jeder Nachweis verweist
+auf sein Ursprungsticket). Der Lauf ist wiederholbar. Anschließend das
+Maßnahmen-Grundgerüst fachlich vervollständigen (Intervalle, Modus,
+Rechtsgrundlagen) und Tätigkeitsprofile anlegen.
+
 ## 6. Betrieb: die nächtliche Automatik
 
 Der CLI-Runner bündelt vier Durchläufe:

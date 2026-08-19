@@ -161,7 +161,7 @@ Legende: ⬜ offen · 🟡 in Arbeit · 🟢 fertig · ⚪ zurückgestellt
 | F8.3 | Übersetzungen | Vollständige Sprachdateien DE/EN | 🟢 |
 | F8.4 | Administratorhandbuch | Installation, Konfiguration, Betrieb, Backup, Upgrade | 🟢 |
 | F8.5 | Anwenderhandbuch | Kurzanleitungen für Führungskräfte und Sachbearbeitung, je max. 2 Seiten | 🟢 |
-| F8.6 | Upgrade-Pfad | Migrationsroutine von der reinen Bordmittel-Konfiguration in die Plugin-Datenstruktur | ⬜ |
+| F8.6 | Upgrade-Pfad | Migrationsroutine von der reinen Bordmittel-Konfiguration in die Plugin-Datenstruktur | 🟢 |
 | F8.7 | Paketierung | Release-Artefakt, Versionierung, Changelog | ⬜ |
 
 ---
