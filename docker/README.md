@@ -43,6 +43,26 @@ Das Plugin ist bereits in den Container gemountet
 (Repo-Stamm → `/var/www/html/plugins/QualificationTracker`). Änderungen an den
 Plugin-Dateien wirken sofort, ohne Neubau.
 
+## Demo-Daten laden
+
+Nach der Plugin-Installation füllt ein Seed-Skript die Testumgebung mit
+reproduzierbaren, **rein synthetischen** Daten (Personalnummern ab 900000, keine
+echten Personen): der mitgelieferte Beispielkatalog (11 Maßnahmen), 50 Personen,
+drei Tätigkeitsprofile und je eine Zuordnung.
+
+```bash
+docker compose exec mantis php plugins/QualificationTracker/scripts/qt_seed.php --reset
+```
+
+Das Skript ist wiederholbar (Personen werden über die Personalnummer, Profile
+über den Namen abgeglichen). `--reset` löscht vorher die Plugin-Stammdaten für
+einen sauberen Stand; ohne `--reset` wird nur ergänzt/aktualisiert.
+
+Nachweistickets erzeugt der Seed bewusst nicht — dafür ein **Zielprojekt**
+konfigurieren (Manage → QualificationTracker → Konfiguration) und anschließend
+den Generator laufen lassen (Manage → QualificationTracker → Trockenlauf bzw.
+Generieren).
+
 ## Häufige Befehle
 
 ```bash

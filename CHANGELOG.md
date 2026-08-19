@@ -8,6 +8,15 @@ die Versionierung folgt [Semantic Versioning](https://semver.org/lang/de/).
 ## [Unreleased]
 
 ### Hinzugefügt
+- **F8.1 Docker-Testumgebung – Seed-Daten (M8):** Das bereits vorhandene
+  Compose-Setup (MantisBT, MariaDB, Mailpit) erhält ein reproduzierbares
+  Seed-Skript `scripts/qt_seed.php`, das die Testumgebung mit **rein
+  synthetischen** Daten füllt: den mitgelieferten Beispielkatalog (11 Maßnahmen),
+  50 Personen (Personalnummern ab 900000), drei Tätigkeitsprofile und je eine
+  Zuordnung. Das Skript ist idempotent (Abgleich über Personalnummer bzw.
+  Profilname) und bietet `--reset` für einen sauberen Stand. Nachweistickets
+  erzeugt es bewusst nicht — dafür ein Zielprojekt konfigurieren und den
+  Generator nutzen. Dokumentiert in `docker/README.md`.
 - **F7.6 Verarbeitungsverzeichnis (M7):** Für den Eintrag ins Verzeichnis von
   Verarbeitungstätigkeiten (DSGVO Art. 30) liegt der Dokumentation ein
   **Vorlagentext** bei (`docs/Verarbeitungsverzeichnis.md`) — mit Zwecken,

@@ -156,7 +156,7 @@ Legende: ⬜ offen · 🟡 in Arbeit · 🟢 fertig · ⚪ zurückgestellt
 
 | ID | Funktion | Beschreibung | Status |
 |---|---|---|---|
-| F8.1 | Docker-Testumgebung | Compose-Setup mit Mantis, MariaDB, Seed-Daten (50 Personen, 8 Maßnahmen) | ⬜ |
+| F8.1 | Docker-Testumgebung | Compose-Setup mit Mantis, MariaDB, Seed-Daten (50 Personen, 8 Maßnahmen) | 🟢 |
 | F8.2 | Lasttest | Nachweis der Zielgrößen: 500 Personen, 25.000 Tickets, Matrix < 2 s | ⬜ |
 | F8.3 | Übersetzungen | Vollständige Sprachdateien DE/EN | ⬜ |
 | F8.4 | Administratorhandbuch | Installation, Konfiguration, Betrieb, Backup, Upgrade | ⬜ |
