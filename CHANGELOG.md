@@ -16,8 +16,12 @@ die Versionierung folgt [Semantic Versioning](https://semver.org/lang/de/).
   die Betroffenen anhand der konfigurierbaren **optimalen Teilnehmerzahl**
   (`vorschlag_kapazitaet`, Vorgabe 15) in Sitzungen auf. Die Seite
   **Terminvorschlag** (`pages/terminvorschlag.php`, SiFa-Stufe) ist eine reine
-  Lese-/Planungsansicht; die Veranstaltungen werden anschließend regulär
-  angelegt. Neue reine, unit-getestete Helfer in `core/QT_Suggestion.php`
+  Lese-/Planungsansicht. Aus jeder vorgeschlagenen Sitzung lässt sich per Klick
+  **direkt eine Veranstaltung anlegen** (`pages/terminvorschlag_create.php`): sie
+  wird mit Maßnahme und vorgeschlagenem Datum erzeugt, die Personen der Sitzung
+  werden als Teilnehmer eingeplant, und die Ansicht wechselt zur
+  Teilnehmerverwaltung, wo Ort, Unterweisende(r) und die Ticketerzeugung ergänzt
+  werden. Neue reine, unit-getestete Helfer in `core/QT_Suggestion.php`
   (`qt_vorschlag_sessions`, `qt_vorschlag_termin`, `qt_vorschlag_target_date`,
   `qt_vorschlag_state_rank`, `qt_vorschlag_actionable`).
 

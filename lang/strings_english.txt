@@ -680,3 +680,6 @@ $s_plugin_QualificationTracker_terminvorschlag_none   = 'No group events are nee
 $s_plugin_QualificationTracker_terminvorschlag_summary = '%1$d persons · %2$d event(s)';
 $s_plugin_QualificationTracker_terminvorschlag_proposed = 'Suggested:';
 $s_plugin_QualificationTracker_terminvorschlag_session = 'Event %1$d – %2$d participants';
+$s_plugin_QualificationTracker_terminvorschlag_create_event = 'Create event';
+$s_plugin_QualificationTracker_terminvorschlag_event_title  = 'Group event %1$s (%2$s)';
+$s_plugin_QualificationTracker_terminvorschlag_msg_created  = 'Event created and %1$d participants booked. Add location, instructor and generate the tickets here.';

@@ -17,6 +17,7 @@ require_api( 'authentication_api.php' );
 require_api( 'access_api.php' );
 require_api( 'config_api.php' );
 require_api( 'database_api.php' );
+require_api( 'form_api.php' );
 require_api( 'gpc_api.php' );
 require_api( 'html_api.php' );
 require_api( 'lang_api.php' );
@@ -111,8 +112,19 @@ layout_page_begin();
 		</div>
 		<div class="widget-body"><div class="widget-main no-padding">
 		<?php foreach( $t_sessions as $t_i => $t_session ) { ?>
-			<div class="padding-6" style="border-top:1px solid #eee">
-				<strong><?php echo sprintf( plugin_lang_get( 'terminvorschlag_session' ), (int)$t_i + 1, count( $t_session ) ); ?></strong>
+			<div class="padding-6 clearfix" style="border-top:1px solid #eee">
+				<strong class="pull-left" style="margin-top:4px"><?php echo sprintf( plugin_lang_get( 'terminvorschlag_session' ), (int)$t_i + 1, count( $t_session ) ); ?></strong>
+				<form method="post" class="pull-right" style="margin:0" action="<?php echo plugin_page( 'terminvorschlag_create' ); ?>">
+					<?php echo form_security_field( 'plugin_QualificationTracker_terminvorschlag_create' ); ?>
+					<input type="hidden" name="massnahme_id" value="<?php echo (int)$t_m['id']; ?>" />
+					<input type="hidden" name="termin" value="<?php echo string_attribute( $t_p['termin'] ); ?>" />
+					<?php foreach( $t_session as $t_c ) { ?>
+						<input type="hidden" name="person_ids[]" value="<?php echo (int)$t_c['person']['id']; ?>" />
+					<?php } ?>
+					<button type="submit" class="btn btn-xs btn-primary btn-white btn-round">
+						<i class="ace-icon fa fa-calendar-plus-o"></i> <?php echo plugin_lang_get( 'terminvorschlag_create_event' ); ?>
+					</button>
+				</form>
 			</div>
 			<div class="table-responsive">
 			<table class="table table-bordered table-condensed table-striped" style="margin-bottom:0">

@@ -680,3 +680,6 @@ $s_plugin_QualificationTracker_terminvorschlag_none   = 'Aktuell sind keine Samm
 $s_plugin_QualificationTracker_terminvorschlag_summary = '%1$d Personen · %2$d Termin(e)';
 $s_plugin_QualificationTracker_terminvorschlag_proposed = 'Vorschlag:';
 $s_plugin_QualificationTracker_terminvorschlag_session = 'Termin %1$d – %2$d Teilnehmer';
+$s_plugin_QualificationTracker_terminvorschlag_create_event = 'Veranstaltung anlegen';
+$s_plugin_QualificationTracker_terminvorschlag_event_title  = 'Sammeltermin %1$s (%2$s)';
+$s_plugin_QualificationTracker_terminvorschlag_msg_created  = 'Veranstaltung angelegt und %1$d Teilnehmer eingeplant. Ort, Unterweisende(r) und Ticketerzeugung hier ergänzen.';

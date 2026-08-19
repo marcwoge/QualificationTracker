@@ -92,7 +92,12 @@ layout_page_begin();
 <div class="col-md-12 col-xs-12">
 <div class="space-10"></div>
 
-<?php if( $t_msg === 'generated' ) {
+<?php if( $t_msg === 'created' ) { ?>
+	<div class="alert alert-success">
+		<i class="ace-icon fa fa-check"></i>
+		<?php echo sprintf( plugin_lang_get( 'terminvorschlag_msg_created' ), gpc_get_int( 'added', 0 ) ); ?>
+	</div>
+<?php } else if( $t_msg === 'generated' ) {
 	$t_created = gpc_get_int( 'created', 0 );
 	$t_linked  = gpc_get_int( 'linked', 0 );
 	$t_skipped = gpc_get_int( 'skipped', 0 );
