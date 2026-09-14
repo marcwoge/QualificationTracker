@@ -1,7 +1,11 @@
 # MantisBT test image for trying out the QualificationTracker plugin.
 FROM php:8.2-apache
 
-ENV MANTIS_VERSION=2.28.3
+# Keep at 2.28.4 or newer: 2.28.4 fixes CVE-2026-47156 (CVSS 9.3), a SOAP API
+# authentication bypass allowing privilege escalation to administrator, present
+# in 2.28.3 and earlier. Only the SOAP API is affected (REST API and web UI are
+# not), so the plugin's own REST endpoints are unaffected either way.
+ENV MANTIS_VERSION=2.28.4
 
 # PHP extensions required by MantisBT (mysqli, gd, mbstring, zip).
 RUN apt-get update \

@@ -7,6 +7,17 @@ die Versionierung folgt [Semantic Versioning](https://semver.org/lang/de/).
 
 ## [Unreleased]
 
+### Sicherheit
+- **Docker-Testumgebung auf MantisBT 2.28.4 angehoben (CVE-2026-47156):** Das
+  Test-Image (`docker/Dockerfile`) bezog bisher MantisBT 2.28.3, das für
+  **CVE-2026-47156** (CVSS 9.3) anfällig ist – ein Authentifizierungs-Bypass in
+  der SOAP-API mit Rechteausweitung bis zum Administrator. Betroffen ist
+  ausschließlich die SOAP-API; die REST-API (und damit die REST-Endpunkte dieses
+  Plugins) sowie die Weboberfläche sind nicht betroffen. Das `docker/`-Verzeichnis
+  ist reine Entwicklungsumgebung und nicht Teil des Release-Artefakts, dennoch
+  wird die Version zur Sicherheit auf 2.28.4 (bzw. neuer) gehoben; Build und alle
+  282 Tests laufen unverändert.
+
 ### Hinzugefügt
 - **F3.7 Terminvorschlag (1.1):** Eine Planungshilfe schlägt auf Basis fälliger
   Maßnahmen Sammeltermine vor. Sie sammelt je Maßnahme die Personen mit
