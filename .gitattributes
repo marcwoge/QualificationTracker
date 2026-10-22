@@ -11,6 +11,9 @@
 /.gitignore       export-ignore
 /docker            export-ignore
 /docker-compose.yml export-ignore
+/.env.example      export-ignore
+/.github           export-ignore
+/SECURITY.md       export-ignore
 /tests             export-ignore
 /phpunit.xml.dist  export-ignore
 /setup-github.sh   export-ignore
