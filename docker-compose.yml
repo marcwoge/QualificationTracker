@@ -1,5 +1,6 @@
 # Local MantisBT sandbox for trying out the QualificationTracker plugin.
 #
+#   cp .env.example .env   # once; then set your own passwords/salt
 #   docker compose up -d --build
 #   -> MantisBT : http://localhost:8990   (finish the installer once)
 #   -> Mailpit  : http://localhost:8026   (catches every outgoing e-mail)
@@ -9,12 +10,12 @@
 
 services:
   db:
-    image: mariadb:10.11
+    image: mariadb:10.11.19
     environment:
-      MARIADB_ROOT_PASSWORD: root
+      MARIADB_ROOT_PASSWORD: ${MARIADB_ROOT_PASSWORD:?set MARIADB_ROOT_PASSWORD in .env (see .env.example)}
       MARIADB_DATABASE: bugtracker
       MARIADB_USER: mantisbt
-      MARIADB_PASSWORD: mantisbt
+      MARIADB_PASSWORD: ${MANTIS_DB_PASSWORD:?set MANTIS_DB_PASSWORD in .env (see .env.example)}
     volumes:
       - mantis_db:/var/lib/mysql
     healthcheck:
@@ -28,8 +29,12 @@ services:
     depends_on:
       db:
         condition: service_healthy
+    environment:
+      # Read by docker/config_inc.php via getenv().
+      MANTIS_DB_PASSWORD: ${MANTIS_DB_PASSWORD:?set MANTIS_DB_PASSWORD in .env (see .env.example)}
+      MANTIS_CRYPTO_MASTER_SALT: ${MANTIS_CRYPTO_MASTER_SALT:?set MANTIS_CRYPTO_MASTER_SALT in .env (see .env.example)}
     ports:
-      - "8990:80"
+      - "127.0.0.1:8990:80"
     volumes:
       # The repository root IS the plugin, so mount it straight into MantisBT's
       # plugins directory under the plugin's basename.
@@ -38,10 +43,10 @@ services:
       - ./docker/config_inc.php:/var/www/html/config/config_inc.php
 
   mailpit:
-    image: axllent/mailpit:latest
+    image: axllent/mailpit:v1.31.6
     ports:
-      - "8026:8025"   # web UI
-      - "1026:1025"   # SMTP
+      - "127.0.0.1:8026:8025"   # web UI
+      - "127.0.0.1:1026:1025"   # SMTP
 
 volumes:
   mantis_db:
