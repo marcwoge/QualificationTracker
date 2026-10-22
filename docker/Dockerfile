@@ -1,5 +1,5 @@
 # MantisBT test image for trying out the QualificationTracker plugin.
-FROM php:8.2-apache
+FROM php:8.2.35-apache
 
 # Keep at 2.28.4 or newer: 2.28.4 fixes CVE-2026-47156 (CVSS 9.3), a SOAP API
 # authentication bypass allowing privilege escalation to administrator, present
