@@ -1,6 +1,6 @@
 # MantisBT test image for trying out the QualificationTracker plugin.
 # PHP 8.4 (security support until 2028-12-31); 8.2 reaches EOL on 2026-12-31.
-FROM php:8.4.27-apache
+FROM php:8.5.0-apache
 
 # Keep at 2.28.4 or newer: 2.28.4 fixes CVE-2026-47156 (CVSS 9.3), a SOAP API
 # authentication bypass allowing privilege escalation to administrator, present
