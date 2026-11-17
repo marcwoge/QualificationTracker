@@ -8,10 +8,10 @@ die Versionierung folgt [Semantic Versioning](https://semver.org/lang/de/).
 ## [Unreleased]
 
 ### Geändert
-- **Mindestversion PHP 8.3** (vorher PHP 8.1): PHP 8.1 ist bereits ohne
-  Security-Support, PHP 8.2 erreicht am 2026-12-31 sein Security-EOL. Die
-  CI-Matrix läuft jetzt auf PHP 8.3, 8.4 und 8.5. Am Code selbst hat sich
-  nichts geändert – nur der unterstützte/getestete Bereich.
+- **CI-Testmatrix auf PHP 8.3, 8.4 und 8.5** (vorher 8.2–8.4): PHP 8.2
+  erreicht am 2026-12-31 sein Security-EOL und wird nicht mehr in der CI
+  geprüft. Die erklärte Mindestversion (PHP 8.1) bleibt unverändert; README
+  und Administratorhandbuch nennen die getesteten Versionen.
 
 ### Sicherheit
 - **Docker-Testumgebung auf MantisBT 2.28.4 angehoben (CVE-2026-47156):** Das
