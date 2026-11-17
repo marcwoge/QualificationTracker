@@ -7,6 +7,12 @@ die Versionierung folgt [Semantic Versioning](https://semver.org/lang/de/).
 
 ## [Unreleased]
 
+### Geändert
+- **CI-Testmatrix auf PHP 8.3, 8.4 und 8.5** (vorher 8.2–8.4): PHP 8.2
+  erreicht am 2026-12-31 sein Security-EOL und wird nicht mehr in der CI
+  geprüft. Die erklärte Mindestversion (PHP 8.1) bleibt unverändert; README
+  und Administratorhandbuch nennen die getesteten Versionen.
+
 ### Sicherheit
 - **Docker-Testumgebung auf MantisBT 2.28.4 angehoben (CVE-2026-47156):** Das
   Test-Image (`docker/Dockerfile`) bezog bisher MantisBT 2.28.3, das für

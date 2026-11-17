@@ -62,7 +62,7 @@ Wer den Kern **ohne dieses Plugin** allein durch Konfiguration von MantisBT abbi
 | Komponente | Version | Anmerkung |
 |---|---|---|
 | MantisBT | 2.25 oder neuer | |
-| PHP | 8.1 oder neuer | |
+| PHP | 8.1 oder neuer | getestet (CI) mit PHP 8.3, 8.4 und 8.5 |
 | MySQL / MariaDB | 8.0 / 10.6 oder neuer | |
 | weitere Plugins | — | **keine erforderlich.** Terminplanung und Ablaufüberwachung sind eingebaut. Ist [Reveille](https://github.com/marcwoge/mantisBT-reveille) installiert, wird es für die Ablaufreaktivierung automatisch mitgenutzt |
 | Cron oder systemd-Timer | | für Ablaufwächter und Eskalation |

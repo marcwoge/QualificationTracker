@@ -47,7 +47,7 @@ Ablaufreaktivierung automatisch mitgenutzt.
 | Komponente | Version | Anmerkung |
 |---|---|---|
 | MantisBT | 2.25+ | entwickelt/getestet gegen 2.28.x |
-| PHP | 8.1+ | |
+| PHP | 8.1+ | getestet (CI) mit PHP 8.3, 8.4 und 8.5 |
 | MySQL / MariaDB | 8.0 / 10.6+ | |
 | Cron oder systemd-Timer | — | für Ablaufwächter und Eskalation |
 | mod_rewrite + REST aktiv | — | **nur** falls die REST-Endpunkte genutzt werden (Abschnitt 7) |
