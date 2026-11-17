@@ -39,7 +39,7 @@ Für die Anbindung an Auswertungssysteme stellt das Plugin **REST-Endpunkte** be
 
 | Aspekt | Festlegung |
 |---|---|
-| Plattform | MantisBT 2.25+, PHP 8.1+, MySQL 8 / MariaDB 10.6+ |
+| Plattform | MantisBT 2.25+, PHP 8.3+, MySQL 8 / MariaDB 10.6+ |
 | Abhängigkeiten | **keine harten.** Terminplanung nativ implementiert. Reveille wird optional erkannt und für die Ablaufreaktivierung genutzt |
 | UI | Bootstrap 3 (Mantis-Standard) |
 | Sprachen | Deutsch, Englisch |
