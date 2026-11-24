@@ -34,7 +34,7 @@ $f_massnahme  = gpc_get_int( 'massnahme_id' );
 $f_modus      = gpc_get_string( 'modus', '' );
 $f_stichmonat = gpc_get_int( 'stichmonat', 0 );
 
-if( qt_massnahme_get( $f_massnahme ) === false || !in_array( $f_modus, qt_catalog_modi(), true ) ) {
+if( qt_massnahme_get( $f_massnahme ) === false || !in_array( $f_modus, qt_catalog_modes(), true ) ) {
 	error_parameters( $f_massnahme );
 	trigger_error( ERROR_GENERIC, ERROR );
 }

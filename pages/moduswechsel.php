@@ -41,7 +41,7 @@ $t_msg        = gpc_get_string( 'msg', '' );
 $t_massnahmen = qt_massnahme_load_all();
 
 $t_sim = null;
-if( $f_massnahme > 0 && in_array( $f_modus, qt_catalog_modi(), true ) ) {
+if( $f_massnahme > 0 && in_array( $f_modus, qt_catalog_modes(), true ) ) {
 	$t_sim = qt_moduswechsel_simulate( $f_massnahme, $f_modus, $f_stichmonat );
 }
 
@@ -84,7 +84,7 @@ layout_page_begin();
 			&nbsp;<i class="ace-icon fa fa-arrow-right"></i>&nbsp;
 			<label><?php echo plugin_lang_get( 'label_modus' ); ?></label>
 			<select name="modus" class="input-sm">
-			<?php foreach( qt_catalog_modi() as $t_mo ) { ?>
+			<?php foreach( qt_catalog_modes() as $t_mo ) { ?>
 				<option value="<?php echo $t_mo; ?>" <?php echo $f_modus === $t_mo ? 'selected="selected"' : ''; ?>><?php echo plugin_lang_get( 'mode_' . $t_mo ); ?></option>
 			<?php } ?>
 			</select>

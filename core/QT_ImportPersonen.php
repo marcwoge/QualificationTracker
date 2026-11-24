@@ -45,7 +45,7 @@ function qt_import_personen_parse( $p_text, $p_delimiter = ';' ) {
 		if( trim( $t_line ) === '' ) {
 			continue;
 		}
-		$t_fields = str_getcsv( $t_line, $p_delimiter );
+		$t_fields = str_getcsv( $t_line, $p_delimiter, '"', '' );
 		if( $t_header === null ) {
 			$t_header = array();
 			foreach( $t_fields as $t_h ) {
