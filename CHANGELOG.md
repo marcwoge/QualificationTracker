@@ -13,6 +13,17 @@ die Versionierung folgt [Semantic Versioning](https://semver.org/lang/de/).
   geprüft. Die erklärte Mindestversion (PHP 8.1) bleibt unverändert; README
   und Administratorhandbuch nennen die getesteten Versionen.
 
+### Behoben
+- **Moduswechsel brach mit HTTP 500 ab:** `moduswechsel.php` und
+  `moduswechsel_apply.php` riefen die nicht existierende Funktion
+  `qt_catalog_modi()` statt `qt_catalog_modes()` auf. Simulation und Übernahme
+  eines Fälligkeitsmodus-Wechsels funktionieren wieder.
+- **CSV unter PHP 8.4 ohne Deprecation:** `fputcsv()` (Matrix-Export) und
+  `str_getcsv()` (Personen-Import) bekommen den `$escape`-Parameter jetzt
+  explizit (`''`, RFC 4180 wie Excel). Nebeneffekt: Ein Feld in
+  Anführungszeichen, das auf `\` endet (z. B. `"C:\Daten\"`), wird beim Import
+  korrekt gelesen statt mit überzähligem `"`.
+
 ### Sicherheit
 - **Docker-Testumgebung auf MantisBT 2.28.4 angehoben (CVE-2026-47156):** Das
   Test-Image (`docker/Dockerfile`) bezog bisher MantisBT 2.28.3, das für

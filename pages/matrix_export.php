@@ -76,7 +76,7 @@ if( $f_format === 'raw' ) {
 		plugin_lang_get( 'export_gueltig_bis' ),
 		plugin_lang_get( 'export_zyklus' ),
 		plugin_lang_get( 'export_ticket' ),
-	), ';' );
+	), ';', '"', '' );
 
 	foreach( qt_matrix_raw_rows( $t_today, $t_filters ) as $t_r ) {
 		fputcsv( $t_out, array(
@@ -91,7 +91,7 @@ if( $f_format === 'raw' ) {
 			(string)$t_r['gueltig_bis'],
 			(string)$t_r['zyklus'],
 			(int)$t_r['bug_id'] > 0 ? (int)$t_r['bug_id'] : '',
-		), ';' );
+		), ';', '"', '' );
 	}
 } else {
 	# Matrix grid: one row per person, one column per measure, cell = state label.
@@ -105,7 +105,7 @@ if( $f_format === 'raw' ) {
 	foreach( $t_matrix['massnahmen'] as $t_m ) {
 		$t_header[] = $t_m['schluessel'];
 	}
-	fputcsv( $t_out, $t_header, ';' );
+	fputcsv( $t_out, $t_header, ';', '"', '' );
 
 	foreach( $t_matrix['persons'] as $t_person ) {
 		$t_pid = (int)$t_person['id'];
@@ -127,7 +127,7 @@ if( $f_format === 'raw' ) {
 				$t_line[] = $t_val;
 			}
 		}
-		fputcsv( $t_out, $t_line, ';' );
+		fputcsv( $t_out, $t_line, ';', '"', '' );
 	}
 }
 
